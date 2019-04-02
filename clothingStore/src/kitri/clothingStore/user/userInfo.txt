@@ -6,11 +6,14 @@
 2. member
 - 로그인, 회원가입, 회원수정및 탈퇴, 비밀번호/아이디 찾기
 
-3. shoppingBasket
+3. shoppingHistory
+- 구매이력 조회, 상세
+
+4. shoppingBasket
 - 장바구니 및 요청
 
-4. search
-- 상단검색
+5. productView
+- 검색결과창
+- 카테고리별 조회
+- 제품 상세
 
-5. Category
-- 카테고리별 보여주기
