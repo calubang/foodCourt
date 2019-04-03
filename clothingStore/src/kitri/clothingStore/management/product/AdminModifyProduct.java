@@ -1,18 +1,19 @@
-package kitri.clothingStore.management;
+package kitri.clothingStore.management.product;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 import java.awt.Dimension;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
-public class AdminRegisterProduct extends JPanel {
+
+public class AdminModifyProduct extends JPanel {
 
 	JPanel picturePanel = new JPanel();
 
@@ -29,10 +30,8 @@ public class AdminRegisterProduct extends JPanel {
 	JLabel sizeLabel = new JLabel("\uCE58\uC218 / \uD06C\uAE30");
 	JLabel cautionLabel = new JLabel("\uC8FC\uC758\uC0AC\uD56D");
 	JLabel productNationLabel = new JLabel("\uC81C\uC870\uAD6D\uAC00");
-
-	JButton isDuplicateCheckBtn = new JButton("\uC911\uBCF5\uD655\uC778");
-	JButton registerImageBtn = new JButton("\uC0AC\uC9C4\uB4F1\uB85D");
-	JButton confirmBtn = new JButton("\uB4F1\uB85D");
+	JButton changeImageBtn = new JButton("\uC0AC\uC9C4\uBCC0\uACBD");
+	JButton confirmBtn = new JButton("\uC218\uC815");
 	JButton cancelBtn = new JButton("\uCDE8\uC18C");
 	
 	JTextField productCodeTextField = new JTextField();
@@ -42,11 +41,10 @@ public class AdminRegisterProduct extends JPanel {
 	JTextField colorCodeTextField = new JTextField();
 	JTextField cautionTextField = new JTextField();
 	
-	
 	/**
 	 * Create the panel.
 	 */
-	public AdminRegisterProduct() {
+	public AdminModifyProduct() {
 		setSize(new Dimension(750, 650));
 		setLayout(null);
 		
@@ -65,8 +63,8 @@ public class AdminRegisterProduct extends JPanel {
 		pictureLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		picturePanel.add(pictureLabel, BorderLayout.CENTER);
 		
-		registerImageBtn.setBounds(40, 215, 130, 40);
-		add(registerImageBtn);
+		changeImageBtn.setBounds(40, 215, 130, 40);
+		add(changeImageBtn);
 		
 		categoryComboBox.setBorder(new LineBorder(Color.BLACK));
 		categoryComboBox.setBounds(40, 300, 130, 34);
@@ -74,9 +72,6 @@ public class AdminRegisterProduct extends JPanel {
 		
 		productCodeLabel.setBounds(213, 40, 80, 40);
 		add(productCodeLabel);
-		
-		isDuplicateCheckBtn.setBounds(620, 40, 100, 40);
-		add(isDuplicateCheckBtn);
 		
 		productNameLabel.setBounds(213, 110, 80, 40);
 		productNameTextField.setText("\uB0B4\uC6A9\uC744 \uC785\uB825\uD574\uC8FC\uC138\uC694.");
@@ -138,4 +133,5 @@ public class AdminRegisterProduct extends JPanel {
 		cancelBtn.setBounds(420, 550, 120, 50);
 		add(cancelBtn);
 	}
+
 }

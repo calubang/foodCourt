@@ -1,4 +1,4 @@
-package kitri.clothingStore.management;
+package kitri.clothingStore.management.product;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;

@@ -13,8 +13,8 @@ import javax.swing.JButton;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
-import kitri.clothingStore.management.AdminProductManagement;
-import kitri.clothingStore.management.AdminRegisterProduct;
+import kitri.clothingStore.management.product.AdminProductManagement;
+import kitri.clothingStore.management.product.AdminRegisterProduct;
 
 
 public class AdminMainFrame extends JFrame {
