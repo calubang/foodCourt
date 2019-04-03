@@ -13,14 +13,17 @@ import javax.swing.JButton;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
+import kitri.clothingStore.management.member.AdminMemberInfo;
 import kitri.clothingStore.management.product.AdminProductManagement;
 import kitri.clothingStore.management.product.AdminRegisterProduct;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class AdminMainFrame extends JFrame {
 
-	JPanel contentPane = new JPanel();
-	JPanel panel = new JPanel();
+	JPanel contentPanel = new JPanel();
+	JPanel ampPanel = new JPanel();
 	JPanel buttonPanel = new JPanel();
 	
 	JButton productManageBtn = new JButton("\uC81C\uD488\uAD00\uB9AC");
@@ -30,7 +33,7 @@ public class AdminMainFrame extends JFrame {
 	JButton statisticsBtn = new JButton("\uD1B5\uACC4");
 	
 	AdminProductManagement apm = new AdminProductManagement();
-	AdminRegisterProduct arp = new AdminRegisterProduct();
+	AdminMemberInfo ami = new AdminMemberInfo();
 	
 	CardLayout cl = new CardLayout(0, 0);
 	
@@ -60,26 +63,40 @@ public class AdminMainFrame extends JFrame {
 		setBounds(100, 100, 1200, 800);
 		setResizable(false);
 
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(null);
-		setContentPane(contentPane);
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setLayout(null);
+		setContentPane(contentPanel);
 		
 		buttonPanel.setLayout(new GridLayout(5, 1, 0, 60));
 		buttonPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uAD00\uB9AC\uC790", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 20, 40, 20)));
 		buttonPanel.setBounds(12, 25, 150, 722);
-		contentPane.add(buttonPanel);
+		contentPanel.add(buttonPanel);
+		
+		productManageBtn.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								cl.show(ampPanel, "AdminProduct");
+							}
+						});
 		
 		buttonPanel.add(productManageBtn);
+		
+		memberManageBtn.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								cl.show(ampPanel, "AdminMember");
+							}
+						});
+		
 		buttonPanel.add(memberManageBtn);
 		buttonPanel.add(helpManageBtn);
 		buttonPanel.add(paymentBtn);
 		buttonPanel.add(statisticsBtn);
 		
-		panel.setBounds(174, 25, 1008, 722);
-		panel.setLayout(cl);
-		panel.add("AdminProduct", apm);
-		cl.show(panel, "AdminProduct");
+		ampPanel.setBounds(174, 25, 1008, 722);
+		ampPanel.setLayout(cl);
+		ampPanel.add("AdminProduct", apm);
+		ampPanel.add("AdminMember", ami);
+		cl.show(ampPanel, "AdminProduct");
 		
-		contentPane.add(panel);
+		contentPanel.add(ampPanel);
 	}
 }

@@ -31,7 +31,8 @@ public class AdminProductManagement extends JPanel {
 	private String[][] entries = {{"모자", "모자1", "123-456-789-123"}, {"모자2", "모자4", "133-466-779-183"}};
 		
 	private JTextField searchTextField = new JTextField();
-	private JTable commonTable = new JTable(entries, properties);
+	//private JTable commonTable = new JTable(entries, properties);
+	private JTable commonTable = new JTable(60, 8);
 	
 	JLabel searchLabel = new JLabel("\uAC80\uC0C9");
 	JLabel pictureLabel = new JLabel("Picture");
@@ -43,6 +44,7 @@ public class AdminProductManagement extends JPanel {
 	private JButton registerBtn = new JButton("\uB4F1\uB85D");
 	private JButton modifyBtn = new JButton("\uC218\uC815");
 	private JButton deleteBtn = new JButton("\uC0AD\uC81C");
+	private JButton storeBtn = new JButton("\uC800\uC7A5");
 
 	JFrame jfR = new JFrame("제품등록");
 	JFrame jfM = new JFrame("제품수정");
@@ -91,7 +93,7 @@ public class AdminProductManagement extends JPanel {
 		scrollPane.setBounds(0, 58, 791, 664);
 		add(scrollPane);
 
-		menuPanel.setLayout(new GridLayout(3, 1, 0, 60));
+		menuPanel.setLayout(new GridLayout(4, 1, 0, 40));
 		menuPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uBA54\uB274", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 40, 40, 40)));
 		menuPanel.setBounds(799, 243, 209, 479);
 		
@@ -101,7 +103,7 @@ public class AdminProductManagement extends JPanel {
 				
 				jfM.setVisible(false);
 				
-				jfR.add(arp);
+				jfR.getContentPane().add(arp);
 				jfR.setSize(750, 650);
 				jfR.setVisible(true);
 			}
@@ -114,7 +116,7 @@ public class AdminProductManagement extends JPanel {
 				
 				jfR.setVisible(false);
 				
-				jfM.add(amp);
+				jfM.getContentPane().add(amp);
 				jfM.setSize(750, 650);
 				jfM.setVisible(true);
 			}
@@ -129,7 +131,9 @@ public class AdminProductManagement extends JPanel {
 		});
 		menuPanel.add(deleteBtn);
 		
+		menuPanel.add(storeBtn);
 		add(menuPanel);
+		
 		
 	}
 }
