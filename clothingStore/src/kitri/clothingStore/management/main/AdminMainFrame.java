@@ -14,6 +14,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
 import kitri.clothingStore.management.member.AdminMemberInfo;
+import kitri.clothingStore.management.payment.AdminPayment;
 import kitri.clothingStore.management.product.AdminProductManagement;
 import kitri.clothingStore.management.product.AdminRegisterProduct;
 import java.awt.event.ActionListener;
@@ -34,6 +35,7 @@ public class AdminMainFrame extends JFrame {
 	
 	AdminProductManagement apm = new AdminProductManagement();
 	AdminMemberInfo ami = new AdminMemberInfo();
+	AdminPayment ap = new AdminPayment();
 	
 	CardLayout cl = new CardLayout(0, 0);
 	
@@ -88,6 +90,11 @@ public class AdminMainFrame extends JFrame {
 		
 		buttonPanel.add(memberManageBtn);
 		buttonPanel.add(helpManageBtn);
+		paymentBtn.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							cl.show(ampPanel, "AdminPayment");
+						}
+					});
 		buttonPanel.add(paymentBtn);
 		buttonPanel.add(statisticsBtn);
 		
@@ -95,6 +102,7 @@ public class AdminMainFrame extends JFrame {
 		ampPanel.setLayout(cl);
 		ampPanel.add("AdminProduct", apm);
 		ampPanel.add("AdminMember", ami);
+		ampPanel.add("AdminPayment", ap);
 		cl.show(ampPanel, "AdminProduct");
 		
 		contentPanel.add(ampPanel);
