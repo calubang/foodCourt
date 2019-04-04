@@ -16,6 +16,7 @@ import javax.swing.border.TitledBorder;
 import kitri.clothingStore.management.member.AdminMemberInfo;
 import kitri.clothingStore.management.payment.AdminPayment;
 import kitri.clothingStore.management.product.AdminProductManagement;
+import kitri.clothingStore.management.request.AdminRequest;
 import kitri.clothingStore.management.statistics.AdminStatistics;
 
 import java.awt.event.ActionListener;
@@ -30,12 +31,13 @@ public class AdminMainFrame extends JFrame {
 	
 	JButton productManageBtn = new JButton("\uC81C\uD488\uAD00\uB9AC");
 	JButton memberManageBtn = new JButton("\uD68C\uC6D0\uAD00\uB9AC");
-	JButton helpManageBtn = new JButton("\uC694\uCCAD\uAD00\uB9AC");
+	JButton requestManageBtn = new JButton("\uC694\uCCAD\uAD00\uB9AC");
 	JButton paymentBtn = new JButton("\uACB0\uC81C");
 	JButton statisticsBtn = new JButton("\uD1B5\uACC4");
 	
 	AdminProductManagement apm = new AdminProductManagement();
 	AdminMemberInfo ami = new AdminMemberInfo();
+	AdminRequest ar = new AdminRequest();
 	AdminPayment ap = new AdminPayment();
 	AdminStatistics as = new AdminStatistics();
 	
@@ -81,7 +83,6 @@ public class AdminMainFrame extends JFrame {
 								cl.show(ampPanel, "AdminProduct");
 							}
 						});
-		
 		buttonPanel.add(productManageBtn);
 		
 		memberManageBtn.addActionListener(new ActionListener() {
@@ -91,13 +92,21 @@ public class AdminMainFrame extends JFrame {
 						});
 		
 		buttonPanel.add(memberManageBtn);
-		buttonPanel.add(helpManageBtn);
+		
+		requestManageBtn.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								cl.show(ampPanel, "AdminRequest");
+							}
+						});
+		buttonPanel.add(requestManageBtn);
+		
 		paymentBtn.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							cl.show(ampPanel, "AdminPayment");
 						}
 					});
 		buttonPanel.add(paymentBtn);
+		
 		statisticsBtn.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							cl.show(ampPanel, "AdminStatistics");
@@ -109,6 +118,7 @@ public class AdminMainFrame extends JFrame {
 		ampPanel.setLayout(cl);
 		ampPanel.add("AdminProduct", apm);
 		ampPanel.add("AdminMember", ami);
+		ampPanel.add("AdminRequest", ar);
 		ampPanel.add("AdminPayment", ap);
 		ampPanel.add("AdminStatistics", as);
 		cl.show(ampPanel, "AdminProduct");
