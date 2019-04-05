@@ -1,4 +1,4 @@
-package kitri.foodCourt.user.swing;
+package kitri.foodCourt.user.basket;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -18,10 +18,13 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import java.awt.SystemColor;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import kitri.foodCourt.user.swing.FLabel;
+import javax.swing.JCheckBox;
+import java.awt.Dimension;
+import javax.swing.JToggleButton;
+import kitri.foodCourt.user.swing.FButton;
 
-public class main extends JFrame{
+public class main extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -56,6 +59,8 @@ public class main extends JFrame{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(null);
+		panel.setToolTipText("\uC804\uCCB4\uC120\uD0DD");
 		panel.setBackground(Color.WHITE);
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
@@ -84,10 +89,6 @@ public class main extends JFrame{
 		lblNewLabel.setBounds(12, 71, 120, 20);
 		panel_2.add(lblNewLabel);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(160, 118, 1012, 634);
-		panel.add(panel_4);
-		
 		JLabel lblNewLabel_1 = new JLabel("\uAC80\uC0C9");
 		lblNewLabel_1.setFont(new Font("±¼¸²", Font.PLAIN, 30));
 		lblNewLabel_1.setBounds(160, 26, 69, 66);
@@ -102,6 +103,57 @@ public class main extends JFrame{
 		JPanel panel_6 = new JPanel();
 		panel_6.setBounds(145, 137, 6, 457);
 		panel.add(panel_6);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(160, 118, 1012, 634);
+		panel.add(panel_4);
+		panel_4.setLayout(null);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon(main.class.getResource("/kitri/foodCourt/user/basket/image/Basket1.png")));
+		lblNewLabel_2.setBounds(12, 10, 120, 100);
+		panel_4.add(lblNewLabel_2);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(SystemColor.activeCaption);
+		panel_1.setBounds(12, 120, 988, 6);
+		panel_4.add(panel_1);
+		
+		FLabel label = new FLabel();
+		label.setFont(new Font("±¼¸²", Font.BOLD, 40));
+		label.setText("\uC7A5\uBC14\uAD6C\uB2C8");
+		label.setBounds(144, 10, 178, 100);
+		panel_4.add(label);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBackground(SystemColor.inactiveCaptionBorder);
+		panel_7.setBounds(12, 132, 988, 64);
+		panel_4.add(panel_7);
+		panel_7.setLayout(null);
+		
+		FButton btnAllCancel = new FButton();
+		btnAllCancel.setSelectedIcon(null);
+		btnAllCancel.setContentAreaFilled(false);
+		btnAllCancel.setBorderPainted(false);
+		btnAllCancel.setFocusPainted(false);
+		//btnAllCancel.setIcon(new ImageIcon(main.class.getResource("/kitri/foodCourt/user/basket/image/x_button.png")));
+		ImageIcon btnAllCancelBasic = new ImageIcon(main.class.getResource("/kitri/foodCourt/user/basket/image/x_button.png"));
+		ImageIcon btnAllCancelEntered = new ImageIcon(main.class.getResource("/kitri/foodCourt/user/basket/image/x_button2.png"));
+		btnAllCancel.setBasic(btnAllCancelBasic);
+		btnAllCancel.setEntered(btnAllCancelEntered);
+		btnAllCancel.setBounds(29, 10, 45, 45);
+		panel_7.add(btnAllCancel);
+		
+		FLabel label_1 = new FLabel();
+		label_1.setFont(new Font("±¼¸²", Font.BOLD, 30));
+		label_1.setText("\uC0C1\uD488\uC815\uBCF4");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setBounds(213, 10, 134, 45);
+		panel_7.add(label_1);
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBounds(12, 206, 988, 130);
+		panel_4.add(panel_8);
 		
 		ImageIcon main = new ImageIcon("C:\\Users\\Administrator\\Desktop\\restaurant-895428__340.png");
 	}

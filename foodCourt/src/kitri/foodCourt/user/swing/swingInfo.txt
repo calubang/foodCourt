@@ -1,6 +1,9 @@
 
 FButton
-
+imageicon 2개를 통해 addMouseListener 적용
+1. ImageIcon basic : 기본 이미지
+	ImageIcon entered : 마우스가 들어올때 이미지
+	등록해두면 알아서 작동함
 
 Label
 
