@@ -1,12 +1,14 @@
-package kitri.foodCourt.dto;
+package kitri.foodCourt.user;
 
 import java.util.List;
 
-public class PaymentDetailDto {
+import kitri.foodCourt.dto.FoodDto;
+
+public class PaymentDetail {
 	FoodDto food;				//음식정보
 	int count;					//개수
 	
-	public PaymentDetailDto(FoodDto food, int count) {
+	public PaymentDetail(FoodDto food, int count) {
 		super();
 		this.food = food;
 		this.count = count;

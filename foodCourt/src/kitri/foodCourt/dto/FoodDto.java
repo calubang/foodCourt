@@ -1,6 +1,9 @@
 package kitri.foodCourt.dto;
 
+import java.util.Date;
+
 public class FoodDto {
+	//공통정보
 	private String foodId;				//음식id
 	private String foodName; 		//음식이름
 	private int categoryId;				//카테고리id
@@ -9,8 +12,11 @@ public class FoodDto {
 	private int point;					//포인트
 	private String description;		//설명
 	private String imageAddress;	//이미지주소
-	//private String managerId;		//등록한매니저
-	//private String createDate;		//등록일
+	
+	//관리자
+	private String managerId;		//등록한매니저
+	private Date createDate;		//등록일
+	private char enable;				//활성화여부
 		
 	public FoodDto(String foodId, String foodName, int categoryId, String categoryName, int price,
 			String imageAddress) {
@@ -71,12 +77,30 @@ public class FoodDto {
 	public void setImageAddress(String imageAddress) {
 		this.imageAddress = imageAddress;
 	}
-	
+	public String getManagerId() {
+		return managerId;
+	}
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	public char getEnable() {
+		return enable;
+	}
+	public void setEnable(char enable) {
+		this.enable = enable;
+	}
+
 	@Override
 	public String toString() {
 		return "FoodDto [foodId=" + foodId + ", foodName=" + foodName + ", categoryId=" + categoryId + ", categoryName="
-				+ categoryName + ", price=" + price + ", description=" + description + ", imageAddress=" + imageAddress
-				+ "]";
+				+ categoryName + ", price=" + price + ", point=" + point + ", description=" + description
+				+ ", imageAddress=" + imageAddress + ", managerId=" + managerId + ", createDate=" + createDate
+				+ ", enable=" + enable + "]";
 	}
-	
 }

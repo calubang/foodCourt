@@ -1,8 +1,10 @@
-package kitri.foodCourt.dto;
+package kitri.foodCourt.user;
 
 import java.util.*;
 
-public class PaymentDto implements Payment{
+import kitri.foodCourt.dto.UserDto;
+
+public class PaymentImpl implements Payment{
 	//결제정보
 	//private String paymentId;
 	private String requestNumber;				//요청번호
@@ -14,12 +16,11 @@ public class PaymentDto implements Payment{
 	private int usedPoint;
 	private int card;
 	private int cash;
-	private char paymentState;
 	//결제시 포함된 음식
-	private List<PaymentDetailDto> detailList;
+	private List<PaymentDetail> detailList;
 	
 	//생성자
-	public PaymentDto(UserDto user) {
+	public PaymentImpl(UserDto user) {
 		super();
 		this.user = user;
 		totalPrice = 0;
@@ -27,7 +28,7 @@ public class PaymentDto implements Payment{
 		usedPoint = 0;
 		card = 0;
 		cash = 0;
-		detailList = new ArrayList<PaymentDetailDto>();
+		detailList = new ArrayList<PaymentDetail>();
 	}
 	public String getRequestNumber() {
 		return requestNumber;
@@ -74,39 +75,34 @@ public class PaymentDto implements Payment{
 	public void setCash(int cash) {
 		this.cash = cash;
 	}
-	public char getPaymentState() {
-		return paymentState;
-	}
-	public void setPaymentState(char paymentState) {
-		this.paymentState = paymentState;
-	}
-	public List<PaymentDetailDto> getDetailList() {
+	public List<PaymentDetail> getDetailList() {
 		return detailList;
 	}
-	public void setDetailList(List<PaymentDetailDto> detailList) {
+	public void setDetailList(List<PaymentDetail> detailList) {
 		this.detailList = detailList;
 	}
 	
 	//구현 메소드
+	//유저용
 	//추가
-	public int add(PaymentDetailDto detail) {
+	public int add(PaymentDetail detail) {
 		detailList.add(detail);
 		totalPrice += detail.getFood().getPrice();
 		savePoint += detail.getFood().getPoint();
 		return detailList.size();
 	}
 	//삭제(index로 삭제)
-	public PaymentDetailDto remove(int index) {
-		PaymentDetailDto detail = remove(index);
+	public PaymentDetail remove(int index) {
+		PaymentDetail detail = remove(index);
 		totalPrice -= detail.getFood().getPrice();
 		savePoint -= detail.getFood().getPoint();
 		return detailList.remove(index);
 	}
 	//삭제(비교해서 삭제)
 	//없으면 null 있으면 삭제한 객체
-	public PaymentDetailDto remove(PaymentDetailDto detailRemove) {
+	public PaymentDetail remove(PaymentDetail detailRemove) {
 		int size = detailList.size();
-		PaymentDetailDto detail = null;
+		PaymentDetail detail = null;
 		for(int i = 0 ; i<size ; i++) {
 			if(detailList.get(i) == detailRemove) {
 				remove(i);
@@ -116,7 +112,7 @@ public class PaymentDto implements Payment{
 	}
 	//모두 삭제
 	public int removeAll() {
-		Iterator<PaymentDetailDto> iter = detailList.iterator();
+		Iterator<PaymentDetail> iter = detailList.iterator();
 		int size = detailList.size();
 		while(iter.hasNext()) {
 			iter.remove();
@@ -126,4 +122,10 @@ public class PaymentDto implements Payment{
 		return size;
 	}
 	
+	@Override
+	public String toString() {
+		return "PaymentImpl [requestNumber=" + requestNumber + ", user=" + user + ", paymentDate=" + paymentDate
+				+ ", totalPrice=" + totalPrice + ", savePoint=" + savePoint + ", usedPoint=" + usedPoint + ", card="
+				+ card + ", cash=" + cash + ", detailList=" + detailList + "]";
+	}
 }
