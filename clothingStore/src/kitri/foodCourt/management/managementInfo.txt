@@ -1,23 +1,20 @@
 매니저가 사용하는 프로그램을 관리
 1. main
 - 실제 main Frame
-- 좌측 메뉴바까지 관리한다.
+- 좌측 메뉴바, 우측 메뉴바 프레임구성
 - 모든 관리자 메뉴는 main Frame 안에서 불러진다.
 
-2. productManagement
+2. menu
 - 상품관리
 
-3. memberManagement
+3. member
 - 회원및 관리자 멤버 관리
 
-4. requestManagement
+4. request
 - 요청관리
 
 5. payment
 - 결제
-
-6. statistics
-- 통계
 
 
 ------------------------------------------------------------------
