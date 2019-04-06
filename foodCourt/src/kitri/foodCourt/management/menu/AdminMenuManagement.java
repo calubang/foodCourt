@@ -25,7 +25,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
 
 
-public class AdminProductManagement extends JPanel {
+public class AdminMenuManagement extends JPanel {
 
 	private String[] properties = {"카테고리", "상품명", "상품코드"};
 	private String[][] entries = {{"모자", "모자1", "123-456-789-123"}, {"모자2", "모자4", "133-466-779-183"}};
@@ -44,20 +44,18 @@ public class AdminProductManagement extends JPanel {
 	private JButton registerBtn = new JButton("\uB4F1\uB85D");
 	private JButton modifyBtn = new JButton("\uC218\uC815");
 	private JButton deleteBtn = new JButton("\uC0AD\uC81C");
-	private JButton storeBtn = new JButton("\uC800\uC7A5");
 
-	JFrame jfR = new JFrame("제품등록");
-	JFrame jfM = new JFrame("제품수정");
+	JFrame jfR = new JFrame("메뉴등록");
+	JFrame jfM = new JFrame("메뉴수정");
 	
-	
-	AdminRegisterProduct arp;
-	AdminModifyProduct amp;
+	AdminRegisterMenu arp;
+	AdminModifyMenu amp;
 	
 	
 	/**
 	 * Create the panel.
 	 */
-	public AdminProductManagement() {
+	public AdminMenuManagement() {
 		setSize(new Dimension(1008, 722));
 		setLayout(null);
 		
@@ -66,7 +64,6 @@ public class AdminProductManagement extends JPanel {
 		searchLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		searchLabel.setBounds(0, 0, 110, 60);
 		add(searchLabel);
-		
 		
 		searchTextField.setBorder(new LineBorder(Color.BLACK, 1, true));
 		searchTextField.setFont(new Font("굴림", Font.PLAIN, 24));
@@ -93,13 +90,13 @@ public class AdminProductManagement extends JPanel {
 		scrollPane.setBounds(0, 58, 791, 664);
 		add(scrollPane);
 
-		menuPanel.setLayout(new GridLayout(4, 1, 0, 40));
+		menuPanel.setLayout(new GridLayout(3, 1, 0, 60));
 		menuPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uBA54\uB274", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 40, 40, 40)));
 		menuPanel.setBounds(799, 243, 209, 479);
 		
 		registerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				arp = new AdminRegisterProduct();
+				arp = new AdminRegisterMenu();
 				
 				jfM.setVisible(false);
 				
@@ -112,7 +109,7 @@ public class AdminProductManagement extends JPanel {
 		
 		modifyBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				amp = new AdminModifyProduct();
+				amp = new AdminModifyMenu();
 				
 				jfR.setVisible(false);
 				
@@ -130,10 +127,7 @@ public class AdminProductManagement extends JPanel {
 			}
 		});
 		menuPanel.add(deleteBtn);
-		
-		menuPanel.add(storeBtn);
+
 		add(menuPanel);
-		
-		
 	}
 }

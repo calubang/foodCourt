@@ -35,7 +35,6 @@ public class AdminMemberInfo extends JPanel {
 	JButton memberRegisterBtn = new JButton("\uD68C\uC6D0\uB4F1\uB85D");
 	JButton modifyBtn = new JButton("\uC218\uC815");
 	JButton deleteBtn = new JButton("\uC0AD\uC81C");
-	JButton storeBtn = new JButton("\uC800\uC7A5");
 	JButton adminBtn = new JButton("\uAD00\uB9AC\uC790");
 	JButton memberBtn = new JButton("\uD68C\uC6D0");
 
@@ -66,12 +65,11 @@ public class AdminMemberInfo extends JPanel {
 		
 		memberMenuPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uBA54\uB274", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 40, 40, 40)));
 		memberMenuPanel.setBounds(799, 128, 209, 594);
-		memberMenuPanel.setLayout(new GridLayout(5, 1, 0, 40));
+		memberMenuPanel.setLayout(new GridLayout(4, 1, 0, 60));
 		memberMenuPanel.add(adminMemberRegisterBtn);
 		memberMenuPanel.add(memberRegisterBtn);
 		memberMenuPanel.add(modifyBtn);
 		memberMenuPanel.add(deleteBtn);
-		memberMenuPanel.add(storeBtn);
 		add(memberMenuPanel);
 		
 		infoPanel.setBounds(0, 12, 250, 70);
