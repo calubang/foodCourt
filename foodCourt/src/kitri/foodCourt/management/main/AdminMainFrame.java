@@ -129,4 +129,5 @@ public class AdminMainFrame extends JFrame {
 		
 		contentPanel.add(ampPanel);
 	}
+
 }
