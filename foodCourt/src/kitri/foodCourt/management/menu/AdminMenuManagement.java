@@ -27,11 +27,7 @@ import javax.swing.ListSelectionModel;
 
 public class AdminMenuManagement extends JPanel {
 
-	private String[] properties = {"카테고리", "상품명", "상품코드"};
-	private String[][] entries = {{"모자", "모자1", "123-456-789-123"}, {"모자2", "모자4", "133-466-779-183"}};
-		
 	private JTextField searchTextField = new JTextField();
-	//private JTable commonTable = new JTable(entries, properties);
 	private JTable commonTable = new JTable(60, 8);
 	
 	JLabel searchLabel = new JLabel("\uAC80\uC0C9");

@@ -89,7 +89,7 @@ public class AdminRequest extends JPanel {
 		
 		add(scrollPane);
 		panel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uBA54\uB274", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 40, 40, 40)));
-		panel.setBounds(808, 427, 200, 295);
+		panel.setBounds(792, 427, 216, 295);
 		
 		add(panel);
 		panel.setLayout(new GridLayout(2, 1, 0, 60));
