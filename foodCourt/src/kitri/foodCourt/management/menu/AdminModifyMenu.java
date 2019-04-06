@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 
+@SuppressWarnings("serial")
 public class AdminModifyMenu extends JPanel {
 
 	JPanel picturePanel = new JPanel();
@@ -25,6 +26,7 @@ public class AdminModifyMenu extends JPanel {
 	JLabel priceLabel = new JLabel("\uD310\uB9E4\uAC00\uACA9");
 	JLabel pointLabel = new JLabel("\uD3EC\uC778\uD2B8");
 	JLabel descriptionLabel = new JLabel("\uC124\uBA85");
+	JLabel menuCodeLabel = new JLabel("\uBA54\uB274\uCF54\uB4DC");
 	
 	JButton changeImageBtn = new JButton("\uC0AC\uC9C4\uBCC0\uACBD");
 	JButton confirmBtn = new JButton("\uC218\uC815");
@@ -33,9 +35,9 @@ public class AdminModifyMenu extends JPanel {
 	JTextField menuNameTextField = new JTextField();
 	JTextField priceTextField = new JTextField();
 	JTextField pointTextField = new JTextField();
+	JTextField menuCodeTextField = new JTextField();
 	
 	JTextArea descriptionTextArea = new JTextArea();
-	private JTextField menuCodeTextField;
 	
 	
 	/**
@@ -98,11 +100,9 @@ public class AdminModifyMenu extends JPanel {
 		descriptionTextArea.setBounds(384, 320, 290, 170);
 		add(descriptionTextArea);
 		
-		JLabel menuCodeLabel = new JLabel("\uBA54\uB274\uCF54\uB4DC");
 		menuCodeLabel.setBounds(297, 40, 80, 40);
 		add(menuCodeLabel);
 		
-		menuCodeTextField = new JTextField();
 		menuCodeTextField.setEditable(false);
 		menuCodeTextField.setText("수정불가");
 		menuCodeTextField.setColumns(10);

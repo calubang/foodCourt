@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import java.awt.Dimension;
 
 
+@SuppressWarnings("serial")
 public class AdminViewOrder extends JPanel {
 
 	JTable table = new JTable(15, 4);
