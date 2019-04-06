@@ -7,9 +7,9 @@ public class AdminMainFrameService {
 	AdminMainFrame amf;
 	
 	
-	public AdminMainFrameService(AdminMainFrameControl amfs) {
-		this.amfc = amfs;
-		amf = amfc.amf;
+	public AdminMainFrameService(AdminMainFrameControl amfc) {
+		this.amfc = amfc;
+		amf = this.amfc.amf;
 	}
 	
 	

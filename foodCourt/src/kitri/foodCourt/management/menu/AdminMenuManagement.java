@@ -3,7 +3,6 @@ package kitri.foodCourt.management.menu;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
@@ -14,38 +13,33 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 
 import java.awt.GridLayout;
 import javax.swing.JTable;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
 
 
+@SuppressWarnings("serial")
 public class AdminMenuManagement extends JPanel {
 
-	private JTextField searchTextField = new JTextField();
-	private JTable commonTable = new JTable(60, 8);
+	JTextField searchTextField = new JTextField();
+	JTable commonTable = new JTable(60, 8);
 	
 	JLabel searchLabel = new JLabel("\uAC80\uC0C9");
 	JLabel pictureLabel = new JLabel("Picture");
+
 	JPanel picturePanel = new JPanel();
+	JPanel menuPanel = new JPanel();
 
 	JScrollPane scrollPane = new JScrollPane(commonTable);
-	private JPanel menuPanel = new JPanel();
 	
-	private JButton registerBtn = new JButton("\uB4F1\uB85D");
-	private JButton modifyBtn = new JButton("\uC218\uC815");
-	private JButton deleteBtn = new JButton("\uC0AD\uC81C");
-
-	JFrame jfR = new JFrame("메뉴등록");
-	JFrame jfM = new JFrame("메뉴수정");
+	JButton registerBtn = new JButton("\uB4F1\uB85D");
+	JButton modifyBtn = new JButton("\uC218\uC815");
+	JButton deleteBtn = new JButton("\uC0AD\uC81C");
 	
-	AdminRegisterMenu arp;
-	AdminModifyMenu amp;
+	AdminMenuControl amc;
 	
 	
 	/**
@@ -90,40 +84,18 @@ public class AdminMenuManagement extends JPanel {
 		menuPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uBA54\uB274", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 40, 40, 40)));
 		menuPanel.setBounds(799, 243, 209, 479);
 		
-		registerBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				arp = new AdminRegisterMenu();
-				
-				jfM.setVisible(false);
-				
-				jfR.getContentPane().add(arp);
-				jfR.setSize(750, 650);
-				jfR.setVisible(true);
-			}
-		});
 		menuPanel.add(registerBtn);
-		
-		modifyBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				amp = new AdminModifyMenu();
-				
-				jfR.setVisible(false);
-				
-				jfM.getContentPane().add(amp);
-				jfM.setSize(750, 650);
-				jfM.setVisible(true);
-			}
-		});
 		menuPanel.add(modifyBtn);
-		
-		deleteBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String[] option = {"예", "아니오"};
-				JOptionPane.showOptionDialog(deleteBtn, "정말 삭제하시겠습니까?\n(삭제하면 다시 되돌릴 수 없습니다.)", "삭제 확인", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
-			}
-		});
 		menuPanel.add(deleteBtn);
 
 		add(menuPanel);
+		
+		
+		// Add Listener
+		amc = new AdminMenuControl(this);
+		
+		registerBtn.addActionListener(amc);
+		modifyBtn.addActionListener(amc);
+		deleteBtn.addActionListener(amc);
 	}
 }
