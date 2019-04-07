@@ -128,6 +128,9 @@ public class AdminMainFrame extends JFrame {
 		cl.show(ampPanel, "AdminProduct");
 		
 		contentPanel.add(ampPanel);
+		
+		
+		
 	}
-
+	
 }

@@ -1,19 +1,17 @@
 package kitri.foodCourt.management.member;
 
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.EtchedBorder;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
 
-public class modifyregit extends JPanel {
+public class AdminRegister extends JPanel {
+	private JTextField idtf;
 	private JTextField passwordtf;
 	private JTextField pwtf;
 	private JTextField nametf;
@@ -29,7 +27,7 @@ public class modifyregit extends JPanel {
 	JPanel selectpanel = new JPanel();
 	JPanel etcpanel = new JPanel();
 
-	JLabel modifylabel = new JLabel("\uC815\uBCF4 \uC218\uC815");
+	JLabel adminRegister = new JLabel("\uAD00\uB9AC\uC790 \uB4F1\uB85D");
 	JLabel idlabel = new JLabel("\uC544\uC774\uB514");
 	JLabel etclabel = new JLabel("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
 	JLabel passwordlabel = new JLabel("\uBE44\uBC00\uBC88\uD638");
@@ -38,27 +36,26 @@ public class modifyregit extends JPanel {
 	JLabel phonelabel = new JLabel("\uD734\uB300\uC804\uD654");
 
 	JComboBox fristnumber = new JComboBox();
-	JButton registerbtn = new JButton("\uC218\uC815");
-	JButton cancelbtn = new JButton("\uCDE8\uC18C");
-	private final JLabel impossibleModify = new JLabel("\uC218\uC815\uBD88\uAC00");
 
-	EtchedBorder eborder;
+	JButton idbtn = new JButton("\uC544\uC774\uB514\uC911\uBCF5\uD655\uC778");
+	JButton registerbtn = new JButton("\uB4F1\uB85D");
+	JButton cancelbtn = new JButton("\uCDE8\uC18C");
 
 	/**
 	 * Create the panel.
 	 */
-	public modifyregit() {
+	public AdminRegister() {
 		setBackground(Color.DARK_GRAY);
 		setLayout(null);
 
-		modifylabel.setFont(new Font("µ¸¿ò", Font.BOLD, 16));
-		modifylabel.setBackground(new Color(128, 0, 0));
-		modifylabel.setForeground(Color.WHITE);
-		modifylabel.setOpaque(true);
-		modifylabel.setHorizontalAlignment(SwingConstants.CENTER);
-		modifylabel.setBounds(0, 0, 600, 31);
+		adminRegister.setFont(new Font("µ¸¿ò", Font.BOLD, 16));
+		adminRegister.setBackground(new Color(128, 0, 0));
+		adminRegister.setForeground(Color.WHITE);
+		adminRegister.setOpaque(true);
+		adminRegister.setHorizontalAlignment(SwingConstants.CENTER);
+		adminRegister.setBounds(0, 0, 600, 31);
 
-		add(modifylabel);
+		add(adminRegister);
 		add(mainpanel);
 		add(selectpanel);
 
@@ -74,6 +71,12 @@ public class modifyregit extends JPanel {
 		idpanel.setBackground(Color.DARK_GRAY);
 		idpanel.setLayout(null);
 		idpanel.add(idlabel);
+		idpanel.add(idbtn);
+
+		idtf = new JTextField();
+		idpanel.add(idtf);
+		idtf.setBounds(107, 0, 283, 51);
+		idtf.setColumns(10);
 
 		idlabel.setFont(new Font("±¼¸²", Font.BOLD, 14));
 		idlabel.setForeground(Color.WHITE);
@@ -81,14 +84,8 @@ public class modifyregit extends JPanel {
 		idlabel.setOpaque(true);
 		idlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		idlabel.setBounds(0, 0, 107, 51);
-		impossibleModify.setFont(new Font("µ¸¿ò", Font.BOLD, 16));
-		impossibleModify.setForeground(Color.WHITE);
-		impossibleModify.setBackground(Color.DARK_GRAY);
-		impossibleModify.setOpaque(true);
-		impossibleModify.setBounds(105, 0, 288, 51);
-		impossibleModify.setBorder(eborder);
-		eborder = new EtchedBorder(EtchedBorder.RAISED);
-		idpanel.add(impossibleModify);
+
+		idbtn.setBounds(402, 0, 116, 51);
 
 		etcpanel.setBackground(Color.DARK_GRAY);
 		etcpanel.setLayout(null);
@@ -175,10 +172,7 @@ public class modifyregit extends JPanel {
 
 		registerbtn.setBounds(12, 5, 110, 39);
 		cancelbtn.setBounds(134, 5, 110, 39);
-		
-		
 
 	}
-	
 
 }

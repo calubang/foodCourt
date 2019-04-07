@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class memberRegister extends JPanel {
+public class MemberRegister extends JPanel {
 	private JTextField idtf;
 	private JTextField passwordtf;
 	private JTextField pwtf;
@@ -44,7 +44,7 @@ public class memberRegister extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public memberRegister() {
+	public MemberRegister() {
 		setBackground(Color.DARK_GRAY);
 		setLayout(null);
 

@@ -95,5 +95,7 @@ public class AdminMemberInfo extends JPanel {
 		cl.show(tablePanel, "AdminTable");
 		
 		add(tablePanel);
+		
+		
 	}
 }
