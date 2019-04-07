@@ -1,15 +1,16 @@
 package kitri.foodCourt.user.swing;
 
-import java.awt.Color;
-import java.awt.LayoutManager;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.border.*;
 
 public class FPanel extends JPanel implements MouseListener{
+	
+	Border basic;
+	Border entered;
 	
 	public FPanel() {
 		super();
@@ -41,12 +42,22 @@ public class FPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		setBorder(new LineBorder(Color.BLACK, 2));
+		basic = this.getBorder();
+		if(entered != null) {
+			setBorder(entered);
+		}else {
+			setBorder(new LineBorder(Color.BLACK, 2, true));
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		setBorder(new LineBorder(Color.BLACK, 0));
+		if(basic != null) {
+			setBorder(basic);
+		}else {
+			setBorder(new LineBorder(Color.BLACK, 0, true));
+		}
+		
 	}
 
 	@Override
