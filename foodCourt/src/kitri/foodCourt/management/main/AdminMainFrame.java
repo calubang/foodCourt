@@ -99,10 +99,7 @@ public class AdminMainFrame extends JFrame {
 		contentPanel.add(ampPanel);
 		
 		
-<<<<<<< HEAD
-		
-=======
-		// Add Listener
+
 		amfc = new AdminMainFrameControl(this);
 		
 		menuManageBtn.addActionListener(amfc);
@@ -110,10 +107,5 @@ public class AdminMainFrame extends JFrame {
 		requestManageBtn.addActionListener(amfc);
 		paymentBtn.addActionListener(amfc);
 		logoutBtn.addActionListener(amfc);
->>>>>>> branch 'master' of https://github.com/calubang/foodCourt.git
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://github.com/calubang/foodCourt.git
 }
