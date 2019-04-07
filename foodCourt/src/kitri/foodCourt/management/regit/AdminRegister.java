@@ -160,6 +160,7 @@ public class AdminRegister extends JPanel {
 		fristnumber.addItem("010");
 		fristnumber.addItem("011");
 		fristnumber.addItem("017");
+		fristnumber.addItem("019");
 
 		phonelabel.setFont(new Font("±¼¸²", Font.BOLD, 16));
 		phonelabel.setForeground(Color.WHITE);

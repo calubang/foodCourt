@@ -12,6 +12,7 @@ public class AdminRegisterService {
 	JFrame jfMo = new JFrame("수정");
 	JFrame jfD = new JFrame("삭제");
 	
+	
 	AdminRegister ar;
 	MemberRegister mr;
 	ModifyRegit mR;

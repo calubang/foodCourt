@@ -18,6 +18,7 @@ public class RemoveMember extends JPanel {
 		panel.setBounds(12, 27, 430, 90);
 		add(panel);
 		
+		
 		JLabel label = new JLabel("\uC0AD\uC81C\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(0, 0, 430, 90);

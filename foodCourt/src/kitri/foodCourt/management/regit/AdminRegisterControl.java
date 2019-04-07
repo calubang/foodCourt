@@ -28,4 +28,5 @@ public class AdminRegisterControl implements ActionListener{
 		}
 		
 	}
+	
 }

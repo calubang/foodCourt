@@ -29,6 +29,7 @@ public class ModifyRegit extends JPanel {
 	JPanel selectpanel = new JPanel();
 	JPanel etcpanel = new JPanel();
 
+	
 	JLabel modifylabel = new JLabel("\uC815\uBCF4 \uC218\uC815");
 	JLabel idlabel = new JLabel("\uC544\uC774\uB514");
 	JLabel etclabel = new JLabel("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");

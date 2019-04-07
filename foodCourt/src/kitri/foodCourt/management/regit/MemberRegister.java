@@ -58,6 +58,7 @@ public class MemberRegister extends JPanel {
 		add(selectpanel);
 		add(mainpanel);
 
+		
 		mainpanel.setBackground(Color.DARK_GRAY);
 		mainpanel.setBounds(43, 64, 518, 360);
 		mainpanel.setLayout(new GridLayout(6, 1, 0, 10));

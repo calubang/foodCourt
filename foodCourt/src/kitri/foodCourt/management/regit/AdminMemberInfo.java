@@ -54,7 +54,7 @@ public class AdminMemberInfo extends JPanel {
 	 * Create the panel.
 	 */
 	public AdminMemberInfo() {
-		setSize(new Dimension(1008, 722));
+		setSize(new Dimension(1007, 722));
 		setLayout(null);
 		
 		searchLabel.setHorizontalAlignment(SwingConstants.CENTER);
