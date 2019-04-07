@@ -10,6 +10,7 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -19,17 +20,22 @@ import javax.swing.JTable;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.JTextArea;
 
 
 @SuppressWarnings("serial")
 public class AdminMenuManagement extends JPanel {
 
 	JTextField searchTextField = new JTextField();
-	JTable commonTable = new JTable(60, 8);
+	JTextArea descriptionTextArea = new JTextArea();
+
+	DefaultTableModel dtm = new DefaultTableModel();
+	JTable commonTable = new JTable(dtm);
 	
 	JLabel searchLabel = new JLabel("\uAC80\uC0C9");
 	JLabel pictureLabel = new JLabel("Picture");
 
+	JPanel descriptionPanel = new JPanel();
 	JPanel picturePanel = new JPanel();
 	JPanel menuPanel = new JPanel();
 
@@ -80,19 +86,28 @@ public class AdminMenuManagement extends JPanel {
 		scrollPane.setBounds(0, 58, 791, 664);
 		add(scrollPane);
 
-		menuPanel.setLayout(new GridLayout(3, 1, 0, 60));
+		menuPanel.setLayout(new GridLayout(3, 1, 0, 35));
 		menuPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uBA54\uB274", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 40, 40, 40)));
-		menuPanel.setBounds(799, 243, 209, 479);
+		menuPanel.setBounds(799, 402, 209, 320);
 		
 		menuPanel.add(registerBtn);
 		menuPanel.add(modifyBtn);
 		menuPanel.add(deleteBtn);
+
+		descriptionPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uC74C\uC2DD \uC124\uBA85", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		descriptionPanel.setBounds(799, 234, 209, 145);
+		add(descriptionPanel);
+		descriptionPanel.setLayout(new BorderLayout(0, 0));
+		descriptionTextArea.setEditable(false);
+		
+		descriptionPanel.add(descriptionTextArea, BorderLayout.CENTER);
 
 		add(menuPanel);
 		
 		
 		// Add Listener
 		amc = new AdminMenuControl(this);
+		
 		
 		registerBtn.addActionListener(amc);
 		modifyBtn.addActionListener(amc);

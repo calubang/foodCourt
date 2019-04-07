@@ -13,6 +13,8 @@ public class AdminMenuControl implements ActionListener {
 	public AdminMenuControl(AdminMenuManagement amm) {
 		this.amm = amm;
 		ams = new AdminMenuService(this);
+		
+		ams.showMenu();
 	}
 
 
