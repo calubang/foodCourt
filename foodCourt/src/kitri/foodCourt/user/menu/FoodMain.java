@@ -1,5 +1,6 @@
-package test;
+package kitri.foodCourt.user.menu;
 
+//
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.EventQueue;

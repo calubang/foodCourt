@@ -1,4 +1,4 @@
-package kitri.foodCourt.management.member;
+package kitri.foodCourt.management.regit;
 
 import java.awt.Dimension;
 
@@ -12,6 +12,11 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
+
+import kitri.foodCourt.management.main.AdminMainFrameControl;
+import kitri.foodCourt.management.member.AdminTable;
+import kitri.foodCourt.management.member.MemberTable;
+
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
@@ -43,6 +48,8 @@ public class AdminMemberInfo extends JPanel {
 	
 	CardLayout cl = new CardLayout(0, 0);
 	
+	AdminRegisterControl arc;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -68,6 +75,10 @@ public class AdminMemberInfo extends JPanel {
 		memberMenuPanel.setLayout(new GridLayout(4, 1, 0, 60));
 		memberMenuPanel.add(adminMemberRegisterBtn);
 		memberMenuPanel.add(memberRegisterBtn);
+		modifyBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		memberMenuPanel.add(modifyBtn);
 		memberMenuPanel.add(deleteBtn);
 		add(memberMenuPanel);
@@ -96,6 +107,13 @@ public class AdminMemberInfo extends JPanel {
 		
 		add(tablePanel);
 		
+//		add listener
+		arc = new AdminRegisterControl(this);
+		
+		adminMemberRegisterBtn.addActionListener(arc);
+		memberRegisterBtn.addActionListener(arc);
+		modifyBtn.addActionListener(arc);
+		deleteBtn.addActionListener(arc);
 		
 	}
 }

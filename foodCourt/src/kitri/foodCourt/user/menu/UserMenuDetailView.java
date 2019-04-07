@@ -1,4 +1,4 @@
-package test;
+package kitri.foodCourt.user.menu;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;

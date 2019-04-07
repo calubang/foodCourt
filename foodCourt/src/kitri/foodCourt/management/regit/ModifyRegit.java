@@ -1,4 +1,4 @@
-package kitri.foodCourt.management.member;
+package kitri.foodCourt.management.regit;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
-public class Modifyregit extends JPanel {
+public class ModifyRegit extends JPanel {
 	private JTextField passwordtf;
 	private JTextField pwtf;
 	private JTextField nametf;
@@ -47,7 +47,7 @@ public class Modifyregit extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Modifyregit() {
+	public ModifyRegit() {
 		setBackground(Color.DARK_GRAY);
 		setLayout(null);
 

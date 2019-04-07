@@ -1,4 +1,4 @@
-package test;
+package kitri.foodCourt.user.menu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

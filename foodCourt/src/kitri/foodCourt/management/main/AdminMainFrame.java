@@ -13,9 +13,9 @@ import javax.swing.JButton;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
-import kitri.foodCourt.management.member.AdminMemberInfo;
 import kitri.foodCourt.management.menu.AdminMenuManagement;
 import kitri.foodCourt.management.payment.AdminPayment;
+import kitri.foodCourt.management.regit.AdminMemberInfo;
 import kitri.foodCourt.management.request.AdminRequest;
 //import kitri.foodCourt.management.statistics.AdminStatistics;
 

@@ -1,4 +1,4 @@
-package kitri.foodCourt.management.member;
+package kitri.foodCourt.management.regit;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;

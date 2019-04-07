@@ -3,17 +3,26 @@ package kitri.foodCourt.management.main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import kitri.foodCourt.management.regit.AdminMemberInfo;
+
 public class AdminMainFrameControl implements ActionListener {
 
 	AdminMainFrame amf;
 	AdminMainFrameService amfs;
+
 	
 	
 	public AdminMainFrameControl(AdminMainFrame amf) {
 		this.amf = amf;
+		
 		amfs = new AdminMainFrameService(this);
 	}
 	
+//	public AdminMainFrameControl(AdminMemberInfo amif) {
+//		this.amif = amif;
+//		amfs = new AdminMainFrameService(this);
+//	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
@@ -28,6 +37,6 @@ public class AdminMainFrameControl implements ActionListener {
 			amfs.showPanel("AdminPayment");
 		} else if (ob == amf.logoutBtn) {
 			amfs.logout();
-		}
+		} 
 	}
 }
