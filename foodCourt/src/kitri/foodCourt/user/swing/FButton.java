@@ -1,9 +1,11 @@
 package kitri.foodCourt.user.swing;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 public class FButton extends JButton implements MouseListener{
 	
@@ -13,15 +15,14 @@ public class FButton extends JButton implements MouseListener{
 	//생성자
 	public FButton() {
 		super();
-		this.addMouseListener(this);
 	}
 
 	public FButton(Action arg0) {
 		super(arg0);
 	}
 
-	public FButton(Icon arg0) {
-		super(arg0);
+	public FButton(Icon icon) {
+		super(icon);
 	}
 
 	public FButton(String arg0, Icon arg1) {
@@ -32,7 +33,11 @@ public class FButton extends JButton implements MouseListener{
 		super(arg0);
 	}
 	
-	
+	public FButton(ImageIcon basic, ImageIcon entered) {
+		super();
+		setBasic(basic);
+		setEntered(entered);
+	}
 	
 	public ImageIcon getBasic() {
 		return basic;
@@ -50,6 +55,11 @@ public class FButton extends JButton implements MouseListener{
 	public void setEntered(ImageIcon entered) {
 		this.entered = entered;
 	}
+	
+	@Override
+	public void setIcon(Icon defaultIcon) {
+		super.setIcon(defaultIcon);
+	}
 
 	//마우스이벤트등록
 	@Override
@@ -62,14 +72,18 @@ public class FButton extends JButton implements MouseListener{
 		FButton button = (FButton)e.getSource();
 		if(this.entered != null) {
 			button.setIcon(entered);
+		}else {
+			button.setBorder(new LineBorder(Color.BLACK, 2));
 		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		FButton button = (FButton)e.getSource();
-		if(this.entered != null) {
+		if(this.basic != null) {
 			button.setIcon(basic);
+		}else {
+			button.setBorder(new LineBorder(Color.BLACK, 1));
 		}
 	}
 

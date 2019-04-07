@@ -1,6 +1,7 @@
 package kitri.foodCourt.user;
 
 import java.util.Iterator;
+import java.util.List;
 
 public interface Basket {
 	
@@ -15,5 +16,15 @@ public interface Basket {
 	//모두 삭제 : 모두 0으로
 	public int removeAll();
 	
+	public String getRequestNumber();
+	public void setRequestNumber(String requestNumber);
+	public String getPaymentDate();
+	public void setPaymentDate(String paymentDate);
+	public int getTotalPrice();
+	public void setTotalPrice(int totalPrice);
+	public int getSavePoint();
+	public void setSavePoint(int savePoint);
+	public List<BasketDetail> getDetailList();
+	public void setDetailList(List<BasketDetail> detailList);
 	
 }

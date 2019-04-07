@@ -56,4 +56,12 @@ public class User {
 	public Basket getBasket() {
 		return basket;
 	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", name=" + name + ", phoneNumberFirst=" + phoneNumberFirst
+				+ ", phoneNumberMiddle=" + phoneNumberMiddle + ", phoneNumberlast=" + phoneNumberlast + ", userPoint="
+				+ userPoint + ", basket=" + basket + "]";
+	}
+	
 }
