@@ -11,11 +11,7 @@ import java.util.ListIterator;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 import kitri.foodCourt.dto.FoodDto;
 
@@ -84,7 +80,7 @@ public class AdminMenuService {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@115.21.52.121:1522:orcl", "kitri", "kitri");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@???.???.???.???:1521:orcl", "kitri", "kitri");
 			
 			ps = c.prepareStatement("select food_id, food_name, f.category_id \"category_id\", category_name, price, point, description, image_address, manager_id, create_date, enable from food f, category c where f.category_id = c.category_id");
 			rs = ps.executeQuery();
