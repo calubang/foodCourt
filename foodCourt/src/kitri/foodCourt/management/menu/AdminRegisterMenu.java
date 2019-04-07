@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import javax.swing.JTextArea;
 
 
+@SuppressWarnings("serial")
 public class AdminRegisterMenu extends JPanel {
 
 	JPanel picturePanel = new JPanel();

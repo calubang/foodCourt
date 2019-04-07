@@ -6,8 +6,6 @@ import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.CompoundBorder;
@@ -15,10 +13,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 
+@SuppressWarnings("serial")
 public class AdminRequest extends JPanel {
 
 	JPanel requestPanel = new JPanel();
@@ -38,9 +35,8 @@ public class AdminRequest extends JPanel {
 	JButton processOrderBtn = new JButton("\uCC98\uB9AC");
 	JButton checkOrderBtn = new JButton("\uC8FC\uBB38\uBAA9\uB85D \uD655\uC778");
 
-	JFrame jfV = new JFrame("주문 목록 확인");
+	AdminRequestControl arc;
 	
-	AdminViewOrder avo;
 	
 	/**
 	 * Create the panel.
@@ -88,29 +84,21 @@ public class AdminRequest extends JPanel {
 		requestPanel.add(requestBtn9);
 		
 		add(scrollPane);
+		
+		panel.setLayout(new GridLayout(2, 1, 0, 60));
 		panel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uBA54\uB274", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 40, 40, 40)));
 		panel.setBounds(792, 427, 216, 295);
 		
-		add(panel);
-		panel.setLayout(new GridLayout(2, 1, 0, 60));
-
-		checkOrderBtn.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							avo = new AdminViewOrder();
-							
-							jfV.getContentPane().add(avo);
-							jfV.setSize(395, 580);
-							jfV.setVisible(true);
-						}
-					});
 		panel.add(checkOrderBtn);
-		
-		processOrderBtn.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								String[] option = {"예", "아니오"};
-								JOptionPane.showOptionDialog(processOrderBtn, "처리하시겠습니까?", "처리 확인", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
-							}
-						});
 		panel.add(processOrderBtn);
+
+		add(panel);
+		
+		
+		// Add Listener
+		arc = new AdminRequestControl(this);
+		
+		checkOrderBtn.addActionListener(arc);
+		processOrderBtn.addActionListener(arc);
 	}
 }

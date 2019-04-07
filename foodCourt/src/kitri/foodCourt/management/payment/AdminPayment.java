@@ -4,15 +4,9 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import kitri.foodCourt.management.menu.AdminModifyMenu;
-import kitri.foodCourt.management.menu.AdminRegisterMenu;
-import kitri.foodCourt.management.request.AdminViewOrder;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -21,33 +15,30 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 
+
+@SuppressWarnings("serial")
 public class AdminPayment extends JPanel {
 	
-	private JTextField searchTextField = new JTextField();
-	private JTable commonTable = new JTable(60, 8);
+	JTextField searchTextField = new JTextField();
+	JTable commonTable = new JTable(60, 8);
 	
 	JLabel searchLabel = new JLabel("\uAC80\uC0C9");
 
 	JScrollPane scrollPane = new JScrollPane(commonTable);
-	private JPanel menuPanel = new JPanel();
+	JPanel menuPanel = new JPanel();
 	
-	private JButton checkReceiptBtn = new JButton("\uC601\uC218\uC99D\uD655\uC778");
-	private JButton deleteBtn = new JButton("\uC0AD\uC81C");
+	JButton checkReceiptBtn = new JButton("\uC601\uC218\uC99D\uD655\uC778");
+	JButton deleteBtn = new JButton("\uC0AD\uC81C");
 	
-	JFrame jfR = new JFrame("영수증");
+	AdminPaymentControl apc;
 	
-	AdminViewReceipt avr;
 	
 	/**
 	 * Create the panel.
@@ -81,27 +72,17 @@ public class AdminPayment extends JPanel {
 		menuPanel.setLayout(new GridLayout(2, 1, 0, 60));
 		menuPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uBA54\uB274", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 40, 40, 40)));
 		menuPanel.setBounds(799, 432, 209, 290);
-		
-		checkReceiptBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				avr = new AdminViewReceipt();
-				
-				jfR.getContentPane().add(avr);
-				jfR.setSize(395, 720);
-				jfR.setVisible(true);
-			}
-		});
+
 		menuPanel.add(checkReceiptBtn);
-		
-		deleteBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String[] option = {"예", "아니오"};
-				JOptionPane.showOptionDialog(deleteBtn, "삭제하시겠습니까?", "삭제 확인", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
-			}
-		});
 		menuPanel.add(deleteBtn);
 
 		add(menuPanel);
+		
+		
+		// Add Listener
+		apc = new AdminPaymentControl(this);
+		
+		checkReceiptBtn.addActionListener(apc);
+		deleteBtn.addActionListener(apc);
 	}
-
 }

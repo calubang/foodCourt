@@ -19,15 +19,14 @@ import kitri.foodCourt.management.payment.AdminPayment;
 import kitri.foodCourt.management.request.AdminRequest;
 //import kitri.foodCourt.management.statistics.AdminStatistics;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-
+@SuppressWarnings("serial")
 public class AdminMainFrame extends JFrame {
 
 	JPanel contentPanel = new JPanel();
 	JPanel ampPanel = new JPanel();
 	JPanel buttonPanel = new JPanel();
+	JPanel emptyPanel = new JPanel();
 	
 	JButton menuManageBtn = new JButton("\uBA54\uB274\uAD00\uB9AC");
 	JButton memberManageBtn = new JButton("\uD68C\uC6D0\uAD00\uB9AC");
@@ -40,6 +39,8 @@ public class AdminMainFrame extends JFrame {
 	AdminRequest ar = new AdminRequest();
 	AdminPayment ap = new AdminPayment();
 //	AdminStatistics as = new AdminStatistics();
+	
+	AdminMainFrameControl amfc;
 	
 	CardLayout cl = new CardLayout(0, 0);
 	
@@ -64,6 +65,7 @@ public class AdminMainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public AdminMainFrame() {
+		super("Food Court");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 800);
@@ -76,47 +78,14 @@ public class AdminMainFrame extends JFrame {
 		buttonPanel.setLayout(new GridLayout(6, 1, 0, 45));
 		buttonPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uAD00\uB9AC\uC790", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 20, 40, 20)));
 		buttonPanel.setBounds(12, 25, 150, 722);
-		contentPanel.add(buttonPanel);
 		
-		menuManageBtn.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								cl.show(ampPanel, "AdminMenuManagement");
-							}
-						});
 		buttonPanel.add(menuManageBtn);
-		
-		memberManageBtn.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								cl.show(ampPanel, "AdminMemberInfo");
-							}
-						});
-		
 		buttonPanel.add(memberManageBtn);
-		
-		requestManageBtn.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								cl.show(ampPanel, "AdminRequest");
-							}
-						});
 		buttonPanel.add(requestManageBtn);
-		
-		paymentBtn.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							cl.show(ampPanel, "AdminPayment");
-						}
-					});
 		buttonPanel.add(paymentBtn);
-		
-		logoutBtn.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-//							<<logout>>
-//							cl.show(ampPanel, "AdminStatistics");
-						}
-					});
-		
-		JPanel emptyPanel = new JPanel();
 		buttonPanel.add(emptyPanel);
 		buttonPanel.add(logoutBtn);
+		contentPanel.add(buttonPanel);
 		
 		ampPanel.setBounds(174, 25, 1008, 722);
 		ampPanel.setLayout(cl);
@@ -130,7 +99,21 @@ public class AdminMainFrame extends JFrame {
 		contentPanel.add(ampPanel);
 		
 		
+<<<<<<< HEAD
 		
+=======
+		// Add Listener
+		amfc = new AdminMainFrameControl(this);
+		
+		menuManageBtn.addActionListener(amfc);
+		memberManageBtn.addActionListener(amfc);
+		requestManageBtn.addActionListener(amfc);
+		paymentBtn.addActionListener(amfc);
+		logoutBtn.addActionListener(amfc);
+>>>>>>> branch 'master' of https://github.com/calubang/foodCourt.git
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/calubang/foodCourt.git
 }

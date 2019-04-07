@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+@SuppressWarnings("serial")
 public class AdminViewReceipt extends JPanel {
 
 	JTable table = new JTable(15, 4);
@@ -21,12 +22,24 @@ public class AdminViewReceipt extends JPanel {
 	JPanel orderNumPanel = new JPanel();
 	JPanel orderDatePanel = new JPanel();
 	JPanel memberIDPanel = new JPanel();
+	JPanel totalPanel = new JPanel();
+	
 	JLabel orderNumLabel = new JLabel("\uC8FC\uBB38\uBC88\uD638 :");
 	JLabel oderNumValueLabel = new JLabel("orderNumber");
 	JLabel orderDateLabel = new JLabel("\uC8FC\uBB38\uC77C\uC2DC :");
 	JLabel orderDateValueLabel = new JLabel("orderDate");
 	JLabel memberIDLabel = new JLabel("\uD68C\uC6D0ID :");
 	JLabel memberIDValueLabel = new JLabel("memberID");
+	JLabel moneyLabel = new JLabel("\uD604\uAE08");
+	JLabel cardLabel = new JLabel("\uCE74\uB4DC");
+	JLabel pointLabel = new JLabel("\uD3EC\uC778\uD2B8");
+	JLabel moneyValueLabel = new JLabel("money");
+	JLabel cardValueLabel = new JLabel("card");
+	JLabel pointValueLabel = new JLabel("point");
+	JLabel payTotalLabel = new JLabel("\uACB0\uC81C\uAE08\uC561");
+	JLabel payTotalValueLabel = new JLabel("money_card_point");
+	JLabel getPointLabel = new JLabel("\uD68D\uB4DD\uD3EC\uC778\uD2B8");
+	JLabel getPointValueLabel = new JLabel("percentage15");
 
 	JButton confirmBtn = new JButton("\uD655\uC778");
 
@@ -54,32 +67,26 @@ public class AdminViewReceipt extends JPanel {
 		paymentMethodPanel.setBounds(10, 415, 360, 62);
 		panel.add(paymentMethodPanel);
 		
-		JLabel moneyLabel = new JLabel("\uD604\uAE08");
 		moneyLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		moneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		paymentMethodPanel.add(moneyLabel);
 		
-		JLabel cardLabel = new JLabel("\uCE74\uB4DC");
 		cardLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		cardLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		paymentMethodPanel.add(cardLabel);
 		
-		JLabel pointLabel = new JLabel("\uD3EC\uC778\uD2B8");
 		pointLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		pointLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		paymentMethodPanel.add(pointLabel);
 		
-		JLabel moneyValueLabel = new JLabel("money");
 		moneyValueLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		moneyValueLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		paymentMethodPanel.add(moneyValueLabel);
 		
-		JLabel cardValueLabel = new JLabel("card");
 		cardValueLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		cardValueLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		paymentMethodPanel.add(cardValueLabel);
 		
-		JLabel pointValueLabel = new JLabel("point");
 		pointValueLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		pointValueLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		paymentMethodPanel.add(pointValueLabel);
@@ -128,28 +135,23 @@ public class AdminViewReceipt extends JPanel {
 		confirmBtn.setBounds(127, 598, 128, 48);
 		panel.add(confirmBtn);
 		
-		JPanel totalPanel = new JPanel();
 		totalPanel.setBorder(null);
 		totalPanel.setBounds(10, 498, 360, 62);
 		panel.add(totalPanel);
 		totalPanel.setLayout(new GridLayout(2, 2, 0, 0));
 		
-		JLabel payTotalLabel = new JLabel("\uACB0\uC81C\uAE08\uC561");
 		payTotalLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		payTotalLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		totalPanel.add(payTotalLabel);
 		
-		JLabel payTotalValueLabel = new JLabel("money_card_point");
 		payTotalValueLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		payTotalValueLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		totalPanel.add(payTotalValueLabel);
 		
-		JLabel getPointLabel = new JLabel("\uD68D\uB4DD\uD3EC\uC778\uD2B8");
 		getPointLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		getPointLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		totalPanel.add(getPointLabel);
 		
-		JLabel getPointValueLabel = new JLabel("percentage15");
 		getPointValueLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		getPointValueLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		totalPanel.add(getPointValueLabel);
