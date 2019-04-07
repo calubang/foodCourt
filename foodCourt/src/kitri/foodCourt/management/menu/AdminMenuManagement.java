@@ -33,7 +33,7 @@ public class AdminMenuManagement extends JPanel {
 	JTable commonTable = new JTable(dtm);
 	
 	JLabel searchLabel = new JLabel("\uAC80\uC0C9");
-	JLabel pictureLabel = new JLabel("Picture");
+	JLabel pictureLabel = new JLabel();
 
 	JPanel descriptionPanel = new JPanel();
 	JPanel picturePanel = new JPanel();
@@ -44,6 +44,8 @@ public class AdminMenuManagement extends JPanel {
 	JButton registerBtn = new JButton("\uB4F1\uB85D");
 	JButton modifyBtn = new JButton("\uC218\uC815");
 	JButton deleteBtn = new JButton("\uC0AD\uC81C");
+	
+	ListSelectionModel lsm;
 	
 	AdminMenuControl amc;
 	
@@ -108,9 +110,11 @@ public class AdminMenuManagement extends JPanel {
 		// Add Listener
 		amc = new AdminMenuControl(this);
 		
-		
 		registerBtn.addActionListener(amc);
 		modifyBtn.addActionListener(amc);
 		deleteBtn.addActionListener(amc);
+		
+		lsm = commonTable.getSelectionModel();
+		lsm.addListSelectionListener(amc);
 	}
 }
