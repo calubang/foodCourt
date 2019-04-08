@@ -1,5 +1,6 @@
 package kitri.foodCourt.management.regit;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 public class AdminRegisterService {
@@ -8,9 +9,13 @@ public class AdminRegisterService {
 	AdminMemberInfo ami;
 	
 	JFrame jfA = new JFrame("관리자등록");
+	JDialog jfAD = new JDialog(jfA);
 	JFrame jfM = new JFrame("회원등록");
+	JDialog jfMD = new JDialog(jfM);
 	JFrame jfMo = new JFrame("수정");
+	JDialog jfMoD = new JDialog(jfMo);
 	JFrame jfD = new JFrame("삭제");
+	JDialog jfDD = new JDialog(jfD);
 	
 	
 	AdminRegister ar;
@@ -31,27 +36,31 @@ public class AdminRegisterService {
 	}
 
 	public void showadminRegister() {
-		jfA.getContentPane().add(ar);
-		jfA.setSize(600,500);
-		jfA.setVisible(true);
+		jfAD.getContentPane().add(ar);
+		jfAD.setSize(600,500);
+		jfAD.setModal(true);
+		jfAD.setVisible(true);
 	}
 
 	public void showmemberRegister() {
-		jfM.getContentPane().add(mr);
-		jfM.setSize(600,500);
-		jfM.setVisible(true);
+		jfMD.getContentPane().add(mr);
+		jfMD.setSize(600,500);
+		jfMD.setModal(true);
+		jfMD.setVisible(true);
 	}
 
 	public void showmodify() {
-		jfM.getContentPane().add(mR);
-		jfM.setSize(600,500);
-		jfM.setVisible(true);
+		jfMoD.getContentPane().add(mR);
+		jfMoD.setSize(600,500);
+		jfMoD.setModal(true);
+		jfMoD.setVisible(true);
 	}
 
 	public void showdelete() {
-		jfD.getContentPane().add(rm);
-		jfD.setSize(450,220);
-		jfD.setVisible(true);
+		jfDD.getContentPane().add(rm);
+		jfDD.setSize(450,220);
+		jfDD.setModal(true);
+		jfDD.setVisible(true);
 	}
 	
 	
