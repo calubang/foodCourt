@@ -80,15 +80,20 @@ CREATE TABLE food (
     CONSTRAINT food_manager_id_fk foreign key(manager_id) references manager(manager_id)
 );
 
+-- Sequence
+CREATE SEQUENCE food_fid_seq START WITH 0 INCREMENT BY 1 MAXVALUE 999999 MINVALUE 0;
+
+DROP SEQUENCE food_fid_seq;
+
 -- 예제 값
 insert into food(food_id, food_name, category_id, price, point, description, image_address, manager_id, create_date, enable)
-values ('1_볶음밥_190407', '볶음밥', 1, 6000, 60, '신선한 야채를 사용.', '/kitri/foodCourt/management/menu/image/bokeumbap.jpg', 'Clerk123', sysdate, 'y');
+values (to_char(food_fid_seq.nextval, '999999'), '볶음밥', 1, 6000, 60, '신선한 야채를 사용.', '/kitri/foodCourt/management/menu/image/bokeumbap.jpg', 'Clerk123', sysdate, 'y');
 insert into food(food_id, food_name, category_id, price, point, description, image_address, manager_id, create_date, enable)
-values ('2_자장면_190407', '자장면', 2, 5000, 50, '직접 수타로 만듦.', '/kitri/foodCourt/management/menu/image/jajangmyeon.jpg', 'Clerk123', sysdate, 'y');
+values (to_char(food_fid_seq.nextval, '999999'), '자장면', 2, 5000, 50, '직접 수타로 만듦.', '/kitri/foodCourt/management/menu/image/jajangmyeon.jpg', 'Clerk123', sysdate, 'y');
 insert into food(food_id, food_name, category_id, price, point, description, image_address, manager_id, create_date, enable)
-values ('3_소바_190407', '소바', 3, 7000, 70, '메밀이 들어감.', '/kitri/foodCourt/management/menu/image/soba.jpg', 'Clerk123', sysdate, 'y');
+values (to_char(food_fid_seq.nextval, '999999'), '소바', 3, 7000, 70, '메밀이 들어감.', '/kitri/foodCourt/management/menu/image/soba.jpg', 'Clerk123', sysdate, 'y');
 insert into food(food_id, food_name, category_id, price, point, description, image_address, manager_id, create_date, enable)
-values ('4_스테이크_190407', '스테이크', 4, 9500, 95, '뉴질랜드산 소고기를 사용.', '/kitri/foodCourt/management/menu/image/steak.jpg', 'Admin123', sysdate, 'y');
+values (to_char(food_fid_seq.nextval, '999999'), '스테이크', 4, 9500, 95, '뉴질랜드산 소고기를 사용.', '/kitri/foodCourt/management/menu/image/steak.jpg', 'Admin123', sysdate, 'y');
 
 -- 확인
 SELECT * FROM food;

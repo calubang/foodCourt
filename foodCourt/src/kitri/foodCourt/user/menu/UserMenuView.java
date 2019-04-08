@@ -1,22 +1,15 @@
 package kitri.foodCourt.user.menu;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import java.awt.Dimension;
-import java.awt.Color;
-import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
-import java.awt.event.ActionEvent;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class UserMenuView extends JPanel {
 	/**
@@ -40,22 +33,35 @@ public class UserMenuView extends JPanel {
 //	단순히 이전으로 클릭이면 이미 카테고리 선택 혹은 검색을 통해 메뉴리스트를 이미 가져왔을 것이므로
 //	메뉴를 바꿀 필요 없이 단순히 setvisible true만 해주면 된다
 // 카테고리 선택 혹은 검색을 통해 여는 경우에는 db에서 메뉴리스트를 얻어와서 뿌려줘야 하므로 매개변수에 메뉴 list를 받아와서 뿌려줘야 한다
-	public void setMenu(int count, List<FoodDto> foodList) { // 임시 테스트용 count
-		int gridx = 0;
-		int gridy = 0;
-		for(int i = 0; i < count; i++) {
-			JButton menuButton = new MenuButton("한식" + (i+1)); // 이 텍스트에는 list.getIndex(i).getFoodName(); 이 올것이다
-			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-			gbc_btnNewButton.insets = new Insets(0, 0, 9, 9);
-			gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-			gbc_btnNewButton.gridx = gridx;
-			gbc_btnNewButton.gridy = gridy;
-			panel.add(menuButton, gbc_btnNewButton);
-			gridx++;
-			if(gridx > 4) {
-				gridx = 0;
-				gridy++;
+	public void setMenu(int count, String ImagePath, List<FoodDto> foodList) { // 임시 테스트용 count
+		try {
+			BufferedImage bimg = ImageIO.read(new File(UserMenuView.class.getResource(ImagePath).toURI())); // 이미지 로드
+			ImageIcon properImg; // 적정크기에 맞춰진 이미지를 담을 변수
+			properImg = new ImageIcon(bimg.getScaledInstance((int) (190), (int) (170), Image.SCALE_SMOOTH));
+			//라벨크기 가로 190 세로 190 에 맞춰서 띄워주자!!! 3줄로 끝납니다...
+			
+			int gridx = 0;
+			int gridy = 0;
+			for(int i = 0; i < count; i++) {
+				System.out.println("패널생성시작 " + i + 1);
+				JPanel menuPanel = new MenuPanel(properImg); // 이 텍스트에는 list.getIndex(i).getFoodName(); 이 올것이다
+				System.out.println("패널생성완료");
+				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+				gbc_btnNewButton.insets = new Insets(0, 0, 9, 9);
+				gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+				gbc_btnNewButton.gridx = gridx;
+				gbc_btnNewButton.gridy = gridy;
+				panel.add(menuPanel, gbc_btnNewButton);
+				gridx++;
+				if(gridx > 4) {
+					gridx = 0;
+					gridy++;
+				}
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
 		}
 	}
 //		만약 메뉴를 17개 뽑아온다고 하면

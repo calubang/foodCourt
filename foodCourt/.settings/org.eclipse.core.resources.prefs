@@ -1,12 +1,9 @@
 eclipse.preferences.version=1
-encoding//src/kitri/foodCourt/user/menu/FoodDao.java=MS949
 encoding//src/kitri/foodCourt/user/menu/FoodDto.java=MS949
 encoding//src/kitri/foodCourt/user/menu/FoodMain.java=MS949
 encoding//src/kitri/foodCourt/user/menu/FoodMainController.java=MS949
 encoding//src/kitri/foodCourt/user/menu/FoodMainService.java=MS949
 encoding//src/kitri/foodCourt/user/menu/FoodMainView.java=MS949
-encoding//src/kitri/foodCourt/user/menu/MenuButton.java=MS949
+encoding//src/kitri/foodCourt/user/menu/MenuDao.java=MS949
 encoding//src/kitri/foodCourt/user/menu/UserMenuDetailView.java=MS949
 encoding//src/kitri/foodCourt/user/menu/UserMenuView.java=MS949
-encoding//src/kitri/foodCourt/user/menu/foodCourt.exerd=MS949
-encoding//src/kitri/foodCourt/user/menu/foodCourt2.exerd=MS949
