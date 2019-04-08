@@ -13,6 +13,5 @@ public class MenuButton extends JButton {
 		setMaximumSize(new Dimension(190, 190));
 		setPreferredSize(new Dimension(190, 190));
 		setVerticalAlignment(SwingConstants.BOTTOM);
-		
 	}
 }
