@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 
@@ -23,7 +22,7 @@ public class AdminModifyMenu extends JPanel {
 
 	JComboBox<String> categoryComboBox = new JComboBox<String>(new String[] {"한식", "중식", "일식", "양식"});
 	
-	JLabel pictureLabel = new JLabel("\uC0AC\uC9C4");
+	JLabel pictureLabel = new JLabel("");
 	JLabel menuNameLabel = new JLabel("\uBA54\uB274\uBA85");
 	JLabel priceLabel = new JLabel("\uD310\uB9E4\uAC00\uACA9");
 	JLabel pointLabel = new JLabel("\uD3EC\uC778\uD2B8");
@@ -60,7 +59,6 @@ public class AdminModifyMenu extends JPanel {
 		add(menuNameTextField);
 		
 		pictureLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		pictureLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		picturePanel.setBounds(40, 40, 205, 213);
 		picturePanel.setLayout(new BorderLayout(0, 0));

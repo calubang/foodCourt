@@ -60,6 +60,7 @@ public class AdminMenuService {
 		arm.pointTextField.setText("");
 		arm.descriptionTextArea.setText("");
 		arm.categoryComboBox.setSelectedIndex(0);
+		arm.pictureLabel.setText("»çÁø");
 		arm.pictureLabel.setIcon(null);
 		
 		amm.jdR.getContentPane().add(arm);
@@ -375,6 +376,7 @@ public class AdminMenuService {
 			image = new ImageIcon(AdminMenuService.class.getResource(imgUrl));
 			
 			if (ob == arm.registerImageBtn) {
+				arm.pictureLabel.setText(null);
 				arm.pictureLabel.setIcon(image); 
 			} else if (ob == am.changeImageBtn) {
 				am.pictureLabel.setIcon(image);
