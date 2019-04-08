@@ -18,7 +18,7 @@ public class AdminRegisterMenu extends JPanel {
 
 	JPanel picturePanel = new JPanel();
 
-	JComboBox categoryComboBox = new JComboBox(new String[] {"한식", "중식", "일식", "양식"});
+	JComboBox<String> categoryComboBox = new JComboBox<String>(new String[] {"한식", "중식", "일식", "양식"});
 	
 	JLabel pictureLabel = new JLabel("\uC0AC\uC9C4");
 	JLabel menuNameLabel = new JLabel("\uBA54\uB274\uBA85");
@@ -35,7 +35,7 @@ public class AdminRegisterMenu extends JPanel {
 	JTextField pointTextField = new JTextField();
 	
 	JTextArea descriptionTextArea = new JTextArea();
-
+	
 	
 	/**
 	 * Create the panel.
@@ -44,7 +44,7 @@ public class AdminRegisterMenu extends JPanel {
 		setSize(new Dimension(750, 650));
 		setLayout(null);
 		
-		menuNameTextField.setText("내용을 입력해주세요.");
+		menuNameTextField.setText("");
 		menuNameTextField.setBounds(384, 40, 290, 40);
 		menuNameTextField.setColumns(10);
 		add(menuNameTextField);
@@ -68,7 +68,7 @@ public class AdminRegisterMenu extends JPanel {
 		add(menuNameLabel);
 		
 		priceLabel.setBounds(297, 110, 80, 40);
-		priceTextField.setText("내용을 입력해주세요.");
+		priceTextField.setText("");
 		add(priceLabel);
 
 		priceTextField.setColumns(10);
@@ -76,7 +76,7 @@ public class AdminRegisterMenu extends JPanel {
 		add(priceTextField);
 		
 		pointLabel.setBounds(297, 180, 80, 40);
-		pointTextField.setText("기본값이 있지만 따로 더 주고 싶을 때");
+		pointTextField.setText("");
 		add(pointLabel);
 		
 		pointTextField.setColumns(10);
@@ -92,7 +92,7 @@ public class AdminRegisterMenu extends JPanel {
 		descriptionLabel.setBounds(297, 250, 80, 40);
 		add(descriptionLabel);
 		
-		descriptionTextArea.setText("해당 음식에 대한 가벼운 설명");
+		descriptionTextArea.setText("");
 		descriptionTextArea.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		descriptionTextArea.setBounds(384, 250, 290, 240);
 		add(descriptionTextArea);

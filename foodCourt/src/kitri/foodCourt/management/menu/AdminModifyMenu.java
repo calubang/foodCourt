@@ -1,6 +1,8 @@
 package kitri.foodCourt.management.menu;
 
 import java.awt.BorderLayout;
+import java.awt.Checkbox;
+import java.awt.CheckboxGroup;
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -19,7 +21,7 @@ public class AdminModifyMenu extends JPanel {
 
 	JPanel picturePanel = new JPanel();
 
-	JComboBox categoryComboBox = new JComboBox(new String[] {"한식", "중식", "일식", "양식", "모자", "아우터"});
+	JComboBox<String> categoryComboBox = new JComboBox<String>(new String[] {"한식", "중식", "일식", "양식"});
 	
 	JLabel pictureLabel = new JLabel("\uC0AC\uC9C4");
 	JLabel menuNameLabel = new JLabel("\uBA54\uB274\uBA85");
@@ -27,6 +29,7 @@ public class AdminModifyMenu extends JPanel {
 	JLabel pointLabel = new JLabel("\uD3EC\uC778\uD2B8");
 	JLabel descriptionLabel = new JLabel("\uC124\uBA85");
 	JLabel menuCodeLabel = new JLabel("\uBA54\uB274\uCF54\uB4DC");
+	JLabel enableLabel = new JLabel("\uD310\uB9E4 \uC5EC\uBD80");
 	
 	JButton changeImageBtn = new JButton("\uC0AC\uC9C4\uBCC0\uACBD");
 	JButton confirmBtn = new JButton("\uC218\uC815");
@@ -38,6 +41,10 @@ public class AdminModifyMenu extends JPanel {
 	JTextField menuCodeTextField = new JTextField();
 	
 	JTextArea descriptionTextArea = new JTextArea();
+	
+	CheckboxGroup cg = new CheckboxGroup();
+	Checkbox checkBox1 = new Checkbox("판매 가능", cg, true);
+	Checkbox checkBox2 = new Checkbox("판매 불가능", cg, false);
 	
 	
 	/**
@@ -92,12 +99,12 @@ public class AdminModifyMenu extends JPanel {
 		cancelBtn.setBounds(420, 550, 120, 50);
 		add(cancelBtn);
 		
-		descriptionLabel.setBounds(297, 320, 80, 40);
+		descriptionLabel.setBounds(297, 390, 80, 40);
 		add(descriptionLabel);
 		
 		descriptionTextArea.setText("해당 음식에 대한 가벼운 설명");
 		descriptionTextArea.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		descriptionTextArea.setBounds(384, 320, 290, 170);
+		descriptionTextArea.setBounds(384, 390, 290, 100);
 		add(descriptionTextArea);
 		
 		menuCodeLabel.setBounds(297, 40, 80, 40);
@@ -108,5 +115,15 @@ public class AdminModifyMenu extends JPanel {
 		menuCodeTextField.setColumns(10);
 		menuCodeTextField.setBounds(384, 40, 290, 40);
 		add(menuCodeTextField);
+		
+		enableLabel.setBounds(297, 320, 80, 40);
+		add(enableLabel);
+		checkBox1.setLocation(384, 320);
+		checkBox1.setSize(80, 40);
+		
+		add(checkBox1);
+		checkBox2.setSize(80, 40);
+		checkBox2.setLocation(485, 320);
+		add(checkBox2);
 	}
 }

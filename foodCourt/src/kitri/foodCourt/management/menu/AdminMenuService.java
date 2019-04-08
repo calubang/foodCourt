@@ -1,5 +1,7 @@
 package kitri.foodCourt.management.menu;
 
+import java.awt.Component;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,8 +13,9 @@ import java.util.ListIterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import kitri.foodCourt.dto.FoodDto;
@@ -22,48 +25,132 @@ public class AdminMenuService {
 
 	AdminMenuControl amc;
 	AdminMenuManagement amm;
-	
-	AdminRegisterMenu arp;
-	AdminModifyMenu amp;
-	
-	JFrame jfR = new JFrame();
-	JDialog jdR = new JDialog(jfR, "메뉴등록");
-	JFrame jfM = new JFrame();
-	JDialog jdM = new JDialog(jfM, "메뉴수정");
+	AdminRegisterMenu arm;
+	AdminModifyMenu am;
 	
 	String[] option = {"예", "아니오"};
 	String[] column = {"메뉴ID", "메뉴이름", "카테고리", "가격", "포인트", "담당매니저", "등록일", "주문가능여부"};
 	
 	DefaultTableModel dtm;
 	
+	JFileChooser chooser = new JFileChooser();
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF & PNG Images", "jpg", "gif", "png");
 	
+    
 	public AdminMenuService(AdminMenuControl amc) {
 		this.amc = amc;
 		amm = this.amc.amm;
-		dtm = amm.dtm;
+		arm = amm.arm;
+		am = amm.am;
 		
-		arp = new AdminRegisterMenu();
-		amp = new AdminModifyMenu();
+		dtm = amm.dtm;
 		
 		// Set Table column
 		for (int i = 0; i < column.length; i++) {
 			dtm.addColumn(column[i]);
 		}
+		
+		chooser.setFileFilter(filter);
 	}
 	
 	
 	public void showRegisterWindow() {
-		jdR.getContentPane().add(arp);
-		jdR.setSize(750, 650);
-		jdR.setModal(true);
-		jdR.setVisible(true);
+		arm.menuNameTextField.setText("");
+		arm.priceTextField.setText("");
+		arm.pointTextField.setText("");
+		arm.descriptionTextArea.setText("");
+		arm.categoryComboBox.setSelectedIndex(0);
+		arm.pictureLabel.setIcon(null);
+		
+		amm.jdR.getContentPane().add(arm);
+		amm.jdR.setSize(750, 650);
+		amm.jdR.setModal(true);
+		amm.jdR.setVisible(true);
 	}
 	
 	public void showModifyWindow() {
-		jdM.getContentPane().add(amp);
-		jdM.setSize(750, 650);
-		jdM.setModal(true);
-		jdM.setVisible(true);
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		FoodDto foodDto = null;
+		ImageIcon image = null;
+		
+		String imgUrl = null;
+		int rowSelect = amm.commonTable.getSelectedRow();
+		
+		if (rowSelect == -1) {
+			JOptionPane.showMessageDialog(amm.modifyBtn, "수정할 메뉴가 없습니다.");
+			closeWindow(amm.jdM);
+			return;
+		}
+		
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			
+			ps = c.prepareStatement("select * from food where food_id = (?)");
+			ps.setString(1, (String)dtm.getValueAt(rowSelect, 0));
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				foodDto = new FoodDto(rs.getString("food_id"), rs.getString("food_name"), rs.getInt("category_id"), null, rs.getInt("price"), rs.getString("image_address"));
+
+				foodDto.setPoint(rs.getInt("point"));
+				foodDto.setDescription(rs.getString("description"));
+				foodDto.setManagerId(rs.getString("manager_id"));
+				foodDto.setCreateDate(rs.getDate("create_date"));
+				foodDto.setEnable(rs.getString("enable").charAt(0));
+			}
+
+			am.menuCodeTextField.setText(foodDto.getFoodId());
+			am.menuNameTextField.setText(foodDto.getFoodName());
+			am.priceTextField.setText(String.valueOf(foodDto.getPrice()));
+			am.pointTextField.setText(String.valueOf(foodDto.getPoint()));
+			am.descriptionTextArea.setText(foodDto.getDescription());
+			am.categoryComboBox.setSelectedIndex(foodDto.getCategoryId() - 1);
+			am.cg.setSelectedCheckbox((foodDto.getEnable() == 'y') ? am.checkBox1 : am.checkBox2);
+			
+			imgUrl = foodDto.getImageAddress();
+			image = new ImageIcon(AdminMenuService.class.getResource(imgUrl));
+			
+			am.pictureLabel.setIcon(image);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(c != null) {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		amm.jdM.getContentPane().add(amm.am);
+		amm.jdM.setSize(750, 650);
+		amm.jdM.setModal(true);
+		amm.jdM.setResizable(false);
+		amm.jdM.setVisible(true);
 	}
 	
 	public void showDeleteWindow() {
@@ -256,6 +343,44 @@ public class AdminMenuService {
 			amm.pictureLabel.setIcon(image);
 			
 			amm.descriptionTextArea.setText(description);
+		}
+	}
+
+	public void closeWindow(JDialog jd) {
+		jd.dispose();
+	}
+
+	public void searchFood() {
+		String str = amm.searchTextField.getText().trim();
+		
+		int rowCount = dtm.getRowCount();
+		for(int i = 0; i < rowCount; i++) {
+			if (str.equals((String)dtm.getValueAt(i, 1))) {
+				amm.commonTable.setRowSelectionInterval(i, i);
+				break;
+			}
+		}
+		
+	}
+
+	public void findImage(Object ob) {
+		chooser.setCurrentDirectory(new File("." + File.separator + "src" + File.separator + "kitri" + File.separator + "foodCourt" + File.separator + "management" + File.separator + "menu" + File.separator + "image"));
+		int choice = chooser.showOpenDialog((Component)ob);
+		String imgUrl = null;
+		ImageIcon image = null;
+		
+		if (choice == JFileChooser.APPROVE_OPTION) {
+			String fullpath = chooser.getSelectedFile().toString();
+			imgUrl = fullpath.substring(fullpath.indexOf("kitri") - 1, fullpath.length()).replace('\\', '/');
+			image = new ImageIcon(AdminMenuService.class.getResource(imgUrl));
+			
+			if (ob == arm.registerImageBtn) {
+				arm.pictureLabel.setIcon(image); 
+			} else if (ob == am.changeImageBtn) {
+				am.pictureLabel.setIcon(image);
+			}
+		} else {
+			return;
 		}
 	}
 }
