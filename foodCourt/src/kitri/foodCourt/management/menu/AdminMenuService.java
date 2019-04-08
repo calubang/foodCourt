@@ -26,10 +26,10 @@ public class AdminMenuService {
 	AdminRegisterMenu arp;
 	AdminModifyMenu amp;
 	
-	JFrame jfR = new JFrame("메뉴등록");
-	JDialog jdR = new JDialog(jfR);
-	JFrame jfM = new JFrame("메뉴수정");
-	JDialog jdM = new JDialog(jfM);
+	JFrame jfR = new JFrame();
+	JDialog jdR = new JDialog(jfR, "메뉴등록");
+	JFrame jfM = new JFrame();
+	JDialog jdM = new JDialog(jfM, "메뉴수정");
 	
 	String[] option = {"예", "아니오"};
 	String[] column = {"메뉴ID", "메뉴이름", "카테고리", "가격", "포인트", "담당매니저", "등록일", "주문가능여부"};
