@@ -7,11 +7,11 @@ import javax.swing.JTextPane;
 import kitri.foodCourt.user.swing.FButton;
 
 public class PaymentController implements ActionListener, InputMethodListener{
-	public PaymentMain paymentMain;
+	public Payment payment;
 	private PaymentService service;
 	
-	public PaymentController(PaymentMain paymentMain){
-		this.paymentMain = paymentMain;
+	public PaymentController(Payment payment){
+		this.payment = payment;
 		this.service = new PaymentService(this);
 	}
 

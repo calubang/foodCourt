@@ -20,9 +20,10 @@ public class PaymentMain extends JFrame{
 	private PaymentController controller;
 	public JPanel pPaymentMain;
 	public Receipt receipt;
-	public static User user = new User("calubang", "안병욱", 5000);
 	private FButton btnCancel;
 	
+	public static User user = new User("calubang", "안병욱", 5000);
+
 	public void test() {
 		FoodDto food1 = new FoodDto("1", "된장찌개", 1, "한식", 5000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
 		FoodDto food2 = new FoodDto("2", "스테이크", 2, "양식", 8000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
@@ -63,7 +64,7 @@ public class PaymentMain extends JFrame{
 	 */
 	public PaymentMain() {
 		test();
-		receipt = new Receipt(this);
+		receipt = new Receipt();
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 800);
@@ -125,7 +126,7 @@ public class PaymentMain extends JFrame{
 		pPaymentMain.setLayout(null);
 		
 		FPanel pCash = new FPanel();
-		LineBorder lineBorder = new LineBorder(new Color(0, 0, 0), 2, true);
+		//LineBorder lineBorder = new LineBorder(new Color(0, 0, 0), 2, true);
 		//pCash.setBorder(new LineBorder(, 2, true));
 		
 //		g.setColor(getBackground());
@@ -279,6 +280,7 @@ public class PaymentMain extends JFrame{
 		document = tpPoint.getStyledDocument();
 		document.setParagraphAttributes(0, document.getLength(), center, false);
 		
+		/*
 		//이벤트
 		controller = new PaymentController(this);
 		btnReceiptConfirm.addActionListener(controller);
@@ -287,6 +289,6 @@ public class PaymentMain extends JFrame{
 		tpCard.addInputMethodListener(controller);
 		btnCancel.addActionListener(controller);
 		//btn
-
+		*/
 	}
 }

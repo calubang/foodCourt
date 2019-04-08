@@ -31,6 +31,10 @@ public class BasketController implements ActionListener, MouseListener{
 			break;
 		case "ok":
 			service.receiptOK();
+			break;
+		case "payment":
+			service.payment();
+			break;
 		}
 	}
 

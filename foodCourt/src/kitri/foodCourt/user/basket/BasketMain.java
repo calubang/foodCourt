@@ -1,15 +1,12 @@
 package kitri.foodCourt.user.basket;
 
-import java.awt.event.*;
 import java.net.URL;
-import java.util.List;
 
 import javax.swing.*;
 import java.awt.*;
 
 import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.*;
-import kitri.foodCourt.user.menu.MenuButton;
 import kitri.foodCourt.user.swing.*;
 import javax.swing.border.*;
 
@@ -17,10 +14,12 @@ import javax.swing.border.*;
 public class BasketMain extends JFrame{
 
 	private JPanel contentPane;
-	private JTextField textField;
 	private BasketController controller;
 	public static User user = new User("calubang", "안병욱", 5000);
 	public JPanel pBasketMain;
+	public Payment payment;
+	public JPanel pChangePanel;
+	public CardLayout card;
 	
 	
 	public void test() {
@@ -87,40 +86,25 @@ public class BasketMain extends JFrame{
 		panel_3.setBounds(0, 102, 1172, 6);
 		panel.add(panel_3);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(0, 10, 133, 101);
-		panel.add(panel_2);
-		panel_2.setLayout(null);
-		JButton btnNewButton = new JButton("메인메뉴", new ImageIcon("C:\\Users\\Administrator\\Desktop\\home.png"));
-		btnNewButton.setBounds(12, 10, 120, 59);
-		btnNewButton.setBorderPainted(false);
-		panel_2.add(btnNewButton);
-		btnNewButton.setBackground(Color.WHITE);
-		
-		JLabel lblNewLabel = new JLabel("\uBA54\uC778\uBA54\uB274");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(12, 71, 120, 20);
-		panel_2.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("\uAC80\uC0C9");
-		lblNewLabel_1.setFont(new Font("굴림", Font.PLAIN, 30));
-		lblNewLabel_1.setBounds(160, 26, 69, 66);
-		panel.add(lblNewLabel_1);
-		
-		textField = new JTextField();
-		textField.setBorder(new LineBorder(SystemColor.activeCaption, 1, true));
-		textField.setBounds(241, 47, 667, 38);
-		panel.add(textField);
-		textField.setColumns(10);
-		
 		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(145, 137, 6, 457);
+		panel_6.setBounds(146, 118, 5, 476);
 		panel.add(panel_6);
+		
+		JButton btnOrderList = new JButton(new ImageIcon(BasketMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/basket.png")));
+		btnOrderList.setToolTipText("\uC8FC\uBB38\uBAA9\uB85D");
+		btnOrderList.setBorder(new LineBorder(Color.GRAY, 2, true));
+		btnOrderList.setBounds(1074, 26, 79, 54);
+		panel.add(btnOrderList);
+		
+		pChangePanel = new JPanel();
+		pChangePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		pChangePanel.setBounds(163, 118, 1021, 643);
+		panel.add(pChangePanel);
+		card = new CardLayout();
+		pChangePanel.setLayout(card);
 		
 		pBasketMain = new JPanel();
 		pBasketMain.setBounds(160, 118, 1012, 634);
-		panel.add(pBasketMain);
 		pBasketMain.setLayout(null);
 		
 		FButton btnAllCancel = SwingFactory.getInstance().getButton("x");
@@ -139,10 +123,9 @@ public class BasketMain extends JFrame{
 		//lblNewLabel_2.setIcon(new ImageIcon(main.class.getResource("/kitri/foodCourt/user/basket/image/Basket1.png")));
 		lblBasketImage.setIcon(new ImageIcon(this.getClass().getResource("/kitri/foodCourt/user/basket/image/Basket1.png")));
 		
-		FLabel lblBasket = new FLabel();
+		FLabel lblBasket = new FLabel(Font.BOLD, 40);
 		lblBasket.setBounds(144, 10, 178, 70);
 		pTop.add(lblBasket);
-		lblBasket.setFont(new Font("휴먼모음T", Font.BOLD, 40));
 		lblBasket.setText("\uC7A5\uBC14\uAD6C\uB2C8");
 		
 		JPanel pSeparator = new JPanel();
@@ -157,31 +140,27 @@ public class BasketMain extends JFrame{
 		pBasketMenu.setLayout(null);
 		pBasketMenu.add(btnAllCancel);
 		
-		FLabel label_1 = new FLabel();
-		label_1.setFont(new Font("휴먼모음T", Font.PLAIN, 20));
+		FLabel label_1 = new FLabel(Font.PLAIN, 20);
 		label_1.setText("\uC0C1\uD488\uC815\uBCF4");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setBounds(210, 0, 134, 50);
 		pBasketMenu.add(label_1);
 		
-		FLabel label_3 = new FLabel();
+		FLabel label_3 = new FLabel(Font.PLAIN, 20);
 		label_3.setText("\uD3EC\uC778\uD2B8");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setFont(new Font("휴먼모음T", Font.PLAIN, 20));
 		label_3.setBounds(520, 0, 100, 50);
 		pBasketMenu.add(label_3);
 		
-		FLabel label_4 = new FLabel();
+		FLabel label_4 = new FLabel(Font.PLAIN, 20);
 		label_4.setText("\uAC00\uACA9");
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setFont(new Font("휴먼모음T", Font.PLAIN, 20));
 		label_4.setBounds(850, 0, 100, 50);
 		pBasketMenu.add(label_4);
 		
-		FLabel label_5 = new FLabel();
+		FLabel label_5 = new FLabel(Font.PLAIN, 20);
 		label_5.setText("\uC218\uB7C9");
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		label_5.setFont(new Font("휴먼모음T", Font.PLAIN, 20));
 		label_5.setBounds(695, 0, 100, 50);
 		pBasketMenu.add(label_5);
 		
@@ -214,42 +193,37 @@ public class BasketMain extends JFrame{
 		pTotal.setBackground(SystemColor.inactiveCaptionBorder);
 		pTotal.setLayout(null);
 		
-		FLabel lblPrice = new FLabel();
-		lblPrice.setFont(new Font("휴먼모음T", Font.BOLD, 30));
+		FLabel lblPrice = new FLabel(Font.BOLD, 30);
 		lblPrice.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPrice.setText("\uCD1D \uACB0\uC81C\uAE08\uC561");
 		lblPrice.setBounds(578, 0, 179, 50);
 		pTotal.add(lblPrice);
 		
-		FLabel lblTotalPrice = new FLabel();
+		FLabel lblTotalPrice = new FLabel(Font.BOLD, 30);
 		lblTotalPrice.setText("20000\uC6D0");
 		lblTotalPrice.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTotalPrice.setFont(new Font("휴먼모음T", Font.BOLD, 30));
 		lblTotalPrice.setBounds(765, 0, 196, 50);
 		pTotal.add(lblTotalPrice);
 		
-		FLabel lblTotalPoint = new FLabel();
+		FLabel lblTotalPoint = new FLabel(Font.BOLD, 20);
 		lblTotalPoint.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTotalPoint.setFont(new Font("휴먼모음T", Font.BOLD, 20));
 		lblTotalPoint.setText("2000P");
 		lblTotalPoint.setBounds(837, 50, 124, 35);
 		pTotal.add(lblTotalPoint);
 		
-		FLabel lblPoint = new FLabel();
+		FLabel lblPoint = new FLabel(Font.BOLD, 20);
 		lblPoint.setText("\uC801\uB9BD \uD3EC\uC778\uD2B8");
 		lblPoint.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPoint.setFont(new Font("휴먼모음T", Font.BOLD, 20));
 		lblPoint.setBounds(710, 50, 115, 35);
 		pTotal.add(lblPoint);
 		
-		FButton button = SwingFactory.getButton("btnPayment");
-		button.setBounds(831, 95, 169, 47);
-		pBottom.add(button);
-		button.setFont(new Font("휴먼모음T", Font.BOLD, 20));
-		button.setText("\uACB0\uC81C");
+		FButton btnPayment = SwingFactory.getButton("");
+		btnPayment.setName("payment");
+		btnPayment.setBounds(831, 95, 169, 47);
+		pBottom.add(btnPayment);
+		btnPayment.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		btnPayment.setText("\uACB0\uC81C");
 		
-		//System.out.println(user);
-		//pBasketMain.add(addFood(0));
 		Basket basket = user.getBasket();
 		
 		int size = basket.getDetailList().size();
@@ -269,54 +243,23 @@ public class BasketMain extends JFrame{
 			pMiddle.add(temp, gbcFood);
 		}
 		
+		//카드부분
+		pChangePanel.add(pBasketMain, "basket");
+		card.show(pChangePanel, "basket");
+		
 		//이벤트
 		controller = new BasketController(this);
 		btnAllCancel.addActionListener(controller);
+		btnPayment.addActionListener(controller);
 		
 	}
-	/*
-	public void setMenu(int count, List<FoodDto> foodList) { // 임시 테스트용 count
-		int gridx = 0;
-		int gridy = 0;
-		for(int i = 0; i < count; i++) {
-			JButton menuButton = new MenuButton("한식" + (i+1)); // 이 텍스트에는 list.getIndex(i).getFoodName(); 이 올것이다
-			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-			gbc_btnNewButton.insets = new Insets(0, 0, 9, 9);
-			gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-			gbc_btnNewButton.gridx = gridx;
-			gbc_btnNewButton.gridy = gridy;
-			panel.add(menuButton, gbc_btnNewButton);
-			gridx++;
-			if(gridx > 4) {
-				gridx = 0;
-				gridy++;
-			}
-			
-		}
-		
-		setLayout(null);
-		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		panel.setBorder(null);
-		panel.setLayout(gbl_panel);
-		scrollPane.setBorder(null);
-	}
-	*/
-	
-	
 	
 	public JPanel addFood(int index) {
-		//panel_8.setBounds(12, 206, 988, 130);
-		int height = 110;
 		BasketDetail detail = user.getBasket().getDetailList().get(index);
 		JPanel pFood = new JPanel();
 		pFood.setLayout(null);
 		pFood.setMaximumSize(new Dimension(988, 100));
 		pFood.setPreferredSize(new Dimension(988, 100));
-		//pFood.setBounds(0, 0, 988, 100);
-		//pFood.setBackground(SystemColor.inactiveCaptionBorder);
 		//x버튼
 		FButton btnX = SwingFactory.getInstance().getButton("x");
 		btnX.setName(index+"cancel");

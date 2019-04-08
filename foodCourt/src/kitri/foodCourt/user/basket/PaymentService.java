@@ -5,26 +5,26 @@ import kitri.foodCourt.dto.PaymentDto;
 public class PaymentService {
 	
 	public PaymentController controller;
-	public PaymentMain paymentMain;
+	public Payment payment;
 	public PaymentDao paymentDao;
 	
 	public PaymentService(PaymentController paymentController) {
 		this.controller = paymentController;
-		this.paymentMain = controller.paymentMain;
+		this.payment = controller.payment;
 		this.paymentDao = new PaymentDao(this);
 	}
 
 	public void receiptConfirm() {
-		Receipt receipt = paymentMain.receipt;
-		receipt.setBounds(paymentMain.getX()+100, paymentMain.getY()+100, receipt.getWidth(), receipt.getHeight());
-		paymentMain.receipt.setVisible(true);
-		paymentMain.setEnabled(false);
+		Receipt receipt = payment.receipt;
+		receipt.setBounds(payment.getX()+100, payment.getY()+100, receipt.getWidth(), receipt.getHeight());
+		payment.receipt.setVisible(true);
+		payment.setEnabled(false);
 		
 	}
 
 	public void receiptOK() {
-		paymentMain.setEnabled(true);
-		Receipt receipt = paymentMain.receipt;
+		payment.setEnabled(true);
+		Receipt receipt = payment.receipt;
 		receipt.setVisible(false);
 		
 	}
@@ -35,7 +35,7 @@ public class PaymentService {
 		//장바구니 -> 결제 클래스로 변경
 		//paymentDao.payment();
 		
-		SwingFactory.getOptionPane("message", paymentMain, "결제확인", "결제완료 되었습니다.");
+		SwingFactory.getOptionPane("message", payment, "결제확인", "결제완료 되었습니다.");
 	}
 
 	public void isCorrectValue() {
@@ -44,7 +44,12 @@ public class PaymentService {
 
 	public void cancel() {
 		//결제 취소
-		SwingFactory.getOptionPane("warning", paymentMain, "결제취소", "장바구니 화면으로 돌아가시겠습니까?");
+		int select = SwingFactory.getOptionPane("warning", payment, "결제취소", "장바구니 화면으로 돌아가시겠습니까?");
+		if(select == 0) {
+			//예
+			payment.basketMain.payment = null;
+			payment.basketMain.card.show(payment.basketMain.pChangePanel, "basket");
+		}
 	}
 	
 }

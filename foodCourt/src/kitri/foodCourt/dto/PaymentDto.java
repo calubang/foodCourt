@@ -16,8 +16,6 @@ public class PaymentDto {
 	private int cash;
 	private char paymentState;	
 	
-	List<PaymentDetailDto> detailList = new ArrayList<PaymentDetailDto>();
-	
 	public PaymentDto(String paymentId, String userId, String paymentDate, int totalPrice, int savePoint,
 			int used_point, int card, int cash) {
 		super();

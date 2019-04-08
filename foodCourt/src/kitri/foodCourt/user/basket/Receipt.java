@@ -9,8 +9,6 @@ import kitri.foodCourt.user.swing.FLabel;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
@@ -20,6 +18,7 @@ import java.awt.GridLayout;
 import java.awt.event.*;
 import java.awt.CardLayout;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.*;
 
 public class Receipt extends JFrame{
 
@@ -27,7 +26,8 @@ public class Receipt extends JFrame{
 	private String columnNames[] = {"분류", "음식명", "풉키포인트", "수량", "가격"};
 	private Object data[][] = {{"한식", "된장찌개", 100, 2, 5000}, {"양식", "스테이크", 100, 2, 5000}, {"중식", "자장면", 100, 2, 5000}, {"일식", "초밥", 100, 2, 5000}};
 	private JTable tabFood;
-	private PaymentMain paymentMain;
+	private Payment payment;
+	private int columnHeight = 30;
 	
 	//버튼
 	FButton btnOK;
@@ -36,8 +36,8 @@ public class Receipt extends JFrame{
 	BasketMain basket = new BasketMain();
 
 
-	public Receipt(PaymentMain paymentMain) {
-		this.paymentMain = paymentMain;
+	public Receipt() {
+		//this.payment = payment;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 474);
@@ -104,6 +104,7 @@ public class Receipt extends JFrame{
 		pTop.add(lbId);
 		
 		JScrollPane spFood = new JScrollPane();
+		spFood.setBorder(new LineBorder(Color.BLACK, 2, true));
 		spFood.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		spFood.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		spFood.setBounds(0, 124, 434, 63);
@@ -112,10 +113,24 @@ public class Receipt extends JFrame{
 		DefaultTableModel foodTableMode = new DefaultTableModel(columnNames, 0);
 		tabFood = new JTable(foodTableMode);
 		tabFood.setEnabled(false);
-		tabFood.setRowHeight(30);
+		tabFood.setRowHeight(columnHeight);
 		tabFood.setMinimumSize(new Dimension(75, 30));
 		tabFood.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		tabFood.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		
+		//내용 가운데 정렬
+		TableColumnModel tcm = tabFood.getColumnModel();
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+		dtcr.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		int size = columnNames.length;
+		for(int i = 0 ; i< size ; i++) {
+			tcm.getColumn(i).setCellRenderer(dtcr);
+		}
+		//헤더 크기조절
+		JTableHeader th = tabFood.getTableHeader();
+		th.setPreferredSize(new Dimension(0, columnHeight));
+		th.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		
 		spFood.setViewportView(tabFood);
 		
 		JPanel pPayment = new JPanel();
@@ -213,14 +228,19 @@ public class Receipt extends JFrame{
 		btnOK.setBounds(157, 10, 127, 45);
 		pBottom.add(btnOK);
 		
-		for (int i = 0; i < 4; i++) {
+		//테이블에 데이터 넣기
+		size = data.length;
+		for (int i = 0; i < size; i++) {
 			foodTableMode.addRow(data[i]);
-			this.setSize(this.getWidth(), this.getHeight()+30);
-			spFood.setBounds(spFood.getX(), spFood.getY(), spFood.getWidth(), spFood.getHeight()+30);
-			pPayment.setBounds(pPayment.getX(), pPayment.getY()+30, pPayment.getWidth(), pPayment.getHeight());
-			pTotal.setBounds(pTotal.getX(), pTotal.getY()+30, pTotal.getWidth(), pTotal.getHeight());
-			pBottom.setBounds(pBottom.getX(), pBottom.getY()+30, pBottom.getWidth(), pBottom.getHeight());
 		}
+		//데이터가 들어간 만큼 사이즈 조절
+		int changeSize = columnHeight * (size-1);
+		this.setSize(this.getWidth(), this.getHeight()+changeSize);
+		spFood.setBounds(spFood.getX(), spFood.getY(), spFood.getWidth(), spFood.getHeight()+changeSize);
+		pPayment.setBounds(pPayment.getX(), pPayment.getY()+changeSize, pPayment.getWidth(), pPayment.getHeight());
+		pTotal.setBounds(pTotal.getX(), pTotal.getY()+changeSize, pTotal.getWidth(), pTotal.getHeight());
+		pBottom.setBounds(pBottom.getX(), pBottom.getY()+changeSize, pBottom.getWidth(), pBottom.getHeight());
+		
 		
 		//이벤트는 paymentMain 에서 처리
 		//x버튼에 대한 처리만 여기서 수행
