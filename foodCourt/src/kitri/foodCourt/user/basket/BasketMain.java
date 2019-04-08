@@ -22,6 +22,7 @@ public class BasketMain extends JFrame{
 	public static User user = new User("calubang", "안병욱", 5000);
 	public JPanel pBasketMain;
 	
+	
 	public void test() {
 		FoodDto food1 = new FoodDto("1", "된장찌개", 1, "한식", 5000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
 		FoodDto food2 = new FoodDto("2", "스테이크", 2, "양식", 8000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
@@ -241,7 +242,7 @@ public class BasketMain extends JFrame{
 		lblPoint.setBounds(710, 50, 115, 35);
 		pTotal.add(lblPoint);
 		
-		FButton button = SwingFactory.getButton("");
+		FButton button = SwingFactory.getButton("btnPayment");
 		button.setBounds(831, 95, 169, 47);
 		pBottom.add(button);
 		button.setFont(new Font("휴먼모음T", Font.BOLD, 20));

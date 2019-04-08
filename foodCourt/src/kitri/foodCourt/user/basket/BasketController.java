@@ -28,6 +28,9 @@ public class BasketController implements ActionListener, MouseListener{
 		switch(name) {
 		case "allCancel":
 			service.allCancel();
+			break;
+		case "ok":
+			service.receiptOK();
 		}
 	}
 

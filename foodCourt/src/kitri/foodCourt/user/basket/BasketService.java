@@ -22,4 +22,8 @@ public class BasketService {
 		
 	}
 
+	public void receiptOK() {
+		
+	}
+
 }

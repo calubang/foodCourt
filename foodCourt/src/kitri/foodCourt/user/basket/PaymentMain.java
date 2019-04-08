@@ -17,9 +17,11 @@ public class PaymentMain extends JFrame{
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private BasketController controller;
+	private PaymentController controller;
 	public JPanel pPaymentMain;
+	public Receipt receipt;
 	public static User user = new User("calubang", "¾Èº´¿í", 5000);
+	private FButton btnCancel;
 	
 	public void test() {
 		FoodDto food1 = new FoodDto("1", "µÈÀåÂî°³", 1, "ÇÑ½Ä", 5000, "/kitri/foodCourt/user/basket/image/Á¦À°1.jpg");
@@ -61,6 +63,7 @@ public class PaymentMain extends JFrame{
 	 */
 	public PaymentMain() {
 		test();
+		receipt = new Receipt(this);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 800);
@@ -130,8 +133,8 @@ public class PaymentMain extends JFrame{
 //        g.setColor(getForeground());
 //        g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 30, 30);
 		//lineBorder.paintBorder(pCash, g, pCash.getX(), pCash.getY(), pCash.getWidth(), pCash.getHeight());
-		pCash.setBorder(lineBorder);
-		pCash.setBounds(100, 150, 200, 180);
+		pCash.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		pCash.setBounds(100, 220, 200, 180);
 		pPaymentMain.add(pCash);
 		pCash.setLayout(null);
 		
@@ -143,6 +146,7 @@ public class PaymentMain extends JFrame{
 		pCash.add(lbCash);
 				
 		JTextPane tpCash = new JTextPane();
+		tpCash.setName("cash");
 		tpCash.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
 		tpCash.setBounds(12, 120, 176, 35);
 		pCash.add(tpCash);
@@ -154,11 +158,12 @@ public class PaymentMain extends JFrame{
 		
 		FPanel pCard = new FPanel();
 		pCard.setLayout(null);
-		pCard.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0), 1, true), new BevelBorder(BevelBorder.RAISED, new Color(64, 64, 64), null, new Color(64, 64, 64), null)));
-		pCard.setBounds(400, 150, 200, 180);
+		pCard.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		pCard.setBounds(400, 220, 200, 180);
 		pPaymentMain.add(pCard);
 		
 		JTextPane tpCard = new JTextPane();
+		tpCard.setName("card");
 		tpCard.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
 		tpCard.setBounds(12, 120, 176, 35);
 		
@@ -176,8 +181,8 @@ public class PaymentMain extends JFrame{
 		
 		FPanel pPoint = new FPanel();
 		pPoint.setLayout(null);
-		pPoint.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0), 1, true), new BevelBorder(BevelBorder.RAISED, new Color(64, 64, 64), null, new Color(64, 64, 64), null)));
-		pPoint.setBounds(700, 150, 200, 180);
+		pPoint.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		pPoint.setBounds(700, 220, 200, 180);
 		pPaymentMain.add(pPoint);
 		
 		FLabel lbPointText = new FLabel();
@@ -195,27 +200,31 @@ public class PaymentMain extends JFrame{
 		pPoint.add(lbPoint);
 		
 		JTextPane tpPoint = new JTextPane();
+		tpPoint.setName("point");
 		tpPoint.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
 		tpPoint.setBounds(12, 120, 176, 35);
 		pPoint.add(tpPoint);
 		
-		FButton button = new FButton();
-		button.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		button.setText("\uC601\uC218\uC99D\uD655\uC778");
-		button.setBounds(480, 430, 140, 45);
-		pPaymentMain.add(button);
+		FButton btnReceiptConfirm = new FButton();
+		btnReceiptConfirm.setName("receiptConfirm");
+		btnReceiptConfirm.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
+		btnReceiptConfirm.setText("\uC601\uC218\uC99D\uD655\uC778");
+		btnReceiptConfirm.setBounds(480, 470, 140, 45);
+		pPaymentMain.add(btnReceiptConfirm);
 		
-		FButton button_1 = new FButton();
-		button_1.setText("\uACB0\uC81C");
-		button_1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		button_1.setBounds(650, 430, 140, 45);
-		pPaymentMain.add(button_1);
+		FButton btnPayment = new FButton();
+		btnPayment.setName("payment");
+		btnPayment.setText("\uACB0\uC81C");
+		btnPayment.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
+		btnPayment.setBounds(650, 470, 140, 45);
+		pPaymentMain.add(btnPayment);
 		
-		FButton button_2 = new FButton();
-		button_2.setText("\uCDE8\uC18C");
-		button_2.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		button_2.setBounds(820, 430, 140, 45);
-		pPaymentMain.add(button_2);
+		btnCancel = new FButton();
+		btnCancel.setName("cancel");
+		btnCancel.setText("\uCDE8\uC18C");
+		btnCancel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
+		btnCancel.setBounds(820, 470, 140, 45);
+		pPaymentMain.add(btnCancel);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(SystemColor.activeCaption);
@@ -233,10 +242,51 @@ public class PaymentMain extends JFrame{
 		label.setBounds(12, 10, 120, 70);
 		pPaymentMain.add(label);
 		
+		JPanel pTotalPrice = new JPanel();
+		pTotalPrice.setLayout(null);
+		pTotalPrice.setBackground(SystemColor.inactiveCaptionBorder);
+		pTotalPrice.setBounds(12, 106, 988, 85);
+		pPaymentMain.add(pTotalPrice);
+		
+		FLabel label_1 = new FLabel();
+		label_1.setText("\uCD1D \uACB0\uC81C\uAE08\uC561");
+		label_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_1.setFont(new Font("Dialog", Font.BOLD, 30));
+		label_1.setBounds(578, 0, 179, 50);
+		pTotalPrice.add(label_1);
+		
+		FLabel lbTotalPrice = new FLabel();
+		lbTotalPrice.setText("20000\uC6D0");
+		lbTotalPrice.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbTotalPrice.setFont(new Font("Dialog", Font.BOLD, 30));
+		lbTotalPrice.setBounds(765, 0, 196, 50);
+		pTotalPrice.add(lbTotalPrice);
+		
+		FLabel lbTotalPoint = new FLabel();
+		lbTotalPoint.setText("2000P");
+		lbTotalPoint.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbTotalPoint.setFont(new Font("Dialog", Font.BOLD, 20));
+		lbTotalPoint.setBounds(837, 50, 124, 35);
+		pTotalPrice.add(lbTotalPoint);
+		
+		FLabel label_4 = new FLabel();
+		label_4.setText("\uC801\uB9BD \uD3EC\uC778\uD2B8");
+		label_4.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_4.setFont(new Font("Dialog", Font.BOLD, 20));
+		label_4.setBounds(710, 50, 115, 35);
+		pTotalPrice.add(label_4);
+		
 		document = tpPoint.getStyledDocument();
 		document.setParagraphAttributes(0, document.getLength(), center, false);
 		
+		//ÀÌº¥Æ®
+		controller = new PaymentController(this);
+		btnReceiptConfirm.addActionListener(controller);
+		receipt.btnOK.addActionListener(controller);
+		btnPayment.addActionListener(controller);
+		tpCard.addInputMethodListener(controller);
+		btnCancel.addActionListener(controller);
+		//btn
 
-		
 	}
 }

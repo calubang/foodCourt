@@ -1,6 +1,6 @@
 package kitri.foodCourt.user.swing;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -15,28 +15,38 @@ public class FButton extends JButton implements MouseListener{
 	//»ý¼ºÀÚ
 	public FButton() {
 		super();
+		basic();
 	}
 
 	public FButton(Action arg0) {
 		super(arg0);
+		basic();
 	}
 
 	public FButton(Icon icon) {
 		super(icon);
+		basic();
 	}
 
 	public FButton(String arg0, Icon arg1) {
 		super(arg0, arg1);
+		basic();
 	}
 
 	public FButton(String arg0) {
 		super(arg0);
+		basic();
 	}
 	
 	public FButton(ImageIcon basic, ImageIcon entered) {
 		super();
+		basic();
 		setBasic(basic);
 		setEntered(entered);
+	}
+	public void basic() {
+		this.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 10));
+		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 	
 	public ImageIcon getBasic() {
@@ -69,6 +79,7 @@ public class FButton extends JButton implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		
 		FButton button = (FButton)e.getSource();
 		if(this.entered != null) {
 			button.setIcon(entered);
