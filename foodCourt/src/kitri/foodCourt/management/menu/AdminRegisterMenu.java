@@ -18,7 +18,7 @@ public class AdminRegisterMenu extends JPanel {
 
 	JPanel picturePanel = new JPanel();
 
-	JComboBox categoryComboBox = new JComboBox(new String[] {"한식", "중식", "일식", "양식", "모자", "아우터"});
+	JComboBox categoryComboBox = new JComboBox(new String[] {"한식", "중식", "일식", "양식"});
 	
 	JLabel pictureLabel = new JLabel("\uC0AC\uC9C4");
 	JLabel menuNameLabel = new JLabel("\uBA54\uB274\uBA85");

@@ -88,7 +88,7 @@ public class AdminMenuManagement extends JPanel {
 		commonTable.setShowGrid(true);
 		commonTable.setShowVerticalLines(true);
 		commonTable.setAutoCreateRowSorter(true);
-		commonTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		commonTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		scrollPane.setBounds(0, 58, 791, 664);
 		add(scrollPane);

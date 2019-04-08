@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.ListIterator;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import kitri.foodCourt.dto.FoodDto;
 
@@ -27,7 +27,9 @@ public class AdminMenuService {
 	AdminModifyMenu amp;
 	
 	JFrame jfR = new JFrame("메뉴등록");
+	JDialog jdR = new JDialog(jfR);
 	JFrame jfM = new JFrame("메뉴수정");
+	JDialog jdM = new JDialog(jfM);
 	
 	String[] option = {"예", "아니오"};
 	String[] column = {"메뉴ID", "메뉴이름", "카테고리", "가격", "포인트", "담당매니저", "등록일", "주문가능여부"};
@@ -51,23 +53,70 @@ public class AdminMenuService {
 	
 	
 	public void showRegisterWindow() {
-		jfM.setVisible(false);
-		
-		jfR.getContentPane().add(arp);
-		jfR.setSize(750, 650);
-		jfR.setVisible(true);
+		jdR.getContentPane().add(arp);
+		jdR.setSize(750, 650);
+		jdR.setModal(true);
+		jdR.setVisible(true);
 	}
 	
 	public void showModifyWindow() {
-		jfR.setVisible(false);
-		
-		jfM.getContentPane().add(amp);
-		jfM.setSize(750, 650);
-		jfM.setVisible(true);
+		jdM.getContentPane().add(amp);
+		jdM.setSize(750, 650);
+		jdM.setModal(true);
+		jdM.setVisible(true);
 	}
 	
 	public void showDeleteWindow() {
-		JOptionPane.showOptionDialog(amm.deleteBtn, "정말 삭제하시겠습니까?\n(삭제하면 다시 되돌릴 수 없습니다.)", "삭제 확인", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
+		Connection c = null;
+		PreparedStatement ps = null;
+		int resultQuery = 0;
+		
+		int result = JOptionPane.showOptionDialog(amm.deleteBtn, "정말 삭제하시겠습니까?\n(삭제하면 다시 되돌릴 수 없습니다.)", "삭제 확인", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
+		int currentSelectedrow = amm.commonTable.getSelectedRow();
+		
+		if (result == JOptionPane.OK_OPTION) {
+			if (currentSelectedrow >= 0) {
+				Object ob = amm.commonTable.getModel().getValueAt(currentSelectedrow, 0);
+					
+				try {
+					Class.forName("oracle.jdbc.driver.OracleDriver");
+					c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+					
+					ps = c.prepareStatement("delete from food where food_id = (?)");
+					ps.setString(1, (String)ob);
+					
+					resultQuery = ps.executeUpdate();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					if(ps != null) {
+						try {
+							ps.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+					
+					if(c != null) {
+						try {
+							c.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				
+				dtm.removeRow(currentSelectedrow);
+			}
+		} else {
+			return;
+		}
+		
+		if (resultQuery == 0) {
+			JOptionPane.showMessageDialog(amm.deleteBtn, "삭제할 메뉴가 없습니다.");
+		}
 	}
 	
 	public void showMenu() {
@@ -149,11 +198,9 @@ public class AdminMenuService {
 
 
 	public void showImageDescription() {
-		TableModel tm = amm.commonTable.getModel();
-		
 		int currentSelectedrow = amm.commonTable.getSelectedRow();
 		if (currentSelectedrow >= 0) {
-			Object ob = tm.getValueAt(currentSelectedrow, 0);
+			Object ob = amm.commonTable.getModel().getValueAt(currentSelectedrow, 0);
 			
 			Connection c = null;
 			PreparedStatement ps = null;
