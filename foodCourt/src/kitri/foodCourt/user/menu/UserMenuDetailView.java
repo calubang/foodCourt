@@ -13,16 +13,16 @@ import javax.swing.SwingConstants;
 
 public class UserMenuDetailView extends JPanel {
 	private JTextField textField;
-
+	private FoodDto foodDto = null ;
 	/**
 	 * Create the panel.
 	 */
 	public UserMenuDetailView() {
 		setLayout(null);
 		
-		JButton btnNewButton = new JButton("\uC74C\uC2DD\uC774\uBBF8\uC9C0");
-		btnNewButton.setBounds(23, 24, 443, 390);
-		add(btnNewButton);
+		JButton menuImage = new JButton("\uC74C\uC2DD\uC774\uBBF8\uC9C0");
+		menuImage.setBounds(23, 24, 443, 390);
+		add(menuImage);
 		
 		JLabel lblNewLabel = new JLabel("\uC74C\uC2DD\uC774\uB984");
 		lblNewLabel.setOpaque(true);
