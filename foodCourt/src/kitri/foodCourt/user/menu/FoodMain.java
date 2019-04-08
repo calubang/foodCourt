@@ -48,17 +48,17 @@ public class FoodMain extends JFrame{
 	JPanel changePanel = new JPanel();
 	CardLayout card = new CardLayout();
 	
-	JButton mainMenu = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainbutton.jpg")));
+	JButton mainMenu = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mainbutton.jpg")));
 	JButton hansicMenu = new JButton("\uD55C\uC2DD");
 	JButton joongsicMenu = new JButton("\uC911\uC2DD");
 	JButton ilsicMenu = new JButton("\uC77C\uC2DD");
 	JButton yangsicMenu = new JButton("\uC591\uC2DD");
-	JButton search = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/search.PNG")));
+	JButton search = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/search.PNG")));
 	JPanel panel_1 = new JPanel();
-	JLabel menu = new JLabel(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/menu.PNG")));
-	JButton userInfo = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mypage.PNG")));
+	JLabel menu = new JLabel(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/menu.PNG")));
+	JButton userInfo = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mypage.PNG")));
 	JLabel name = new JLabel("\uAD8C\uC601\uCC2C\uB2D8");
-	JButton orderList = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/basket.png")));
+	JButton orderList = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/basket.png")));
 	JLabel basket = new JLabel("\uC8FC\uBB38\uBAA9\uB85D");
 	JPanel panel_7 = new JPanel();
 	Cursor handCursor = new Cursor(Cursor.HAND_CURSOR);

@@ -18,6 +18,7 @@ public class PaymentMain extends JFrame{
 	private JPanel contentPane;
 	private JTextField textField;
 	private BasketController controller;
+	public JPanel pPaymentMain;
 	public static User user = new User("calubang", "¾Èº´¿í", 5000);
 	
 	public void test() {
@@ -115,26 +116,34 @@ public class PaymentMain extends JFrame{
 		panel_6.setBounds(145, 137, 6, 457);
 		panel.add(panel_6);
 		
-		JPanel pPaymentMain = new JPanel();
+		pPaymentMain = new JPanel();
 		pPaymentMain.setBounds(160, 118, 1012, 634);
 		panel.add(pPaymentMain);
 		pPaymentMain.setLayout(null);
 		
 		FPanel pCash = new FPanel();
-		pCash.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0), 1, true), new BevelBorder(BevelBorder.RAISED, new Color(64, 64, 64), null, new Color(64, 64, 64), null)));
+		LineBorder lineBorder = new LineBorder(new Color(0, 0, 0), 2, true);
+		//pCash.setBorder(new LineBorder(, 2, true));
+		
+//		g.setColor(getBackground());
+//        g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 30, 30);
+//        g.setColor(getForeground());
+//        g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 30, 30);
+		//lineBorder.paintBorder(pCash, g, pCash.getX(), pCash.getY(), pCash.getWidth(), pCash.getHeight());
+		pCash.setBorder(lineBorder);
 		pCash.setBounds(100, 150, 200, 180);
 		pPaymentMain.add(pCash);
 		pCash.setLayout(null);
 		
 		FLabel lbCash = new FLabel();
 		lbCash.setHorizontalAlignment(SwingConstants.CENTER);
-		lbCash.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.BOLD, 20));
+		lbCash.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		lbCash.setText("\uD604  \uAE08");
 		lbCash.setBounds(12, 20, 176, 50);
 		pCash.add(lbCash);
 				
 		JTextPane tpCash = new JTextPane();
-		tpCash.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.PLAIN, 20));
+		tpCash.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
 		tpCash.setBounds(12, 120, 176, 35);
 		pCash.add(tpCash);
 		
@@ -150,7 +159,7 @@ public class PaymentMain extends JFrame{
 		pPaymentMain.add(pCard);
 		
 		JTextPane tpCard = new JTextPane();
-		tpCard.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.PLAIN, 20));
+		tpCard.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
 		tpCard.setBounds(12, 120, 176, 35);
 		
 		document = tpCard.getStyledDocument();
@@ -161,7 +170,7 @@ public class PaymentMain extends JFrame{
 		FLabel lbCard = new FLabel();
 		lbCard.setText("\uCE74  \uB4DC");
 		lbCard.setHorizontalAlignment(SwingConstants.CENTER);
-		lbCard.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.BOLD, 20));
+		lbCard.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		lbCard.setBounds(12, 20, 176, 50);
 		pCard.add(lbCard);
 		
@@ -174,37 +183,37 @@ public class PaymentMain extends JFrame{
 		FLabel lbPointText = new FLabel();
 		lbPointText.setText("\uAC00\uC6A9\uD3EC\uC778\uD2B8");
 		lbPointText.setHorizontalAlignment(SwingConstants.CENTER);
-		lbPointText.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.BOLD, 20));
+		lbPointText.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		lbPointText.setBounds(12, 10, 176, 35);
 		pPoint.add(lbPointText);
 		
 		FLabel lbPoint = new FLabel();
 		lbPoint.setText("5000P");
 		lbPoint.setHorizontalAlignment(SwingConstants.CENTER);
-		lbPoint.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.BOLD, 20));
+		lbPoint.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		lbPoint.setBounds(12, 45, 176, 35);
 		pPoint.add(lbPoint);
 		
 		JTextPane tpPoint = new JTextPane();
-		tpPoint.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.PLAIN, 20));
+		tpPoint.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
 		tpPoint.setBounds(12, 120, 176, 35);
 		pPoint.add(tpPoint);
 		
 		FButton button = new FButton();
-		button.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.BOLD, 20));
+		button.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		button.setText("\uC601\uC218\uC99D\uD655\uC778");
 		button.setBounds(480, 430, 140, 45);
 		pPaymentMain.add(button);
 		
 		FButton button_1 = new FButton();
 		button_1.setText("\uACB0\uC81C");
-		button_1.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.BOLD, 20));
+		button_1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		button_1.setBounds(650, 430, 140, 45);
 		pPaymentMain.add(button_1);
 		
 		FButton button_2 = new FButton();
 		button_2.setText("\uCDE8\uC18C");
-		button_2.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.BOLD, 20));
+		button_2.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		button_2.setBounds(820, 430, 140, 45);
 		pPaymentMain.add(button_2);
 		
@@ -215,7 +224,7 @@ public class PaymentMain extends JFrame{
 		
 		FLabel lbPayment = new FLabel();
 		lbPayment.setText("\uACB0\uC81C");
-		lbPayment.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.BOLD, 40));
+		lbPayment.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 40));
 		lbPayment.setBounds(144, 10, 178, 70);
 		pPaymentMain.add(lbPayment);
 		

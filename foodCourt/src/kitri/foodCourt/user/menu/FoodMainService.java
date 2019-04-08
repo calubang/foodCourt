@@ -17,7 +17,7 @@ public class FoodMainService {
 		// 카드레이아웃 -> 메뉴 목록 페이지로 (한식, 중식, 일식, 양식)
 		System.out.println("menuList");
 		foodList = foodDao.getMenubyCategory(Integer.parseInt(button.getName()));
-		foodMain.userMenuList.setMenu(27, foodList);
+		foodMain.userMenuList.setMenu(1, foodList);
 		foodMain.card.show(foodMain.changePanel, "menuList");
 	}
 	public void clickMain() {

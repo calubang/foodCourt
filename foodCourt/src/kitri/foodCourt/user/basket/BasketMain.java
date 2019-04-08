@@ -1,15 +1,15 @@
 package kitri.foodCourt.user.basket;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.*;
 import java.net.URL;
+import java.util.List;
 
 import javax.swing.*;
 import java.awt.*;
 
 import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.*;
+import kitri.foodCourt.user.menu.MenuButton;
 import kitri.foodCourt.user.swing.*;
 import javax.swing.border.*;
 
@@ -20,6 +20,7 @@ public class BasketMain extends JFrame{
 	private JTextField textField;
 	private BasketController controller;
 	public static User user = new User("calubang", "안병욱", 5000);
+	public JPanel pBasketMain;
 	
 	public void test() {
 		FoodDto food1 = new FoodDto("1", "된장찌개", 1, "한식", 5000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
@@ -116,7 +117,7 @@ public class BasketMain extends JFrame{
 		panel_6.setBounds(145, 137, 6, 457);
 		panel.add(panel_6);
 		
-		JPanel pBasketMain = new JPanel();
+		pBasketMain = new JPanel();
 		pBasketMain.setBounds(160, 118, 1012, 634);
 		panel.add(pBasketMain);
 		pBasketMain.setLayout(null);
@@ -183,13 +184,23 @@ public class BasketMain extends JFrame{
 		label_5.setBounds(695, 0, 100, 50);
 		pBasketMenu.add(label_5);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(12, 165, 988, 304);
+		pBasketMain.add(panel_1);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 165, 990, 304);
-		pBasketMain.add(scrollPane);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		panel_1.add(scrollPane);
 		
 		JPanel pMiddle = new JPanel();
 		scrollPane.setViewportView(pMiddle);
-		pMiddle.setLayout(null);
+		GridBagLayout gbl_pMiddle = new GridBagLayout();
+		gbl_pMiddle.rowHeights = new int[] {110};
+		gbl_pMiddle.columnWidths = new int[] {988};
+		gbl_pMiddle.columnWeights = new double[]{};
+		gbl_pMiddle.rowWeights = new double[]{};
+		pMiddle.setLayout(gbl_pMiddle);
 		
 		JPanel pBottom = new JPanel();
 		pBottom.setBounds(0, 479, 1010, 155);
@@ -241,8 +252,20 @@ public class BasketMain extends JFrame{
 		Basket basket = user.getBasket();
 		
 		int size = basket.getDetailList().size();
+		if(size > 3) {
+			pMiddle.setLayout(new GridLayout(size, 1, 0, 0));
+		}
+		
+		
 		for(int i = 0; i<size ; i++) {
-			pMiddle.add(addFood(i));
+			JPanel temp = addFood(i);
+			GridBagConstraints gbcFood = new GridBagConstraints();
+			gbcFood.insets = new Insets(10, 10, 10, 10);
+			gbcFood.fill = GridBagConstraints.CENTER;
+			gbcFood.gridx = 0;
+			gbcFood.gridy = i;
+			
+			pMiddle.add(temp, gbcFood);
 		}
 		
 		//이벤트
@@ -250,6 +273,38 @@ public class BasketMain extends JFrame{
 		btnAllCancel.addActionListener(controller);
 		
 	}
+	/*
+	public void setMenu(int count, List<FoodDto> foodList) { // 임시 테스트용 count
+		int gridx = 0;
+		int gridy = 0;
+		for(int i = 0; i < count; i++) {
+			JButton menuButton = new MenuButton("한식" + (i+1)); // 이 텍스트에는 list.getIndex(i).getFoodName(); 이 올것이다
+			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+			gbc_btnNewButton.insets = new Insets(0, 0, 9, 9);
+			gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+			gbc_btnNewButton.gridx = gridx;
+			gbc_btnNewButton.gridy = gridy;
+			panel.add(menuButton, gbc_btnNewButton);
+			gridx++;
+			if(gridx > 4) {
+				gridx = 0;
+				gridy++;
+			}
+			
+		}
+		
+		setLayout(null);
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		panel.setBorder(null);
+		panel.setLayout(gbl_panel);
+		scrollPane.setBorder(null);
+	}
+	*/
+	
+	
 	
 	public JPanel addFood(int index) {
 		//panel_8.setBounds(12, 206, 988, 130);
@@ -257,7 +312,9 @@ public class BasketMain extends JFrame{
 		BasketDetail detail = user.getBasket().getDetailList().get(index);
 		JPanel pFood = new JPanel();
 		pFood.setLayout(null);
-		pFood.setBounds(0, index*height, 988, 100);
+		pFood.setMaximumSize(new Dimension(988, 100));
+		pFood.setPreferredSize(new Dimension(988, 100));
+		//pFood.setBounds(0, 0, 988, 100);
 		//pFood.setBackground(SystemColor.inactiveCaptionBorder);
 		//x버튼
 		FButton btnX = SwingFactory.getInstance().getButton("x");

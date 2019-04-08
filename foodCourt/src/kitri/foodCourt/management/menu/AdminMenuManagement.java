@@ -14,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 import java.awt.GridLayout;
 import javax.swing.JTable;
@@ -53,6 +55,13 @@ public class AdminMenuManagement extends JPanel {
 	ListSelectionModel lsm;
 	
 	AdminMenuControl amc;
+	AdminRegisterMenu arm;
+	AdminModifyMenu am;
+	
+	JFrame jfR = new JFrame();
+	JDialog jdR = new JDialog(jfR, "메뉴등록");
+	JFrame jfM = new JFrame();
+	JDialog jdM = new JDialog(jfM, "메뉴수정");
 	
 	
 	/**
@@ -111,13 +120,24 @@ public class AdminMenuManagement extends JPanel {
 
 		add(menuPanel);
 		
-		
+
 		// Add Listener
+		arm = new AdminRegisterMenu();
+		am = new AdminModifyMenu();
 		amc = new AdminMenuControl(this);
 		
+		searchTextField.addKeyListener(amc);
 		registerBtn.addActionListener(amc);
 		modifyBtn.addActionListener(amc);
 		deleteBtn.addActionListener(amc);
+		
+		arm.registerImageBtn.addActionListener(amc);
+		arm.confirmBtn.addActionListener(amc);
+		arm.cancelBtn.addActionListener(amc);
+
+		am.changeImageBtn.addActionListener(amc);
+		am.confirmBtn.addActionListener(amc);
+		am.cancelBtn.addActionListener(amc);
 		
 		lsm = commonTable.getSelectionModel();
 		lsm.addListSelectionListener(amc);

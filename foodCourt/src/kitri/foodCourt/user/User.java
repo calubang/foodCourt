@@ -1,5 +1,7 @@
 package kitri.foodCourt.user;
 
+import kitri.foodCourt.dto.UserDto;
+
 public class User {
 	//공통정보 
 	String userId;

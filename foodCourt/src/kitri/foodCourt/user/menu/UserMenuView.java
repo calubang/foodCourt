@@ -56,7 +56,6 @@ public class UserMenuView extends JPanel {
 				gridx = 0;
 				gridy++;
 			}
-			
 		}
 	}
 //		만약 메뉴를 17개 뽑아온다고 하면
