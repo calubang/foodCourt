@@ -84,7 +84,7 @@ public class AdminMenuService {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@115.21.52.121:1522:orcl", "kitri", "kitri");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 			
 			ps = c.prepareStatement("select food_id, food_name, f.category_id \"category_id\", category_name, price, point, description, image_address, manager_id, create_date, enable from food f, category c where f.category_id = c.category_id");
 			rs = ps.executeQuery();
@@ -151,61 +151,65 @@ public class AdminMenuService {
 
 	public void showImageDescription() {
 		TableModel tm = amm.commonTable.getModel();
-		Object ob = tm.getValueAt(amm.commonTable.getSelectedRow(), 0);
 		
-		Connection c = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		String imgUrl = null;
-		String description = null;
-		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@115.21.52.121:1522:orcl", "kitri", "kitri");
+		int currentSelectedrow = amm.commonTable.getSelectedRow();
+		if (currentSelectedrow >= 0) {
+			Object ob = tm.getValueAt(currentSelectedrow, 0);
 			
-			ps = c.prepareStatement("select image_address, description from food where food_id = (?)");
-			ps.setString(1, (String)ob);
+			Connection c = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
 			
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				imgUrl = rs.getString("image_address");
-				description = rs.getString("description");
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if(rs != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+			String imgUrl = null;
+			String description = null;
+			
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+				
+				ps = c.prepareStatement("select image_address, description from food where food_id = (?)");
+				ps.setString(1, (String)ob);
+				
+				rs = ps.executeQuery();
+	
+				if (rs.next()) {
+					imgUrl = rs.getString("image_address");
+					description = rs.getString("description");
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				if(rs != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				if(ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				if(c != null) {
+					try {
+						c.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 			
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			ImageIcon image = new ImageIcon(AdminMenuService.class.getResource(imgUrl));
+			amm.pictureLabel.setIcon(image);
 			
-			if(c != null) {
-				try {
-					c.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			amm.descriptionTextArea.setText(description);
 		}
-		
-		ImageIcon image = new ImageIcon(AdminMenuService.class.getResource(imgUrl));
-		amm.pictureLabel.setIcon(image);
-		
-		amm.descriptionTextArea.setText(description);
 	}
 }

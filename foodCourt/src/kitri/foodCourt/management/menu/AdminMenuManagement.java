@@ -30,7 +30,12 @@ public class AdminMenuManagement extends JPanel {
 	JTextArea descriptionTextArea = new JTextArea();
 
 	DefaultTableModel dtm = new DefaultTableModel();
-	JTable commonTable = new JTable(dtm);
+	JTable commonTable = new JTable(dtm) {
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		};
+	};
 	
 	JLabel searchLabel = new JLabel("\uAC80\uC0C9");
 	JLabel pictureLabel = new JLabel();
