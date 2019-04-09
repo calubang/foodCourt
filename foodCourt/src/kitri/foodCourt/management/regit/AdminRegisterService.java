@@ -17,7 +17,6 @@ public class AdminRegisterService {
 	JFrame jfD = new JFrame("ªË¡¶");
 	JDialog jfDD = new JDialog(jfD);
 	
-	
 	AdminRegister ar;
 	MemberRegister mr;
 	ModifyRegit mR;

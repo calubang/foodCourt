@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 
 public class AdminRegister extends JPanel {
+	
 	private JTextField idtf;
 	private JTextField passwordtf;
 	private JTextField pwtf;
