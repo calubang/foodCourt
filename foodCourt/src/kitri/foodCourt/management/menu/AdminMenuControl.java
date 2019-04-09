@@ -46,7 +46,7 @@ public class AdminMenuControl implements ActionListener, ListSelectionListener, 
 		} else if (ob == am.changeImageBtn) {
 			ams.findImage(ob);
 		} else if (ob == am.confirmBtn) {
-			//ams.modifyMenu();
+			ams.modifyMenu();
 		} else if (ob == am.cancelBtn) {
 			ams.closeWindow(amm.jdM);
 		}

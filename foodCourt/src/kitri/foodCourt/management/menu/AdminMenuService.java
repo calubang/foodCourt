@@ -386,7 +386,90 @@ public class AdminMenuService {
 		}
 	}
 
-//	public void modifyMenu() {
-//		return;
-//	}
+	public void modifyMenu() {
+		int currentSelectedrow = amm.commonTable.getSelectedRow();
+		
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		Object[] rowData = new Object[8];
+
+		String food_id = am.menuCodeTextField.getText();
+		String food_name = am.menuNameTextField.getText();
+		int price = Integer.parseInt(am.priceTextField.getText());
+		int point = Integer.parseInt(am.pointTextField.getText());
+		String food_enable = am.cg.getSelectedCheckbox().equals(am.checkBox1) ? "y" : "n";
+		String food_description = am.descriptionTextArea.getText();
+		int category = am.categoryComboBox.getSelectedIndex() + 1;
+		String fullpath = am.pictureLabel.getIcon().toString();
+		String imgUrl = fullpath.substring(fullpath.indexOf("kitri") - 1, fullpath.length());
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			
+			ps = c.prepareStatement("update fook_food set food_name = (?), category_id = (?), price = (?), food_point = (?), food_description = (?), image_address = (?), food_enable = (?) where food_id = (?)");
+			
+			ps.setString(1, food_name);
+			ps.setInt(2, category);
+			ps.setInt(3, price);
+			ps.setInt(4, point);
+			ps.setString(5, food_description);
+			ps.setString(6, imgUrl);
+			ps.setString(7, food_enable);
+			ps.setString(8, food_id);
+			
+			result = ps.executeUpdate();
+
+			ps.close();
+			
+			ps = c.prepareStatement("select category_name from fook_category where category_id = (select distinct category_id from fook_food where category_id = (?))");
+			
+			ps.setInt(1, category);
+			
+			rs = ps.executeQuery();
+			
+			if ((result != 0) && rs.next()) {
+				rowData[0] = food_id;
+				rowData[1] = food_name;
+				rowData[2] = rs.getString("category_name");
+				rowData[3] = price;
+				rowData[4] = point;
+				rowData[5] = dtm.getValueAt(currentSelectedrow, 5);
+				rowData[6] = dtm.getValueAt(currentSelectedrow, 6);
+				rowData[7] = food_enable;
+
+				int columnNum = dtm.getColumnCount();
+				for (int i = 0; i < columnNum; i++) {
+					dtm.setValueAt(rowData[i], currentSelectedrow, i);
+				}
+			}
+			
+			amm.commonTable.setRowSelectionInterval(currentSelectedrow, currentSelectedrow);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(c != null) {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		closeWindow(amm.jdM);
+	}
 }
