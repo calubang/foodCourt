@@ -57,6 +57,7 @@ public class FPanel extends JPanel implements MouseListener{
 		addMouseListener(this);
 	}
 	
+	/*
 	@Override
     protected void paintComponent(Graphics g) {
          g.setColor(getBackground());
@@ -75,6 +76,7 @@ public class FPanel extends JPanel implements MouseListener{
          }
          return shape.contains(x, y);
     }
+    */
     
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -100,6 +102,7 @@ public class FPanel extends JPanel implements MouseListener{
 		}
 		
 	}
+	
 
 	@Override
 	public void mousePressed(MouseEvent e) {

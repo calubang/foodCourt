@@ -32,5 +32,10 @@ public class FLabel extends JLabel {
 		super(text);
 	}
 	
+	public FLabel(int style, int size) {
+		super();
+		setFont(new Font("¸¼Àº °íµñ", style, size));
+	}
+	
 	
 }

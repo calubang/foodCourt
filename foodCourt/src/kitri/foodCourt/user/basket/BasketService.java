@@ -22,4 +22,15 @@ public class BasketService {
 		
 	}
 
+	public void receiptOK() {
+		
+	}
+
+	public void payment() {
+		basketMain.payment = new Payment(basketMain);
+		basketMain.pChangePanel.add(basketMain.payment, "payment");
+		basketMain.card.show(basketMain.pChangePanel, "payment");
+		//basketMain.
+	}
+
 }

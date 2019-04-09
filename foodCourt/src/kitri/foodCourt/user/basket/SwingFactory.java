@@ -71,17 +71,22 @@ public class SwingFactory {
 		return panel;
 	}
 	
-	public static int getOptionPane(String name, Container parent,String title, String message) {
+	public static int getOptionPane(String name, Container parentComponent, String title, String message) {
 		FOptionPane fOptionPane = null;
 		switch(name) {
 		case "warning":
 			//ImageIcon icon = new ImageIcon(BasketMain.class.getResource("/kitri/foodCourt/user/basket/image/warning.png"));
 			fOptionPane = new FOptionPane();
 			String options[] = {"¿¹", "¾Æ´Ï¿ä"};
-			UIManager.put("OptionPane.messageFont", new Font("ÈÞ¸Õ¸ðÀ½T", Font.PLAIN, 15));
-			UIManager.put("OptionPane.buttonFont", new Font("ÈÞ¸Õ¸ðÀ½T", Font.PLAIN, 15));
-			return fOptionPane.showOptionDialog(parent, message, title, JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-			
+			UIManager.put("OptionPane.messageFont", new Font("", Font.PLAIN, 15));
+			UIManager.put("OptionPane.buttonFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
+			return fOptionPane.showOptionDialog(parentComponent, message, title, JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+		case "message":
+			fOptionPane = new FOptionPane();
+			UIManager.put("OptionPane.messageFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
+			UIManager.put("OptionPane.buttonFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
+			fOptionPane.showMessageDialog(parentComponent, message, title, JOptionPane.INFORMATION_MESSAGE);
+			return 0;
 		default:
 			return 0;
 		}

@@ -16,13 +16,13 @@ public class FoodMainController implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
-		if(ob == foodMain.mainMenu)
+		if(ob == foodMain.btnMainMenu)
 			foodMainService.clickMain();
-		else if(ob == foodMain.search)
-			foodMainService.searchAllMenu();
-		else if(ob == foodMain.userInfo)
+		else if(ob == foodMain.btnSearch)
+			foodMainService.searchMenuName();
+		else if(ob == foodMain.btnUserInfo)
 			foodMainService.userInfo();
-		else if(ob == foodMain.orderList)
+		else if(ob == foodMain.btnOrderList)
 			foodMainService.orderList();
 		else {
 			System.out.println("메뉴클릭");

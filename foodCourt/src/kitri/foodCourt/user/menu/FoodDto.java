@@ -18,6 +18,8 @@ public class FoodDto {
 	private Date createDate;		//등록일
 	private char enable;				//활성화여부
 		
+	public FoodDto() {
+	}
 	public FoodDto(String foodId, String foodName, int categoryId, String categoryName, int price,
 			String imageAddress) {
 		super();
