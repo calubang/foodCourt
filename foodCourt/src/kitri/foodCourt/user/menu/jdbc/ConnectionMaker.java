@@ -3,6 +3,6 @@ package kitri.foodCourt.user.menu.jdbc;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public interface ConnectionMaker { //ì¸í„°í˜ì´ìŠ¤ì˜ ë„ì…
+public interface ConnectionMaker { //ÀÎÅÍÆäÀÌ½ºÀÇ µµÀÔ
 	public Connection makeConnection();
 }

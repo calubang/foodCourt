@@ -15,22 +15,22 @@ import javax.swing.event.ChangeListener;
 import kitri.foodCourt.user.swing.FOptionPane;
 
 
-public class Form extends JFrame {
+public class Form extends JFrame { // ÀÌ¹ÌÁö ÁÙÀÌ´Â ÇÁ·Î±×·¥ ¿¹Á¦
 
-	BufferedImage bimg; // ì´ë¯¸ì§€ íŒŒì¼ì„ ì½ì–´ë“¤ì¼ ë³€ìˆ˜
-	int width, height; // ì½ì–´ë“¤ì¸ ì´ë¯¸ì§€ì˜ ì›ë³¸ í¬ê¸°
-	JLabel imgLable; // ì´ë¯¸ì§€ë¥¼ ì¶œë ¥í•  ë ˆì´ë¸”
-	JPanel panel; // íŒ¨ë„
+	BufferedImage bimg; // ÀÌ¹ÌÁö ÆÄÀÏÀ» ÀĞ¾îµéÀÏ º¯¼ö
+	int width, height; // ÀĞ¾îµéÀÎ ÀÌ¹ÌÁöÀÇ ¿øº» Å©±â
+	JLabel imgLable; // ÀÌ¹ÌÁö¸¦ Ãâ·ÂÇÒ ·¹ÀÌºí
+	JPanel panel; // ÆĞ³Î
 
 	public Form() {
-		System.out.println("ìƒì„±ì");
+		System.out.println("»ı¼ºÀÚ");
 		try{
-			bimg = ImageIO.read(new File(Form.class.getResource("/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg").toURI())); //ì´ë¯¸ì§€ ë¡œë“œ
-			System.out.println("ì´ë¯¸ì§€ ë¡œë“œ ì™„ë£Œ");
+			bimg = ImageIO.read(new File(Form.class.getResource("/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg").toURI())); //ÀÌ¹ÌÁö ·Îµå
+			System.out.println("ÀÌ¹ÌÁö ·Îµå ¿Ï·á");
 			width = bimg.getWidth();
 			height = bimg.getHeight();
 		} catch(IOException ex) {
-			System.out.println("IOìµì…‰ì…˜ ë°œìƒ");
+			System.out.println("IOÀÍ¼Á¼Ç ¹ß»ı");
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -38,7 +38,7 @@ public class Form extends JFrame {
 
 	public void initalize() {
 		// JFrame
-		setTitle("ì´ë¯¸ì§€ ë¹„ìœ¨ ì¡°ì ˆ ì˜ˆì œ");
+		setTitle("ÀÌ¹ÌÁö ºñÀ² Á¶Àı ¿¹Á¦");
 		setLayout(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 500, 500);

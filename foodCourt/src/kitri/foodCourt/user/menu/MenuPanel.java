@@ -2,33 +2,36 @@ package kitri.foodCourt.user.menu;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
 
 public class MenuPanel extends JPanel {
-	private JLabel labImg;
-	private JLabel labName;
-	private Dimension ds = new Dimension(190, 190);
-	private Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
+	MenuButton btnImg;
+	JLabel labName;
+	Dimension ds = new Dimension(185, 190);
+	Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
 	/**
 	 * Create the panel.
 	 */
 
-	public MenuPanel(ImageIcon roperImg) {
+	public MenuPanel(ImageIcon roperImg, String foodName) {
 		setBackground(Color.WHITE);
 		
-		labImg = new JLabel(roperImg);
-		labName = new JLabel("test");
-		labName.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 16));
+		btnImg = new MenuButton(roperImg);
+		btnImg.setBorder(null);
+		labName = new JLabel(foodName);
+		labName.setFont(new Font("±º∏≤", Font.PLAIN, 16));
 		labName.setHorizontalAlignment(SwingConstants.CENTER);
-		labImg.setCursor(cursor);
-		labName.setCursor(cursor);
+		btnImg.setCursor(cursor);
 		setMaximumSize(ds);
 		setPreferredSize(ds);
 		setLayout(new BorderLayout());
-		add(labImg, "Center");
+		add(btnImg, "Center");
 		add(labName, "South");
-		setVisible(true);
 		
-		// Ïù¥Î≤§Ìä∏ Îì±Î°ùÎ∂Ä
+		setVisible(true);
+		btnImg.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		// ¿Ã∫•∆Æ µÓ∑œ∫Œ
 		
 //		MenuClickController
 //		label.addMouseListener(l);

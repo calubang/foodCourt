@@ -15,9 +15,10 @@ public class UserMenuView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	private JScrollPane scrollPane = new JScrollPane();
-	private JPanel panel = new JPanel();
-	private GridBagLayout gbl_panel = new GridBagLayout();
+	JScrollPane scrollPane = new JScrollPane();
+	JPanel panel = new JPanel();
+	GridBagLayout gbl_panel = new GridBagLayout();
+	FoodMainService service;
 								//db 에서 	select * from food;
 //								select * from food where category_id = 1;
 //								select * from food where food_name like '%찌개%';
@@ -33,19 +34,43 @@ public class UserMenuView extends JPanel {
 //	단순히 이전으로 클릭이면 이미 카테고리 선택 혹은 검색을 통해 메뉴리스트를 이미 가져왔을 것이므로
 //	메뉴를 바꿀 필요 없이 단순히 setvisible true만 해주면 된다
 // 카테고리 선택 혹은 검색을 통해 여는 경우에는 db에서 메뉴리스트를 얻어와서 뿌려줘야 하므로 매개변수에 메뉴 list를 받아와서 뿌려줘야 한다
-	public void setMenu(int count, String ImagePath, List<FoodDto> foodList) { // 임시 테스트용 count
+	public UserMenuView(List<FoodDto> list, FoodMainService service) {
+		this.service = service;
+		setBackground(Color.WHITE);
+		setLayout(null);
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		panel.setBackground(Color.WHITE);
+		panel.setBorder(null);
+		panel.setLayout(gbl_panel);
+		scrollPane.setBackground(Color.WHITE);
+		scrollPane.setBorder(null);
+		
+		scrollPane.setViewportView(panel);
+		scrollPane.setBounds(12, 10, 988, 614);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		setMenu(list);
+		add(scrollPane);
+//		panel.setPreferredSize(new Dimension(998, 614));
+		
+		
+	}
+	public void setMenu(List<FoodDto> list) { //여기서 리스트를 받아온다
+		int listSize = list.size();
 		try {
-			BufferedImage bimg = ImageIO.read(new File(UserMenuView.class.getResource(ImagePath).toURI())); // 이미지 로드
-			ImageIcon properImg; // 적정크기에 맞춰진 이미지를 담을 변수
-			properImg = new ImageIcon(bimg.getScaledInstance((int) (190), (int) (170), Image.SCALE_SMOOTH));
-			//라벨크기 가로 190 세로 190 에 맞춰서 띄워주자!!! 3줄로 끝납니다...
-			
 			int gridx = 0;
 			int gridy = 0;
-			for(int i = 0; i < count; i++) {
-				System.out.println("패널생성시작 " + i + 1);
-				JPanel menuPanel = new MenuPanel(properImg); // 이 텍스트에는 list.getIndex(i).getFoodName(); 이 올것이다
-				System.out.println("패널생성완료");
+			for(FoodDto foodDto : list) {
+				// 이미지 로드
+				BufferedImage bimg = ImageIO.read(new File(UserMenuView.class.getResource(foodDto.getImageAddress()).toURI()));
+				ImageIcon properImg; // 적정크기에 맞춰진 이미지를 담을 변수
+				properImg = new ImageIcon(bimg.getScaledInstance((int) (185), (int) (170), Image.SCALE_SMOOTH));
+				
+				//라벨크기 각 컴포넌트에 맞게 설정해주기 190 190
+				MenuPanel menuPanel = new MenuPanel(properImg, foodDto.getFoodName());
 				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 				gbc_btnNewButton.insets = new Insets(0, 0, 9, 9);
 				gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
@@ -57,6 +82,9 @@ public class UserMenuView extends JPanel {
 					gridx = 0;
 					gridy++;
 				}
+				menuPanel.btnImg.setName(foodDto.getFoodId());
+				menuPanel.btnImg.addActionListener(service.foodMainController);
+				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -75,24 +103,5 @@ public class UserMenuView extends JPanel {
 //		가로가 4인거 까지 넣으면 
 //		가로를 다시 0으로만들어주고
 //		행을 1 증가시킨다
-	public UserMenuView() {
-		setLayout(null);
-		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		panel.setBorder(null);
-		panel.setLayout(gbl_panel);
-		scrollPane.setBorder(null);
-		
-		scrollPane.setViewportView(panel);
-		scrollPane.setBounds(12, 10, 988, 614);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scrollPane);
-//		panel.setPreferredSize(new Dimension(998, 614));
-
-
-	}
 
 }

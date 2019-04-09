@@ -21,15 +21,15 @@ public class MenuDao {
 		ResultSet rs = null;
 		try {
 			c = connectionMaker.makeConnection();
-			ps = c.prepareStatement("select * from fook_food where category_id = ?");
+			ps = c.prepareStatement("select food_name, image_address, food_id from fook_food where category_id = ?");
 			ps.setInt(1, categori_id);
 			rs = ps.executeQuery();
 			//음식 이름, 이미지주소, 아이디 (메뉴 리스트에 갖고있을 정보만)
 			while (rs.next()) {
 				FoodDto food = new FoodDto();
-				food.setFoodName("food_name");
-				food.setImageAddress("image_address");
-				food.setFoodId("food_id");
+				food.setFoodName(rs.getString("food_name"));
+				food.setImageAddress(rs.getString("image_address"));
+				food.setFoodId(rs.getString("food_id"));
 				list.add(food);
 			}
 		} catch (SQLException e) {
@@ -68,15 +68,16 @@ public class MenuDao {
 		ResultSet rs = null;
 		try {
 			c = connectionMaker.makeConnection();
-			ps = c.prepareStatement("select * from fook_food where food_name = ?");
-			ps.setString(1, foodName);
+			String str = "'%"+foodName+"%'";
+			ps = c.prepareStatement("select food_name, image_address, food_id from fook_food where food_name like " + str);
+//			ps.setString(1, foodName); //의문의 에러 발생 해결!!!
 			rs = ps.executeQuery();
 			//음식 이름, 이미지주소, 아이디 (메뉴 리스트에 갖고있을 정보만)
 			while (rs.next()) {
 				FoodDto food = new FoodDto();
-				food.setFoodName("food_name");
-				food.setImageAddress("image_address");
-				food.setFoodId("food_id");
+				food.setFoodName(rs.getString("food_name"));
+				food.setImageAddress(rs.getString("image_address"));
+				food.setFoodId(rs.getString("food_id"));
 				list.add(food);
 			}
 		} catch (SQLException e) {
@@ -108,4 +109,48 @@ public class MenuDao {
 		return list;
 	}
 	
+	public FoodDto getMenubyId(String food_id) {
+		FoodDto foodDto = null;
+		Connection c = null; 
+		PreparedStatement ps = null; 
+		ResultSet rs = null;
+		try {
+			c = connectionMaker.makeConnection();
+			ps = c.prepareStatement("select food_name, image_address, food_id from fook_food where food_id = ?");
+			ps.setString(1, food_id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				foodDto = new FoodDto();
+				foodDto.setFoodName(rs.getString("food_name"));
+				foodDto.setImageAddress(rs.getString("image_address"));
+				foodDto.setFoodId(rs.getString("food_id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(c != null) {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return foodDto;
+	}
 }

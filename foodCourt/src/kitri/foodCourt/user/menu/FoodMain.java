@@ -34,14 +34,13 @@ import javax.swing.border.TitledBorder;
 public class FoodMain extends JFrame{
 
 	JPanel contentPane;
-	JTextField textField;
+	JTextField searchField;
 	JPanel panel = new JPanel();
 	JPanel panel_5 = new JPanel();
 	JPanel panel_3 = new JPanel();
 	JPanel panel_2 = new JPanel();
-//	UserMenuView userMenuList = new UserMenuView();
-//	서비스단에서 생성한다
-	UserMenuDetailView menuDetailView = new UserMenuDetailView();
+	UserMenuView userMenuList;
+	UserMenuDetailView menuDetailView;
 	FoodMainView foodMainView = new FoodMainView();
 	
 	JLabel labSearch = new JLabel("\uAC80\uC0C9");
@@ -99,7 +98,9 @@ public class FoodMain extends JFrame{
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		panel.setBorder(null);
-		
+		btnSearch.setToolTipText("\uAC80\uC0C9");
+		// 커서 모양지정
+		btnSearch.setCursor(csorHandCursor);
 		btnMainMenu.setCursor(csorHandCursor);
 		btnUserInfo.setToolTipText("\uD68C\uC6D0\uC815\uBCF4");
 		btnUserInfo.setCursor(csorHandCursor);
@@ -141,20 +142,21 @@ public class FoodMain extends JFrame{
 		btnJoongsicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnIlsicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnYangsicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
+		panChangePanel.setBackground(Color.WHITE);
 	
 //		--------------------변하는 패널 부분 카드레이아웃 설정
 		panChangePanel.setLayout(card);
-		panChangePanel.add(menuDetailView, "menuDetail");
+//		panChangePanel.add(menuDetailView, "menuDetail"); 서비스 단에서 add
 		panChangePanel.add(foodMainView, "mainMenu");
 		panChangePanel.setBounds(160, 118, 1012, 634);
 		panel.add(panChangePanel);
 		card.show(panChangePanel, "mainMenu");
 		
-		textField = new JTextField();
-		textField.setBorder(new MatteBorder(2, 2, 4, 4, (Color) Color.LIGHT_GRAY));
-		textField.setBounds(240, 42, 553, 38);
-		panel.add(textField);
-		textField.setColumns(10);
+		searchField = new JTextField();
+		searchField.setBorder(new MatteBorder(2, 2, 4, 4, (Color) Color.LIGHT_GRAY));
+		searchField.setBounds(240, 42, 553, 38);
+		panel.add(searchField);
+		searchField.setColumns(10);
 		panel_6.setBackground(Color.DARK_GRAY);
 		
 		

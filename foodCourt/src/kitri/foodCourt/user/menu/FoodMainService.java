@@ -2,14 +2,14 @@ package kitri.foodCourt.user.menu;
 
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JPanel;
+
 import kitri.foodCourt.user.menu.jdbc.DaoFactory;
 
 public class FoodMainService {
-	FoodMainController foodMainController = null;
-	FoodMain foodMain = null;
-	List<FoodDto> foodList = null;
-	MenuDao foodDao = new DaoFactory().menuDao();
-	UserMenuView userMenuList = null;
+	FoodMainController foodMainController;
+	FoodMain foodMain;
+	MenuDao menuDao = new DaoFactory().menuDao();
 
 	public FoodMainService(FoodMainController foodMainController) {
 		this.foodMainController = foodMainController;
@@ -25,28 +25,32 @@ public class FoodMainService {
 	public void searchMenu(JButton button) {
 		// 메뉴 목록 페이지로 (한식, 중식, 일식, 양식)
 		System.out.println("menuList");
-		foodList = foodDao.getMenubyCategory(Integer.parseInt(button.getName()));
-		if (Integer.parseInt(button.getName()) == 1) {
-			userMenuList = new UserMenuView();
-			userMenuList.setBounds(160, 118, 1012, 634);
-			userMenuList.setMenu(2, "/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg", foodList);
-			foodMain.card.show(foodMain.panChangePanel, "menuList");
-		} else {
-			userMenuList.setMenu(17, "/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg", foodList);
-			foodMain.card.show(foodMain.panChangePanel, "menuList");
-		}
-
+		List<FoodDto> list = menuDao.getMenubyCategory(Integer.parseInt(button.getName()));
+//		JPanel userMenuList = new UserMenuView(list, this);
+//		userMenuList.setBounds(160, 118, 1012, 634);
+		foodMain.panChangePanel.add(new UserMenuView(list, this), "userMenuList");
+		foodMain.card.show(foodMain.panChangePanel, "userMenuList");
 	}
 
 	public void searchMenuName() {
 		// 주문목록 페이지로 (검색 버튼)
 		System.out.println("menuNameList");
-		String foodName = foodMain.textField.getText();
-		foodList = foodDao.getMenubyName(foodName);
-//		foodMain.userMenuList.setMenu(27, foodList);
-		foodMain.card.show(foodMain.panChangePanel, "menuList");
+		String foodName = foodMain.searchField.getText();
+		List<FoodDto> list = menuDao.getMenubyName(foodName);
+//		JPanel userMenuList = new UserMenuView(list, this);
+		foodMain.panChangePanel.add(new UserMenuView(list, this), "menuNameList");
+		foodMain.card.show(foodMain.panChangePanel, "menuNameList");
 	}
 
+	public void searchMenuDetail(String food_id) {
+		// 메뉴 상세 페이지로 (메뉴 이미지 버튼)
+		System.out.println("menuDetail");
+		FoodDto foodDto = menuDao.getMenubyId(food_id);
+//		JPanel userMenuList = new UserMenuDetailView(foodDto);
+		foodMain.panChangePanel.add(new UserMenuDetailView(foodDto), "menuNameList");
+		foodMain.card.show(foodMain.panChangePanel, "menuNameList");
+	}
+	
 	public void userInfo() {
 		// 유저 페이지로 (유저 정보 버튼)
 		// 지금은 임시로 메뉴 디테일 띄우기
@@ -56,7 +60,5 @@ public class FoodMainService {
 
 	public void orderList() {
 		// 주문목록 페이지로 (주문목록 버튼)
-
 	}
-
 }

@@ -1,84 +1,94 @@
 package kitri.foodCourt.user.menu;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Color;
-import javax.swing.JTextField;
-import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 public class UserMenuDetailView extends JPanel {
 	private JTextField textField;
-	private FoodDto foodDto = null ;
-	/**
-	 * Create the panel.
-	 */
-	public UserMenuDetailView() {
-		setLayout(null);
+	JLabel image;
+	JLabel foodName = new JLabel("");
+	JLabel price = new JLabel("");
+	JLabel content = new JLabel("");
+	JLabel count = new JLabel("\uC218\uB7C9");
+	JLabel category = new JLabel("");
+	JPanel panel = new JPanel();
+	JButton btnNewButton = new JButton("\uC774\uC804\uC73C\uB85C");
+	JButton button = new JButton("\uC7A5\uBC14\uAD6C\uB2C8 \uB2F4\uAE30");
+	public UserMenuDetailView(FoodDto foodDto) {
 		
-		JButton menuImage = new JButton("\uC74C\uC2DD\uC774\uBBF8\uC9C0");
-		menuImage.setBounds(23, 24, 443, 390);
-		add(menuImage);
+//		BufferedImage bimg = ImageIO.read(new File(UserMenuView.class.getResource(foodDto.getImageAddress()).toURI()));
+//		ImageIcon properImg; // ÀûÁ¤Å©±â¿¡ ¸ÂÃçÁø ÀÌ¹ÌÁö¸¦ ´ãÀ» º¯¼ö
+//		properImg = new ImageIcon(bimg.getScaledInstance((int) (185), (int) (170), Image.SCALE_SMOOTH));
 		
-		JLabel lblNewLabel = new JLabel("\uC74C\uC2DD\uC774\uB984");
-		lblNewLabel.setOpaque(true);
-		lblNewLabel.setBackground(Color.PINK);
-		lblNewLabel.setBounds(504, 24, 443, 86);
-		add(lblNewLabel);
+//		image = 
+//		setBackground(Color.WHITE);
+//		setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("\uAC00\uACA9");
-		lblNewLabel_1.setBackground(Color.ORANGE);
-		lblNewLabel_1.setOpaque(true);
-		lblNewLabel_1.setBounds(542, 143, 173, 50);
-		add(lblNewLabel_1);
 		
-		JLabel label = new JLabel("\uC81C\uC870\uC6D0");
-		label.setOpaque(true);
-		label.setBackground(Color.ORANGE);
-		label.setBounds(737, 143, 173, 50);
-		add(label);
+		image.setBorder(new MatteBorder(2, 2, 5, 5, (Color) new Color(128, 128, 128)));
+		image.setToolTipText("\uC774\uBBF8\uC9C0");
+		image.setBounds(35, 39, 475, 394);
+		add(image);
 		
-		JLabel lblNewLabel_2 = new JLabel("\uBA54\uB274 \uC124\uBA85");
-		lblNewLabel_2.setBackground(Color.ORANGE);
-		lblNewLabel_2.setOpaque(true);
-		lblNewLabel_2.setBounds(542, 216, 368, 135);
-		add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("\uC218\uB7C9");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setOpaque(true);
-		lblNewLabel_3.setBackground(Color.CYAN);
-		lblNewLabel_3.setBounds(542, 372, 90, 42);
-		add(lblNewLabel_3);
+		foodName.setBorder(new LineBorder(Color.GRAY, 3));
+		foodName.setToolTipText("\uBA54\uB274 \uC774\uB984");
+		foodName.setBounds(542, 39, 419, 71);
+		add(foodName);
 		
-		JPanel panel = new JPanel();
+		
+		price.setBorder(new LineBorder(Color.LIGHT_GRAY, 3, true));
+		price.setBounds(542, 131, 162, 52);
+		add(price);
+		
+		
+		content.setBorder(new LineBorder(Color.LIGHT_GRAY, 3, true));
+		content.setBounds(542, 202, 419, 165);
+		add(content);
+		count.setHorizontalAlignment(SwingConstants.CENTER);
+		count.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		
+		
+		count.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+		count.setBounds(542, 385, 69, 35);
+		add(count);
+		
+		
+		category.setBorder(new LineBorder(Color.LIGHT_GRAY, 3, true));
+		category.setBounds(723, 131, 162, 52);
+		add(category);
+		
+		
 		panel.setBackground(Color.BLACK);
-		panel.setBounds(644, 372, 4, 42);
+		panel.setBounds(631, 385, 3, 35);
 		add(panel);
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField.setText("\uC218\uB7C9\uC744\uC785\uB825\uD574\uC8FC\uC138\uC694");
-		textField.setBounds(659, 372, 251, 42);
+		textField.setBounds(653, 385, 308, 35);
 		add(textField);
 		textField.setColumns(10);
 		
-		JButton btnNewButton_1 = new JButton("\uC774\uC804\uC73C\uB85C");
-		btnNewButton_1.setBackground(Color.DARK_GRAY);
-		btnNewButton_1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 19));
-		btnNewButton_1.setBounds(313, 458, 153, 62);
-		add(btnNewButton_1);
 		
-		JButton button = new JButton("\uC7A5\uBC14\uAD6C\uB2C8 \uB2F4\uAE30");
-		button.setBackground(Color.DARK_GRAY);
+		btnNewButton.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 26));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(199, 476, 223, 92);
+		add(btnNewButton);
 		
-		button.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 19));
-		button.setBounds(520, 458, 153, 62);
+		
+		button.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 26));
+		button.setBounds(585, 476, 223, 92);
 		add(button);
-		setVisible(true);
 	}
 }

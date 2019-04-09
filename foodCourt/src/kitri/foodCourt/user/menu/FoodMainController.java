@@ -1,5 +1,6 @@
 package kitri.foodCourt.user.menu;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,8 +25,10 @@ public class FoodMainController implements ActionListener{
 			foodMainService.userInfo();
 		else if(ob == foodMain.btnOrderList)
 			foodMainService.orderList();
+		else if(ob instanceof MenuButton) {
+			foodMainService.searchMenuDetail(((MenuButton) ob).getName());
+		}
 		else {
-			System.out.println("메뉴클릭");
 			foodMainService.searchMenu((JButton)ob);
 		}
 	}

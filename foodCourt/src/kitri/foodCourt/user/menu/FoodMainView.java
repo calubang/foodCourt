@@ -10,9 +10,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import java.awt.Color;
 
 public class FoodMainView extends JPanel {
 	public FoodMainView() {
+		setBackground(Color.WHITE);
 		setBounds(160, 118, 1012, 634);
 		setLayout(null);
 		
@@ -27,6 +29,8 @@ public class FoodMainView extends JPanel {
 		panel.add(hansic);
 		
 		JLabel lblNewLabel_1 = new JLabel("\uD55C\uC2DD");
+		lblNewLabel_1.setOpaque(true);
+		lblNewLabel_1.setBackground(Color.WHITE);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(0, 250, 330, 38);
 		panel.add(lblNewLabel_1);
@@ -42,6 +46,8 @@ public class FoodMainView extends JPanel {
 		panel_1.add(ilsic);
 		
 		JLabel label_4 = new JLabel("\uC77C\uC2DD");
+		label_4.setOpaque(true);
+		label_4.setBackground(Color.WHITE);
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
 		label_4.setBounds(0, 250, 330, 38);
 		panel_1.add(label_4);
@@ -57,6 +63,8 @@ public class FoodMainView extends JPanel {
 		panel_2.add(joongsic);
 		
 		JLabel label_3 = new JLabel("\uC911\uC2DD");
+		label_3.setOpaque(true);
+		label_3.setBackground(Color.WHITE);
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		label_3.setBounds(0, 250, 330, 38);
 		panel_2.add(label_3);
@@ -72,6 +80,8 @@ public class FoodMainView extends JPanel {
 		panel_3.add(yangsic);
 		
 		JLabel label_5 = new JLabel("\uC591\uC2DD");
+		label_5.setOpaque(true);
+		label_5.setBackground(Color.WHITE);
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);
 		label_5.setBounds(0, 250, 330, 38);
 		panel_3.add(label_5);
