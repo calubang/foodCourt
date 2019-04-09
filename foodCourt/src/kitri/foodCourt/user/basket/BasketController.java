@@ -3,6 +3,7 @@ package kitri.foodCourt.user.basket;
 import java.awt.Button;
 import java.awt.TrayIcon.MessageType;
 import java.awt.event.*;
+import java.util.StringTokenizer;
 
 import javax.swing.JOptionPane;
 
@@ -27,14 +28,17 @@ public class BasketController implements ActionListener, MouseListener{
 		String name = button.getName();
 		switch(name) {
 		case "allCancel":
-			service.allCancel();
+			service.allDelete();
 			break;
 		case "ok":
-			service.receiptOK();
+			//service.receiptOK();
 			break;
 		case "payment":
 			service.payment();
 			break;
+		default:
+			int index = name.charAt(1) - 48;
+			service.delete(index);
 		}
 	}
 

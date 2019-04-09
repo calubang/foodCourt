@@ -15,12 +15,25 @@ public class BasketMain extends JFrame{
 
 	private JPanel contentPane;
 	private BasketController controller;
-	public static User user = new User("calubang", "안병욱", 5000);
+	
 	public JPanel pBasketMain;
 	public Payment payment;
 	public JPanel pChangePanel;
+	public JPanel pMiddle;
 	public CardLayout card;
+	public GridBagLayout gbl_pMiddle;
+	public JScrollPane scrollPane;
 	
+	public FButton btnAllCancel;
+	public FButton btnPayment;
+	
+	//라벨
+	public FLabel lblTotalPrice;
+	public FLabel lblTotalPoint;
+	
+	
+	//테스트
+	public User user = new User("calubang", "안병욱", 5000);
 	
 	public void test() {
 		FoodDto food1 = new FoodDto("1", "된장찌개", 1, "한식", 5000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
@@ -38,7 +51,8 @@ public class BasketMain extends JFrame{
 		user.getBasket().add(detail2);
 		user.getBasket().add(detail3);
 		user.getBasket().add(detail4);
-		user.getBasket().add(detail5);
+		//user.getBasket().add(detail5);
+		
 	}
 	
 	/**
@@ -62,6 +76,19 @@ public class BasketMain extends JFrame{
 	 */
 	public BasketMain() {
 		test();
+		
+		//기본 UI 구성
+		controller = new BasketController(this);
+		initView();
+		dataSetting();
+		
+		//이벤트
+		btnAllCancel.addActionListener(controller);
+		btnPayment.addActionListener(controller);
+		
+		
+	}
+	public void initView() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 800);
@@ -96,6 +123,7 @@ public class BasketMain extends JFrame{
 		btnOrderList.setBounds(1074, 26, 79, 54);
 		panel.add(btnOrderList);
 		
+		//시작
 		pChangePanel = new JPanel();
 		pChangePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		pChangePanel.setBounds(163, 118, 1021, 643);
@@ -107,9 +135,8 @@ public class BasketMain extends JFrame{
 		pBasketMain.setBounds(160, 118, 1012, 634);
 		pBasketMain.setLayout(null);
 		
-		FButton btnAllCancel = SwingFactory.getInstance().getButton("x");
+		btnAllCancel = SwingFactory.getInstance().getButton("x");
 		btnAllCancel.setName("allCancel");
-		//64/2 32 44 22
 		btnAllCancel.setBounds(29, 2, 44, 44);
 		
 		JPanel pTop = new JPanel();
@@ -120,7 +147,6 @@ public class BasketMain extends JFrame{
 		JLabel lblBasketImage = new JLabel("");
 		lblBasketImage.setBounds(12, 10, 120, 70);
 		pTop.add(lblBasketImage);
-		//lblNewLabel_2.setIcon(new ImageIcon(main.class.getResource("/kitri/foodCourt/user/basket/image/Basket1.png")));
 		lblBasketImage.setIcon(new ImageIcon(this.getClass().getResource("/kitri/foodCourt/user/basket/image/Basket1.png")));
 		
 		FLabel lblBasket = new FLabel(Font.BOLD, 40);
@@ -169,17 +195,17 @@ public class BasketMain extends JFrame{
 		pBasketMain.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		panel_1.add(scrollPane);
 		
-		JPanel pMiddle = new JPanel();
+		pMiddle = new JPanel();
 		scrollPane.setViewportView(pMiddle);
-		GridBagLayout gbl_pMiddle = new GridBagLayout();
-		gbl_pMiddle.rowHeights = new int[] {110};
-		gbl_pMiddle.columnWidths = new int[] {988};
-		gbl_pMiddle.columnWeights = new double[]{};
-		gbl_pMiddle.rowWeights = new double[]{};
+		gbl_pMiddle = new GridBagLayout();
+		gbl_pMiddle.columnWidths = new int[]{0};
+		gbl_pMiddle.rowHeights = new int[]{0, 0, 0};
+		gbl_pMiddle.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pMiddle.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		pMiddle.setLayout(gbl_pMiddle);
 		
 		JPanel pBottom = new JPanel();
@@ -187,6 +213,7 @@ public class BasketMain extends JFrame{
 		pBasketMain.add(pBottom);
 		pBottom.setLayout(null);
 		
+		//토탈부분
 		JPanel pTotal = new JPanel();
 		pTotal.setBounds(12, 0, 988, 85);
 		pBottom.add(pTotal);
@@ -199,15 +226,14 @@ public class BasketMain extends JFrame{
 		lblPrice.setBounds(578, 0, 179, 50);
 		pTotal.add(lblPrice);
 		
-		FLabel lblTotalPrice = new FLabel(Font.BOLD, 30);
-		lblTotalPrice.setText("20000\uC6D0");
+		lblTotalPrice = new FLabel(Font.BOLD, 30);
 		lblTotalPrice.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTotalPrice.setBounds(765, 0, 196, 50);
 		pTotal.add(lblTotalPrice);
 		
-		FLabel lblTotalPoint = new FLabel(Font.BOLD, 20);
+		lblTotalPoint = new FLabel(Font.BOLD, 20);
 		lblTotalPoint.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTotalPoint.setText("2000P");
+		
 		lblTotalPoint.setBounds(837, 50, 124, 35);
 		pTotal.add(lblTotalPoint);
 		
@@ -217,41 +243,45 @@ public class BasketMain extends JFrame{
 		lblPoint.setBounds(710, 50, 115, 35);
 		pTotal.add(lblPoint);
 		
-		FButton btnPayment = SwingFactory.getButton("");
+		btnPayment = SwingFactory.getButton("");
 		btnPayment.setName("payment");
 		btnPayment.setBounds(831, 95, 169, 47);
 		pBottom.add(btnPayment);
 		btnPayment.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		btnPayment.setText("\uACB0\uC81C");
 		
-		Basket basket = user.getBasket();
+		//카드부분
+		pChangePanel.add(pBasketMain, "basket");
+		card.show(pChangePanel, "basket");
 		
-		int size = basket.getDetailList().size();
-		if(size > 3) {
-			pMiddle.setLayout(new GridLayout(size, 1, 0, 0));
-		}
+	}
+	
+	public void dataSetting() {
+		//토탈가격
+		lblTotalPrice.setText(String.valueOf(user.getBasket().getTotalPrice()));
+		lblTotalPoint.setText(String.valueOf(user.getBasket().getSavePoint()));
 		
+		pMiddle = new JPanel();
+		scrollPane.setViewportView(pMiddle);
+		gbl_pMiddle = new GridBagLayout();
+		gbl_pMiddle.columnWidths = new int[]{0};
+		gbl_pMiddle.rowHeights = new int[]{0, 0, 0};
+		gbl_pMiddle.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pMiddle.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		pMiddle.setLayout(gbl_pMiddle);
 		
+		//바스켓에 있는 음식정보 뿌리기
+		int size = user.getBasket().getDetailList().size();
 		for(int i = 0; i<size ; i++) {
 			JPanel temp = addFood(i);
 			GridBagConstraints gbcFood = new GridBagConstraints();
-			gbcFood.insets = new Insets(10, 10, 10, 10);
-			gbcFood.fill = GridBagConstraints.CENTER;
+			gbcFood.insets = new Insets(0, 0, 0, 0);
+			gbcFood.fill = GridBagConstraints.HORIZONTAL;
 			gbcFood.gridx = 0;
 			gbcFood.gridy = i;
 			
 			pMiddle.add(temp, gbcFood);
 		}
-		
-		//카드부분
-		pChangePanel.add(pBasketMain, "basket");
-		card.show(pChangePanel, "basket");
-		
-		//이벤트
-		controller = new BasketController(this);
-		btnAllCancel.addActionListener(controller);
-		btnPayment.addActionListener(controller);
-		
 	}
 	
 	public JPanel addFood(int index) {
@@ -265,6 +295,7 @@ public class BasketMain extends JFrame{
 		btnX.setName(index+"cancel");
 		btnX.setBounds(29, 28, 44, 44);
 		pFood.add(btnX);
+		btnX.setName("x"+index);
 		
 		//음식설명용 패널 - 차후 클릭하면 효과있음
 		JPanel pFoodInfo = SwingFactory.getInstance().getPanel("basketFood");
@@ -307,7 +338,7 @@ public class BasketMain extends JFrame{
 		
 		//btn
 		btnX.addActionListener(controller);
-		pFoodInfo.addMouseListener(controller);
+		//pFoodInfo.addMouseListener(controller);
 		
 		return pFood;
 	}

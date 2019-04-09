@@ -88,7 +88,7 @@ public class BasketImpl implements Basket{
 	}
 	//삭제(index로 삭제)
 	public BasketDetail remove(int index) {
-		BasketDetail detail = remove(index);
+		BasketDetail detail = detailList.get(index);
 		totalPrice -= detail.getFood().getPrice();
 		savePoint -= detail.getFood().getPoint();
 		return detailList.remove(index);
@@ -110,6 +110,7 @@ public class BasketImpl implements Basket{
 		Iterator<BasketDetail> iter = detailList.iterator();
 		int size = detailList.size();
 		while(iter.hasNext()) {
+			BasketDetail temp = iter.next();
 			iter.remove();
 		}
 		totalPrice = 0;
