@@ -39,6 +39,7 @@ public class SwingFactory {
 			return button;
 		default:
 			button = new FButton();
+			button.setBackground(SystemColor.inactiveCaptionBorder);
 			button.setBorder(new LineBorder(Color.BLACK, 1));
 			button.addMouseListener(button);
 			return button;

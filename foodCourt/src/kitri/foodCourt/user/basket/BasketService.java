@@ -40,4 +40,9 @@ public class BasketService {
 		basketMain.dataSetting();
 	}
 
+	public void goFoodDetail() {
+		//food상세 정보로 이동
+		JOptionPane.showMessageDialog(basketMain, "음식상세정보로 이동(개발해야함)", "경고", JOptionPane.WARNING_MESSAGE);
+	}
+
 }

@@ -1,14 +1,8 @@
 package kitri.foodCourt.user.basket;
 
-import java.awt.Button;
-import java.awt.TrayIcon.MessageType;
+
 import java.awt.event.*;
-import java.util.StringTokenizer;
-
-import javax.swing.JOptionPane;
-
 import kitri.foodCourt.user.swing.FButton;
-import kitri.foodCourt.user.swing.FOptionPane;
 
 public class BasketController implements ActionListener, MouseListener{
 
@@ -44,7 +38,7 @@ public class BasketController implements ActionListener, MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+		service.goFoodDetail();
 	}
 
 	@Override

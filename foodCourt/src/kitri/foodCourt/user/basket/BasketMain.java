@@ -51,7 +51,7 @@ public class BasketMain extends JFrame{
 		user.getBasket().add(detail2);
 		user.getBasket().add(detail3);
 		user.getBasket().add(detail4);
-		//user.getBasket().add(detail5);
+		user.getBasket().add(detail5);
 		
 	}
 	
@@ -298,7 +298,7 @@ public class BasketMain extends JFrame{
 		btnX.setName("x"+index);
 		
 		//음식설명용 패널 - 차후 클릭하면 효과있음
-		JPanel pFoodInfo = SwingFactory.getInstance().getPanel("basketFood");
+		FPanel pFoodInfo = SwingFactory.getInstance().getPanel("basketFood");
 		pFoodInfo.setBounds(93, 0, 350, 100);
 		pFood.add(pFoodInfo);
 		
@@ -336,9 +336,9 @@ public class BasketMain extends JFrame{
 		lPrice.setBounds(850, 28, 100, 45);
 		pFood.add(lPrice);
 		
-		//btn
+		//이벤트
 		btnX.addActionListener(controller);
-		//pFoodInfo.addMouseListener(controller);
+		pFoodInfo.setController(controller);
 		
 		return pFood;
 	}
