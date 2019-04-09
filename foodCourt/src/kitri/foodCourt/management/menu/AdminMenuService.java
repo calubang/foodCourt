@@ -91,7 +91,10 @@ public class AdminMenuService {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 			
-			ps = c.prepareStatement("select * from fook_food where food_id = (?)");
+			ps = c.prepareStatement("select * "
+								  + "from fook_food "
+								  + "where food_id = (?)");
+			
 			ps.setString(1, (String)dtm.getValueAt(rowSelect, 0));
 			rs = ps.executeQuery();
 
@@ -170,7 +173,9 @@ public class AdminMenuService {
 					Class.forName("oracle.jdbc.driver.OracleDriver");
 					c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 					
-					ps = c.prepareStatement("delete from fook_food where food_id = (?)");
+					ps = c.prepareStatement("delete from fook_food "
+										  + "where food_id = (?)");
+					
 					ps.setString(1, (String)ob);
 					
 					resultQuery = ps.executeUpdate();
@@ -222,7 +227,10 @@ public class AdminMenuService {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 			
-			ps = c.prepareStatement("select food_id, food_name, f.category_id \"category_id\", category_name, price, food_point, food_description, image_address, manager_id, create_date, food_enable from fook_food f, fook_category c where f.category_id = c.category_id");
+			ps = c.prepareStatement("select food_id, food_name, f.category_id \"category_id\", category_name, price, food_point, food_description, image_address, manager_id, create_date, food_enable "
+								  + "from fook_food f, fook_category c "
+								  + "where f.category_id = c.category_id");
+			
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -301,7 +309,10 @@ public class AdminMenuService {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 				
-				ps = c.prepareStatement("select image_address, food_description from fook_food where food_id = (?)");
+				ps = c.prepareStatement("select image_address, food_description "
+									  + "from fook_food "
+									  + "where food_id = (?)");
+				
 				ps.setString(1, (String)ob);
 				
 				rs = ps.executeQuery();
@@ -361,7 +372,6 @@ public class AdminMenuService {
 				break;
 			}
 		}
-		
 	}
 
 	public void findImage(Object ob) {
@@ -386,7 +396,175 @@ public class AdminMenuService {
 		}
 	}
 
-//	public void modifyMenu() {
-//		return;
-//	}
+	public void modifyMenu() {
+		int currentSelectedrow = amm.commonTable.getSelectedRow();
+		
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		Object[] rowData = new Object[8];
+
+		String food_id = am.menuCodeTextField.getText();
+		String food_name = am.menuNameTextField.getText();
+		int price = Integer.parseInt(am.priceTextField.getText());
+		int point = Integer.parseInt(am.pointTextField.getText());
+		String food_enable = am.cg.getSelectedCheckbox().equals(am.checkBox1) ? "y" : "n";
+		String food_description = am.descriptionTextArea.getText();
+		int category = am.categoryComboBox.getSelectedIndex() + 1;
+		String fullpath = am.pictureLabel.getIcon().toString();
+		String imgUrl = fullpath.substring(fullpath.indexOf("kitri") - 1, fullpath.length());
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			
+			ps = c.prepareStatement("update fook_food "
+								  + "set food_name = (?), category_id = (?), price = (?), food_point = (?), food_description = (?), image_address = (?), food_enable = (?) "
+								  + "where food_id = (?)");
+			
+			ps.setString(1, food_name);
+			ps.setInt(2, category);
+			ps.setInt(3, price);
+			ps.setInt(4, point);
+			ps.setString(5, food_description);
+			ps.setString(6, imgUrl);
+			ps.setString(7, food_enable);
+			ps.setString(8, food_id);
+			
+			result = ps.executeUpdate();
+
+			ps.close();
+			
+			ps = c.prepareStatement("select category_name "
+								  + "from fook_category "
+								  + "where category_id = (select distinct category_id from fook_food where category_id = (?))");
+			
+			ps.setInt(1, category);
+			
+			rs = ps.executeQuery();
+			
+			if ((result != 0) && rs.next()) {
+				rowData[0] = food_id;
+				rowData[1] = food_name;
+				rowData[2] = rs.getString("category_name");
+				rowData[3] = price;
+				rowData[4] = point;
+				rowData[5] = dtm.getValueAt(currentSelectedrow, 5);	// TODO jwlee use to real manager_id
+				rowData[6] = dtm.getValueAt(currentSelectedrow, 6);
+				rowData[7] = food_enable;
+
+				int columnNum = dtm.getColumnCount();
+				for (int i = 0; i < columnNum; i++) {
+					dtm.setValueAt(rowData[i], currentSelectedrow, i);
+				}
+			}
+			
+			amm.commonTable.setRowSelectionInterval(currentSelectedrow, currentSelectedrow);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(c != null) {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		closeWindow(amm.jdM);
+	}
+
+	public void registerMenu() {
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		Object[] rowData = new Object[8];
+
+		String food_name = arm.menuNameTextField.getText();
+		String food_enable = "y";
+		String food_description = arm.descriptionTextArea.getText();
+		String fullpath = arm.pictureLabel.getIcon().toString();
+		String imgUrl = fullpath.substring(fullpath.indexOf("kitri") - 1, fullpath.length());
+		String manager_id = "Admin123";	// TODO jwlee use to real manager_id
+		int price = Integer.parseInt(arm.priceTextField.getText());
+		int point = arm.pointTextField.getText().isEmpty() ? Integer.parseInt(arm.pointTextField.getText()) : (price / 100);
+		int category = arm.categoryComboBox.getSelectedIndex() + 1;
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			
+			ps = c.prepareStatement("insert into fook_food (food_id, food_name, category_id, price, food_point, food_description, image_address, manager_id, create_date, food_enable) "
+												 + "values (food_fid_seq.nextval, (?), (?), (?), (?), (?), (?), (?), sysdate, (?))");
+			
+			ps.setString(1, food_name);
+			ps.setInt(2, category);
+			ps.setInt(3, price);
+			ps.setInt(4, point);
+			ps.setString(5, food_description);
+			ps.setString(6, imgUrl);
+			ps.setString(7, manager_id);
+			ps.setString(8, food_enable);
+			
+			result = ps.executeUpdate();
+
+			ps.close();
+			
+			ps = c.prepareStatement("select food_id, category_name, create_date "
+								  + "from fook_food f, fook_category c "
+								  + "where (food_id = (select max(to_number(food_id,'999999')) from fook_food)) and (f.category_id = c.category_id)");
+			
+			rs = ps.executeQuery();
+			
+			if ((result != 0) && rs.next()) {
+				rowData[0] = rs.getString("food_id");
+				rowData[1] = food_name;
+				rowData[2] = rs.getString("category_name");
+				rowData[3] = price;
+				rowData[4] = point;
+				rowData[5] = manager_id;
+				rowData[6] = rs.getDate("create_date");
+				rowData[7] = food_enable;
+			}
+			
+			dtm.addRow(rowData);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(c != null) {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		closeWindow(amm.jdR);
+	}
 }
