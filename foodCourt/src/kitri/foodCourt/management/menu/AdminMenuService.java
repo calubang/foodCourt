@@ -91,18 +91,18 @@ public class AdminMenuService {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 			
-			ps = c.prepareStatement("select * from food where food_id = (?)");
+			ps = c.prepareStatement("select * from fook_food where food_id = (?)");
 			ps.setString(1, (String)dtm.getValueAt(rowSelect, 0));
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				foodDto = new FoodDto(rs.getString("food_id"), rs.getString("food_name"), rs.getInt("category_id"), null, rs.getInt("price"), rs.getString("image_address"));
 
-				foodDto.setPoint(rs.getInt("point"));
-				foodDto.setDescription(rs.getString("description"));
+				foodDto.setPoint(rs.getInt("food_point"));
+				foodDto.setDescription(rs.getString("food_description"));
 				foodDto.setManagerId(rs.getString("manager_id"));
 				foodDto.setCreateDate(rs.getDate("create_date"));
-				foodDto.setEnable(rs.getString("enable").charAt(0));
+				foodDto.setEnable(rs.getString("food_enable").charAt(0));
 			}
 
 			am.menuCodeTextField.setText(foodDto.getFoodId());
@@ -170,7 +170,7 @@ public class AdminMenuService {
 					Class.forName("oracle.jdbc.driver.OracleDriver");
 					c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 					
-					ps = c.prepareStatement("delete from food where food_id = (?)");
+					ps = c.prepareStatement("delete from fook_food where food_id = (?)");
 					ps.setString(1, (String)ob);
 					
 					resultQuery = ps.executeUpdate();
@@ -222,17 +222,17 @@ public class AdminMenuService {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 			
-			ps = c.prepareStatement("select food_id, food_name, f.category_id \"category_id\", category_name, price, point, description, image_address, manager_id, create_date, enable from food f, category c where f.category_id = c.category_id");
+			ps = c.prepareStatement("select food_id, food_name, f.category_id \"category_id\", category_name, price, food_point, food_description, image_address, manager_id, create_date, food_enable from fook_food f, fook_category c where f.category_id = c.category_id");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				foodDto = new FoodDto(rs.getString("food_id"), rs.getString("food_name"), rs.getInt("category_id"), rs.getString("category_name"), rs.getInt("price"), rs.getString("image_address"));
 
-				foodDto.setPoint(rs.getInt("point"));
-				foodDto.setDescription(rs.getString("description"));
+				foodDto.setPoint(rs.getInt("food_point"));
+				foodDto.setDescription(rs.getString("food_description"));
 				foodDto.setManagerId(rs.getString("manager_id"));
 				foodDto.setCreateDate(rs.getDate("create_date"));
-				foodDto.setEnable(rs.getString("enable").charAt(0));
+				foodDto.setEnable(rs.getString("food_enable").charAt(0));
 				
 				list.add(foodDto);
 			}
@@ -301,14 +301,14 @@ public class AdminMenuService {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 				
-				ps = c.prepareStatement("select image_address, description from food where food_id = (?)");
+				ps = c.prepareStatement("select image_address, food_description from fook_food where food_id = (?)");
 				ps.setString(1, (String)ob);
 				
 				rs = ps.executeQuery();
 	
 				if (rs.next()) {
 					imgUrl = rs.getString("image_address");
-					description = rs.getString("description");
+					description = rs.getString("food_description");
 				}
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
