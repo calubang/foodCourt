@@ -2,26 +2,20 @@ package kitri.foodCourt.management.regit;
 
 import java.awt.Dimension;
 
-import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
+
+import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
-import kitri.foodCourt.management.main.AdminMainFrameControl;
+
 import kitri.foodCourt.management.member.AdminTable;
 import kitri.foodCourt.management.member.MemberTable;
 
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -49,6 +43,20 @@ public class AdminMemberInfo extends JPanel {
 	CardLayout cl = new CardLayout(0, 0);
 	
 	AdminRegisterControl arc;
+	AdminRegister ar;
+	MemberRegister mr;
+	ModifyAdminRegit maR;
+	ModifyRegit mR;
+	RemoveMember rm;
+	
+	JFrame jfA = new JFrame();
+	JDialog jfAD = new JDialog(jfA,"관리자등록");
+	JFrame jfM = new JFrame();
+	JDialog jfMD = new JDialog(jfM,"회원등록");
+	JFrame jfMo = new JFrame();
+	JDialog jfMoD = new JDialog(jfMo,"수정");
+	JFrame jfD = new JFrame();
+	JDialog jfDD = new JDialog(jfD,"삭제");
 	
 	/**
 	 * Create the panel.
@@ -110,11 +118,29 @@ public class AdminMemberInfo extends JPanel {
 		
 //		add listener
 		arc = new AdminRegisterControl(this);
+		ar = new AdminRegister();
+		mr = new MemberRegister();
+		maR = new ModifyAdminRegit();
+		mR = new ModifyRegit();
 		
+				
 		adminMemberRegisterBtn.addActionListener(arc);
 		memberRegisterBtn.addActionListener(arc);
 		modifyBtn.addActionListener(arc);
 		deleteBtn.addActionListener(arc);
 		
+		ar.idbtn.addActionListener(arc);
+		ar.registerbtn.addActionListener(arc);
+		ar.cancelbtn.addActionListener(arc);
+		
+		mr.idbtn.addActionListener(arc);
+		mr.registerbtn.addActionListener(arc);
+		mr.cancelbtn.addActionListener(arc);
+		
+		maR.registerbtn.addActionListener(arc);
+		maR.cancelbtn.addActionListener(arc);
+
+		mR.registerbtn.addActionListener(arc);
+		mR.cancelbtn.addActionListener(arc);
 	}
 }

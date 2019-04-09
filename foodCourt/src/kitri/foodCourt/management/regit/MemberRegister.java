@@ -37,7 +37,7 @@ public class MemberRegister extends JPanel {
 	JLabel phonelabel = new JLabel("\uD734\uB300\uC804\uD654");
 
 	JComboBox fristnumber = new JComboBox();
-	JButton idbtn = new JButton("\uC544\uC774\uB514\uC911\uBCF5\uD655\uC778");
+	JButton idbtn = new JButton("\uC911\uBCF5\uD655\uC778");
 	JButton registerbtn = new JButton("\uB4F1\uB85D");
 	JButton cancelbtn = new JButton("\uCDE8\uC18C");
 
