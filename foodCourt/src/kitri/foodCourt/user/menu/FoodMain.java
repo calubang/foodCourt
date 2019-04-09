@@ -39,7 +39,8 @@ public class FoodMain extends JFrame{
 	JPanel panel_5 = new JPanel();
 	JPanel panel_3 = new JPanel();
 	JPanel panel_2 = new JPanel();
-	UserMenuView userMenuList = new UserMenuView();
+//	UserMenuView userMenuList = new UserMenuView();
+//	서비스단에서 생성한다
 	UserMenuDetailView menuDetailView = new UserMenuDetailView();
 	FoodMainView foodMainView = new FoodMainView();
 	
@@ -135,7 +136,7 @@ public class FoodMain extends JFrame{
 		panel_2.add(btnMainMenu);
 		btnMainMenu.setBackground(Color.WHITE);
 		
-		userMenuList.setBounds(160, 118, 1012, 634);
+		
 		btnHansicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnJoongsicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnIlsicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -143,7 +144,6 @@ public class FoodMain extends JFrame{
 	
 //		--------------------변하는 패널 부분 카드레이아웃 설정
 		panChangePanel.setLayout(card);
-		panChangePanel.add(userMenuList, "menuList");
 		panChangePanel.add(menuDetailView, "menuDetail");
 		panChangePanel.add(foodMainView, "mainMenu");
 		panChangePanel.setBounds(160, 118, 1012, 634);

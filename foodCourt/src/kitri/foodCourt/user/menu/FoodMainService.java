@@ -1,9 +1,7 @@
 package kitri.foodCourt.user.menu;
 
 import java.util.List;
-
 import javax.swing.JButton;
-
 import kitri.foodCourt.user.menu.jdbc.DaoFactory;
 
 public class FoodMainService {
@@ -11,6 +9,7 @@ public class FoodMainService {
 	FoodMain foodMain = null;
 	List<FoodDto> foodList = null;
 	MenuDao foodDao = new DaoFactory().menuDao();
+	UserMenuView userMenuList = null;
 
 	public FoodMainService(FoodMainController foodMainController) {
 		this.foodMainController = foodMainController;
@@ -28,10 +27,12 @@ public class FoodMainService {
 		System.out.println("menuList");
 		foodList = foodDao.getMenubyCategory(Integer.parseInt(button.getName()));
 		if (Integer.parseInt(button.getName()) == 1) {
-			foodMain.userMenuList.setMenu(2, "/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg", foodList);
+			userMenuList = new UserMenuView();
+			userMenuList.setBounds(160, 118, 1012, 634);
+			userMenuList.setMenu(2, "/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg", foodList);
 			foodMain.card.show(foodMain.panChangePanel, "menuList");
 		} else {
-			foodMain.userMenuList.setMenu(17, "/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg", foodList);
+			userMenuList.setMenu(17, "/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg", foodList);
 			foodMain.card.show(foodMain.panChangePanel, "menuList");
 		}
 
