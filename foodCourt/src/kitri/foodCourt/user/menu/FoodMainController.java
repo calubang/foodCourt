@@ -28,8 +28,8 @@ public class FoodMainController implements ActionListener{
 		else if(ob instanceof MenuButton) {
 			foodMainService.searchMenuDetail(((MenuButton) ob).getName());
 		}
-		else {
-			foodMainService.searchMenu((JButton)ob);
+		else if(ob instanceof MainButton){
+			foodMainService.searchCategory(((JButton)ob).getName());
 		}
 	}
 

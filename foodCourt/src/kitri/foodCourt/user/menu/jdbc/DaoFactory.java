@@ -4,7 +4,7 @@ import kitri.foodCourt.user.menu.MenuDao;
 
 public class DaoFactory {
 	public ConnectionMaker connectionMaker() { 
-		return new OracleConnectionMaker();
+		return new HomeOracleConnectionMaker();
 	}
 	public MenuDao menuDao() {
 		ConnectionMaker connectionMaker = connectionMaker();

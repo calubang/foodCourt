@@ -116,7 +116,7 @@ public class MenuDao {
 		ResultSet rs = null;
 		try {
 			c = connectionMaker.makeConnection();
-			ps = c.prepareStatement("select food_name, image_address, food_id from fook_food where food_id = ?");
+			ps = c.prepareStatement("select food_name, image_address, food_id, description, price, c.category_id category_id from fook_food f, fook_category c where f.category_id = c.category_id and food_id = ?");
 			ps.setString(1, food_id);
 			rs = ps.executeQuery();
 			if(rs.next()) {
@@ -124,6 +124,9 @@ public class MenuDao {
 				foodDto.setFoodName(rs.getString("food_name"));
 				foodDto.setImageAddress(rs.getString("image_address"));
 				foodDto.setFoodId(rs.getString("food_id"));
+				foodDto.setPrice(rs.getInt("price"));
+				foodDto.setCategoryName(rs.getString("category_id"));
+				foodDto.setDescription(rs.getString("description"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

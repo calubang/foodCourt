@@ -22,10 +22,10 @@ public class FoodMainService {
 		foodMain.card.show(foodMain.panChangePanel, "mainMenu");
 	}
 
-	public void searchMenu(JButton button) {
+	public void searchCategory(String category) {
 		// 메뉴 목록 페이지로 (한식, 중식, 일식, 양식)
 		System.out.println("menuList");
-		List<FoodDto> list = menuDao.getMenubyCategory(Integer.parseInt(button.getName()));
+		List<FoodDto> list = menuDao.getMenubyCategory(Integer.parseInt(category));
 //		JPanel userMenuList = new UserMenuView(list, this);
 //		userMenuList.setBounds(160, 118, 1012, 634);
 		foodMain.panChangePanel.add(new UserMenuView(list, this), "userMenuList");

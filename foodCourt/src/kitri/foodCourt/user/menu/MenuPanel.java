@@ -6,7 +6,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 
 public class MenuPanel extends JPanel {
-	MenuButton btnImg;
+	JButton btnImg;
 	JLabel labName;
 	Dimension ds = new Dimension(185, 190);
 	Cursor cursor = new Cursor(Cursor.HAND_CURSOR);

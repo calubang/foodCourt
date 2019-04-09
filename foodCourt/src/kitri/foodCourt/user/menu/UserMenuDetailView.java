@@ -3,6 +3,8 @@ package kitri.foodCourt.user.menu;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -12,25 +14,46 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 public class UserMenuDetailView extends JPanel {
-	private JTextField textField;
+	JTextField textField;
+	
 	JLabel image;
-	JLabel foodName = new JLabel("");
-	JLabel price = new JLabel("");
-	JLabel content = new JLabel("");
+	JLabel foodName = new JLabel();
+	JLabel price = new JLabel();
+	JLabel content = new JLabel();
 	JLabel count = new JLabel("\uC218\uB7C9");
-	JLabel category = new JLabel("");
+	JLabel category = new JLabel();
 	JPanel panel = new JPanel();
 	JButton btnNewButton = new JButton("\uC774\uC804\uC73C\uB85C");
 	JButton button = new JButton("\uC7A5\uBC14\uAD6C\uB2C8 \uB2F4\uAE30");
 	public UserMenuDetailView(FoodDto foodDto) {
 		
-//		BufferedImage bimg = ImageIO.read(new File(UserMenuView.class.getResource(foodDto.getImageAddress()).toURI()));
-//		ImageIcon properImg; // 적정크기에 맞춰진 이미지를 담을 변수
-//		properImg = new ImageIcon(bimg.getScaledInstance((int) (185), (int) (170), Image.SCALE_SMOOTH));
+		BufferedImage bimg;
+		try {
+			System.out.println("여기로");
+			bimg = ImageIO.read(new File(UserMenuView.class.getResource(foodDto.getImageAddress()).toURI()));
+			ImageIcon properImg; // 적정크기에 맞춰진 이미지를 담을 변수
+			properImg = new ImageIcon(bimg.getScaledInstance((int) (475), (int) (394), Image.SCALE_SMOOTH));
+			image = new JLabel(properImg);
+			System.out.println("이미지까지");
+			foodName.setText(foodDto.getFoodName());
+			foodName.setFont(new Font("맑은고딕", Font.BOLD, 28));
+			System.out.println(foodDto.getFoodName());
+			price.setText(Integer.toString(foodDto.getPrice()));
+			System.out.println(foodDto.getPrice());
+			content.setText(foodDto.getDescription());
+			System.out.println(foodDto.getDescription());
+			category.setText(foodDto.getCategoryName());
+			System.out.println("끝");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (URISyntaxException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
-//		image = 
-//		setBackground(Color.WHITE);
-//		setLayout(null);
+		setBackground(Color.WHITE);
+		setLayout(null);
 		
 		
 		image.setBorder(new MatteBorder(2, 2, 5, 5, (Color) new Color(128, 128, 128)));

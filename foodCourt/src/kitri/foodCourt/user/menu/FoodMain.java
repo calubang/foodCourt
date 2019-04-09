@@ -48,11 +48,12 @@ public class FoodMain extends JFrame{
 	JPanel panChangePanel = new JPanel();
 	CardLayout card = new CardLayout();
 	
-	JButton btnMainMenu = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mainbutton.jpg")));
-	JButton btnHansicMenu = new JButton("\uD55C\uC2DD");
-	JButton btnJoongsicMenu = new JButton("\uC911\uC2DD");
-	JButton btnIlsicMenu = new JButton("\uC77C\uC2DD");
-	JButton btnYangsicMenu = new JButton("\uC591\uC2DD");
+	JButton btnMainMenu = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mainbutton.jpg")));
+	JButton btnHansicMenu = new MainButton("\uD55C\uC2DD");
+	JButton btnJoongsicMenu = new MainButton("\uC911\uC2DD");
+	JButton btnIlsicMenu = new MainButton("\uC77C\uC2DD");
+	JButton btnYangsicMenu = new MainButton("\uC591\uC2DD");
+	
 	JButton btnSearch = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/search.PNG")));
 	JPanel panMainButton = new JPanel();
 	JLabel labMenu = new JLabel(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/menu.PNG")));
@@ -82,6 +83,12 @@ public class FoodMain extends JFrame{
 	 * Create the frame.
 	 */
 	public FoodMain() {
+		
+		btnHansicMenu.setName("1");
+		btnJoongsicMenu.setName("2");
+		btnIlsicMenu.setName("3");
+		btnYangsicMenu.setName("4");
+		
 		labName.setHorizontalAlignment(SwingConstants.CENTER);
 		labName.setVerticalTextPosition(0);
 		btnHansicMenu.setToolTipText("\uD55C\uC2DD");
@@ -146,7 +153,8 @@ public class FoodMain extends JFrame{
 	
 //		--------------------변하는 패널 부분 카드레이아웃 설정
 		panChangePanel.setLayout(card);
-//		panChangePanel.add(menuDetailView, "menuDetail"); 서비스 단에서 add
+//		panChangePanel.add(menuDetailView, "menuDetail"); 서비스 단에서 add (조회해서 보여줘야하기 때문에)
+		
 		panChangePanel.add(foodMainView, "mainMenu");
 		panChangePanel.setBounds(160, 118, 1012, 634);
 		panel.add(panChangePanel);
@@ -217,15 +225,20 @@ public class FoodMain extends JFrame{
 		setBounds(100, 100, 1200, 800);
 		
 //		--------------------------이벤트 등록부
-		FoodMainController mainController = new FoodMainController(this);
-		btnMainMenu.addActionListener(mainController);
-		btnSearch.addActionListener(mainController);
-		btnHansicMenu.addActionListener(mainController);
-		btnJoongsicMenu.addActionListener(mainController);
-		btnIlsicMenu.addActionListener(mainController);
-		btnYangsicMenu.addActionListener(mainController);
-		btnUserInfo.addActionListener(mainController);
-		btnOrderList.addActionListener(mainController);
+		FoodMainController foodMainController = new FoodMainController(this);
+		btnMainMenu.addActionListener(foodMainController);
+		btnSearch.addActionListener(foodMainController);
+		btnHansicMenu.addActionListener(foodMainController);
+		btnJoongsicMenu.addActionListener(foodMainController);
+		btnIlsicMenu.addActionListener(foodMainController);
+		btnYangsicMenu.addActionListener(foodMainController);
+		btnUserInfo.addActionListener(foodMainController);
+		btnOrderList.addActionListener(foodMainController);
+		
+		foodMainView.labHansic.addActionListener(foodMainController);
+		foodMainView.labJoongsic.addActionListener(foodMainController);
+		foodMainView.labIlsic.addActionListener(foodMainController);
+		foodMainView.labYangsic.addActionListener(foodMainController);
 	}
 	// 한식 메뉴를 클릭했을때 한식 메뉴 패널에 메뉴 리스트를 세팅하고 setView메소드를 호출해서 메인화면에 add해준다
 	// 메뉴 패널을 메인에 add하지 않고 setvisible을 하게되면 메인 화면을 움직였을때 

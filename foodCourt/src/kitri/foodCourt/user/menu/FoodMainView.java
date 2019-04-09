@@ -11,9 +11,22 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Cursor;
 
 public class FoodMainView extends JPanel {
+	Cursor hand = new Cursor(Cursor.HAND_CURSOR);
+	JButton labHansic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/hansic.jpg")));
+	JLabel labHansicName = new JLabel("\uD55C\uC2DD");
+	JButton labIlsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/ilsic.jpg")));
+	JButton labJoongsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/joongsic.jpg")));
+	JButton labYangsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/yangsic.jpeg")));
 	public FoodMainView() {
+		
+		labHansic.setName("1");
+		labJoongsic.setName("2");
+		labIlsic.setName("3");
+		labYangsic.setName("4");
+		
 		setBackground(Color.WHITE);
 		setBounds(160, 118, 1012, 634);
 		setLayout(null);
@@ -23,27 +36,30 @@ public class FoodMainView extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
-		JLabel hansic = new JLabel(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/hansic.jpg")));
-		hansic.setToolTipText("\uD55C\uC2DD");
-		hansic.setBounds(0, 0, 330, 251);
-		panel.add(hansic);
 		
-		JLabel lblNewLabel_1 = new JLabel("\uD55C\uC2DD");
-		lblNewLabel_1.setOpaque(true);
-		lblNewLabel_1.setBackground(Color.WHITE);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(0, 250, 330, 38);
-		panel.add(lblNewLabel_1);
+		labHansic.setToolTipText("\uD55C\uC2DD");
+		labHansic.setBounds(0, 0, 330, 251);
+		labHansic.setCursor(hand);
+		panel.add(labHansic);
+		
+		
+		labHansicName.setOpaque(true);
+		labHansicName.setBackground(Color.WHITE);
+		labHansicName.setHorizontalAlignment(SwingConstants.CENTER);
+		labHansicName.setBounds(0, 250, 330, 38);
+
+		panel.add(labHansicName);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(107, 321, 330, 288);
 		add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel ilsic = new JLabel(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/ilsic.jpg")));
-		ilsic.setToolTipText("\uC77C\uC2DD");
-		ilsic.setBounds(0, 0, 330, 251);
-		panel_1.add(ilsic);
+		
+		labIlsic.setToolTipText("\uC77C\uC2DD");
+		labIlsic.setBounds(0, 0, 330, 251);
+		labIlsic.setCursor(hand);
+		panel_1.add(labIlsic);
 		
 		JLabel label_4 = new JLabel("\uC77C\uC2DD");
 		label_4.setOpaque(true);
@@ -57,10 +73,11 @@ public class FoodMainView extends JPanel {
 		add(panel_2);
 		panel_2.setLayout(null);
 		
-		JLabel joongsic = new JLabel(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/joongsic.jpg")));
-		joongsic.setToolTipText("\uC911\uC2DD");
-		joongsic.setBounds(0, 0, 330, 251);
-		panel_2.add(joongsic);
+		
+		labJoongsic.setToolTipText("\uC911\uC2DD");
+		labJoongsic.setBounds(0, 0, 330, 251);
+		labJoongsic.setCursor(hand);
+		panel_2.add(labJoongsic);
 		
 		JLabel label_3 = new JLabel("\uC911\uC2DD");
 		label_3.setOpaque(true);
@@ -74,10 +91,11 @@ public class FoodMainView extends JPanel {
 		add(panel_3);
 		panel_3.setLayout(null);
 		
-		JLabel yangsic = new JLabel(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/yangsic.jpeg")));
-		yangsic.setToolTipText("\uC591\uC2DD");
-		yangsic.setBounds(0, 0, 330, 251);
-		panel_3.add(yangsic);
+		
+		labYangsic.setToolTipText("\uC591\uC2DD");
+		labYangsic.setBounds(0, 0, 330, 251);
+		labYangsic.setCursor(hand);
+		panel_3.add(labYangsic);
 		
 		JLabel label_5 = new JLabel("\uC591\uC2DD");
 		label_5.setOpaque(true);
@@ -86,5 +104,7 @@ public class FoodMainView extends JPanel {
 		label_5.setBounds(0, 250, 330, 38);
 		panel_3.add(label_5);
 		setVisible(true);
+		
+		//이벤트 등록
 	}
 }
