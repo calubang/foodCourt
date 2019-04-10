@@ -16,10 +16,9 @@ public class FoodMainController implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
-		System.out.println(((JButton)ob).getName());
 		if(ob == foodMain.btnMainMenu)
 			foodMainService.clickMain();
-		else if(ob == foodMain.btnSearch)
+		else if(ob == foodMain.btnSearch || ob == foodMain.searchField)
 			foodMainService.searchMenuName();
 		else if(ob == foodMain.btnUserInfo)
 			foodMainService.userInfo();
@@ -31,6 +30,8 @@ public class FoodMainController implements ActionListener{
 			foodMainService.searchCategory(((JButton)ob).getName());
 		} else if(((JButton)ob).getName().equals("back")) {
 			foodMainService.backMenu();
+		} else if(((JButton)ob).getName().equals("basket")) {
+			foodMainService.addMenuInbasket();
 		}
 			
 	}

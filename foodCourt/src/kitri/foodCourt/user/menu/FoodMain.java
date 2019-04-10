@@ -4,65 +4,56 @@ package kitri.foodCourt.user.menu;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Cursor;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Dimension;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
+import javax.swing.border.*;
+
+import kitri.foodCourt.user.menu.*;
 
 public class FoodMain extends JFrame{
 
-	JPanel contentPane;
-	JTextField searchField;
-	JPanel panel = new JPanel();
-	JPanel panel_5 = new JPanel();
-	JPanel panel_3 = new JPanel();
-	JPanel panel_2 = new JPanel();
-	UserMenuView userMenuView;
-	UserMenuDetailView menuDetailView;
-	FoodMainView foodMainView = new FoodMainView();
+	public JPanel contentPane;
+	public JTextField searchField;
+	public JPanel panel = new JPanel();
+	public JPanel panel_5 = new JPanel();
+	public JPanel panel_3 = new JPanel();
+	public JPanel panel_2 = new JPanel();
+	public UserMenuView userMenuView = new UserMenuView();
+	public UserMenuDetailView UserMenuDetailView = new UserMenuDetailView();
+	public FoodMainView foodMainView = new FoodMainView();
+	public NoSearchMenuImg noSearchMenuImg = new NoSearchMenuImg();
 	
-	JLabel labSearch = new JLabel("\uAC80\uC0C9");
-	JPanel panel_6 = new JPanel();
-	JPanel panChangePanel = new JPanel();
-	CardLayout card = new CardLayout();
+	public JLabel labSearch = new JLabel("\uAC80\uC0C9");
+	public JPanel panel_6 = new JPanel();
+	public JPanel panChangePanel = new JPanel();
+	public CardLayout card = new CardLayout();
 	
-	JButton btnMainMenu = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mainbutton.jpg")));
-	JButton btnHansicMenu = new MainButton("\uD55C\uC2DD");
-	JButton btnJoongsicMenu = new MainButton("\uC911\uC2DD");
-	JButton btnIlsicMenu = new MainButton("\uC77C\uC2DD");
-	JButton btnYangsicMenu = new MainButton("\uC591\uC2DD");
+	public JButton btnMainMenu = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mainbutton.jpg")));
+	public JButton btnHansicMenu = new MainButton("\uD55C\uC2DD");
+	public JButton btnJoongsicMenu = new MainButton("\uC911\uC2DD");
+	public JButton btnIlsicMenu = new MainButton("\uC77C\uC2DD");
+	public JButton btnYangsicMenu = new MainButton("\uC591\uC2DD");
 	
-	JButton btnSearch = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/search.PNG")));
-	JPanel panMainButton = new JPanel();
-	JLabel labMenu = new JLabel(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/menu.PNG")));
-	JButton btnUserInfo = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mypage.PNG")));
-	JLabel labName = new JLabel("\uAD8C\uC601\uCC2C\uB2D8");
-	JButton btnOrderList = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/basket.png")));
-	JLabel labBasket = new JLabel("\uC8FC\uBB38\uBAA9\uB85D");
-	JPanel panBarVerRight = new JPanel();
-	Cursor csorHandCursor = new Cursor(Cursor.HAND_CURSOR);
+	public JButton btnSearch = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/search.PNG")));
+	public JPanel panMainButton = new JPanel();
+	public JLabel labMenu = new JLabel(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/menu.PNG")));
+	public JButton btnUserInfo = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mypage.PNG")));
+	public JLabel labName = new JLabel("\uAD8C\uC601\uCC2C\uB2D8");
+	public JButton btnOrderList = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/basket.png")));
+	public JLabel labBasket = new JLabel("\uC8FC\uBB38\uBAA9\uB85D");
+	public JPanel panBarVerRight = new JPanel();
+	public Cursor csorHandCursor = new Cursor(Cursor.HAND_CURSOR);
 	/**
 	 * Launch the application.
 	 */
@@ -153,14 +144,16 @@ public class FoodMain extends JFrame{
 	
 //		--------------------변하는 패널 부분 카드레이아웃 설정
 		panChangePanel.setLayout(card);
-		panChangePanel.add(menuDetailView, "menuDetail");
+		panChangePanel.add(UserMenuDetailView, "UserMenuDetailView");
 		panChangePanel.add(userMenuView, "userMenuView");
 		panChangePanel.add(foodMainView, "foodMainView");
+		panChangePanel.add(noSearchMenuImg, "noSearchMenuImg");
 		panChangePanel.setBounds(160, 118, 1012, 634);
 		panel.add(panChangePanel);
-		card.show(panChangePanel, "mainMenu");
+		card.show(panChangePanel, "foodMainView");
 		
 		searchField = new JTextField();
+		searchField.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		searchField.setBorder(new MatteBorder(2, 2, 4, 4, (Color) Color.LIGHT_GRAY));
 		searchField.setBounds(240, 42, 553, 38);
 		panel.add(searchField);
@@ -234,19 +227,11 @@ public class FoodMain extends JFrame{
 //		btnYangsicMenu.addActionListener(foodMainController);
 //		btnUserInfo.addActionListener(foodMainController);
 //		btnOrderList.addActionListener(foodMainController);
+//		searchField.addActionListener(foodMainController);
 //		
 //		foodMainView.labHansic.addActionListener(foodMainController);
 //		foodMainView.labJoongsic.addActionListener(foodMainController);
 //		foodMainView.labIlsic.addActionListener(foodMainController);
 //		foodMainView.labYangsic.addActionListener(foodMainController);
 	}
-	// 한식 메뉴를 클릭했을때 한식 메뉴 패널에 메뉴 리스트를 세팅하고 setView메소드를 호출해서 메인화면에 add해준다
-	// 메뉴 패널을 메인에 add하지 않고 setvisible을 하게되면 메인 화면을 움직였을때 
-//	public void setView(Component component) {
-//		component.setLocation(160, 118);
-//		FoodMain.add(component);
-//	}
-//	public void removeView(Component component) {
-//		FoodMain.remove(component);
-//	}
 }

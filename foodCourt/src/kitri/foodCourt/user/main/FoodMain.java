@@ -4,14 +4,12 @@ package kitri.foodCourt.user.main;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Cursor;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -34,6 +32,7 @@ public class FoodMain extends JFrame{
 	public UserMenuView userMenuView = new UserMenuView();
 	public UserMenuDetailView UserMenuDetailView = new UserMenuDetailView();
 	public FoodMainView foodMainView = new FoodMainView();
+	public NoSearchMenuImg noSearchMenuImg = new NoSearchMenuImg();
 	
 	public JLabel labSearch = new JLabel("\uAC80\uC0C9");
 	public JPanel panel_6 = new JPanel();
@@ -148,11 +147,13 @@ public class FoodMain extends JFrame{
 		panChangePanel.add(UserMenuDetailView, "UserMenuDetailView");
 		panChangePanel.add(userMenuView, "userMenuView");
 		panChangePanel.add(foodMainView, "foodMainView");
+		panChangePanel.add(noSearchMenuImg, "noSearchMenuImg");
 		panChangePanel.setBounds(160, 118, 1012, 634);
 		panel.add(panChangePanel);
 		card.show(panChangePanel, "foodMainView");
 		
 		searchField = new JTextField();
+		searchField.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 16));
 		searchField.setBorder(new MatteBorder(2, 2, 4, 4, (Color) Color.LIGHT_GRAY));
 		searchField.setBounds(240, 42, 553, 38);
 		panel.add(searchField);
@@ -226,6 +227,7 @@ public class FoodMain extends JFrame{
 		btnYangsicMenu.addActionListener(foodMainController);
 		btnUserInfo.addActionListener(foodMainController);
 		btnOrderList.addActionListener(foodMainController);
+		searchField.addActionListener(foodMainController);
 		
 		foodMainView.labHansic.addActionListener(foodMainController);
 		foodMainView.labJoongsic.addActionListener(foodMainController);
