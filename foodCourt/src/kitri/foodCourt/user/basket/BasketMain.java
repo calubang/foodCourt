@@ -11,9 +11,8 @@ import kitri.foodCourt.user.swing.*;
 import javax.swing.border.*;
 
 
-public class BasketMain extends JFrame{
+public class BasketMain extends JPanel{
 
-	private JPanel contentPane;
 	private BasketController controller;
 	
 	public JPanel pBasketMain;
@@ -45,7 +44,7 @@ public class BasketMain extends JFrame{
 		BasketDetail detail2 = new BasketDetail(food2, 2);
 		BasketDetail detail3 = new BasketDetail(food3, 3);
 		BasketDetail detail4 = new BasketDetail(food4, 4);
-		BasketDetail detail5 = new BasketDetail(food4, 5);
+		BasketDetail detail5 = new BasketDetail(food5, 5);
 		
 		user.getBasket().add(detail1);
 		user.getBasket().add(detail2);
@@ -55,9 +54,6 @@ public class BasketMain extends JFrame{
 		
 	}
 	
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -71,13 +67,10 @@ public class BasketMain extends JFrame{
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public BasketMain() {
 		test();
-		
 		//기본 UI 구성
+		payment = new Payment(this);
 		controller = new BasketController(this);
 		initView();
 		dataSetting();
@@ -86,48 +79,17 @@ public class BasketMain extends JFrame{
 		btnAllCancel.addActionListener(controller);
 		btnPayment.addActionListener(controller);
 		
-		
 	}
+	
 	public void initView() {
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1200, 800);
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(null);
-		panel.setToolTipText("\uC804\uCCB4\uC120\uD0DD");
-		panel.setBackground(Color.WHITE);
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(0, 10, 1172, 6);
-		panel.add(panel_5);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(0, 102, 1172, 6);
-		panel.add(panel_3);
-		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(146, 118, 5, 476);
-		panel.add(panel_6);
-		
-		JButton btnOrderList = new JButton(new ImageIcon(BasketMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/basket.png")));
-		btnOrderList.setToolTipText("\uC8FC\uBB38\uBAA9\uB85D");
-		btnOrderList.setBorder(new LineBorder(Color.GRAY, 2, true));
-		btnOrderList.setBounds(1074, 26, 79, 54);
-		panel.add(btnOrderList);
-		
 		//시작
+		this.setLayout(new BorderLayout());
+		this.setBounds(160, 118, 1012, 634);
+		
 		pChangePanel = new JPanel();
 		pChangePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		pChangePanel.setBounds(163, 118, 1021, 643);
-		panel.add(pChangePanel);
+		add(pChangePanel, BorderLayout.CENTER);
 		card = new CardLayout();
 		pChangePanel.setLayout(card);
 		
@@ -252,6 +214,7 @@ public class BasketMain extends JFrame{
 		
 		//카드부분
 		pChangePanel.add(pBasketMain, "basket");
+		pChangePanel.add(payment, "payment");
 		card.show(pChangePanel, "basket");
 		
 	}
@@ -261,7 +224,12 @@ public class BasketMain extends JFrame{
 		lblTotalPrice.setText(String.valueOf(user.getBasket().getTotalPrice()));
 		lblTotalPoint.setText(String.valueOf(user.getBasket().getSavePoint()));
 		
-		pMiddle = new JPanel();
+		if(pMiddle != null) {
+			pMiddle.removeAll();
+		}else {
+			pMiddle = new JPanel();
+		}
+		
 		scrollPane.setViewportView(pMiddle);
 		gbl_pMiddle = new GridBagLayout();
 		gbl_pMiddle.columnWidths = new int[]{0};

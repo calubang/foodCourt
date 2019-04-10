@@ -11,6 +11,7 @@ import kitri.foodCourt.user.swing.*;
 
 public class Payment extends JPanel {
 
+	public static int requestNumber = 0;
 	private PaymentController controller;
 	public Receipt receipt = new Receipt();
 	public BasketMain basketMain;
@@ -20,9 +21,9 @@ public class Payment extends JPanel {
 	public FButton btnCancel;
 	
 	//≈ÿΩ∫∆Æ« µÂ
-	public JTextPane tpCard;
-	public JTextPane tpCash;
-	public JTextPane tpPoint;
+	public JTextField tpCard;
+	public JTextField tpCash;
+	public JTextField tpPoint;
 	
 	//ªÛ¥‹ √—∞°∞› 
 	public FLabel lbTotalPrice;
@@ -32,9 +33,10 @@ public class Payment extends JPanel {
 	
 	public Payment(BasketMain basketMain) {
 		this.basketMain = basketMain;
+		receipt.user = basketMain.user;
 		//±‚∫ªUI
 		initView();
-		dataSetting();
+		//dataSetting();
 		
 		//¿Ã∫•∆Æ
 		controller = new PaymentController(this);
@@ -42,16 +44,20 @@ public class Payment extends JPanel {
 		receipt.btnOK.addActionListener(controller);
 		btnPayment.addActionListener(controller);
 		btnCancel.addActionListener(controller);
-		tpCard.addInputMethodListener(controller);
+		tpCard.addKeyListener(controller);
+		tpCash.addKeyListener(controller);
+		tpPoint.addKeyListener(controller);
 	}
 	
-	private void dataSetting() {
+	public void dataSetting() {
 		Basket basket = basketMain.user.getBasket();
 		
 		lbTotalPrice.setText(String.valueOf(basket.getTotalPrice()));
 		lbTotalPoint.setText(String.valueOf(basket.getSavePoint()) + "P");
-		
 		lbUserPoint.setText(String.valueOf(basketMain.user.getUserPoint()) + "P");
+		
+		//øµºˆ¡ıµµ ∞∞¿Ã dataSetting
+		receipt.dataSetting();
 	}
 	
 	public void initView(){
@@ -64,7 +70,7 @@ public class Payment extends JPanel {
 		add(pSeperator);
 		
 		JLabel lbPageImage = new JLabel("");
-		lbPageImage.setIcon(new ImageIcon(PaymentMain.class.getResource("/kitri/foodCourt/user/basket/image/payment.png")));
+		lbPageImage.setIcon(new ImageIcon(Payment.class.getResource("/kitri/foodCourt/user/basket/image/payment.png")));
 		lbPageImage.setBounds(12, 10, 120, 70);
 		add(lbPageImage);
 		
@@ -115,40 +121,33 @@ public class Payment extends JPanel {
 		lbCash.setBounds(12, 20, 176, 50);
 		pCash.add(lbCash);
 				
-		tpCash = new JTextPane();
+		tpCash = new JTextField();
+		tpCash.setHorizontalAlignment(JTextField.CENTER);
 		tpCash.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		tpCash.setBounds(12, 120, 176, 35);
 		tpCash.setName("cash");
 		tpCash.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
-		tpCash.setBounds(12, 120, 176, 35);
 		pCash.add(tpCash);
-		
-		StyledDocument document = tpCash.getStyledDocument();
-		SimpleAttributeSet center = new SimpleAttributeSet();
-		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-		document.setParagraphAttributes(0, document.getLength(), center, false);
-		
+	
 		RoundPanel pCard = new RoundPanel();
 		pCard.setBackground(new Color(255, 255, 240));
 		pCard.setLayout(null);
 		pCard.setBounds(400, 220, 200, 180);
 		add(pCard);
 		
-		tpCard = new JTextPane();
+		tpCard = new JTextField();
+		tpCard.setHorizontalAlignment(JTextField.CENTER);
 		tpCard.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		tpCard.setName("card");
 		tpCard.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
 		tpCard.setBounds(12, 120, 176, 35);
-		
-		document = tpCard.getStyledDocument();
-		document.setParagraphAttributes(0, document.getLength(), center, false);
+		pCard.add(tpCard);
 		
 		FLabel lbCard = new FLabel(Font.BOLD, 20);
 		lbCard.setText("\uCE74  \uB4DC");
 		lbCard.setHorizontalAlignment(SwingConstants.CENTER);
 		lbCard.setBounds(12, 20, 176, 50);
 		pCard.add(lbCard);
-		
-		pCard.add(tpCard);
 		
 		RoundPanel pPoint = new RoundPanel();
 		pPoint.setBackground(new Color(255, 255, 240));
@@ -167,7 +166,8 @@ public class Payment extends JPanel {
 		lbUserPoint.setBounds(12, 45, 176, 35);
 		pPoint.add(lbUserPoint);
 		
-		tpPoint = new JTextPane();
+		tpPoint = new JTextField();
+		tpPoint.setHorizontalAlignment(JTextField.CENTER);
 		tpPoint.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		tpPoint.setName("point");
 		tpPoint.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
@@ -194,9 +194,7 @@ public class Payment extends JPanel {
 		btnCancel.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 20));
 		btnCancel.setBounds(820, 470, 140, 45);
 		add(btnCancel);
-		
-		document = tpPoint.getStyledDocument();
-		document.setParagraphAttributes(0, document.getLength(), center, false);
+	
 	}
 
 }

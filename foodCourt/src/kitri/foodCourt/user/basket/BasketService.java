@@ -27,8 +27,11 @@ public class BasketService {
 		
 	}
 	public void payment() {
-		basketMain.payment = new Payment(basketMain);
-		basketMain.pChangePanel.add(basketMain.payment, "payment");
+		if(basketMain.user.getBasket().getDetailList().size() == 0) {
+			SwingFactory.getOptionPane("warning", basketMain, "결제실패", "장바구니가 비었습니다.");
+			return;
+		}
+		basketMain.payment.dataSetting();
 		basketMain.card.show(basketMain.pChangePanel, "payment");
 		//basketMain.
 	}

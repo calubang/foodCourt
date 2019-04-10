@@ -1,5 +1,7 @@
 package kitri.foodCourt.user.basket;
 
+import javax.xml.crypto.Data;
+
 import kitri.foodCourt.dto.PaymentDto;
 
 public class PaymentService {
@@ -26,16 +28,20 @@ public class PaymentService {
 		payment.setEnabled(true);
 		Receipt receipt = payment.receipt;
 		receipt.setVisible(false);
-		
 	}
 
 	public void payment() {
-		//실제 결제부분 
+		//실제 결제부분
 		//정상적으로 가격이 적어졌는지 부터 확인
 		//장바구니 -> 결제 클래스로 변경
 		//paymentDao.payment();
+		int cash = Integer.parseInt(payment.tpCash.getText());
 		
-		SwingFactory.getOptionPane("message", payment, "결제확인", "결제완료 되었습니다.");
+		SwingFactory.getOptionPane("message", payment, "결제확인", payment.requestNumber + "번으로 결제완료 되었습니다.");
+		payment.requestNumber++;
+		//장바구니 초기화
+		payment.basketMain.user.getBasket().removeAll();
+		//네트워크 통신
 	}
 
 	public void isCorrectValue() {
@@ -47,7 +53,6 @@ public class PaymentService {
 		int select = SwingFactory.getOptionPane("warning", payment, "결제취소", "장바구니 화면으로 돌아가시겠습니까?");
 		if(select == 0) {
 			//예
-			payment.basketMain.payment = null;
 			payment.basketMain.card.show(payment.basketMain.pChangePanel, "basket");
 		}
 	}

@@ -19,6 +19,8 @@ import javax.swing.border.LineBorder;
 import java.awt.Dimension;
 import javax.swing.border.*;
 
+import kitri.foodCourt.user.User;
+import kitri.foodCourt.user.basket.BasketMain;
 import kitri.foodCourt.user.menu.*;
 
 public class FoodMain extends JFrame{
@@ -54,9 +56,11 @@ public class FoodMain extends JFrame{
 	public JLabel labBasket = new JLabel("\uC8FC\uBB38\uBAA9\uB85D");
 	public JPanel panBarVerRight = new JPanel();
 	public Cursor csorHandCursor = new Cursor(Cursor.HAND_CURSOR);
-	/**
-	 * Launch the application.
-	 */
+	
+	//장바구니, 결제부분 결합
+	public User user;
+	public BasketMain basketMain = new BasketMain();
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -148,6 +152,7 @@ public class FoodMain extends JFrame{
 		panChangePanel.add(userMenuView, "userMenuView");
 		panChangePanel.add(foodMainView, "foodMainView");
 		panChangePanel.add(noSearchMenuImg, "noSearchMenuImg");
+		panChangePanel.add(basketMain, "basketMain");
 		panChangePanel.setBounds(160, 118, 1012, 634);
 		panel.add(panChangePanel);
 		card.show(panChangePanel, "foodMainView");
@@ -228,11 +233,13 @@ public class FoodMain extends JFrame{
 		btnUserInfo.addActionListener(foodMainController);
 		btnOrderList.addActionListener(foodMainController);
 		searchField.addActionListener(foodMainController);
+		btnOrderList.addActionListener(foodMainController);
 		
 		foodMainView.labHansic.addActionListener(foodMainController);
 		foodMainView.labJoongsic.addActionListener(foodMainController);
 		foodMainView.labIlsic.addActionListener(foodMainController);
 		foodMainView.labYangsic.addActionListener(foodMainController);
+		
 	}
 	// 한식 메뉴를 클릭했을때 한식 메뉴 패널에 메뉴 리스트를 세팅하고 setView메소드를 호출해서 메인화면에 add해준다
 	// 메뉴 패널을 메인에 add하지 않고 setvisible을 하게되면 메인 화면을 움직였을때 
