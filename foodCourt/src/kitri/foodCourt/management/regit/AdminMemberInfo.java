@@ -9,7 +9,7 @@ import java.awt.Font;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
-
+import javax.swing.table.DefaultTableModel;
 
 import kitri.foodCourt.management.member.AdminTable;
 import kitri.foodCourt.management.member.MemberTable;
@@ -48,6 +48,8 @@ public class AdminMemberInfo extends JPanel {
 	ModifyAdminRegit maR;
 	ModifyRegit mR;
 	RemoveMember rm;
+	
+	DefaultTableModel dtm = new DefaultTableModel();
 	
 	JFrame jfA = new JFrame();
 	JDialog jfAD = new JDialog(jfA,"관리자등록");

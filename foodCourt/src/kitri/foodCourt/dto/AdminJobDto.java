@@ -5,6 +5,8 @@ public class AdminJobDto {
 	private String jobId;
 	private String jobName;
 	private String gradeLevel;
+	
+	
 	public String getJobId() {
 		return jobId;
 	}
