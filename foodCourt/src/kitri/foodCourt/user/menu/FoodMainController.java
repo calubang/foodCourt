@@ -1,9 +1,8 @@
 package kitri.foodCourt.user.menu;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import kitri.foodCourt.user.main.FoodMain;
 import javax.swing.JButton;
 
 public class FoodMainController implements ActionListener{

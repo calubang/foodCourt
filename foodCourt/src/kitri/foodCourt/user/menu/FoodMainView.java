@@ -14,12 +14,12 @@ import java.awt.Color;
 import java.awt.Cursor;
 
 public class FoodMainView extends JPanel {
-	Cursor hand = new Cursor(Cursor.HAND_CURSOR);
-	JButton labHansic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/hansic.jpg")));
-	JLabel labHansicName = new JLabel("\uD55C\uC2DD");
-	JButton labIlsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/ilsic.jpg")));
-	JButton labJoongsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/joongsic.jpg")));
-	JButton labYangsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/yangsic.jpeg")));
+	public Cursor hand = new Cursor(Cursor.HAND_CURSOR);
+	public JButton labHansic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/hansic.jpg")));
+	public JLabel labHansicName = new JLabel("\uD55C\uC2DD");
+	public JButton labIlsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/ilsic.jpg")));
+	public JButton labJoongsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/joongsic.jpg")));
+	public JButton labYangsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/yangsic.jpeg")));
 	public FoodMainView() {
 		
 		labHansic.setName("1");

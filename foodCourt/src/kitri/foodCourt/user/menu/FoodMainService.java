@@ -3,7 +3,7 @@ package kitri.foodCourt.user.menu;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
+import kitri.foodCourt.user.main.FoodMain;
 import kitri.foodCourt.user.menu.jdbc.DaoFactory;
 
 public class FoodMainService {
