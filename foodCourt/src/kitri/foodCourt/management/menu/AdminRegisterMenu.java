@@ -95,6 +95,7 @@ public class AdminRegisterMenu extends JPanel {
 		descriptionTextArea.setText("");
 		descriptionTextArea.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		descriptionTextArea.setBounds(384, 250, 290, 240);
+		descriptionTextArea.setLineWrap(true);
 		add(descriptionTextArea);
 	}
 }

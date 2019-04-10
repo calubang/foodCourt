@@ -103,6 +103,7 @@ public class AdminModifyMenu extends JPanel {
 		descriptionTextArea.setText("해당 음식에 대한 가벼운 설명");
 		descriptionTextArea.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		descriptionTextArea.setBounds(384, 390, 290, 100);
+		descriptionTextArea.setLineWrap(true);
 		add(descriptionTextArea);
 		
 		menuCodeLabel.setBounds(297, 40, 80, 40);

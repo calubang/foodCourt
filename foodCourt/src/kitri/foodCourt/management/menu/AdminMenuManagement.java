@@ -80,7 +80,6 @@ public class AdminMenuManagement extends JPanel {
 		searchTextField.setBorder(new LineBorder(Color.BLACK, 1, true));
 		searchTextField.setFont(new Font("±¼¸²", Font.PLAIN, 24));
 		searchTextField.setBounds(110, 0, 681, 60);
-		searchTextField.setColumns(10);
 		add(searchTextField);
 		
 		picturePanel.setBounds(803, 0, 205, 213);
@@ -115,6 +114,7 @@ public class AdminMenuManagement extends JPanel {
 		add(descriptionPanel);
 		descriptionPanel.setLayout(new BorderLayout(0, 0));
 		descriptionTextArea.setEditable(false);
+		descriptionTextArea.setLineWrap(true);
 		
 		descriptionPanel.add(descriptionTextArea, BorderLayout.CENTER);
 
