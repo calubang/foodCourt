@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -81,11 +82,10 @@ public class AdminMenuService {
 		int rowSelect = amm.commonTable.getSelectedRow();
 		
 		if (rowSelect == -1) {
-			JOptionPane.showMessageDialog(amm.modifyBtn, "수정할 메뉴가 없습니다.");
+			warningMessage(amm.modifyBtn, "수정할 메뉴가 없습니다.", "메뉴 수정 오류");
 			closeWindow(amm.jdM);
 			return;
 		}
-		
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -208,7 +208,7 @@ public class AdminMenuService {
 		}
 		
 		if (resultQuery == 0) {
-			JOptionPane.showMessageDialog(amm.deleteBtn, "삭제할 메뉴가 없습니다.");
+			warningMessage(amm.deleteBtn, "삭제할 메뉴가 없습니다.", "메뉴 삭제 오류");
 		}
 	}
 	
@@ -369,9 +369,11 @@ public class AdminMenuService {
 		for(int i = 0; i < rowCount; i++) {
 			if (str.equals((String)dtm.getValueAt(i, 1))) {
 				amm.commonTable.setRowSelectionInterval(i, i);
-				break;
+				return;
 			}
 		}
+		
+		warningMessage(amm.searchTextField, "찾는 메뉴가 없습니다.", "메뉴 검색 오류");
 	}
 
 	public void findImage(Object ob) {
@@ -396,6 +398,10 @@ public class AdminMenuService {
 		}
 	}
 
+	private void warningMessage(Component component, Object msg, String title) {
+		JOptionPane.showMessageDialog(component, msg, title, JOptionPane.WARNING_MESSAGE);
+	}
+	
 	public void modifyMenu() {
 		int currentSelectedrow = amm.commonTable.getSelectedRow();
 		
@@ -407,15 +413,41 @@ public class AdminMenuService {
 		Object[] rowData = new Object[8];
 
 		String food_id = am.menuCodeTextField.getText();
+		if (food_id.isEmpty()) {
+			warningMessage(am.confirmBtn, "메뉴 ID를 입력하세요.", "메뉴 수정 오류");
+			return;
+		}
+		
 		String food_name = am.menuNameTextField.getText();
-		int price = Integer.parseInt(am.priceTextField.getText());
-		int point = Integer.parseInt(am.pointTextField.getText());
+		if (food_name.isEmpty()) {
+			warningMessage(am.confirmBtn, "메뉴 이름을 입력하세요.", "메뉴 수정 오류");
+			return;
+		}
+		
+		String priceStr = am.priceTextField.getText();
+		if (priceStr.isEmpty()) {
+			warningMessage(am.confirmBtn, "메뉴 가격을 입력하세요.", "메뉴 수정 오류");
+			return;
+		}
+		int price = Integer.parseInt(priceStr);
+		
+		int point = am.pointTextField.getText().isEmpty() ? (price / 100) : Integer.parseInt(am.pointTextField.getText());
 		String food_enable = am.cg.getSelectedCheckbox().equals(am.checkBox1) ? "y" : "n";
 		String food_description = am.descriptionTextArea.getText();
 		int category = am.categoryComboBox.getSelectedIndex() + 1;
-		String fullpath = am.pictureLabel.getIcon().toString();
+		if (category < 1) {
+			warningMessage(am.confirmBtn, "카테고리를 선택하세요.", "메뉴 수정 오류");
+			return;
+		}
+		
+		Icon food_image = am.pictureLabel.getIcon();
+		if (food_image == null) {
+			warningMessage(am.confirmBtn, "메뉴 이미지를 선택하세요.", "메뉴 수정 오류");
+			return;
+		}		
+		String fullpath = food_image.toString();
 		String imgUrl = fullpath.substring(fullpath.indexOf("kitri") - 1, fullpath.length());
-
+		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
@@ -496,14 +528,36 @@ public class AdminMenuService {
 		Object[] rowData = new Object[8];
 
 		String food_name = arm.menuNameTextField.getText();
+		if (food_name.isEmpty()) {
+			warningMessage(arm.confirmBtn, "메뉴 이름을 입력하세요.", "메뉴 등록 오류");
+			return;
+		}
+		
 		String food_enable = "y";
 		String food_description = arm.descriptionTextArea.getText();
-		String fullpath = arm.pictureLabel.getIcon().toString();
+		Icon food_image = arm.pictureLabel.getIcon();
+		if (food_image == null) {
+			warningMessage(arm.confirmBtn, "메뉴 이미지를 선택하세요.", "메뉴 등록 오류");
+			return;
+		}		
+		String fullpath = food_image.toString();
 		String imgUrl = fullpath.substring(fullpath.indexOf("kitri") - 1, fullpath.length());
+		
 		String manager_id = "Admin123";	// TODO jwlee use to real manager_id
-		int price = Integer.parseInt(arm.priceTextField.getText());
-		int point = arm.pointTextField.getText().isEmpty() ? Integer.parseInt(arm.pointTextField.getText()) : (price / 100);
+		
+		String priceStr = arm.priceTextField.getText();
+		if (priceStr.isEmpty()) {
+			warningMessage(arm.confirmBtn, "메뉴 가격을 입력하세요.", "메뉴 동록 오류");
+			return;
+		}
+		int price = Integer.parseInt(priceStr);
+		
+		int point = arm.pointTextField.getText().isEmpty() ? (price / 100) : Integer.parseInt(arm.pointTextField.getText());
 		int category = arm.categoryComboBox.getSelectedIndex() + 1;
+		if (category < 1) {
+			warningMessage(arm.confirmBtn, "카테고리를 선택하세요.", "메뉴 등록 오류");
+			return;
+		}
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
