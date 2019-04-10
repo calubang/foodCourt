@@ -37,6 +37,10 @@ public class AdminMenuService {
 	JFileChooser chooser = new JFileChooser();
     FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF & PNG Images", "jpg", "gif", "png");
 	
+    Connection c = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
     
 	public AdminMenuService(AdminMenuControl amc) {
 		this.amc = amc;
@@ -55,6 +59,38 @@ public class AdminMenuService {
 	}
 	
 	
+	private void closeOracleConnection(Connection c, PreparedStatement ps, ResultSet rs) {
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				rs = null;
+			}
+		}
+		
+		if(ps != null) {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				ps = null;
+			}
+		}
+		
+		if(c != null) {
+			try {
+				c.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				c = null;
+			}
+		}
+	}
+	
 	public void showRegisterWindow() {
 		arm.menuNameTextField.setText("");
 		arm.priceTextField.setText("");
@@ -71,10 +107,6 @@ public class AdminMenuService {
 	}
 	
 	public void showModifyWindow() {
-		Connection c = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
 		FoodDto foodDto = null;
 		ImageIcon image = null;
 		
@@ -125,29 +157,7 @@ public class AdminMenuService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			if(c != null) {
-				try {
-					c.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			closeOracleConnection(c, ps, rs);
 		}
 		
 		amm.jdM.getContentPane().add(amm.am);
@@ -158,8 +168,6 @@ public class AdminMenuService {
 	}
 	
 	public void showDeleteWindow() {
-		Connection c = null;
-		PreparedStatement ps = null;
 		int resultQuery = 0;
 		
 		int result = JOptionPane.showOptionDialog(amm.deleteBtn, "정말 삭제하시겠습니까?\n(삭제하면 다시 되돌릴 수 없습니다.)", "삭제 확인", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
@@ -184,21 +192,7 @@ public class AdminMenuService {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				} finally {
-					if(ps != null) {
-						try {
-							ps.close();
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-					}
-					
-					if(c != null) {
-						try {
-							c.close();
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-					}
+					closeOracleConnection(c, ps, null);
 				}
 				
 				dtm.removeRow(currentSelectedrow);
@@ -213,10 +207,6 @@ public class AdminMenuService {
 	}
 	
 	public void showMenu() {
-		Connection c = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
 		List<FoodDto> list = new ArrayList<FoodDto>();
 		ListIterator<FoodDto> iterator;
 		FoodDto foodDto = null;
@@ -266,29 +256,7 @@ public class AdminMenuService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			if(c != null) {
-				try {
-					c.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			closeOracleConnection(c, ps, rs);
 		}
 	}
 
@@ -297,10 +265,6 @@ public class AdminMenuService {
 		int currentSelectedrow = amm.commonTable.getSelectedRow();
 		if (currentSelectedrow >= 0) {
 			Object ob = amm.commonTable.getModel().getValueAt(currentSelectedrow, 0);
-			
-			Connection c = null;
-			PreparedStatement ps = null;
-			ResultSet rs = null;
 			
 			String imgUrl = null;
 			String description = null;
@@ -326,29 +290,7 @@ public class AdminMenuService {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
-				if(rs != null) {
-					try {
-						ps.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				
-				if(ps != null) {
-					try {
-						ps.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				
-				if(c != null) {
-					try {
-						c.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
+				closeOracleConnection(c, ps, rs);
 			}
 			
 			ImageIcon image = new ImageIcon(AdminMenuService.class.getResource(imgUrl));
@@ -404,10 +346,6 @@ public class AdminMenuService {
 	
 	public void modifyMenu() {
 		int currentSelectedrow = amm.commonTable.getSelectedRow();
-		
-		Connection c = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 		int result = 0;
 		
 		Object[] rowData = new Object[8];
@@ -499,30 +437,13 @@ public class AdminMenuService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			if(c != null) {
-				try {
-					c.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			closeOracleConnection(c, ps, rs);
 		}
 		
 		closeWindow(amm.jdM);
 	}
 
 	public void registerMenu() {
-		Connection c = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 		int result = 0;
 		
 		Object[] rowData = new Object[8];
@@ -602,21 +523,7 @@ public class AdminMenuService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			if(c != null) {
-				try {
-					c.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			closeOracleConnection(c, ps, rs);
 		}
 		
 		closeWindow(amm.jdR);
