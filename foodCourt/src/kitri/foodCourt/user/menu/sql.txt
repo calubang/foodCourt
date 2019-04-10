@@ -272,7 +272,7 @@ ALTER TABLE fook_payment
 
 ALTER TABLE fook_payment_detail
 	ADD
-		CONSTRAINT fook_payment_detail_fk
+		CONSTRAINT payment_detail_payment_id_fk
 		FOREIGN KEY (
 			payment_id
 		)
@@ -282,7 +282,7 @@ ALTER TABLE fook_payment_detail
 
 ALTER TABLE fook_payment_detail
 	ADD
-		CONSTRAINT fook_payment_detail_fk
+		CONSTRAINT payment_detail_food_id_fk
 		FOREIGN KEY (
 			food_id
 		)

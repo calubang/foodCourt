@@ -39,7 +39,7 @@ public class FoodMain extends JFrame{
 	JPanel panel_5 = new JPanel();
 	JPanel panel_3 = new JPanel();
 	JPanel panel_2 = new JPanel();
-	UserMenuView userMenuList;
+	UserMenuView userMenuView;
 	UserMenuDetailView menuDetailView;
 	FoodMainView foodMainView = new FoodMainView();
 	
@@ -153,9 +153,9 @@ public class FoodMain extends JFrame{
 	
 //		--------------------변하는 패널 부분 카드레이아웃 설정
 		panChangePanel.setLayout(card);
-//		panChangePanel.add(menuDetailView, "menuDetail"); 서비스 단에서 add (조회해서 보여줘야하기 때문에)
-		
-		panChangePanel.add(foodMainView, "mainMenu");
+		panChangePanel.add(menuDetailView, "menuDetail");
+		panChangePanel.add(userMenuView, "userMenuView");
+		panChangePanel.add(foodMainView, "foodMainView");
 		panChangePanel.setBounds(160, 118, 1012, 634);
 		panel.add(panChangePanel);
 		card.show(panChangePanel, "mainMenu");

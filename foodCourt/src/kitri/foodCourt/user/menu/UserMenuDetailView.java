@@ -23,9 +23,9 @@ public class UserMenuDetailView extends JPanel {
 	JLabel count = new JLabel("\uC218\uB7C9");
 	JLabel category = new JLabel();
 	JPanel panel = new JPanel();
-	JButton btnNewButton = new JButton("\uC774\uC804\uC73C\uB85C");
-	JButton button = new JButton("\uC7A5\uBC14\uAD6C\uB2C8 \uB2F4\uAE30");
-	public UserMenuDetailView(FoodDto foodDto) {
+	JButton btnBack = new JButton("\uC774\uC804\uC73C\uB85C");
+	JButton btnBasket = new JButton("\uC7A5\uBC14\uAD6C\uB2C8 \uB2F4\uAE30");
+	public UserMenuDetailView(FoodDto foodDto, FoodMainService service) {
 		
 		BufferedImage bimg;
 		try {
@@ -51,6 +51,12 @@ public class UserMenuDetailView extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		btnBack.setName("back");
+		btnBasket.setName("basket");
+		btnBack.addActionListener(service.foodMainController);
+		btnBasket.addActionListener(service.foodMainController);
+		
 		
 		setBackground(Color.WHITE);
 		setLayout(null);
@@ -101,17 +107,16 @@ public class UserMenuDetailView extends JPanel {
 		textField.setColumns(10);
 		
 		
-		btnNewButton.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 26));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(199, 476, 223, 92);
-		add(btnNewButton);
+		btnBack.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 26));
+		btnBack.setBounds(199, 476, 223, 92);
+		add(btnBack);
 		
 		
-		button.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 26));
-		button.setBounds(585, 476, 223, 92);
-		add(button);
+		btnBasket.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 26));
+		btnBasket.setBounds(585, 476, 223, 92);
+		add(btnBasket);
+	}
+	public UserMenuDetailView() {
+		// TODO Auto-generated constructor stub
 	}
 }

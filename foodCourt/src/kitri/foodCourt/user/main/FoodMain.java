@@ -18,11 +18,6 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import javax.swing.border.*;
 
@@ -36,8 +31,8 @@ public class FoodMain extends JFrame{
 	public JPanel panel_5 = new JPanel();
 	public JPanel panel_3 = new JPanel();
 	public JPanel panel_2 = new JPanel();
-	public UserMenuView userMenuList;
-	public UserMenuDetailView menuDetailView;
+	public UserMenuView userMenuView = new UserMenuView();
+	public UserMenuDetailView UserMenuDetailView = new UserMenuDetailView();
 	public FoodMainView foodMainView = new FoodMainView();
 	
 	public JLabel labSearch = new JLabel("\uAC80\uC0C9");
@@ -150,12 +145,12 @@ public class FoodMain extends JFrame{
 	
 //		--------------------변하는 패널 부분 카드레이아웃 설정
 		panChangePanel.setLayout(card);
-//		panChangePanel.add(menuDetailView, "menuDetail"); 서비스 단에서 add (조회해서 보여줘야하기 때문에)
-		
-		panChangePanel.add(foodMainView, "mainMenu");
+		panChangePanel.add(UserMenuDetailView, "UserMenuDetailView");
+		panChangePanel.add(userMenuView, "userMenuView");
+		panChangePanel.add(foodMainView, "foodMainView");
 		panChangePanel.setBounds(160, 118, 1012, 634);
 		panel.add(panChangePanel);
-		card.show(panChangePanel, "mainMenu");
+		card.show(panChangePanel, "foodMainView");
 		
 		searchField = new JTextField();
 		searchField.setBorder(new MatteBorder(2, 2, 4, 4, (Color) Color.LIGHT_GRAY));

@@ -58,6 +58,8 @@ public class UserMenuView extends JPanel {
 		
 		
 	}
+	public UserMenuView() {
+	}
 	public void setMenu(List<FoodDto> list) { //여기서 리스트를 받아온다
 		int listSize = list.size();
 		try {
