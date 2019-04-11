@@ -113,6 +113,7 @@ public class BasketMain extends JPanel{
 		pBasketMain.setLayout(null);
 		
 		btnAllCancel = SwingFactory.getInstance().getButton("x");
+		btnAllCancel.setToolTipText("\uC804\uCCB4\uC0AD\uC81C");
 		btnAllCancel.setName("allCancel");
 		btnAllCancel.setBounds(29, 2, 44, 44);
 		
@@ -227,6 +228,7 @@ public class BasketMain extends JPanel{
 		pTotal.add(lblPoint);
 		
 		btnPayment = SwingFactory.getButton("");
+		btnPayment.setToolTipText("\uACB0\uC81C");
 		btnPayment.setName("payment");
 		btnPayment.setBounds(831, 95, 169, 47);
 		pBottom.add(btnPayment);
@@ -283,6 +285,7 @@ public class BasketMain extends JPanel{
 		btnX.setBounds(29, 28, 44, 44);
 		pFood.add(btnX);
 		btnX.setName("x"+index);
+		btnX.setToolTipText("삭제");
 		
 		//음식설명용 패널 - 차후 클릭하면 효과있음
 		FPanel pFoodInfo = SwingFactory.getInstance().getPanel("basketFood");
@@ -338,7 +341,7 @@ public class BasketMain extends JPanel{
 		
 		//이벤트
 		btnX.addActionListener(controller);
-		pFoodInfo.setController(controller);
+		pFoodInfo.addMouseListener(controller);
 		
 		return pFood;
 	}

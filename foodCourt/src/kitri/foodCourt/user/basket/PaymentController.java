@@ -7,7 +7,7 @@ import javax.swing.JTextPane;
 
 import kitri.foodCourt.user.swing.FButton;
 
-public class PaymentController implements ActionListener, InputMethodListener, KeyListener{
+public class PaymentController implements ActionListener, KeyListener{
 	public Payment payment;
 	private PaymentService service;
 	
@@ -34,29 +34,6 @@ public class PaymentController implements ActionListener, InputMethodListener, K
 			service.cancel();
 			break;
 		}
-	}
-
-	@Override
-	public void inputMethodTextChanged(InputMethodEvent e) {
-		JTextPane jTextPane = (JTextPane)e.getSource();
-		System.out.println(e);
-		String name = jTextPane.getName();
-		switch(name) {
-		case "cash":
-			System.out.println(e);
-			break;
-		case "card":
-			break;
-		case "point":
-			service.isCorrectValue();
-			break;
-		}
-	}
-
-	@Override
-	public void caretPositionChanged(InputMethodEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package kitri.foodCourt.user;
 import java.util.*;
 
 import kitri.foodCourt.dto.UserDto;
+import kitri.foodCourt.user.swing.FLabel;
 
 public class BasketImpl implements Basket{
 	//장바구니
@@ -18,6 +19,9 @@ public class BasketImpl implements Basket{
 	//결제시 포함된 음식
 	private List<BasketDetail> detailList;
 	
+	//결제 add시 메인화면 수정
+	private FLabel orderCount;
+
 	//생성자
 	public BasketImpl() {
 		super();
@@ -78,6 +82,14 @@ public class BasketImpl implements Basket{
 		this.detailList = detailList;
 	}
 	
+	public FLabel getOrderCount() {
+		return orderCount;
+	}
+
+	public void setOrderCount(FLabel orderCount) {
+		this.orderCount = orderCount;
+	}
+	
 	//구현 메소드
 	//유저용
 	//추가
@@ -96,6 +108,9 @@ public class BasketImpl implements Basket{
 		detailList.add(detail);
 		totalPrice += detail.getFood().getPrice() * detail.getCount();
 		savePoint += detail.getFood().getPoint() * detail.getCount();
+		if(orderCount != null) {
+			orderCount.setText(detailList.size()+"");
+		}
 		return detailList.size();
 	}
 	//삭제(index로 삭제)

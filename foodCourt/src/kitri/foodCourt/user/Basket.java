@@ -3,6 +3,8 @@ package kitri.foodCourt.user;
 import java.util.Iterator;
 import java.util.List;
 
+import kitri.foodCourt.user.swing.FLabel;
+
 public interface Basket {
 	
 	//구현 메소드
@@ -26,5 +28,7 @@ public interface Basket {
 	public void setSavePoint(int savePoint);
 	public List<BasketDetail> getDetailList();
 	public void setDetailList(List<BasketDetail> detailList);
+	public FLabel getOrderCount();
+	public void setOrderCount(FLabel orderCount);
 	
 }

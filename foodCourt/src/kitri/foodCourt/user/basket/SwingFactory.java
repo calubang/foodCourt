@@ -88,6 +88,12 @@ public class SwingFactory {
 			UIManager.put("OptionPane.buttonFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 			fOptionPane.showMessageDialog(parentComponent, message, title, JOptionPane.INFORMATION_MESSAGE);
 			return 0;
+		case "errorMessage":
+			fOptionPane = new FOptionPane();
+			UIManager.put("OptionPane.messageFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
+			UIManager.put("OptionPane.buttonFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
+			fOptionPane.showMessageDialog(parentComponent, message, title, JOptionPane.ERROR_MESSAGE);
+			return 0;
 		default:
 			return 0;
 		}

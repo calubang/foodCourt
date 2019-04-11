@@ -1,10 +1,8 @@
 package kitri.foodCourt.user.basket;
 
 import java.awt.*;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.text.*;
 
 import kitri.foodCourt.user.Basket;
 import kitri.foodCourt.user.swing.*;

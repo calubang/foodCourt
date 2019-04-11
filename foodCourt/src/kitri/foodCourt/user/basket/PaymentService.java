@@ -61,10 +61,10 @@ public class PaymentService {
 		}
 		total = card+cash+point;
 		if( total < user.getBasket().getTotalPrice()) {
-			SwingFactory.getOptionPane("warning", payment, "결제오류", "입력금액 총합이 적습니다.");
+			SwingFactory.getOptionPane("message", payment, "결제오류", "입력금액 총합이 적습니다.");
 			return;
 		} else if(  total > user.getBasket().getTotalPrice() ) {
-			SwingFactory.getOptionPane("warning", payment, "결제오류", "입력금액 총합이 많습니다.");
+			SwingFactory.getOptionPane("message", payment, "결제오류", "입력금액 총합이 많습니다.");
 			return;
 		}
 		//포인트 조절
@@ -72,23 +72,19 @@ public class PaymentService {
 		usedPoint = point;
 		user.setUserPoint(user.getUserPoint() - usedPoint + savePoint);
 		
-		//네트워크 통신
-		
 		//DB연동
 		user.getBasket().setRequestNumber(payment.requestNumber);
 		int dbResult = paymentDao.insertPayment(user, card, cash, point);
-		if( dbResult == 1) {
-			//정상 insert
-			
-		} else if(dbResult == -1){
+		if(dbResult == -1){
 			//비정상
 			System.out.println("비정상종료");
-		} else {
-			//??
+			SwingFactory.getOptionPane("errorMessage", payment, "결제오류", "결제오류, 관리자를 호출해주세요.");
+			return;
 		}
 		
-		//모든 절차후
+		//네트워크 통신
 		
+		//모든 절차후
 		int result = SwingFactory.getOptionPane("message", payment, "결제확인", payment.requestNumber + "번으로 결제완료 되었습니다.");
 		if(result == 0) {
 			payment.requestNumber++;
@@ -96,15 +92,8 @@ public class PaymentService {
 			//장바구니 초기화
 			payment.basketMain.user.getBasket().removeAll();
 		}
-		
-		
-		
 	}
-
-	public void isCorrectValue() {
-		
-	}
-
+	
 	public void cancel() {
 		//결제 취소
 		int select = SwingFactory.getOptionPane("warning", payment, "결제취소", "장바구니 화면으로 돌아가시겠습니까?");

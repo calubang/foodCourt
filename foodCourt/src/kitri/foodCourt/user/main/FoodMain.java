@@ -1,22 +1,22 @@
 package kitri.foodCourt.user.main;
 
-//
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Cursor;
+
+//
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import java.awt.Dimension;
 import javax.swing.border.*;
 
 import kitri.foodCourt.dto.FoodDto;
@@ -24,6 +24,7 @@ import kitri.foodCourt.user.BasketDetail;
 import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.basket.BasketMain;
 import kitri.foodCourt.user.menu.*;
+import kitri.foodCourt.user.swing.FLabel;
 
 public class FoodMain extends JFrame{
 
@@ -62,6 +63,8 @@ public class FoodMain extends JFrame{
 	//장바구니, 결제부분 결합
 	public User user;
 	public BasketMain basketMain;
+	public FLabel lbOrderCircle = new FLabel();
+	public FLabel lbOrderCount = new FLabel(Font.BOLD, 20);
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -91,6 +94,7 @@ public class FoodMain extends JFrame{
 		BasketDetail detail4 = new BasketDetail(food4, 4);
 		BasketDetail detail5 = new BasketDetail(food5, 5);
 		
+		user.getBasket().setOrderCount(lbOrderCount);
 		user.getBasket().add(detail1);
 		user.getBasket().add(detail2);
 		user.getBasket().add(detail3);
@@ -132,6 +136,13 @@ public class FoodMain extends JFrame{
 		btnMainMenu.setCursor(csorHandCursor);
 		btnUserInfo.setToolTipText("\uD68C\uC6D0\uC815\uBCF4");
 		btnUserInfo.setCursor(csorHandCursor);
+		lbOrderCount.setHorizontalAlignment(SwingConstants.CENTER);
+		lbOrderCount.setBackground(Color.WHITE);
+		lbOrderCount.setCursor(csorHandCursor);
+		
+		btnOrderList.setFocusPainted(false);
+		btnOrderList.setContentAreaFilled(false);
+		//btnOrderList.setBorderPainted(false);
 		btnOrderList.setToolTipText("\uC8FC\uBB38\uBAA9\uB85D");
 		btnOrderList.setCursor(csorHandCursor);
 		labName.setCursor(csorHandCursor);
@@ -171,6 +182,7 @@ public class FoodMain extends JFrame{
 		btnIlsicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnYangsicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
 		panChangePanel.setBackground(Color.WHITE);
+		
 	
 //		--------------------변하는 패널 부분 카드레이아웃 설정
 		panChangePanel.setLayout(card);
@@ -227,6 +239,23 @@ public class FoodMain extends JFrame{
 		labName.setBounds(965, 77, 79, 22);
 		
 		panel.add(labName);
+		
+		//주문 개수 표시
+		lbOrderCount.setBounds(1129, 15, 35, 35);
+		panel.add(lbOrderCount);
+		user.getBasket().setOrderCount(lbOrderCount);
+		
+		lbOrderCircle.setBounds(1129, 15, 35, 35);
+		URL url = FoodMain.class.getResource("/kitri/foodCourt/user/basket/image/red_circle.png");
+		try {
+			BufferedImage image = ImageIO.read(url);
+			ImageIcon icon = new ImageIcon(image.getScaledInstance(lbOrderCircle.getWidth(), lbOrderCircle.getHeight(), Image.SCALE_FAST));
+			lbOrderCircle.setIcon(icon);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		panel.add(lbOrderCircle);
+		
 		btnOrderList.setBorder(new LineBorder(Color.GRAY, 2, true));
 		btnOrderList.setBounds(1074, 26, 79, 54);
 		
