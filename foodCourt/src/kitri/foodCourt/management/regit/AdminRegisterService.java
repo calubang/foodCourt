@@ -19,8 +19,8 @@ public class AdminRegisterService {
 	RemoveMember rm;
 	ModifyRegit mR;
 
-	String[] option = { "¿¹", "¾Æ´Ï¿ä" };
-	String[] column = { "¾ÆÀÌµð", "ÀÌ¸§", "ºñ¹Ð¹øÈ£", "ÇÚµåÆù¹øÈ£", "Á÷¾÷ÄÚµå", "ÀÔ»çÀÏ", "¿ìÆí¹øÈ£", "ÁÖ¼Ò", "ÀÌ¸ÞÀÏ", "ÀÌ¸ÞÀÏµµ¸ÞÀÎ" };
+	String[] option = { "ï¿½ï¿½", "ï¿½Æ´Ï¿ï¿½" };
+	String[] column = { "ï¿½ï¿½ï¿½Ìµï¿½", "ï¿½Ì¸ï¿½", "ï¿½ï¿½Ð¹ï¿½È, "ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½È£", "ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½", "ï¿½Ô»ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½È, "ï¿½Ö¼ï¿½", "ï¿½Ì¸ï¿½ï¿½ï¿½", "ï¿½Ì¸ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½" };
 
 	DefaultTableModel dtm;
 	CardLayout card;
@@ -111,11 +111,11 @@ public class AdminRegisterService {
 		}
 		ami.jfMo.setVisible(true);
 	
-		
+		}
 	}
 
 	public void showdelete() {
-		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?\n(»èÁ¦ÇÏ¸é ´Ù½Ã µÇµ¹¸± ¼ö ¾ø½À´Ï´Ù.)", "»èÁ¦ È®ÀÎ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
+		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½?\n(ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ù½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.)", "ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
 	public void arRegister() {
@@ -123,7 +123,7 @@ public class AdminRegisterService {
 	}
 
 	public void arId() {
-		int result = JOptionPane.showOptionDialog(ar, "»ç¿ëÇÒ¼öÀÖ½À´Ï´Ù.", "Áßº¹È®ÀÎ", JOptionPane.YES_OPTION,
+		int result = JOptionPane.showOptionDialog(ar, "ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½Ö½ï¿½ï¿½Ï´ï¿", "ï¿½ßºï¿½È®ï¿½ï¿½", JOptionPane.YES_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
@@ -138,7 +138,7 @@ public class AdminRegisterService {
 	}
 
 	public void mrId() {
-		int result = JOptionPane.showOptionDialog(ar, "»ç¿ëÇÒ¼öÀÖ½À´Ï´Ù.", "Áßº¹È®ÀÎ", JOptionPane.YES_OPTION,
+		int result = JOptionPane.showOptionDialog(ar, "ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½Ö½ï¿½ï¿½Ï´ï¿", "ï¿½ßºï¿½È®ï¿½ï¿½", JOptionPane.YES_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 

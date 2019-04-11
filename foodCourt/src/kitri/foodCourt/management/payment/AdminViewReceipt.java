@@ -32,7 +32,7 @@ public class AdminViewReceipt extends JPanel {
 	JPanel totalPanel = new JPanel();
 	
 	JLabel orderNumLabel = new JLabel("\uC8FC\uBB38\uBC88\uD638 :");
-	JLabel oderNumValueLabel = new JLabel("orderNumber");
+	JLabel orderNumValueLabel = new JLabel("orderNumber");
 	JLabel orderDateLabel = new JLabel("\uC8FC\uBB38\uC77C\uC2DC :");
 	JLabel orderDateValueLabel = new JLabel("orderDate");
 	JLabel memberIDLabel = new JLabel("\uD68C\uC6D0ID :");
@@ -64,11 +64,13 @@ public class AdminViewReceipt extends JPanel {
 		
 		scrollPane.setBounds(0, 120, 380, 280);
 		panel.add(scrollPane);
+		table.setRowSelectionAllowed(false);
 		
 		table.setPreferredSize(new Dimension(380, 250));
 		table.setPreferredScrollableViewportSize(new Dimension(380, 280));
 		table.setShowVerticalLines(true);
 		table.setAutoCreateRowSorter(false);
+		table.setEnabled(false);
 		scrollPane.setViewportView(table);
 		
 		paymentMethodPanel.setLayout(new GridLayout(2, 3, 0, 0));
@@ -101,7 +103,7 @@ public class AdminViewReceipt extends JPanel {
 		paymentMethodPanel.add(pointValueLabel);
 		
 		orderNumPanel.setBorder(null);
-		orderNumPanel.setBounds(0, 23, 172, 31);
+		orderNumPanel.setBounds(0, 23, 162, 31);
 		orderNumPanel.setLayout(new GridLayout(1, 2, 0, 0));
 		panel.add(orderNumPanel);
 		
@@ -109,13 +111,13 @@ public class AdminViewReceipt extends JPanel {
 		orderNumLabel.setBorder(null);
 		orderNumPanel.add(orderNumLabel);
 		
-		oderNumValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		oderNumValueLabel.setBorder(null);
-		orderNumPanel.add(oderNumValueLabel);
+		orderNumValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		orderNumValueLabel.setBorder(null);
+		orderNumPanel.add(orderNumValueLabel);
 		
 		orderDatePanel.setLayout(null);
 		orderDatePanel.setBorder(null);
-		orderDatePanel.setBounds(184, 23, 188, 31);
+		orderDatePanel.setBounds(164, 23, 215, 31);
 		panel.add(orderDatePanel);
 		
 		orderDateLabel.setBounds(0, 0, 86, 31);
@@ -123,14 +125,14 @@ public class AdminViewReceipt extends JPanel {
 		orderDateLabel.setBorder(null);
 		orderDatePanel.add(orderDateLabel);
 		
-		orderDateValueLabel.setBounds(86, 0, 105, 31);
+		orderDateValueLabel.setBounds(86, 0, 130, 31);
 		orderDateValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		orderDateValueLabel.setBorder(null);
 		orderDatePanel.add(orderDateValueLabel);
 		
 		memberIDPanel.setLayout(new GridLayout(1, 2, 0, 0));
 		memberIDPanel.setBorder(null);
-		memberIDPanel.setBounds(184, 52, 172, 31);
+		memberIDPanel.setBounds(170, 52, 172, 31);
 		panel.add(memberIDPanel);
 		
 		memberIDLabel.setHorizontalAlignment(SwingConstants.CENTER);
