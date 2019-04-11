@@ -74,7 +74,7 @@ public class UserMenuView extends JPanel {
 				//라벨크기 각 컴포넌트에 맞게 설정해주기 190 190
 				MenuPanel menuPanel = new MenuPanel(properImg, foodDto.getFoodName());
 				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-				gbc_btnNewButton.insets = new Insets(0, 0, 9, 9);
+				gbc_btnNewButton.insets = new Insets(0, 0, 9, 17);
 				gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
 				gbc_btnNewButton.gridx = gridx;
 				gbc_btnNewButton.gridy = gridy;

@@ -1,4 +1,12 @@
 eclipse.preferences.version=1
+encoding//src/kitri/foodCourt/user/basket/BasketMain.java=MS949
+encoding//src/kitri/foodCourt/user/basket/BasketService.java=MS949
+encoding//src/kitri/foodCourt/user/basket/Payment.java=MS949
+encoding//src/kitri/foodCourt/user/basket/PaymentController.java=MS949
+encoding//src/kitri/foodCourt/user/basket/PaymentDao.java=MS949
+encoding//src/kitri/foodCourt/user/basket/PaymentService.java=MS949
+encoding//src/kitri/foodCourt/user/basket/Receipt.java=MS949
+encoding//src/kitri/foodCourt/user/basket/SwingFactory.java=MS949
 encoding//src/kitri/foodCourt/user/main/FoodMain.java=MS949
 encoding//src/kitri/foodCourt/user/menu/FoodDto.java=MS949
 encoding//src/kitri/foodCourt/user/menu/FoodMain.java=MS949
