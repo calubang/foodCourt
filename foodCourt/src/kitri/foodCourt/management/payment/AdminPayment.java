@@ -92,6 +92,7 @@ public class AdminPayment extends JPanel {
 		
 		checkReceiptBtn.addActionListener(apc);
 		deleteBtn.addActionListener(apc);
+		searchTextField.addKeyListener(apc);
 		
 		avr.confirmBtn.addActionListener(apc);
 	}
