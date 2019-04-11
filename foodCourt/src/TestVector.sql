@@ -4,6 +4,7 @@ DROP TABLE fook_food;
 DROP TABLE fook_category;
 DROP TABLE fook_user;
 DROP TABLE fook_payment;
+DROP TABLE fook_payment_detail;
 
 CREATE TABLE fook_job (
 	job_id VARCHAR2(32) NOT NULL, /* 직급ID */
@@ -159,3 +160,40 @@ values (payment_pid_seq.nextval, 'dxcvowej34', sysdate, '0003', 80000, 800, 0, 2
 
 -- 확인
 SELECT * FROM fook_payment;
+
+
+CREATE TABLE fook_payment_detail (
+	payment_id VARCHAR2(32) NOT NULL, /* 결제_ID */
+	food_id VARCHAR2(64) NOT NULL, /* 음식ID */
+	food_name VARCHAR2(64), /* 음식이름 */
+	price NUMBER, /* 가격 */
+	count NUMBER, /* 수량 */
+	point NUMBER DEFAULT 0 /* 획득포인트 */
+);
+
+-- 예제 값
+insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
+values ('1', '72', '볶음밥', 6000, 3, 60);
+insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
+values ('1', '73', '자장면', 5000, 2, 50);
+insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
+values ('1', '74', '소바', 7000, 1, 70);
+insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
+values ('1', '75', '스테이크', 9500, 4, 95);
+
+insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
+values ('0', '73', '자장면', 5000, 3, 50);
+insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
+values ('0', '74', '소바', 7000, 2, 70);
+
+insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
+values ('2', '72', '볶음밥', 6000, 5, 60);
+insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
+values ('2', '74', '소바', 7000, 3, 70);
+insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
+values ('2', '75', '스테이크', 9500, 1, 95);
+
+
+select request_number, payment_date, category_name, pd.food_name "food_name", count, pd.price "price", pd.point "point", card, cash, used_point, total_price, save_point 
+from fook_payment p, fook_payment_detail pd, fook_food f, fook_category fc
+where user_id = 'dfkjhg987' and p.payment_id = pd.payment_id and pd.food_id = f.food_id and f.category_id = fc.category_id;

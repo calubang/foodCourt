@@ -1,5 +1,7 @@
 package kitri.foodCourt.management.regit;
 
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.sql.*;
 
 import javax.swing.JDialog;
@@ -17,11 +19,11 @@ public class AdminRegisterService {
 	RemoveMember rm;
 	ModifyRegit mR;
 
-	String[] option = { "¿¹", "¾Æ´Ï¿ä" };
-	String[] column = { "¾ÆÀÌµð", "ÀÌ¸§", "ºñ¹Ð¹øÈ£", "ÇÚµåÆù¹øÈ£", "Á÷¾÷ÄÚµå", "ÀÔ»çÀÏ", "¿ìÆí¹øÈ£", "ÁÖ¼Ò", "ÀÌ¸ÞÀÏ", "ÀÌ¸ÞÀÏµµ¸ÞÀÎ" };
+	String[] option = { "ï¿½ï¿½", "ï¿½Æ´Ï¿ï¿½" };
+	String[] column = { "ï¿½ï¿½ï¿½Ìµï¿½", "ï¿½Ì¸ï¿½", "ï¿½ï¿½Ð¹ï¿½È£", "ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½È£", "ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½", "ï¿½Ô»ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½È£", "ï¿½Ö¼ï¿½", "ï¿½Ì¸ï¿½ï¿½ï¿½", "ï¿½Ì¸ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½" };
 
 	DefaultTableModel dtm;
-	
+	CardLayout card;
 	 Connection c = null;
 	 PreparedStatement ps = null;
 	 ResultSet rs = null;
@@ -72,14 +74,19 @@ public class AdminRegisterService {
 			}
 		}
 	}
-
+	
+	private void warningMessage(Component component, Object msg, String title) {
+		JOptionPane.showMessageDialog(component, msg, title, JOptionPane.WARNING_MESSAGE);
+	}
+	
 	public void showadminRegister() {
 
-//		Connection c = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
 //		AdminRegitDto adminDto = null;
+		
 
 		ami.jfAD.getContentPane().add(ami.ar);
 		ami.jfAD.setSize(600, 650);
@@ -95,38 +102,41 @@ public class AdminRegisterService {
 	}
 
 	public void showmodify() {
+		//ami.jfMoD.getContentPane().add(ami.jpaMo);
+		System.out.println(ami.check);
+		if(ami.check == false) {
+			ami.card.show(ami.jpaMo, "adminModi");
+		}else {
+			ami.card.show(ami.jpaMo, "memberModi");
+		}
+		ami.jfMo.setVisible(true);
+	
 <<<<<<< HEAD
-		if(ami.check) {
-			// íšŒì›
-=======
-	
-	
-		ami.jfMoD.getContentPane().add(ami.maR);
-		ami.jfMoD.setSize(600, 650);
-		ami.jfMoD.setModal(true);
-		ami.jfMoD.setVisible(true);
-		
-		
->>>>>>> refs/remotes/food/master
+		if (true){
 			ami.jfMoD.getContentPane().add(ami.mR);
 			ami.jfMoD.setSize(600, 650);
 			ami.jfMoD.setModal(true);
 			ami.jfMoD.setVisible(true);
-<<<<<<< HEAD
 		} else {
 			// ê´€ë¦¬ìž
 			ami.jfMoD.getContentPane().add(ami.maR);
 			ami.jfMoD.setSize(600, 650);
 			ami.jfMoD.setModal(true);
 			ami.jfMoD.setVisible(true);
+		
+		
+			ami.jfMoD.getContentPane().add(ami.mR);
+			ami.jfMoD.setSize(600, 650);
+			ami.jfMoD.setModal(true);
+			ami.jfMoD.setVisible(true);
 		}
 =======
 		
->>>>>>> refs/remotes/food/master
+>>>>>>> d240db7baa03876035e3b251425ebdd04eb3e916
 	}
 
 	public void showdelete() {
-		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?\n(»èÁ¦ÇÏ¸é ´Ù½Ã µÇµ¹¸± ¼ö ¾ø½À´Ï´Ù.)", "»èÁ¦ È®ÀÎ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
+		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½?\n(ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ù½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.)", "ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
 	public void arRegister() {
@@ -134,12 +144,14 @@ public class AdminRegisterService {
 	}
 
 	public void arId() {
-		int result = JOptionPane.showOptionDialog(ar, "»ç¿ëÇÒ¼öÀÖ½À´Ï´Ù.", "Áßº¹È®ÀÎ", JOptionPane.YES_OPTION,
+		int result = JOptionPane.showOptionDialog(ar, "ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½Ö½ï¿½ï¿½Ï´ï¿½.", "ï¿½ßºï¿½È®ï¿½ï¿½", JOptionPane.YES_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
 	public void Close(JDialog ja) {
+		
 		ja.dispose();
+		
 	}
 
 	public void mrRegister() {
@@ -147,7 +159,7 @@ public class AdminRegisterService {
 	}
 
 	public void mrId() {
-		int result = JOptionPane.showOptionDialog(ar, "»ç¿ëÇÒ¼öÀÖ½À´Ï´Ù.", "Áßº¹È®ÀÎ", JOptionPane.YES_OPTION,
+		int result = JOptionPane.showOptionDialog(ar, "ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½Ö½ï¿½ï¿½Ï´ï¿½.", "ï¿½ßºï¿½È®ï¿½ï¿½", JOptionPane.YES_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
@@ -158,14 +170,7 @@ public class AdminRegisterService {
 	public void mRRegister() {
 
 	}
-	public  void aminModify() {
-		ami.cl.show(ami.tablePanel, "AdminTable");
-		
-	}
-	public  void memberModify() {
-		ami.cl.show(ami.tablePanel, "MemberTable");
-		
-	}
+	
 	
 
 }

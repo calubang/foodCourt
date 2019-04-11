@@ -1,5 +1,7 @@
 package kitri.foodCourt.management.regit;
 
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.sql.*;
 
 import javax.swing.JDialog;
@@ -18,10 +20,10 @@ public class AdminRegisterService {
 	ModifyRegit mR;
 
 	String[] option = { "��", "�ƴϿ�" };
-	String[] column = { "���̵�", "�̸�", "��й�ȣ", "�ڵ�����ȣ", "�����ڵ�", "�Ի���", "�����ȣ", "�ּ�", "�̸���", "�̸��ϵ�����" };
+	String[] column = { "���̵�", "�̸�", "��й��, "�ڵ�����ȣ", "�����ڵ�", "�Ի���", "������, "�ּ�", "�̸���", "�̸��ϵ�����" };
 
 	DefaultTableModel dtm;
-	
+	CardLayout card;
 	 Connection c = null;
 	 PreparedStatement ps = null;
 	 ResultSet rs = null;
@@ -72,14 +74,19 @@ public class AdminRegisterService {
 			}
 		}
 	}
-
+	
+	private void warningMessage(Component component, Object msg, String title) {
+		JOptionPane.showMessageDialog(component, msg, title, JOptionPane.WARNING_MESSAGE);
+	}
+	
 	public void showadminRegister() {
 
-//		Connection c = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
 //		AdminRegitDto adminDto = null;
+		
 
 		ami.jfAD.getContentPane().add(ami.ar);
 		ami.jfAD.setSize(600, 650);
@@ -95,24 +102,15 @@ public class AdminRegisterService {
 	}
 
 	public void showmodify() {
+		//ami.jfMoD.getContentPane().add(ami.jpaMo);
+		System.out.println(ami.check);
+		if(ami.check == false) {
+			ami.card.show(ami.jpaMo, "adminModi");
+		}else {
+			ami.card.show(ami.jpaMo, "memberModi");
+		}
+		ami.jfMo.setVisible(true);
 	
-		if (true){
-			ami.jfMoD.getContentPane().add(ami.mR);
-			ami.jfMoD.setSize(600, 650);
-			ami.jfMoD.setModal(true);
-			ami.jfMoD.setVisible(true);
-		} else {
-			// 관리자
-			ami.jfMoD.getContentPane().add(ami.maR);
-			ami.jfMoD.setSize(600, 650);
-			ami.jfMoD.setModal(true);
-			ami.jfMoD.setVisible(true);
-		
-		
-			ami.jfMoD.getContentPane().add(ami.mR);
-			ami.jfMoD.setSize(600, 650);
-			ami.jfMoD.setModal(true);
-			ami.jfMoD.setVisible(true);
 		}
 	}
 
@@ -125,12 +123,14 @@ public class AdminRegisterService {
 	}
 
 	public void arId() {
-		int result = JOptionPane.showOptionDialog(ar, "����Ҽ��ֽ��ϴ�.", "�ߺ�Ȯ��", JOptionPane.YES_OPTION,
+		int result = JOptionPane.showOptionDialog(ar, "����Ҽ��ֽ��ϴ�", "�ߺ�Ȯ��", JOptionPane.YES_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
 	public void Close(JDialog ja) {
+		
 		ja.dispose();
+		
 	}
 
 	public void mrRegister() {
@@ -138,7 +138,7 @@ public class AdminRegisterService {
 	}
 
 	public void mrId() {
-		int result = JOptionPane.showOptionDialog(ar, "����Ҽ��ֽ��ϴ�.", "�ߺ�Ȯ��", JOptionPane.YES_OPTION,
+		int result = JOptionPane.showOptionDialog(ar, "����Ҽ��ֽ��ϴ�", "�ߺ�Ȯ��", JOptionPane.YES_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
@@ -149,14 +149,7 @@ public class AdminRegisterService {
 	public void mRRegister() {
 
 	}
-	public  void aminModify() {
-		ami.cl.show(ami.tablePanel, "AdminTable");
-		
-	}
-	public  void memberModify() {
-		ami.cl.show(ami.tablePanel, "MemberTable");
-		
-	}
+	
 	
 
 }

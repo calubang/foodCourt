@@ -101,7 +101,7 @@ public class FoodMainService {
 		foodMain.card.show(foodMain.panChangePanel, "basketMain");
 		foodMain.basketMain.card.show(foodMain.basketMain.pChangePanel, "basket");
 	}
-
+	//유효성 검사
 	public void validationCheck(KeyEvent e) {
 		char keyValue = e.getKeyChar();
 		if(!Character.isDigit(keyValue)) {
@@ -109,5 +109,4 @@ public class FoodMainService {
 			return;
 		}
 	}
-
 }

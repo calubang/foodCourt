@@ -52,31 +52,62 @@ public class AdminMemberInfo extends JPanel {
 	DefaultTableModel dtm = new DefaultTableModel();
 	
 	JFrame jfA = new JFrame();
-	JDialog jfAD = new JDialog(jfA,"�����ڵ��");
-	JFrame jfM = new JFrame();
-	JDialog jfMD = new JDialog(jfM,"ȸ�����");
-	JFrame jfMo = new JFrame();
-	JDialog jfMoD = new JDialog(jfMo,"����");
-	JFrame jfD = new JFrame();
-	JDialog jfDD = new JDialog(jfD,"����");
+
+	JDialog jfAD = new JDialog(jfA,"관리자등록");
 	
-	boolean check = false;
+
+	JFrame jfM = new JFrame();
+	JDialog jfMD = new JDialog(jfM,"회원등록");
+	
+
+	
+	JFrame jfMo = new JFrame();
+
+	JDialog jfMoD = new JDialog(jfMo, "수정");
+	JPanel jpaMo;
+	CardLayout card = new CardLayout();
+	
+
+
+
+	JFrame jfD = new JFrame();
+
+	JDialog jfDD = new JDialog(jfD,"삭제");
+	boolean check =false;
+
+
+	
+	
+
 	/**
 	 * Create the panel.
 	 */
 	
 	public AdminMemberInfo() {
+		
+		//수정창 관련
+		jfMo.setSize(600, 650);
+		jpaMo = new JPanel();
+		card = new CardLayout();
+		maR = new ModifyAdminRegit();
+		mR = new ModifyRegit();
+		jpaMo.setLayout(card);
+		jpaMo.add(maR, "adminModi");
+		jpaMo.add(mR, "memberModi");
+		//jpaMo.setBounds(160, 118, 1012, 634);
+		jfMo.add(jpaMo);
+		
 		setSize(new Dimension(1007, 722));
 		setLayout(null);
 		
 		searchLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		searchLabel.setFont(new Font("����", Font.PLAIN, 24));
+		searchLabel.setFont(new Font("占쏙옙占쏙옙", Font.PLAIN, 24));
 		searchLabel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		searchLabel.setBounds(398, 0, 110, 60);
 		add(searchLabel);
 		
 		searchTextField = new JTextField();
-		searchTextField.setFont(new Font("����", Font.PLAIN, 24));
+		searchTextField.setFont(new Font("占쏙옙占쏙옙", Font.PLAIN, 24));
 		searchTextField.setColumns(10);
 		searchTextField.setBorder(new LineBorder(Color.BLACK, 1, true));
 		searchTextField.setBounds(508, 0, 500, 60);
@@ -99,6 +130,7 @@ public class AdminMemberInfo extends JPanel {
 		infoPanel.setLayout(new GridLayout(1, 2, 0, 0));
 		adminBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						check = false;
 						cl.show(tablePanel, "AdminTable");
 						check = false;
 					}
@@ -106,6 +138,7 @@ public class AdminMemberInfo extends JPanel {
 		infoPanel.add(adminBtn);
 		memberBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						check = true;
 						cl.show(tablePanel, "MemberTable");
 						check = true;
 					}
@@ -133,8 +166,8 @@ public class AdminMemberInfo extends JPanel {
 		memberRegisterBtn.addActionListener(arc);
 		modifyBtn.addActionListener(arc);
 		deleteBtn.addActionListener(arc);
-		adminBtn.addActionListener(arc);
-		memberBtn.addActionListener(arc);
+		//adminBtn.addActionListener(arc);
+		//memberBtn.addActionListener(arc);
 		
 		ar.idbtn.addActionListener(arc);
 		ar.registerbtn.addActionListener(arc);
@@ -150,4 +183,5 @@ public class AdminMemberInfo extends JPanel {
 		mR.registerbtn.addActionListener(arc);
 		mR.cancelbtn.addActionListener(arc);
 	}
+	
 }
