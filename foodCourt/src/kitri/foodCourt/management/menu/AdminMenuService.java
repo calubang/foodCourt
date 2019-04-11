@@ -128,7 +128,7 @@ public class AdminMenuService {
 		ImageIcon image = null;
 		
 		String imgUrl = null;
-		int rowSelect = amm.commonTable.convertRowIndexToModel(amm.commonTable.getSelectedRow());
+		int rowSelect = amm.commonTable.getSelectedRow();
 		
 		if (rowSelect == -1) {
 			warningMessage(amm.modifyBtn, "수정할 메뉴가 없습니다.", "메뉴 수정 오류");
@@ -137,6 +137,8 @@ public class AdminMenuService {
 		}
 		
 		try {
+			rowSelect = amm.commonTable.convertRowIndexToModel(rowSelect);
+			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 			
@@ -188,10 +190,11 @@ public class AdminMenuService {
 		int resultQuery = 0;
 		
 		int result = JOptionPane.showOptionDialog(amm.deleteBtn, "정말 삭제하시겠습니까?\n(삭제하면 다시 되돌릴 수 없습니다.)", "삭제 확인", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
-		int currentSelectedrow = amm.commonTable.convertRowIndexToModel(amm.commonTable.getSelectedRow());
+		int currentSelectedrow = amm.commonTable.getSelectedRow();
 		
 		if (result == JOptionPane.OK_OPTION) {
 			if (currentSelectedrow >= 0) {
+				currentSelectedrow = amm.commonTable.convertRowIndexToModel(currentSelectedrow);
 				Object ob = amm.commonTable.getModel().getValueAt(currentSelectedrow, 0);
 
 				try {
