@@ -52,26 +52,40 @@ public class AdminMemberInfo extends JPanel {
 	DefaultTableModel dtm = new DefaultTableModel();
 	
 	JFrame jfA = new JFrame();
-	JDialog jfAD = new JDialog(jfA,"°ü¸®ÀÚµî·Ï");
+
+	JDialog jfAD = new JDialog(jfA,"ê´€ë¦¬ìë“±ë¡");
 	
+
 	JFrame jfM = new JFrame();
-	JDialog jfMD = new JDialog(jfM,"È¸¿øµî·Ï");
+	JDialog jfMD = new JDialog(jfM,"íšŒì›ë“±ë¡");
+	
+
 	
 	JFrame jfMo = new JFrame();
-	JDialog jfMoD = new JDialog(jfMo, "¼öÁ¤");
+
+	JDialog jfMoD = new JDialog(jfMo, "ìˆ˜ì •");
 	JPanel jpaMo;
 	CardLayout card = new CardLayout();
 	
+
+
+
 	JFrame jfD = new JFrame();
-	JDialog jfDD = new JDialog(jfD,"»èÁ¦");
+
+	JDialog jfDD = new JDialog(jfD,"ì‚­ì œ");
 	boolean check =false;
+
+
+	
+	
+
 	/**
 	 * Create the panel.
 	 */
 	
 	public AdminMemberInfo() {
 		
-		//¼öÁ¤Ã¢ °ü·Ã
+		//ìˆ˜ì •ì°½ ê´€ë ¨
 		jfMo.setSize(600, 650);
 		jpaMo = new JPanel();
 		card = new CardLayout();
@@ -87,13 +101,13 @@ public class AdminMemberInfo extends JPanel {
 		setLayout(null);
 		
 		searchLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		searchLabel.setFont(new Font("±¼¸²", Font.PLAIN, 24));
+		searchLabel.setFont(new Font("å ì™ì˜™å ì™ì˜™", Font.PLAIN, 24));
 		searchLabel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		searchLabel.setBounds(398, 0, 110, 60);
 		add(searchLabel);
 		
 		searchTextField = new JTextField();
-		searchTextField.setFont(new Font("±¼¸²", Font.PLAIN, 24));
+		searchTextField.setFont(new Font("å ì™ì˜™å ì™ì˜™", Font.PLAIN, 24));
 		searchTextField.setColumns(10);
 		searchTextField.setBorder(new LineBorder(Color.BLACK, 1, true));
 		searchTextField.setBounds(508, 0, 500, 60);
@@ -118,6 +132,7 @@ public class AdminMemberInfo extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						check = false;
 						cl.show(tablePanel, "AdminTable");
+						check = false;
 					}
 				});
 		infoPanel.add(adminBtn);
@@ -125,6 +140,7 @@ public class AdminMemberInfo extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						check = true;
 						cl.show(tablePanel, "MemberTable");
+						check = true;
 					}
 				});
 		infoPanel.add(memberBtn);

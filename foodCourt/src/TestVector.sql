@@ -2,6 +2,8 @@ DROP TABLE fook_manager;
 DROP TABLE fook_job;
 DROP TABLE fook_food;
 DROP TABLE fook_category;
+DROP TABLE fook_user;
+DROP TABLE fook_payment;
 
 CREATE TABLE fook_job (
 	job_id VARCHAR2(32) NOT NULL, /* 직급ID */
@@ -99,3 +101,61 @@ values (food_fid_seq.nextval, '스테이크', 4, 9500, 95, '뉴질랜드산 소고기를 사용
 SELECT * FROM fook_food;
 
 commit;
+
+
+CREATE TABLE fook_user (
+	user_id VARCHAR2(32) NOT NULL, /* 유저ID */
+	password VARCHAR2(32) NOT NULL, /* 비밀번호 */
+	name VARCHAR2(32) NOT NULL, /* 이름 */
+	phone_first VARCHAR2(3), /* 핸드폰번호1 */
+	phone_middle VARCHAR2(4), /* 핸드폰번호2 */
+	phone_last VARCHAR2(4), /* 핸드폰번호3 */
+	user_point NUMBER DEFAULT 0, /* 사용가능포인트 */
+	password_quiz VARCHAR2(80), /* 비밀번호퀴즈 */
+	password_answer VARCHAR2(80), /* 비밀번호답변 */
+	join_date DATE DEFAULT sysdate, /* 가입일 */
+	secession_date DATE, /* 탈퇴일 */
+	enable VARCHAR2(1) DEFAULT 'y' /* 활성화여부 */
+);
+
+-- 예제 값
+insert into fook_user(user_id, password, name, phone_first, phone_middle, phone_last, user_point, password_quiz, password_answer, join_date, secession_date, enable)
+values ('a1s2d3', '1q2w3e', '이수만', '010', '1234', '5678', 0, 'Country?', 'South Korea', sysdate, NULL, 'y');
+insert into fook_user(user_id, password, name, phone_first, phone_middle, phone_last, user_point, password_quiz, password_answer, join_date, secession_date, enable)
+values ('dfkjhg987', 'dfjhjh2', '박진영', '010', '3456', '7890', 10000, 'City?', 'Seoul', sysdate, NULL, 'y');
+insert into fook_user(user_id, password, name, phone_first, phone_middle, phone_last, user_point, password_quiz, password_answer, join_date, secession_date, enable)
+values ('dxcvowej34', '2309fjsdjfh', '양현석', '010', '7948', '2948', 300, 'Nation?', 'East Asia', sysdate, sysdate, 'n');
+
+-- 확인
+SELECT * FROM fook_user;
+
+
+CREATE TABLE fook_payment (
+	payment_id VARCHAR2(32) NOT NULL, /* 결제ID */
+	user_id VARCHAR2(32) NOT NULL, /* 유저ID */
+	payment_date DATE DEFAULT sysdate, /* 결제일 */
+	request_number VARCHAR2(4), /* 요청번호 */
+	total_price NUMBER, /* 총가격 */
+	save_point NUMBER DEFAULT 0, /* 총획득포인트 */
+	used_point NUMBER DEFAULT 0, /* 결제시사용포인트 */
+	card NUMBER DEFAULT 0, /* 카드금액 */
+	cash NUMBER DEFAULT 0, /* 현금금액 */
+	payment_state VARCHAR2(1) /* 결제상태 */
+);
+
+
+-- Sequence
+CREATE SEQUENCE payment_pid_seq START WITH 0 INCREMENT BY 1 MAXVALUE 999999 MINVALUE 0;
+
+DROP SEQUENCE payment_pid_seq;
+
+-- 예제 값
+insert into fook_payment(payment_id, user_id, payment_date, request_number, total_price, save_point, used_point, card, cash, payment_state)
+values (payment_pid_seq.nextval, 'a1s2d3', sysdate, '0001', 50000, 500, 0, 25000, 25000, '0');
+insert into fook_payment(payment_id, user_id, payment_date, request_number, total_price, save_point, used_point, card, cash, payment_state)
+values (payment_pid_seq.nextval, 'dfkjhg987', sysdate, '0002', 150000, 1500, 0, 125000, 25000, '0');
+insert into fook_payment(payment_id, user_id, payment_date, request_number, total_price, save_point, used_point, card, cash, payment_state)
+values (payment_pid_seq.nextval, 'dxcvowej34', sysdate, '0003', 80000, 800, 0, 25000, 55000, '0');
+
+-- 확인
+SELECT * FROM fook_payment;

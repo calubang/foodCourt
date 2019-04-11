@@ -53,9 +53,10 @@ public class UserMenuDetailView extends JPanel {
 		btnBasket.setName("basket");
 		btnBasket.setFoodDto(foodDto);
 		
-		
+		//이벤트 등록부 ------------------------------------------
 		btnBack.addActionListener(service.foodMainController);
 		btnBasket.addActionListener(service.foodMainController);
+		
 		
 		
 		setBackground(Color.WHITE);

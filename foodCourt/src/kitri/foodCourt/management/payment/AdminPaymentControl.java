@@ -15,6 +15,8 @@ public class AdminPaymentControl implements ActionListener {
 		this.ap = ap;
 		aps = new AdminPaymentService(this);
 		this.avr = aps.avr;
+		
+		aps.showPayment();
 	}
 
 
