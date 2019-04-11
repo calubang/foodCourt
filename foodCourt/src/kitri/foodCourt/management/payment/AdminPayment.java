@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -27,7 +28,13 @@ import javax.swing.border.CompoundBorder;
 public class AdminPayment extends JPanel {
 	
 	JTextField searchTextField = new JTextField();
-	JTable commonTable = new JTable(60, 8);
+	DefaultTableModel dtm = new DefaultTableModel();
+	JTable commonTable = new JTable(dtm) {
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		};
+	};
 	
 	JLabel searchLabel = new JLabel("\uAC80\uC0C9");
 
