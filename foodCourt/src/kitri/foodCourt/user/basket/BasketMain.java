@@ -2,12 +2,17 @@ package kitri.foodCourt.user.basket;
 
 import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.*;
 import kitri.foodCourt.user.main.FoodMain;
+import kitri.foodCourt.user.menu.UserMenuView;
 import kitri.foodCourt.user.swing.*;
 import javax.swing.border.*;
 
@@ -38,7 +43,7 @@ public class BasketMain extends JPanel{
 	
 	public void test() {
 		FoodDto food1 = new FoodDto("1", "된장찌개", 1, "한식", 5000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
-		FoodDto food2 = new FoodDto("2", "스테이크", 2, "양식", 8000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
+		FoodDto food2 = new FoodDto("2", "스테이크", 2, "양식", 8000, "/kitri/foodCourt/user/basket/image/x_button.png");
 		FoodDto food3 = new FoodDto("3", "자장면", 3, "중식", 7000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
 		FoodDto food4 = new FoodDto("4", "나가사키짬뽕", 4, "일식", 6000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
 		FoodDto food5 = new FoodDto("5", "나가사키짬뽕", 4, "일식", 6000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
@@ -277,10 +282,17 @@ public class BasketMain extends JPanel{
 		//음식사진
 		FButton btnFoodImage = SwingFactory.getInstance().getButton("image");
 		URL url = BasketMain.class.getResource(detail.getFood().getImageAddress());
-		if(url != null) {
-			btnFoodImage.setIcon(new ImageIcon(url));
-		}
 		btnFoodImage.setBounds(12, 15, 120, 70);
+		if(url != null) {			
+			try {
+				BufferedImage bImage = ImageIO.read(url);
+				ImageIcon icon = new ImageIcon(bImage.getScaledInstance(btnFoodImage.getWidth(), btnFoodImage.getHeight(), Image.SCALE_FAST));
+				btnFoodImage.setIcon(icon);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		pFoodInfo.add(btnFoodImage);
 		
 		//음식이름

@@ -4,6 +4,7 @@ import java.sql.*;
 
 import kitri.foodCourt.db.ConnectionMaker;
 import kitri.foodCourt.db.DbFactory;
+import kitri.foodCourt.user.Basket;
 
 public class PaymentDao {
 	
@@ -15,11 +16,11 @@ public class PaymentDao {
 		connectionMaker = DbFactory.connectionMaker("oracle");
 	}
 
-	public int payment() {
+	public int insertPayment(Basket basket) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "";
+		String sql = "ddd";
 		try {
 			con = connectionMaker.makeConnection();
 			ps = con.prepareStatement(sql);

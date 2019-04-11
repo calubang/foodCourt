@@ -11,11 +11,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 public class AdminViewReceipt extends JPanel {
 
-	JTable table = new JTable(15, 4);
+	DefaultTableModel dtm = new DefaultTableModel();
+	JTable table = new JTable(dtm) {
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		};
+	};
 
 	JPanel panel = new JPanel();
 	JPanel paymentMethodPanel = new JPanel();
@@ -60,6 +67,8 @@ public class AdminViewReceipt extends JPanel {
 		
 		table.setPreferredSize(new Dimension(380, 250));
 		table.setPreferredScrollableViewportSize(new Dimension(380, 280));
+		table.setShowVerticalLines(true);
+		table.setAutoCreateRowSorter(false);
 		scrollPane.setViewportView(table);
 		
 		paymentMethodPanel.setLayout(new GridLayout(2, 3, 0, 0));

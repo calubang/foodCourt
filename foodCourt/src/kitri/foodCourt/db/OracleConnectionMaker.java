@@ -12,7 +12,7 @@ public class OracleConnectionMaker implements ConnectionMaker{
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection(
-					"jdbc:oracle:thin:@localhost:1521:orcl", "kitri", "kitri");
+					"jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

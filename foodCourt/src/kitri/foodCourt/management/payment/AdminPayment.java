@@ -38,7 +38,7 @@ public class AdminPayment extends JPanel {
 	JButton deleteBtn = new JButton("\uC0AD\uC81C");
 	
 	AdminPaymentControl apc;
-	
+	AdminViewReceipt avr;
 	
 	/**
 	 * Create the panel.
@@ -81,8 +81,11 @@ public class AdminPayment extends JPanel {
 		
 		// Add Listener
 		apc = new AdminPaymentControl(this);
+		avr = apc.avr;
 		
 		checkReceiptBtn.addActionListener(apc);
 		deleteBtn.addActionListener(apc);
+		
+		avr.confirmBtn.addActionListener(apc);
 	}
 }

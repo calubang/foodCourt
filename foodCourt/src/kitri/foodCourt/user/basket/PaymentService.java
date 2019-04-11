@@ -64,16 +64,18 @@ public class PaymentService {
 			SwingFactory.getOptionPane("warning", payment, "결제오류", "입력금액 총합이 많습니다.");
 			return;
 		}
-		
-		//장바구니 초기화
-		payment.basketMain.user.getBasket().removeAll();
 		//네트워크 통신
+		
+		//DB연동
+		paymentDao.insertPayment(user.getBasket());
 		
 		//모든 절차후
 		int result = SwingFactory.getOptionPane("message", payment, "결제확인", payment.requestNumber + "번으로 결제완료 되었습니다.");
 		if(result == 0) {
 			payment.requestNumber++;
 			payment.basketMain.foodMain.card.show(payment.basketMain.foodMain.panChangePanel, "foodMainView");
+			//장바구니 초기화
+			payment.basketMain.user.getBasket().removeAll();
 		}
 		
 		
