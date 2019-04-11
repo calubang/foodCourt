@@ -1,5 +1,6 @@
 package kitri.foodCourt.management.payment;
 
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -104,9 +105,62 @@ public class AdminPaymentService {
 	}
 	
 	public void showReceiptWindow() {
+		if (ap.commonTable.getSelectedRow() < 0) {
+			warningMessage(ap.checkReceiptBtn, "선택된 결제 내역이 없습니다.", "영수증 확인 오류");
+			return;
+		}
+		
+		dtmReceipt.setRowCount(0);
+		
+		int currentSelectedrow = ap.commonTable.convertRowIndexToModel(ap.commonTable.getSelectedRow());
+		Object user_id = dtmPayment.getValueAt(currentSelectedrow, 1);
+		
+		Object[] rowData = new Object[8];
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			
+			ps = c.prepareStatement("select request_number, to_char(payment_date, 'yyyy.mm.dd hh24:mi:ss') \"payment_date\", category_name, pd.food_name \"food_name\", count, pd.price \"price\", pd.point \"point\", card, cash, used_point, total_price, save_point "
+								  + "from fook_payment p, fook_payment_detail pd, fook_food f, fook_category fc "
+								  + "where user_id = (?) and p.payment_id = pd.payment_id and pd.food_id = f.food_id and f.category_id = fc.category_id");
+			
+			ps.setString(1, (String)user_id);
+			
+			rs = ps.executeQuery();
+
+			avr.memberIDValueLabel.setText((String)user_id);
+			
+			while (rs.next()) {
+				avr.orderNumValueLabel.setText(rs.getString("request_number"));
+				avr.orderDateValueLabel.setText(rs.getString("payment_date"));
+				
+				rowData[0] = rs.getString("category_name");
+				rowData[1] = rs.getString("food_name");
+				rowData[2] = rs.getInt("count");
+				rowData[3] = rs.getInt("price");
+				rowData[4] = rs.getInt("point");
+
+				dtmReceipt.addRow(rowData);
+				
+				avr.moneyValueLabel.setText(String.valueOf(rs.getInt("cash")));
+				avr.cardValueLabel.setText(String.valueOf(rs.getInt("card")));
+				avr.pointValueLabel.setText(String.valueOf(rs.getInt("used_point")));
+				avr.payTotalValueLabel.setText(String.valueOf(rs.getInt("total_price")));
+				avr.getPointValueLabel.setText(String.valueOf(rs.getInt("save_point")));
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeOracleConnection(c, ps, rs);
+		}
+		
 		jdR.getContentPane().add(avr);
 		jdR.setSize(395, 720);
 		jdR.setModal(true);
+		jdR.setResizable(false);
 		jdR.setVisible(true);
 	}
 	
@@ -155,5 +209,23 @@ public class AdminPaymentService {
 		} finally {
 			closeOracleConnection(c, ps, rs);
 		}
+	}
+
+	public void searchUserID() {
+		String str = ap.searchTextField.getText().trim();
+		
+		int rowCount = dtmPayment.getRowCount();
+		for(int i = 0; i < rowCount; i++) {
+			if (str.equals((String)ap.commonTable.getValueAt(i, 1))) {
+				ap.commonTable.setRowSelectionInterval(i, i);
+				return;
+			}
+		}
+		
+		warningMessage(ap.searchTextField, "찾는 회원 ID가 없습니다.", "회원 검색 오류");
+	}
+	
+	private void warningMessage(Component component, Object msg, String title) {
+		JOptionPane.showMessageDialog(component, msg, title, JOptionPane.WARNING_MESSAGE);
 	}
 }

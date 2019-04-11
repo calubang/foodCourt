@@ -13,7 +13,8 @@ import javax.swing.border.MatteBorder;
 import kitri.foodCourt.dto.FoodDto;
 
 public class UserMenuDetailView extends JPanel {
-	JTextField tfcount;
+	JTextField tfCount;
+	String tfcountStr;
 	JTextArea tfDescription = new JTextArea();
 	FoodDto foodDto;
 	JLabel image;
@@ -34,11 +35,8 @@ public class UserMenuDetailView extends JPanel {
 			image = new JLabel(properImg);
 			foodName.setText(foodDto.getFoodName());
 			foodName.setFont(new Font("맑은고딕", Font.BOLD, 28));
-			System.out.println(foodDto.getFoodName());
 			price.setText("가격 : " + Integer.toString(foodDto.getPrice()) + " 원");
-			System.out.println(foodDto.getPrice());
 			tfDescription.setText(foodDto.getDescription());
-			System.out.println(foodDto.getDescription());
 			point.setText("적립 포인트 : " + Integer.toString(foodDto.getPoint()));
 			this.foodDto = foodDto;
 		} catch (IOException e1) {
@@ -58,7 +56,6 @@ public class UserMenuDetailView extends JPanel {
 		btnBasket.addActionListener(service.foodMainController);
 		
 		
-		
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
@@ -74,7 +71,6 @@ public class UserMenuDetailView extends JPanel {
 		foodName.setToolTipText("\uBA54\uB274 \uC774\uB984");
 		foodName.setBounds(542, 39, 419, 71);
 		add(foodName);
-		
 		
 		price.setBorder(new LineBorder(Color.LIGHT_GRAY, 3, true));
 		price.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,22 +95,22 @@ public class UserMenuDetailView extends JPanel {
 		point.setBounds(723, 131, 162, 52);
 		add(point);
 		
-		
 		panel.setBackground(Color.BLACK);
 		panel.setBounds(631, 385, 3, 35);
 		add(panel);
 		
-		tfcount = new JTextField("1");
-		tfcount.setHorizontalAlignment(SwingConstants.CENTER);
-		tfcount.setBounds(653, 385, 308, 35);
-		add(tfcount);
-		tfcount.setColumns(10);
+		tfCount = new JTextField("1");
+		tfcountStr = tfCount.getText();
+		tfCount.setHorizontalAlignment(SwingConstants.CENTER);
+		tfCount.setBounds(653, 385, 308, 35);
+		tfCount.addKeyListener(service.foodMainController);
+		add(tfCount);
+		tfCount.setColumns(10);
 		
 		
 		btnBack.setFont(new Font("맑은 고딕", Font.BOLD, 26));
 		btnBack.setBounds(199, 476, 223, 92);
 		add(btnBack);
-		
 		
 		btnBasket.setFont(new Font("맑은 고딕", Font.BOLD, 26));
 		btnBasket.setBounds(585, 476, 223, 92);
@@ -127,6 +123,6 @@ public class UserMenuDetailView extends JPanel {
 		return this.foodDto;
 	}
 	public int getCount() {
-		return Integer.parseInt(tfcount.getText()); // 장바구니 추가를 실행할때 액션이 발생했을때
+		return Integer.parseInt(tfCount.getText()); // 장바구니 추가버튼 액션이벤트가 발생했을때 실행
 	}
 }

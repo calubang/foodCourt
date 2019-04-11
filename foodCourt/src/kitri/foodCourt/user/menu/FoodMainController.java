@@ -1,11 +1,13 @@
 package kitri.foodCourt.user.menu;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import kitri.foodCourt.user.main.FoodMain;
-import javax.swing.JButton;
 
-public class FoodMainController implements ActionListener{
+import java.awt.event.*;
+
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
+public class FoodMainController implements ActionListener, KeyListener{
 	FoodMain foodMain = null;
 	FoodMainService foodMainService = null;
 	public FoodMainController(FoodMain main) {
@@ -34,6 +36,21 @@ public class FoodMainController implements ActionListener{
 			foodMainService.addMenuInbasket(((AddOrderListButton)ob).getFoodDto(), ((AddOrderListButton)ob).getCount());
 		}
 			
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		foodMainService.validationCheck(e);
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
 	}
 
 }
