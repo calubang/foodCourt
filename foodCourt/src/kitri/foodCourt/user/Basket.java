@@ -16,8 +16,8 @@ public interface Basket {
 	//모두 삭제 : 모두 0으로
 	public int removeAll();
 	
-	public String getRequestNumber();
-	public void setRequestNumber(String requestNumber);
+	public int getRequestNumber();
+	public void setRequestNumber(int requestNumber);
 	public String getPaymentDate();
 	public void setPaymentDate(String paymentDate);
 	public int getTotalPrice();

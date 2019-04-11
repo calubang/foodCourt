@@ -41,6 +41,9 @@ public class PaymentService {
 		//paymentDao.payment();
 		int cash = 0 , card = 0, point = 0;
 		int total = 0;
+		int savePoint = 0;
+		int usedPoint = 0;
+		
 		if(payment.tfCash.getText().isEmpty()) {
 			cash = 0;
 		} else {
@@ -64,12 +67,28 @@ public class PaymentService {
 			SwingFactory.getOptionPane("warning", payment, "결제오류", "입력금액 총합이 많습니다.");
 			return;
 		}
+		//포인트 조절
+		savePoint = user.getBasket().getSavePoint();
+		usedPoint = point;
+		user.setUserPoint(user.getUserPoint() - usedPoint + savePoint);
+		
 		//네트워크 통신
 		
 		//DB연동
-		paymentDao.insertPayment(user.getBasket());
+		user.getBasket().setRequestNumber(payment.requestNumber);
+		int dbResult = paymentDao.insertPayment(user, card, cash, point);
+		if( dbResult == 1) {
+			//정상 insert
+			
+		} else if(dbResult == -1){
+			//비정상
+			System.out.println("비정상종료");
+		} else {
+			//??
+		}
 		
 		//모든 절차후
+		
 		int result = SwingFactory.getOptionPane("message", payment, "결제확인", payment.requestNumber + "번으로 결제완료 되었습니다.");
 		if(result == 0) {
 			payment.requestNumber++;

@@ -14,6 +14,8 @@ import kitri.foodCourt.user.*;
 import kitri.foodCourt.user.main.FoodMain;
 import kitri.foodCourt.user.menu.UserMenuView;
 import kitri.foodCourt.user.swing.*;
+import oracle.net.aso.a;
+
 import javax.swing.border.*;
 
 
@@ -38,28 +40,32 @@ public class BasketMain extends JPanel{
 	
 	public FoodMain foodMain;
 	
-	//테스트
-	public User user ;//= new User("calubang", "안병욱", 5000);
+	//스크롤바위치
+	int position;
 	
-	public void test() {
-		FoodDto food1 = new FoodDto("1", "된장찌개", 1, "한식", 5000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
-		FoodDto food2 = new FoodDto("2", "스테이크", 2, "양식", 8000, "/kitri/foodCourt/user/basket/image/x_button.png");
-		FoodDto food3 = new FoodDto("3", "자장면", 3, "중식", 7000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
-		FoodDto food4 = new FoodDto("4", "나가사키짬뽕", 4, "일식", 6000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
-		FoodDto food5 = new FoodDto("5", "나가사키짬뽕", 4, "일식", 6000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
-		BasketDetail detail1 = new BasketDetail(food1, 1);
-		BasketDetail detail2 = new BasketDetail(food2, 2);
-		BasketDetail detail3 = new BasketDetail(food3, 3);
-		BasketDetail detail4 = new BasketDetail(food4, 4);
-		BasketDetail detail5 = new BasketDetail(food5, 5);
-		
-		user.getBasket().add(detail1);
-		user.getBasket().add(detail2);
-		user.getBasket().add(detail3);
-		user.getBasket().add(detail4);
-		user.getBasket().add(detail5);
-		
-	}
+	//테스트
+	public User user ;
+	//= new User("calubang", "안병욱", 5000);
+//	
+//	public void test() {
+//		FoodDto food1 = new FoodDto("1", "된장찌개", 1, "한식", 5000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
+//		FoodDto food2 = new FoodDto("2", "스테이크", 2, "양식", 8000, "/kitri/foodCourt/user/basket/image/x_button.png");
+//		FoodDto food3 = new FoodDto("3", "자장면", 3, "중식", 7000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
+//		FoodDto food4 = new FoodDto("4", "나가사키짬뽕", 4, "일식", 6000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
+//		FoodDto food5 = new FoodDto("5", "나가사키짬뽕", 4, "일식", 6000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
+//		BasketDetail detail1 = new BasketDetail(food1, 1);
+//		BasketDetail detail2 = new BasketDetail(food2, 2);
+//		BasketDetail detail3 = new BasketDetail(food3, 3);
+//		BasketDetail detail4 = new BasketDetail(food4, 4);
+//		BasketDetail detail5 = new BasketDetail(food5, 5);
+//		
+//		user.getBasket().add(detail1);
+//		user.getBasket().add(detail2);
+//		user.getBasket().add(detail3);
+//		user.getBasket().add(detail4);
+//		user.getBasket().add(detail5);
+//		
+//	}
 	
 //	public static void main(String[] args) {
 //		EventQueue.invokeLater(new Runnable() {
@@ -77,10 +83,10 @@ public class BasketMain extends JPanel{
 	public BasketMain(FoodMain foodMain) {
 		//test();
 		//기본 UI 구성
-		payment = new Payment(this);
-		controller = new BasketController(this);
 		this.foodMain = foodMain;
 		this.user = foodMain.user;
+		payment = new Payment(this);
+		controller = new BasketController(this);
 		initView();
 		//dataSetting();
 		
@@ -146,20 +152,26 @@ public class BasketMain extends JPanel{
 		FLabel label_3 = new FLabel(Font.PLAIN, 20);
 		label_3.setText("\uD3EC\uC778\uD2B8");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setBounds(520, 0, 100, 50);
+		label_3.setBounds(420, 0, 100, 50);
 		pBasketMenu.add(label_3);
 		
 		FLabel label_4 = new FLabel(Font.PLAIN, 20);
-		label_4.setText("\uAC00\uACA9");
+		label_4.setText("\uAC1C\uB2F9\uAC00\uACA9");
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setBounds(850, 0, 100, 50);
+		label_4.setBounds(720, 0, 100, 50);
 		pBasketMenu.add(label_4);
 		
 		FLabel label_5 = new FLabel(Font.PLAIN, 20);
 		label_5.setText("\uC218\uB7C9");
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		label_5.setBounds(695, 0, 100, 50);
+		label_5.setBounds(560, 0, 100, 50);
 		pBasketMenu.add(label_5);
+		
+		FLabel label = new FLabel(0, 20);
+		label.setText("\uCD1D\uAC00\uACA9");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setBounds(876, 0, 100, 50);
+		pBasketMenu.add(label);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(12, 165, 988, 304);
@@ -175,7 +187,7 @@ public class BasketMain extends JPanel{
 		gbl_pMiddle = new GridBagLayout();
 		gbl_pMiddle.columnWidths = new int[]{0};
 		gbl_pMiddle.rowHeights = new int[]{0, 0, 0};
-		gbl_pMiddle.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pMiddle.columnWeights = new double[]{0.0};
 		gbl_pMiddle.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		pMiddle.setLayout(gbl_pMiddle);
 		
@@ -233,11 +245,7 @@ public class BasketMain extends JPanel{
 		lblTotalPrice.setText(String.valueOf(user.getBasket().getTotalPrice()));
 		lblTotalPoint.setText(String.valueOf(user.getBasket().getSavePoint()));
 		
-		if(pMiddle != null) {
-			pMiddle.removeAll();
-		}else {
-			pMiddle = new JPanel();
-		}
+		pMiddle.removeAll();
 		
 		scrollPane.setViewportView(pMiddle);
 		gbl_pMiddle = new GridBagLayout();
@@ -259,10 +267,12 @@ public class BasketMain extends JPanel{
 			
 			pMiddle.add(temp, gbcFood);
 		}
+		
 	}
 	
 	public JPanel addFood(int index) {
 		BasketDetail detail = user.getBasket().getDetailList().get(index);
+		int count = detail.getCount();
 		JPanel pFood = new JPanel();
 		pFood.setLayout(null);
 		pFood.setMaximumSize(new Dimension(988, 100));
@@ -305,20 +315,26 @@ public class BasketMain extends JPanel{
 		//포인트
 		FLabel lPoint = SwingFactory.getInstance().getLabel("basketFood");
 		lPoint.setText(String.valueOf(detail.getFood().getPoint()));
-		lPoint.setBounds(520, 28, 100, 44);
+		lPoint.setBounds(420, 28, 100, 44);
 		pFood.add(lPoint);
 		
 		//수량
 		FLabel lCount = SwingFactory.getInstance().getLabel("basketFood");
 		lCount.setText(String.valueOf(detail.getCount()));
-		lCount.setBounds(695, 28, 100, 45);
+		lCount.setBounds(560, 28, 100, 45);
 		pFood.add(lCount);
 		
-		//가격
+		//개당가격
 		FLabel lPrice = SwingFactory.getInstance().getLabel("basketFood");
 		lPrice.setText(String.valueOf(detail.getFood().getPrice()));
-		lPrice.setBounds(850, 28, 100, 45);
+		lPrice.setBounds(720, 28, 100, 45);
 		pFood.add(lPrice);
+		
+		//총가격
+		FLabel lPriceSum = SwingFactory.getInstance().getLabel("basketFood");
+		lPriceSum.setText(String.valueOf(detail.getFood().getPrice()*count));
+		lPriceSum.setBounds(870, 28, 100, 45);
+		pFood.add(lPriceSum);
 		
 		//이벤트
 		btnX.addActionListener(controller);

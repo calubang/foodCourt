@@ -11,9 +11,9 @@ import kitri.foodCourt.user.swing.*;
 
 public class Payment extends JPanel {
 
-	public static int requestNumber = 0;
+	public static int requestNumber = 1;
 	private PaymentController controller;
-	public Receipt receipt = new Receipt();
+	public Receipt receipt;
 	public BasketMain basketMain;
 	//하단 버튼3개
 	public FButton btnReceiptConfirm;
@@ -33,7 +33,9 @@ public class Payment extends JPanel {
 	
 	public Payment(BasketMain basketMain) {
 		this.basketMain = basketMain;
+		receipt = new Receipt();
 		receipt.user = basketMain.user;
+		
 		//기본UI
 		initView();
 		//dataSetting();
@@ -55,6 +57,11 @@ public class Payment extends JPanel {
 		lbTotalPrice.setText(String.valueOf(basket.getTotalPrice()));
 		lbTotalPoint.setText(String.valueOf(basket.getSavePoint()) + "P");
 		lbUserPoint.setText(String.valueOf(basketMain.user.getUserPoint()) + "P");
+		
+		//tf 리셋
+		tfCard.setText("");
+		tfCash.setText("");
+		tfPoint.setText("");
 		
 		//영수증도 같이 dataSetting
 		receipt.dataSetting();
@@ -110,6 +117,7 @@ public class Payment extends JPanel {
 		
 		RoundPanel pCash = new RoundPanel();
 		pCash.setBackground(new Color(255, 255, 240));
+		//pCash.addMouseListener(pCash);
 		//pCash.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		pCash.setBounds(100, 220, 200, 180);
 		add(pCash);

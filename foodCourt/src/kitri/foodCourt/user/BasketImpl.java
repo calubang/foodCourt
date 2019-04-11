@@ -6,7 +6,7 @@ import kitri.foodCourt.dto.UserDto;
 
 public class BasketImpl implements Basket{
 	//장바구니
-	private String requestNumber;				//요청번호
+	private int requestNumber;				//요청번호
 	private String paymentDate;					//결제일
 	private int totalPrice;							//총가격
 	private int savePoint;
@@ -28,10 +28,11 @@ public class BasketImpl implements Basket{
 		cash = 0;
 		detailList = new ArrayList<BasketDetail>();
 	}
-	public String getRequestNumber() {
+	
+	public int getRequestNumber() {
 		return requestNumber;
 	}
-	public void setRequestNumber(String requestNumber) {
+	public void setRequestNumber(int requestNumber) {
 		this.requestNumber = requestNumber;
 	}
 	public String getPaymentDate() {
