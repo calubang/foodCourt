@@ -58,7 +58,7 @@ public class FoodMain extends JFrame{
 	public JLabel labBasket = new JLabel("\uC8FC\uBB38\uBAA9\uB85D");
 	public JPanel panBarVerRight = new JPanel();
 	public Cursor csorHandCursor = new Cursor(Cursor.HAND_CURSOR);
-	
+	boolean check = false;
 	//장바구니, 결제부분 결합
 	public User user;
 	public BasketMain basketMain;
@@ -157,7 +157,7 @@ public class FoodMain extends JFrame{
 		panel_2.setBounds(22, 21, 107, 75);
 		panel.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
-		btnMainMenu.setToolTipText("\uBA54\uC778\uBA54\uB274");
+		btnMainMenu.setToolTipText("\uBA54\uC778");
 		btnMainMenu.setBorder(null);
 		btnMainMenu.setPreferredSize(new Dimension(107, 75));
 		

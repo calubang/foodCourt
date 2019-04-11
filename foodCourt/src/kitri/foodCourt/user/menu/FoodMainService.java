@@ -1,8 +1,11 @@
 package kitri.foodCourt.user.menu;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.BasketDetail;
@@ -75,7 +78,8 @@ public class FoodMainService {
 			foodMain.basketMain.dataSetting();
 			subResult = JOptionPane.showConfirmDialog(foodMain.UserMenuDetailView, "추가되었습니다\n장바구니로 가시겠습니까?", "titme",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
-			if (subResult == 1) {
+			System.out.println(subResult);
+			if (subResult == 1 || subResult == -1) {
 				backMenu();
 			} else {
 				foodMain.card.show(foodMain.panChangePanel, "basketMain");
@@ -96,6 +100,14 @@ public class FoodMainService {
 		foodMain.basketMain.dataSetting();
 		foodMain.card.show(foodMain.panChangePanel, "basketMain");
 		foodMain.basketMain.card.show(foodMain.basketMain.pChangePanel, "basket");
+	}
+
+	public void validationCheck(KeyEvent e) {
+		char keyValue = e.getKeyChar();
+		if(!Character.isDigit(keyValue)) {
+			e.consume();
+			return;
+		}
 	}
 
 }
