@@ -53,18 +53,36 @@ public class AdminMemberInfo extends JPanel {
 	
 	JFrame jfA = new JFrame();
 	JDialog jfAD = new JDialog(jfA,"관리자등록");
+	
 	JFrame jfM = new JFrame();
 	JDialog jfMD = new JDialog(jfM,"회원등록");
+	
 	JFrame jfMo = new JFrame();
-	JDialog jfMoD = new JDialog(jfMo,"수정");
+	JDialog jfMoD = new JDialog(jfMo, "수정");
+	JPanel jpaMo;
+	CardLayout card = new CardLayout();
+	
 	JFrame jfD = new JFrame();
 	JDialog jfDD = new JDialog(jfD,"삭제");
-	
+	boolean check =false;
 	/**
 	 * Create the panel.
 	 */
 	
 	public AdminMemberInfo() {
+		
+		//수정창 관련
+		jfMo.setSize(600, 650);
+		jpaMo = new JPanel();
+		card = new CardLayout();
+		maR = new ModifyAdminRegit();
+		mR = new ModifyRegit();
+		jpaMo.setLayout(card);
+		jpaMo.add(maR, "adminModi");
+		jpaMo.add(mR, "memberModi");
+		//jpaMo.setBounds(160, 118, 1012, 634);
+		jfMo.add(jpaMo);
+		
 		setSize(new Dimension(1007, 722));
 		setLayout(null);
 		
@@ -98,12 +116,14 @@ public class AdminMemberInfo extends JPanel {
 		infoPanel.setLayout(new GridLayout(1, 2, 0, 0));
 		adminBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						check = false;
 						cl.show(tablePanel, "AdminTable");
 					}
 				});
 		infoPanel.add(adminBtn);
 		memberBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						check = true;
 						cl.show(tablePanel, "MemberTable");
 					}
 				});
@@ -130,8 +150,8 @@ public class AdminMemberInfo extends JPanel {
 		memberRegisterBtn.addActionListener(arc);
 		modifyBtn.addActionListener(arc);
 		deleteBtn.addActionListener(arc);
-		adminBtn.addActionListener(arc);
-		memberBtn.addActionListener(arc);
+		//adminBtn.addActionListener(arc);
+		//memberBtn.addActionListener(arc);
 		
 		ar.idbtn.addActionListener(arc);
 		ar.registerbtn.addActionListener(arc);
@@ -147,4 +167,5 @@ public class AdminMemberInfo extends JPanel {
 		mR.registerbtn.addActionListener(arc);
 		mR.cancelbtn.addActionListener(arc);
 	}
+	
 }

@@ -51,10 +51,6 @@ public class AdminRegisterControl implements ActionListener {
 			ars.maRRegister();
 		} else if (ob == ami.maR.cancelbtn) {
 			ars.Close(ami.jfMoD);
-		} else if (ob == ami.adminBtn) {
-			ars.aminModify();
-		}else if(ob == ami.memberBtn) {
-			ars.memberModify();
 		}
 //		else if(ob == ami.mR.registerbtn) {
 //			ars.mRRegister();
