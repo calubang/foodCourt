@@ -133,6 +133,8 @@ public class AdminMemberInfo extends JPanel {
 		memberRegisterBtn.addActionListener(arc);
 		modifyBtn.addActionListener(arc);
 		deleteBtn.addActionListener(arc);
+		adminBtn.addActionListener(arc);
+		memberBtn.addActionListener(arc);
 		
 		ar.idbtn.addActionListener(arc);
 		ar.registerbtn.addActionListener(arc);

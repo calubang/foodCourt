@@ -17,11 +17,15 @@ public class AdminRegisterService {
 	RemoveMember rm;
 	ModifyRegit mR;
 
-	String[] option = { "ï¿½ï¿½", "ï¿½Æ´Ï¿ï¿½" };
-	String[] column = { "ï¿½Ì¸ï¿½", "ï¿½ï¿½Ğ¹ï¿½È£", "ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½È£", "ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½", "ï¿½Ô»ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½È£", "ï¿½Ö¼ï¿½", "ï¿½Ì¸ï¿½ï¿½ï¿½", "ï¿½Ì¸ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½" };
+	String[] option = { "¿¹", "¾Æ´Ï¿ä" };
+	String[] column = { "¾ÆÀÌµğ", "ÀÌ¸§", "ºñ¹Ğ¹øÈ£", "ÇÚµåÆù¹øÈ£", "Á÷¾÷ÄÚµå", "ÀÔ»çÀÏ", "¿ìÆí¹øÈ£", "ÁÖ¼Ò", "ÀÌ¸ŞÀÏ", "ÀÌ¸ŞÀÏµµ¸ŞÀÎ" };
 
 	DefaultTableModel dtm;
-
+	
+	 Connection c = null;
+	 PreparedStatement ps = null;
+	 ResultSet rs = null;
+	    
 	public AdminRegisterService(AdminRegisterControl arc) {
 		this.arc = arc;
 		ami = this.arc.ami;
@@ -36,6 +40,37 @@ public class AdminRegisterService {
 			dtm.addColumn(column[i]);
 		}
 
+	}
+	private void closeOracleConnection(Connection c, PreparedStatement ps, ResultSet rs) {
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				rs = null;
+			}
+		}
+		
+		if(ps != null) {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				ps = null;
+			}
+		}
+		
+		if(c != null) {
+			try {
+				c.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				c = null;
+			}
+		}
 	}
 
 	public void showadminRegister() {
@@ -60,8 +95,8 @@ public class AdminRegisterService {
 	}
 
 	public void showmodify() {
-		if(ami.check) {
-			// íšŒì›
+	
+	
 			ami.jfMoD.getContentPane().add(ami.mR);
 			ami.jfMoD.setSize(600, 650);
 			ami.jfMoD.setModal(true);
@@ -72,12 +107,17 @@ public class AdminRegisterService {
 			ami.jfMoD.setSize(600, 650);
 			ami.jfMoD.setModal(true);
 			ami.jfMoD.setVisible(true);
-		}
+		
+		
+			ami.jfMoD.getContentPane().add(ami.mR);
+			ami.jfMoD.setSize(600, 650);
+			ami.jfMoD.setModal(true);
+			ami.jfMoD.setVisible(true);
+		
 	}
 
 	public void showdelete() {
-		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½?\n(ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ù½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.)",
-				"ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
+		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?\n(»èÁ¦ÇÏ¸é ´Ù½Ã µÇµ¹¸± ¼ö ¾ø½À´Ï´Ù.)", "»èÁ¦ È®ÀÎ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
 	public void arRegister() {
@@ -85,7 +125,7 @@ public class AdminRegisterService {
 	}
 
 	public void arId() {
-		int result = JOptionPane.showOptionDialog(ar, "ï¿½ï¿½ï¿½ï¿½Ï½Ç¼ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.", "ï¿½ßºï¿½È®ï¿½ï¿½", JOptionPane.YES_OPTION,
+		int result = JOptionPane.showOptionDialog(ar, "»ç¿ëÇÒ¼öÀÖ½À´Ï´Ù.", "Áßº¹È®ÀÎ", JOptionPane.YES_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
@@ -98,7 +138,7 @@ public class AdminRegisterService {
 	}
 
 	public void mrId() {
-		int result = JOptionPane.showOptionDialog(ar, "ï¿½ï¿½ï¿½ï¿½Ï½Ç¼ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.", "ï¿½ßºï¿½È®ï¿½ï¿½", JOptionPane.YES_OPTION,
+		int result = JOptionPane.showOptionDialog(ar, "»ç¿ëÇÒ¼öÀÖ½À´Ï´Ù.", "Áßº¹È®ÀÎ", JOptionPane.YES_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
@@ -109,5 +149,14 @@ public class AdminRegisterService {
 	public void mRRegister() {
 
 	}
+	public  void aminModify() {
+		ami.cl.show(ami.tablePanel, "AdminTable");
+		
+	}
+	public  void memberModify() {
+		ami.cl.show(ami.tablePanel, "MemberTable");
+		
+	}
+	
 
 }
