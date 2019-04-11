@@ -74,6 +74,7 @@ public class FoodMainService {
 
 	// 주문목록 페이지로 (주문목록 버튼)
 	public void orderList() {
+		foodMain.basketMain.dataSetting();
 		foodMain.card.show(foodMain.panChangePanel, "basketMain");
 		foodMain.basketMain.card.show(foodMain.basketMain.pChangePanel, "basket");
 	}

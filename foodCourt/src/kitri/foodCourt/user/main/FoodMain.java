@@ -59,7 +59,7 @@ public class FoodMain extends JFrame{
 	
 	//장바구니, 결제부분 결합
 	public User user;
-	public BasketMain basketMain = new BasketMain();
+	public BasketMain basketMain = new BasketMain(this);
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
