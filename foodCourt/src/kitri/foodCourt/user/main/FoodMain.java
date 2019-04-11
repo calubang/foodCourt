@@ -102,9 +102,8 @@ public class FoodMain extends JFrame{
 	public FoodMain() {
 		//테스트용
 		user = new User("calubang", "안병욱", 5000);
-		basketMain = new BasketMain(this); //이시점에서 유저를 넣어준다
 		test();
-		
+		basketMain = new BasketMain(this); //이시점에서 유저를 넣어준다
 		
 		btnHansicMenu.setName("1");
 		btnJoongsicMenu.setName("2");
@@ -260,7 +259,6 @@ public class FoodMain extends JFrame{
 		btnUserInfo.addActionListener(foodMainController);
 		btnOrderList.addActionListener(foodMainController);
 		searchField.addActionListener(foodMainController);
-		btnOrderList.addActionListener(foodMainController);
 		
 		foodMainView.labHansic.addActionListener(foodMainController);
 		foodMainView.labJoongsic.addActionListener(foodMainController);

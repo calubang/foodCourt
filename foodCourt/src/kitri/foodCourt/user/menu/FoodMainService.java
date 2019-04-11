@@ -91,7 +91,7 @@ public class FoodMainService {
 
 	// 주문목록 페이지로 (주문목록 버튼)
 	public void orderList() {
-		System.out.println(foodMain.user.getBasket());
+		//System.out.println(foodMain.user.getBasket());
 //		foodMain.basketMain.user = foodMain.user; // 장바구니버튼을 클릭하지 않고 메뉴에서 바로 들어가게 되면 이 문장이 실행되지 않는다  
 		foodMain.basketMain.dataSetting();
 		foodMain.card.show(foodMain.panChangePanel, "basketMain");
