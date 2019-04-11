@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.menu.jdbc.ConnectionMaker;
 
 public class MenuDao {

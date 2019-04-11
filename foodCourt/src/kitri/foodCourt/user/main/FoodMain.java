@@ -19,6 +19,8 @@ import javax.swing.border.LineBorder;
 import java.awt.Dimension;
 import javax.swing.border.*;
 
+import kitri.foodCourt.dto.FoodDto;
+import kitri.foodCourt.user.BasketDetail;
 import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.basket.BasketMain;
 import kitri.foodCourt.user.menu.*;
@@ -59,7 +61,7 @@ public class FoodMain extends JFrame{
 	
 	//장바구니, 결제부분 결합
 	public User user;
-	public BasketMain basketMain = new BasketMain(this);
+	public BasketMain basketMain;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -77,7 +79,32 @@ public class FoodMain extends JFrame{
 	/**
 	 * Create the frame.
 	 */
+	public void test() {
+		FoodDto food1 = new FoodDto("1", "된장찌개", 1, "한식", 5000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
+		FoodDto food2 = new FoodDto("2", "스테이크", 2, "양식", 8000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
+		FoodDto food3 = new FoodDto("3", "자장면", 3, "중식", 7000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
+		FoodDto food4 = new FoodDto("4", "나가사키짬뽕", 4, "일식", 6000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
+		FoodDto food5 = new FoodDto("5", "나가사키짬뽕", 4, "일식", 6000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
+		BasketDetail detail1 = new BasketDetail(food1, 1);
+		BasketDetail detail2 = new BasketDetail(food2, 2);
+		BasketDetail detail3 = new BasketDetail(food3, 3);
+		BasketDetail detail4 = new BasketDetail(food4, 4);
+		BasketDetail detail5 = new BasketDetail(food5, 5);
+		
+		user.getBasket().add(detail1);
+		user.getBasket().add(detail2);
+		user.getBasket().add(detail3);
+		user.getBasket().add(detail4);
+		user.getBasket().add(detail5);
+		
+	}
+	
 	public FoodMain() {
+		//테스트용
+		user = new User("calubang", "안병욱", 5000);
+		basketMain = new BasketMain(this); //이시점에서 유저를 넣어준다
+		test();
+		
 		
 		btnHansicMenu.setName("1");
 		btnJoongsicMenu.setName("2");

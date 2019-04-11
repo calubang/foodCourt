@@ -10,10 +10,12 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
+import kitri.foodCourt.dto.FoodDto;
+
 public class UserMenuDetailView extends JPanel {
-	JTextField textField;
+	JTextField tfcount;
 	JTextArea tfDescription = new JTextArea();
-	
+	FoodDto foodDto;
 	JLabel image;
 	JLabel foodName = new JLabel();
 	JLabel price = new JLabel();
@@ -21,7 +23,7 @@ public class UserMenuDetailView extends JPanel {
 	JLabel point = new JLabel();
 	JPanel panel = new JPanel();
 	JButton btnBack = new JButton("\uC774\uC804\uC73C\uB85C");
-	JButton btnBasket = new JButton("\uC7A5\uBC14\uAD6C\uB2C8 \uB2F4\uAE30");
+	AddOrderListButton btnBasket;
 	public UserMenuDetailView(FoodDto foodDto, FoodMainService service) {
 		tfDescription.setLineWrap(true);
 		BufferedImage bimg;
@@ -38,6 +40,7 @@ public class UserMenuDetailView extends JPanel {
 			tfDescription.setText(foodDto.getDescription());
 			System.out.println(foodDto.getDescription());
 			point.setText("적립 포인트 : " + Integer.toString(foodDto.getPoint()));
+			this.foodDto = foodDto;
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -45,9 +48,12 @@ public class UserMenuDetailView extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+		btnBasket = new AddOrderListButton("\uC7A5\uBC14\uAD6C\uB2C8 \uB2F4\uAE30", this);
 		btnBack.setName("back");
 		btnBasket.setName("basket");
+		btnBasket.setFoodDto(foodDto);
+		
+		
 		btnBack.addActionListener(service.foodMainController);
 		btnBasket.addActionListener(service.foodMainController);
 		
@@ -97,11 +103,11 @@ public class UserMenuDetailView extends JPanel {
 		panel.setBounds(631, 385, 3, 35);
 		add(panel);
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setBounds(653, 385, 308, 35);
-		add(textField);
-		textField.setColumns(10);
+		tfcount = new JTextField("1");
+		tfcount.setHorizontalAlignment(SwingConstants.CENTER);
+		tfcount.setBounds(653, 385, 308, 35);
+		add(tfcount);
+		tfcount.setColumns(10);
 		
 		
 		btnBack.setFont(new Font("맑은 고딕", Font.BOLD, 26));
@@ -115,5 +121,11 @@ public class UserMenuDetailView extends JPanel {
 	}
 	public UserMenuDetailView() {
 		// TODO Auto-generated constructor stub
+	}
+	public FoodDto getFoodDto() {
+		return this.foodDto;
+	}
+	public int getCount() {
+		return Integer.parseInt(tfcount.getText()); // 장바구니 추가를 실행할때 액션이 발생했을때
 	}
 }

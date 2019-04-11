@@ -30,8 +30,8 @@ public class FoodMainController implements ActionListener{
 			foodMainService.searchCategory(((JButton)ob).getName());
 		} else if(((JButton)ob).getName().equals("back")) {
 			foodMainService.backMenu();
-		} else if(((JButton)ob).getName().equals("basket")) {
-			foodMainService.addMenuInbasket();
+		} else if(((AddOrderListButton)ob).getName().equals("basket")) {
+			foodMainService.addMenuInbasket(((AddOrderListButton)ob).getFoodDto(), ((AddOrderListButton)ob).getCount());
 		}
 			
 	}

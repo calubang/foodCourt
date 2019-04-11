@@ -5,6 +5,8 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import kitri.foodCourt.dto.FoodDto;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -61,7 +63,6 @@ public class UserMenuView extends JPanel {
 	public UserMenuView() {
 	}
 	public void setMenu(List<FoodDto> list) { //여기서 리스트를 받아온다
-		int listSize = list.size();
 		try {
 			int gridx = 0;
 			int gridy = 0;

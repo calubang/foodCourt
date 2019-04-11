@@ -34,7 +34,7 @@ public class BasketMain extends JPanel{
 	public FoodMain foodMain;
 	
 	//테스트
-	public User user = new User("calubang", "안병욱", 5000);
+	public User user ;//= new User("calubang", "안병욱", 5000);
 	
 	public void test() {
 		FoodDto food1 = new FoodDto("1", "된장찌개", 1, "한식", 5000, "/kitri/foodCourt/user/basket/image/제육1.jpg");
@@ -70,13 +70,14 @@ public class BasketMain extends JPanel{
 //	}
 
 	public BasketMain(FoodMain foodMain) {
-		test();
+		//test();
 		//기본 UI 구성
 		payment = new Payment(this);
 		controller = new BasketController(this);
 		this.foodMain = foodMain;
+		this.user = foodMain.user;
 		initView();
-		dataSetting();
+		//dataSetting();
 		
 		//이벤트
 		btnAllCancel.addActionListener(controller);

@@ -3,21 +3,24 @@ package kitri.foodCourt.dto;
 import java.util.Date;
 
 public class FoodDto {
-	//°øÅëÁ¤º¸
-	private String foodId;				//À½½Äid
-	private String foodName; 		//À½½ÄÀÌ¸§
-	private int categoryId;				//Ä«Å×°í¸®id
-	private String categoryName;	//Ä«Å×°í¸®ÀÌ¸§
-	private int price;						//°¡°Ý
-	private int point;					//Æ÷ÀÎÆ®
-	private String description;		//¼³¸í
-	private String imageAddress;	//ÀÌ¹ÌÁöÁÖ¼Ò
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String foodId;				//ï¿½ï¿½ï¿½ï¿½id
+	private String foodName; 		//ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
+	private int categoryId;				//Ä«ï¿½×°ï¿½id
+	private String categoryName;	//Ä«ï¿½×°ï¿½ï¿½Ì¸ï¿½
+	private int price;						//ï¿½ï¿½ï¿½ï¿½
+	private int point;					//ï¿½ï¿½ï¿½ï¿½Æ®
+	private String description;		//ï¿½ï¿½ï¿½ï¿½
+	private String imageAddress;	//ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½
 	
-	//°ü¸®ÀÚ
-	private String managerId;		//µî·ÏÇÑ¸Å´ÏÀú
-	private Date createDate;		//µî·ÏÀÏ
-	private char enable;				//È°¼ºÈ­¿©ºÎ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String managerId;		//ï¿½ï¿½ï¿½ï¿½Ñ¸Å´ï¿½ï¿½ï¿½
+	private Date createDate;		//ï¿½ï¿½ï¿½ï¿½ï¿½
+	private char enable;				//È°ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½
 		
+	public FoodDto() {
+	}
+	
 	public FoodDto(String foodId, String foodName, int categoryId, String categoryName, int price,
 			String imageAddress) {
 		super();
