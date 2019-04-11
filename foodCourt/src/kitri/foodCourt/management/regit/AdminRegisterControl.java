@@ -50,13 +50,14 @@ public class AdminRegisterControl implements ActionListener {
 		} else if (ob == ami.maR.registerbtn) {
 			ars.maRRegister();
 		} else if (ob == ami.maR.cancelbtn) {
-			ars.Close(ami.jfMoD);
+			System.out.println("1");
+			ami.jfMo.setVisible(false);
+		}else if(ob == ami.mR.registerbtn) {
+			ars.mRRegister();
+		}else if(ob == ami.mR.cancelbtn) {
+			System.out.println("2");
+			ami.jfMo.setVisible(false);
 		}
-//		else if(ob == ami.mR.registerbtn) {
-//			ars.mRRegister();
-//		}else if(ob == ami.mR.cancelbtn) {
-//			ars.Close(ami.jfMoD);
-//		}
 
 	}
 

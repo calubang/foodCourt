@@ -13,12 +13,12 @@ import java.awt.Component;
 
 public class AdminRegister extends JPanel {
 	
-	private JTextField idtf;
-	private JTextField passwordtf;
-	private JTextField pwtf;
-	private JTextField nametf;
-	private JTextField lastnumber;
-	private JTextField midnumber;
+	JTextField idtf;
+	JTextField passwordtf = new JTextField();
+	JTextField pwtf = new JTextField();
+	JTextField nametf = new JTextField();
+	JTextField lastnumber = new JTextField();
+	JTextField midnumber = new JTextField();
 
 	JPanel mainpanel = new JPanel();
 	JPanel idpanel = new JPanel();
@@ -50,6 +50,7 @@ public class AdminRegister extends JPanel {
 	 * Create the panel.
 	 */
 	public AdminRegister() {
+		idtf = new JTextField();
 		setBackground(Color.DARK_GRAY);
 		setLayout(null);
 

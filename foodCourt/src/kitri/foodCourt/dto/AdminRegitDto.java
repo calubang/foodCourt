@@ -18,6 +18,22 @@ public class AdminRegitDto {
 	private String emailDomain;
 	
 	
+	public AdminRegitDto(String managerId, String name, String password, String phoneFirst, String phoneMiddle, String phoneLast,
+			String jobId, Date hireDate, String adressZip, String adress, String email, String emailDomain) {
+		super();
+		this.managerId = managerId;
+		this.name = name;
+		this.password = password;
+		this.phoneFirst = phoneFirst;
+		this.phoneMiddle = phoneMiddle;
+		this.phoneLast = phoneLast;
+		this.jobId = jobId;
+		this.hireDate = hireDate;
+		this.adressZip = adressZip;
+		this.adress = adress;
+		this.email = email;
+		this.emailDomain = emailDomain;
+	}
 	public String getManagerId() {
 		return managerId;
 	}
