@@ -81,9 +81,20 @@ public class BasketImpl implements Basket{
 	//유저용
 	//추가
 	public int add(BasketDetail detail) {
+		int size = detailList.size();
+		BasketDetail temp = null;
+		for(int i = 0 ; i < size  ; i++) {
+			temp = detailList.get(i);
+			if(temp.getFood().getFoodId().equals(detail.getFood().getFoodId())) {
+				temp.setCount(temp.getCount() + detail.getCount());
+				totalPrice += detail.getFood().getPrice() * detail.getCount();
+				savePoint += detail.getFood().getPoint() * detail.getCount();
+				return detailList.size();
+			}
+		}
 		detailList.add(detail);
-		totalPrice += detail.getFood().getPrice();
-		savePoint += detail.getFood().getPoint();
+		totalPrice += detail.getFood().getPrice() * detail.getCount();
+		savePoint += detail.getFood().getPoint() * detail.getCount();
 		return detailList.size();
 	}
 	//삭제(index로 삭제)

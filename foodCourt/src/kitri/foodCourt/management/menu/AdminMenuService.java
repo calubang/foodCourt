@@ -16,8 +16,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import kitri.foodCourt.dto.FoodDto;
 
@@ -33,6 +37,9 @@ public class AdminMenuService {
 	String[] column = {"메뉴ID", "메뉴이름", "카테고리", "가격", "포인트", "담당매니저", "등록일", "주문가능여부"};
 	
 	DefaultTableModel dtm;
+	TableRowSorter<TableModel> sorter;
+	
+	List<RowSorter.SortKey> sortKeys = new ArrayList<>(column.length);
 	
 	JFileChooser chooser = new JFileChooser();
     FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF & PNG Images", "jpg", "gif", "png");
@@ -50,10 +57,20 @@ public class AdminMenuService {
 		
 		dtm = amm.dtm;
 		
+		
 		// Set Table column
 		for (int i = 0; i < column.length; i++) {
 			dtm.addColumn(column[i]);
 		}
+		
+		sorter = new TableRowSorter<TableModel>(amm.commonTable.getModel());
+		
+		for (int i = 0; i < column.length; i++) {
+			sortKeys.add(new RowSorter.SortKey(i, SortOrder.ASCENDING));
+		}
+		
+		amm.commonTable.setRowSorter(sorter);
+		sorter.setSortKeys(sortKeys);
 		
 		chooser.setFileFilter(filter);
 	}
@@ -120,6 +137,8 @@ public class AdminMenuService {
 		}
 		
 		try {
+			rowSelect = amm.commonTable.convertRowIndexToModel(rowSelect);
+			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 			
@@ -175,8 +194,9 @@ public class AdminMenuService {
 		
 		if (result == JOptionPane.OK_OPTION) {
 			if (currentSelectedrow >= 0) {
+				currentSelectedrow = amm.commonTable.convertRowIndexToModel(currentSelectedrow);
 				Object ob = amm.commonTable.getModel().getValueAt(currentSelectedrow, 0);
-					
+
 				try {
 					Class.forName("oracle.jdbc.driver.OracleDriver");
 					c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
@@ -264,6 +284,7 @@ public class AdminMenuService {
 	public void showImageDescription() {
 		int currentSelectedrow = amm.commonTable.getSelectedRow();
 		if (currentSelectedrow >= 0) {
+			currentSelectedrow = amm.commonTable.convertRowIndexToModel(currentSelectedrow);
 			Object ob = amm.commonTable.getModel().getValueAt(currentSelectedrow, 0);
 			
 			String imgUrl = null;
@@ -309,7 +330,7 @@ public class AdminMenuService {
 		
 		int rowCount = dtm.getRowCount();
 		for(int i = 0; i < rowCount; i++) {
-			if (str.equals((String)dtm.getValueAt(i, 1))) {
+			if (str.equals((String)amm.commonTable.getValueAt(i, 1))) {
 				amm.commonTable.setRowSelectionInterval(i, i);
 				return;
 			}
@@ -345,7 +366,7 @@ public class AdminMenuService {
 	}
 	
 	public void modifyMenu() {
-		int currentSelectedrow = amm.commonTable.getSelectedRow();
+		int currentSelectedrow = amm.commonTable.convertRowIndexToModel(amm.commonTable.getSelectedRow());
 		int result = 0;
 		
 		Object[] rowData = new Object[8];
