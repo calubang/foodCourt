@@ -7,6 +7,7 @@ import java.awt.*;
 
 import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.*;
+import kitri.foodCourt.user.main.FoodMain;
 import kitri.foodCourt.user.swing.*;
 import javax.swing.border.*;
 
@@ -30,6 +31,7 @@ public class BasketMain extends JPanel{
 	public FLabel lblTotalPrice;
 	public FLabel lblTotalPoint;
 	
+	public FoodMain foodMain;
 	
 	//테스트
 	public User user = new User("calubang", "안병욱", 5000);
@@ -54,24 +56,25 @@ public class BasketMain extends JPanel{
 		
 	}
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					BasketMain frame = new BasketMain();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					BasketMain frame = new BasketMain();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
-	public BasketMain() {
+	public BasketMain(FoodMain foodMain) {
 		test();
 		//기본 UI 구성
 		payment = new Payment(this);
 		controller = new BasketController(this);
+		this.foodMain = foodMain;
 		initView();
 		dataSetting();
 		

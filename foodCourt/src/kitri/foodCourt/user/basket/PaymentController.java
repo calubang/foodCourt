@@ -66,14 +66,9 @@ public class PaymentController implements ActionListener, InputMethodListener, K
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println(e);
-		JTextField temp = (JTextField)e.getComponent();
-		char input = e.getKeyChar();
-		if(input > '9' || input < '0') {
-			temp.setText(temp.getText().substring(0, temp.getText().length()-1));
-			SwingFactory.getOptionPane("warning", payment, "잘못된 입력", "숫자를 입력해주세요");
-			return;
-		}	
+		//3개 텍스트필드
+		service.checkValue((JTextField)e.getComponent(), e.getKeyChar());
+		
 	}
 
 	@Override

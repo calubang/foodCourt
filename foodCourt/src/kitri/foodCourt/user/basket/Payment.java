@@ -21,9 +21,9 @@ public class Payment extends JPanel {
 	public FButton btnCancel;
 	
 	//≈ÿΩ∫∆Æ« µÂ
-	public JTextField tpCard;
-	public JTextField tpCash;
-	public JTextField tpPoint;
+	public JTextField tfCard;
+	public JTextField tfCash;
+	public JTextField tfPoint;
 	
 	//ªÛ¥‹ √—∞°∞› 
 	public FLabel lbTotalPrice;
@@ -44,9 +44,9 @@ public class Payment extends JPanel {
 		receipt.btnOK.addActionListener(controller);
 		btnPayment.addActionListener(controller);
 		btnCancel.addActionListener(controller);
-		tpCard.addKeyListener(controller);
-		tpCash.addKeyListener(controller);
-		tpPoint.addKeyListener(controller);
+		tfCard.addKeyListener(controller);
+		tfCash.addKeyListener(controller);
+		tfPoint.addKeyListener(controller);
 	}
 	
 	public void dataSetting() {
@@ -121,13 +121,13 @@ public class Payment extends JPanel {
 		lbCash.setBounds(12, 20, 176, 50);
 		pCash.add(lbCash);
 				
-		tpCash = new JTextField();
-		tpCash.setHorizontalAlignment(JTextField.CENTER);
-		tpCash.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-		tpCash.setBounds(12, 120, 176, 35);
-		tpCash.setName("cash");
-		tpCash.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
-		pCash.add(tpCash);
+		tfCash = new JTextField();
+		tfCash.setHorizontalAlignment(JTextField.CENTER);
+		tfCash.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		tfCash.setBounds(12, 120, 176, 35);
+		tfCash.setName("cash");
+		tfCash.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
+		pCash.add(tfCash);
 	
 		RoundPanel pCard = new RoundPanel();
 		pCard.setBackground(new Color(255, 255, 240));
@@ -135,13 +135,13 @@ public class Payment extends JPanel {
 		pCard.setBounds(400, 220, 200, 180);
 		add(pCard);
 		
-		tpCard = new JTextField();
-		tpCard.setHorizontalAlignment(JTextField.CENTER);
-		tpCard.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-		tpCard.setName("card");
-		tpCard.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
-		tpCard.setBounds(12, 120, 176, 35);
-		pCard.add(tpCard);
+		tfCard = new JTextField();
+		tfCard.setHorizontalAlignment(JTextField.CENTER);
+		tfCard.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		tfCard.setName("card");
+		tfCard.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
+		tfCard.setBounds(12, 120, 176, 35);
+		pCard.add(tfCard);
 		
 		FLabel lbCard = new FLabel(Font.BOLD, 20);
 		lbCard.setText("\uCE74  \uB4DC");
@@ -166,13 +166,13 @@ public class Payment extends JPanel {
 		lbUserPoint.setBounds(12, 45, 176, 35);
 		pPoint.add(lbUserPoint);
 		
-		tpPoint = new JTextField();
-		tpPoint.setHorizontalAlignment(JTextField.CENTER);
-		tpPoint.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-		tpPoint.setName("point");
-		tpPoint.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
-		tpPoint.setBounds(12, 120, 176, 35);
-		pPoint.add(tpPoint);
+		tfPoint = new JTextField();
+		tfPoint.setHorizontalAlignment(JTextField.CENTER);
+		tfPoint.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		tfPoint.setName("point");
+		tfPoint.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
+		tfPoint.setBounds(12, 120, 176, 35);
+		pPoint.add(tfPoint);
 		
 		btnReceiptConfirm = SwingFactory.getButton("");
 		btnReceiptConfirm.setName("receiptConfirm");
