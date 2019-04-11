@@ -52,14 +52,15 @@ public class AdminMemberInfo extends JPanel {
 	DefaultTableModel dtm = new DefaultTableModel();
 	
 	JFrame jfA = new JFrame();
-	JDialog jfAD = new JDialog(jfA,"°ü¸®ÀÚµî·Ï");
+	JDialog jfAD = new JDialog(jfA,"ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½");
 	JFrame jfM = new JFrame();
-	JDialog jfMD = new JDialog(jfM,"È¸¿øµî·Ï");
+	JDialog jfMD = new JDialog(jfM,"È¸ï¿½ï¿½ï¿½ï¿½ï¿½");
 	JFrame jfMo = new JFrame();
-	JDialog jfMoD = new JDialog(jfMo,"¼öÁ¤");
+	JDialog jfMoD = new JDialog(jfMo,"ï¿½ï¿½ï¿½ï¿½");
 	JFrame jfD = new JFrame();
-	JDialog jfDD = new JDialog(jfD,"»èÁ¦");
+	JDialog jfDD = new JDialog(jfD,"ï¿½ï¿½ï¿½ï¿½");
 	
+	boolean check = false;
 	/**
 	 * Create the panel.
 	 */
@@ -69,13 +70,13 @@ public class AdminMemberInfo extends JPanel {
 		setLayout(null);
 		
 		searchLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		searchLabel.setFont(new Font("±¼¸²", Font.PLAIN, 24));
+		searchLabel.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 24));
 		searchLabel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		searchLabel.setBounds(398, 0, 110, 60);
 		add(searchLabel);
 		
 		searchTextField = new JTextField();
-		searchTextField.setFont(new Font("±¼¸²", Font.PLAIN, 24));
+		searchTextField.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 24));
 		searchTextField.setColumns(10);
 		searchTextField.setBorder(new LineBorder(Color.BLACK, 1, true));
 		searchTextField.setBounds(508, 0, 500, 60);
@@ -99,12 +100,14 @@ public class AdminMemberInfo extends JPanel {
 		adminBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						cl.show(tablePanel, "AdminTable");
+						check = false;
 					}
 				});
 		infoPanel.add(adminBtn);
 		memberBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						cl.show(tablePanel, "MemberTable");
+						check = true;
 					}
 				});
 		infoPanel.add(memberBtn);

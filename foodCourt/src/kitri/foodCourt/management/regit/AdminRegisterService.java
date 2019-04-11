@@ -60,12 +60,19 @@ public class AdminRegisterService {
 	}
 
 	public void showmodify() {
-
-		ami.jfMoD.getContentPane().add(ami.maR);
-		ami.jfMoD.setSize(600, 650);
-		ami.jfMoD.setModal(true);
-		ami.jfMoD.setVisible(true);
-
+		if(ami.check) {
+			// 회원
+			ami.jfMoD.getContentPane().add(ami.mR);
+			ami.jfMoD.setSize(600, 650);
+			ami.jfMoD.setModal(true);
+			ami.jfMoD.setVisible(true);
+		} else {
+			// 관리자
+			ami.jfMoD.getContentPane().add(ami.maR);
+			ami.jfMoD.setSize(600, 650);
+			ami.jfMoD.setModal(true);
+			ami.jfMoD.setVisible(true);
+		}
 	}
 
 	public void showdelete() {
