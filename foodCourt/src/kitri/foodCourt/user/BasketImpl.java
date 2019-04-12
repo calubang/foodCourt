@@ -108,6 +108,8 @@ public class BasketImpl implements Basket{
 		detailList.add(detail);
 		totalPrice += detail.getFood().getPrice() * detail.getCount();
 		savePoint += detail.getFood().getPoint() * detail.getCount();
+		
+		size = detailList.size();
 		if(orderCount != null) {
 			if(size == 0) {
 				orderCount.setText("");
@@ -120,8 +122,8 @@ public class BasketImpl implements Basket{
 	//삭제(index로 삭제)
 	public BasketDetail remove(int index) {
 		BasketDetail detail = detailList.get(index);
-		totalPrice -= detail.getFood().getPrice();
-		savePoint -= detail.getFood().getPoint();
+		totalPrice -= detail.getFood().getPrice()*detail.count;
+		savePoint -= detail.getFood().getPoint()*detail.count;
 		detail = detailList.remove(index);
 		if(orderCount != null) {
 			if(detailList.size() == 0) {
@@ -132,18 +134,24 @@ public class BasketImpl implements Basket{
 		}
 		return detail;
 	}
+	
 	//삭제(비교해서 삭제)
 	//없으면 null 있으면 삭제한 객체
 	public BasketDetail remove(BasketDetail detailRemove) {
 		int size = detailList.size();
-		BasketDetail detail = null;
-		for(int i = 0 ; i<size ; i++) {
-			if(detailList.get(i) == detailRemove) {
-				remove(i);
+		totalPrice -= detailRemove.getFood().getPrice()*detailRemove.count;
+		savePoint -= detailRemove.getFood().getPoint()*detailRemove.count;
+		BasketDetail detail = remove(detailRemove);
+		if(orderCount != null) {
+			if(detailList.size() == 0) {
+				orderCount.setText("");
+			}else {
+				orderCount.setText(detailList.size()+"");
 			}
 		}
 		return detail;
 	}
+	
 	//모두 삭제
 	public int removeAll() {
 		Iterator<BasketDetail> iter = detailList.iterator();
@@ -151,6 +159,9 @@ public class BasketImpl implements Basket{
 		while(iter.hasNext()) {
 			BasketDetail temp = iter.next();
 			iter.remove();
+		}
+		if(orderCount != null) {
+			orderCount.setText("");
 		}
 		totalPrice = 0;
 		savePoint = 0;
