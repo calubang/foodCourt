@@ -55,16 +55,15 @@ public class FoodMainService {
 	public void searchMenuDetail(String food_id) {
 		FoodDto foodDto = menuDao.getMenubyId(food_id);
 		// foodMain.panChangePanel.remove(foodMain.UserMenuDetailView);
-		foodMain.panChangePanel.add(new UserMenuDetailView(foodDto, this), "UserMenuDetailView");
-		foodMain.setPanelName("UserMenuDetailView");
+		foodMain.panChangePanel.add(new UserMenuDetailView(foodDto, this), "userMenuDetailView");
+		foodMain.setPanelName("userMenuDetailView");
 		foodMain.card.show(foodMain.panChangePanel, foodMain.getPanelName());
 		System.out.println("카드 레이아웃 투스트링 : " + foodMain.card.toString());
 	}
 
-	// 이전으로 (이전으로 버튼)
+	// 이전으로 (메뉴 상에 페이지에서 이전으로 버튼)
 	public void backMenu() {
-		foodMain.setPanelName("UserMenuDetailView");
-		foodMain.card.show(foodMain.panChangePanel, foodMain.getPanelName());
+		foodMain.card.show(foodMain.panChangePanel, "userMenuView");
 	}
 
 	// 주문목록 추가 (장바구니 추가 버튼)
