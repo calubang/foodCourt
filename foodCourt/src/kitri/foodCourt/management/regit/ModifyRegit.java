@@ -14,11 +14,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
 public class ModifyRegit extends JPanel {
-	private JTextField passwordtf;
-	private JTextField pwtf;
-	private JTextField nametf;
-	private JTextField lastnumber;
-	private JTextField midnumber;
+	JTextField passwordtf;
+	JTextField pwtf;
+	JTextField nametf;
+	JTextField lastnumber;
+	JTextField midnumber;
 
 	JPanel mainpanel = new JPanel();
 	JPanel idpanel = new JPanel();

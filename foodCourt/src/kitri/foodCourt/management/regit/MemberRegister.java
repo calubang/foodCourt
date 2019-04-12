@@ -12,12 +12,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class MemberRegister extends JPanel {
-	private JTextField idtf;
-	private JTextField passwordtf;
-	private JTextField pwtf;
-	private JTextField nametf;
-	private JTextField lastnumber;
-	private JTextField midnumber;
+	JTextField idtf;
+	JTextField passwordtf;
+	JTextField pwtf;
+	JTextField nametf;
+	JTextField lastnumber;
+	JTextField midnumber;
 
 	JPanel mainpanel = new JPanel();
 	JPanel passwordpanel = new JPanel();
