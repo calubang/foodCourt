@@ -76,12 +76,12 @@ public class AdminMenuService {
 	}
 	
 	
-	private void closeOracleConnection(Connection c, PreparedStatement ps, ResultSet rs) {
+	private void closeOracleConnection(Component comp, Connection c, PreparedStatement ps, ResultSet rs) {
 		if(rs != null) {
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				warningMessage(comp, e.getMessage(), "SQL 종료 오류");
 			} finally {
 				rs = null;
 			}
@@ -91,7 +91,7 @@ public class AdminMenuService {
 			try {
 				ps.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				warningMessage(comp, e.getMessage(), "SQL 종료 오류");
 			} finally {
 				ps = null;
 			}
@@ -101,7 +101,7 @@ public class AdminMenuService {
 			try {
 				c.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				warningMessage(comp, e.getMessage(), "SQL 종료 오류");
 			} finally {
 				c = null;
 			}
@@ -172,11 +172,11 @@ public class AdminMenuService {
 			
 			am.pictureLabel.setIcon(image);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			warningMessage(amm.modifyBtn, "드라이버를 찾을 수 없습니다.", "메뉴 수정 오류");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			warningMessage(amm.modifyBtn, e.getMessage(), "메뉴 수정 오류");
 		} finally {
-			closeOracleConnection(c, ps, rs);
+			closeOracleConnection(amm.modifyBtn, c, ps, rs);
 		}
 		
 		amm.jdM.getContentPane().add(amm.am);
@@ -208,11 +208,11 @@ public class AdminMenuService {
 					
 					resultQuery = ps.executeUpdate();
 				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
+					warningMessage(amm.deleteBtn, "드라이버를 찾을 수 없습니다.", "메뉴 삭제 오류");
 				} catch (SQLException e) {
-					e.printStackTrace();
+					warningMessage(amm.deleteBtn, e.getMessage(), "메뉴 삭제 오류");
 				} finally {
-					closeOracleConnection(c, ps, null);
+					closeOracleConnection(amm.deleteBtn, c, ps, null);
 				}
 				
 				dtm.removeRow(currentSelectedrow);
@@ -272,11 +272,11 @@ public class AdminMenuService {
 				dtm.addRow(rowData);
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			warningMessage(amm.commonTable, "드라이버를 찾을 수 없습니다.", "메뉴 보기 오류");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			warningMessage(amm.commonTable, e.getMessage(), "메뉴 보기 오류");
 		} finally {
-			closeOracleConnection(c, ps, rs);
+			closeOracleConnection(amm.commonTable, c, ps, rs);
 		}
 	}
 
@@ -307,11 +307,11 @@ public class AdminMenuService {
 					description = rs.getString("food_description");
 				}
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				warningMessage(amm.commonTable, "드라이버를 찾을 수 없습니다.", "메뉴 보기 오류");
 			} catch (SQLException e) {
-				e.printStackTrace();
+				warningMessage(amm.commonTable, e.getMessage(), "메뉴 보기 오류");
 			} finally {
-				closeOracleConnection(c, ps, rs);
+				closeOracleConnection(amm.commonTable, c, ps, rs);
 			}
 			
 			ImageIcon image = new ImageIcon(AdminMenuService.class.getResource(imgUrl));
@@ -454,11 +454,11 @@ public class AdminMenuService {
 			
 			amm.commonTable.setRowSelectionInterval(currentSelectedrow, currentSelectedrow);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			warningMessage(am.confirmBtn, "드라이버를 찾을 수 없습니다.", "메뉴 수정 오류");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			warningMessage(am.confirmBtn, e.getMessage(), "메뉴 수정 오류");
 		} finally {
-			closeOracleConnection(c, ps, rs);
+			closeOracleConnection(am.confirmBtn, c, ps, rs);
 		}
 		
 		closeWindow(amm.jdM);
@@ -540,11 +540,11 @@ public class AdminMenuService {
 			
 			dtm.addRow(rowData);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			warningMessage(arm.confirmBtn, "드라이버를 찾을 수 없습니다.", "메뉴 등록 오류");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			warningMessage(arm.confirmBtn, e.getMessage(), "메뉴 등록 오류");
 		} finally {
-			closeOracleConnection(c, ps, rs);
+			closeOracleConnection(arm.confirmBtn, c, ps, rs);
 		}
 		
 		closeWindow(amm.jdR);
