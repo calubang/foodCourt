@@ -267,7 +267,7 @@ public class AdminMenuService {
 				rowData[4] = foodDto.getPoint();
 				rowData[5] = foodDto.getManagerId();
 				rowData[6] = foodDto.getCreateDate().toString();
-				rowData[7] = foodDto.getEnable();
+				rowData[7] = foodDto.getEnable() == 'y' ? "주문 가능" : "주문 불가능";
 				
 				dtm.addRow(rowData);
 			}
@@ -465,7 +465,7 @@ public class AdminMenuService {
 				rowData[4] = point;
 				rowData[5] = dtm.getValueAt(currentSelectedrow, 5);	// TODO jwlee use to real manager_id
 				rowData[6] = dtm.getValueAt(currentSelectedrow, 6);
-				rowData[7] = food_enable;
+				rowData[7] = food_enable.equals("y") ? "주문 가능" : "주문 불가능";
 
 				int columnNum = dtm.getColumnCount();
 				for (int i = 0; i < columnNum; i++) {
