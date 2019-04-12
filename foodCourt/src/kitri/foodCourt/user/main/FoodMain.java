@@ -24,6 +24,7 @@ import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.basket.BasketMain;
 import kitri.foodCourt.user.menu.*;
 import kitri.foodCourt.user.swing.FLabel;
+import kitri.foodCourt.user.swing.RoundPanel;
 
 public class FoodMain extends JFrame {
 	public String currentPanelName;
@@ -38,21 +39,17 @@ public class FoodMain extends JFrame {
 	public FoodMainView foodMainView = new FoodMainView();
 	public NoSearchMenuImg noSearchMenuImg = new NoSearchMenuImg();
 
-	public JLabel labSearch = new JLabel("\uAC80\uC0C9");
+	public FLabel labSearch = new FLabel("\uAC80\uC0C9");
 	public JPanel panel_6 = new JPanel();
 	public JPanel panChangePanel = new JPanel();
 	public CardLayout card = new CardLayout();
 
-	public JButton btnMainMenu = new MainButton(
-			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mainbutton.jpg")));
+	public JButton btnMainMenu = new MainButton();
 
 	public JButton btnSearch = new JButton(
 			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/search.PNG")));
 	public JPanel panMainButton = new JPanel();
-	public JLabel labMenu = new JLabel(
-			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/menu.PNG")));
-	public JButton btnUserInfo = new JButton(
-			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mypage.PNG")));
+	public JButton btnUserInfo = new JButton();
 	public JLabel labName = new JLabel();
 	public JButton btnOrderList = new JButton(
 			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/basket.png")));
@@ -67,14 +64,14 @@ public class FoodMain extends JFrame {
 	public FLabel lbOrderCount = new FLabel(Font.BOLD, 20);
 	public FoodMainController foodMainController;
 
-	public JLabel labHansic = new JLabel("\uD55C\uC2DD");
-	public JLabel labJoongsic = new JLabel("\uC911\uC2DD");
-	public JLabel labIlsic = new JLabel("\uC77C\uC2DD");
-	public JLabel labYangsic = new JLabel("\uC591\uC2DD");
-	public JButton btnHansic = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/HansicMin1.jpg")));
-	public JButton btnJoongsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/joongsicMin.jpg")));
-	public JButton btnIlsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/ilsicMin.jpg")));
-	public JButton btnYangsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/yangsicMin.jpg")));
+	public JLabel labHansic = new JLabel("\uD55C  \uC2DD");
+	public JLabel labJoongsic = new JLabel("\uC911  \uC2DD");
+	public JLabel labIlsic = new JLabel("\uC77C  \uC2DD");
+	public JLabel labYangsic = new JLabel("\uC591  \uC2DD");
+	public JButton btnHansic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/koreanFoodImage.png")));
+	public JButton btnJoongsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/chineseFoodImage.png")));
+	public JButton btnIlsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/JapaneseFoodImage.png")));
+	public JButton btnYangsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/americanFoodImage.png")));
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -88,28 +85,6 @@ public class FoodMain extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public void test() {
-		FoodDto food1 = new FoodDto("1", "µÈÀåÂî°³", 1, "ÇÑ½Ä", 5000, "/kitri/foodCourt/user/basket/image/Á¦À°1.jpg");
-		FoodDto food2 = new FoodDto("2", "½ºÅ×ÀÌÅ©", 2, "¾ç½Ä", 8000, "/kitri/foodCourt/user/basket/image/Á¦À°1.jpg");
-		FoodDto food3 = new FoodDto("3", "ÀÚÀå¸é", 3, "Áß½Ä", 7000, "/kitri/foodCourt/user/basket/image/Á¦À°1.jpg");
-		FoodDto food4 = new FoodDto("4", "³ª°¡»çÅ°Â«»Í", 4, "ÀÏ½Ä", 6000, "/kitri/foodCourt/user/basket/image/Á¦À°1.jpg");
-		FoodDto food5 = new FoodDto("5", "³ª°¡»çÅ°Â«»Í", 4, "ÀÏ½Ä", 6000, "/kitri/foodCourt/user/basket/image/Á¦À°1.jpg");
-		BasketDetail detail1 = new BasketDetail(food1, 1);
-		BasketDetail detail2 = new BasketDetail(food2, 2);
-		BasketDetail detail3 = new BasketDetail(food3, 3);
-		BasketDetail detail4 = new BasketDetail(food4, 4);
-		BasketDetail detail5 = new BasketDetail(food5, 5);
-
-		user.getBasket().setOrderCount(lbOrderCount);
-		user.getBasket().add(detail1);
-		user.getBasket().add(detail2);
-		user.getBasket().add(detail3);
-		user.getBasket().add(detail4);
-		user.getBasket().add(detail5);
-	}
 	public void setPanelName(String panelName) {
 		this.currentPanelName = panelName;
 	}
@@ -120,8 +95,12 @@ public class FoodMain extends JFrame {
 	public FoodMain() {
 		// Å×½ºÆ®¿ë
 		user = new User("calubang", "¾Èº´¿í", 5000);
+		user.getBasket().setOrderCount(lbOrderCount);
+		labName.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		labName.setText(user.getName() + "´Ô");
-		test();
+		
+		//º»ÄÚµå
+		setTitle("Ç±Å°¿¡ ¿À½Å °ÍÀ» È¯¿µÇÕ´Ï´Ù.");
 		basketMain = new BasketMain(this);
 
 		labName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -135,22 +114,23 @@ public class FoodMain extends JFrame {
 		btnSearch.setToolTipText("\uAC80\uC0C9");
 		// Ä¿¼­ ¸ð¾çÁöÁ¤
 		btnSearch.setCursor(csorHandCursor);
+		btnMainMenu.setBounds(0, 0, 120, 75);
 		btnMainMenu.setCursor(csorHandCursor);
+		btnUserInfo.setIcon(new ImageIcon(FoodMain.class.getResource("/img/user/myInfo.png")));
+		btnUserInfo.setBackground(Color.WHITE);
 		btnUserInfo.setToolTipText("\uD68C\uC6D0\uC815\uBCF4");
 		btnUserInfo.setCursor(csorHandCursor);
+		//btnUserInfo
 		lbOrderCount.setHorizontalAlignment(SwingConstants.CENTER);
 		lbOrderCount.setBackground(Color.WHITE);
 		lbOrderCount.setCursor(csorHandCursor);
-		btnHansic.setCursor(csorHandCursor);
-		btnJoongsic.setCursor(csorHandCursor);
-		btnIlsic.setCursor(csorHandCursor);
-		btnYangsic.setCursor(csorHandCursor);
 		
 		btnOrderList.setFocusPainted(false);
 		btnOrderList.setContentAreaFilled(false);
 		btnOrderList.setToolTipText("\uC8FC\uBB38\uBAA9\uB85D");
 		btnOrderList.setCursor(csorHandCursor);
 		labName.setCursor(csorHandCursor);
+		labBasket.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		labBasket.setCursor(csorHandCursor);
 
 		panel.setBackground(Color.WHITE);
@@ -166,12 +146,24 @@ public class FoodMain extends JFrame {
 		panel.add(panel_3);
 
 		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(16, 21, 115, 75);
+		panel_2.setBounds(16, 21, 120, 75);
 		panel.add(panel_2);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		panel_2.setLayout(null);
 		btnMainMenu.setToolTipText("\uBA54\uC778");
 		btnMainMenu.setBorder(null);
 		btnMainMenu.setPreferredSize(new Dimension(115, 75));
+		try {
+			String btnImageName = "home2.png";
+			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
+			BufferedImage bufferedImage = ImageIO.read(url);
+			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(btnMainMenu.getWidth(), btnMainMenu.getHeight(), Image.SCALE_FAST));
+			btnMainMenu.setIcon(icon);
+			btnMainMenu.setFocusable(false);
+			btnMainMenu.setContentAreaFilled(false);
+			btnMainMenu.setBorderPainted(false);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
 		btnMainMenu.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnMainMenu.setBorderPainted(false);
@@ -179,50 +171,132 @@ public class FoodMain extends JFrame {
 		btnMainMenu.setBackground(Color.WHITE);
 		panChangePanel.setBackground(Color.WHITE);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(16, 210, 115, 116);
-		panel.add(panel_1);
-		panel_1.setLayout(new BorderLayout(0, 0));
+		//koreanFood
+		RoundPanel pKoreanMenu = new RoundPanel(2, 40);
+		pKoreanMenu.setName("1");
+		pKoreanMenu.setBackground(Color.WHITE);
+		pKoreanMenu.setBounds(16, 120, 115, 100);
+		panel.add(pKoreanMenu);
+		pKoreanMenu.setLayout(null);
+		btnHansic.setBounds(10, 10, 95, 70);
+		btnHansic.setCursor(csorHandCursor);
+		pKoreanMenu.add(btnHansic);
+		btnHansic.setName("1");
+		btnHansic.setFocusable(false);
+		btnHansic.setContentAreaFilled(false);
+		btnHansic.setBorderPainted(false);
+		try {
+			String btnImageName = "koreanFoodImage.png";
+			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
+			BufferedImage bufferedImage = ImageIO.read(url);
+			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(btnHansic.getWidth()+20, btnHansic.getHeight()+20, Image.SCALE_FAST));
+			btnHansic.setIcon(icon);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		
+		labHansic.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
+		labHansic.setBounds(10, 70, 95, 20);
 		labHansic.setOpaque(true);
 		labHansic.setBackground(Color.WHITE);
 		labHansic.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(labHansic, BorderLayout.SOUTH);
-		panel_1.add(btnHansic, BorderLayout.CENTER);
+		pKoreanMenu.add(labHansic);		
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(16, 337, 115, 116);
-		panel.add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
+		//chineseMenu
+		RoundPanel pChineseMenu = new RoundPanel(2, 40);
+		pChineseMenu.setName("2");
+		pChineseMenu.setBackground(Color.WHITE);
+		pChineseMenu.setBounds(16, 230, 115, 100);
+		panel.add(pChineseMenu);
+		pChineseMenu.setLayout(null);
+		btnJoongsic.setSize(95, 60);
+		btnJoongsic.setLocation(10, 10);
+		btnJoongsic.setCursor(csorHandCursor);
+		pChineseMenu.add(btnJoongsic, BorderLayout.CENTER);
+		btnJoongsic.setName("2");
 		
-		
+		labJoongsic.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
+		labJoongsic.setSize(95, 20);
+		labJoongsic.setLocation(10, 70);
+		btnJoongsic.setFocusable(false);
+		btnJoongsic.setContentAreaFilled(false);
+		btnJoongsic.setBorderPainted(false);
+		try {
+			String btnImageName = "chineseFoodImage.png";
+			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
+			BufferedImage bufferedImage = ImageIO.read(url);
+			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(btnJoongsic.getWidth(), btnJoongsic.getHeight(), Image.SCALE_FAST));
+			btnJoongsic.setIcon(icon);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		labJoongsic.setBackground(Color.WHITE);
 		labJoongsic.setOpaque(true);
 		labJoongsic.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(labJoongsic, BorderLayout.SOUTH);
-		panel_4.add(btnJoongsic, BorderLayout.CENTER);
+		pChineseMenu.add(labJoongsic, BorderLayout.SOUTH);
 		
-		JPanel panel_7 = new JPanel();
-		panel_7.setBounds(16, 463, 115, 116);
-		panel.add(panel_7);
-		panel_7.setLayout(new BorderLayout(0, 0));
+		//japaneseFood
+		RoundPanel pJapaneseMenu = new RoundPanel(2, 40);
+		pJapaneseMenu.setName("3");
+		pJapaneseMenu.setBackground(Color.WHITE);
+		pJapaneseMenu.setBounds(16, 340, 115, 100);
+		panel.add(pJapaneseMenu);
+		pJapaneseMenu.setLayout(null);
+		btnIlsic.setBounds(10, 10, 95, 60);
+		btnIlsic.setCursor(csorHandCursor);
+		pJapaneseMenu.add(btnIlsic);
+		btnIlsic.setName("3");
+
+		labIlsic.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
+		labIlsic.setBounds(10, 70, 95, 20);
 		
 		labIlsic.setBackground(Color.WHITE);
 		labIlsic.setOpaque(true);
 		labIlsic.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_7.add(labIlsic, BorderLayout.SOUTH);
-		panel_7.add(btnIlsic, BorderLayout.CENTER);
+		pJapaneseMenu.add(labIlsic);
+		btnIlsic.setFocusable(false);
+		btnIlsic.setContentAreaFilled(false);
+		btnIlsic.setBorderPainted(false);
+		try {
+			String btnImageName = "japaneseFoodImage.png";
+			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
+			BufferedImage bufferedImage = ImageIO.read(url);
+			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(btnIlsic.getWidth(), btnIlsic.getHeight(), Image.SCALE_DEFAULT));
+			btnIlsic.setIcon(icon);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		
-		JPanel panel_8 = new JPanel();
-		panel_8.setBounds(16, 589, 115, 116);
-		panel.add(panel_8);
-		panel_8.setLayout(new BorderLayout(0, 0));
-		
+		//americanFood
+		RoundPanel pAmericanMenu = new RoundPanel(2, 40);
+		pAmericanMenu.setName("4");
+		pAmericanMenu.setBackground(Color.WHITE);
+		pAmericanMenu.setBounds(16, 450, 115, 100);
+		panel.add(pAmericanMenu);
+		pAmericanMenu.setLayout(null);
+		btnYangsic.setBounds(10, 10, 95, 60);
+		btnYangsic.setCursor(csorHandCursor);
+		pAmericanMenu.add(btnYangsic);
+		btnYangsic.setName("4");
+		labYangsic.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
+		labYangsic.setBounds(10, 70, 95, 20);
 		labYangsic.setBackground(Color.WHITE);
 		labYangsic.setOpaque(true);
 		labYangsic.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_8.add(labYangsic, BorderLayout.SOUTH);
-		panel_8.add(btnYangsic, BorderLayout.CENTER);
+		pAmericanMenu.add(labYangsic);
+		
+		btnYangsic.setFocusable(false);
+		btnYangsic.setContentAreaFilled(false);
+		btnYangsic.setBorderPainted(false);
+		try {
+			String btnImageName = "americanFoodImage.png";
+			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
+			BufferedImage bufferedImage = ImageIO.read(url);
+			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(btnYangsic.getWidth(), btnYangsic.getHeight(), Image.SCALE_SMOOTH));
+			btnYangsic.setIcon(icon);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
 //		--------------------º¯ÇÏ´Â ÆÐ³Î ºÎºÐ Ä«µå·¹ÀÌ¾Æ¿ô ¼³Á¤
 		panChangePanel.setLayout(card);
@@ -253,13 +327,6 @@ public class FoodMain extends JFrame {
 		panMainButton.setBounds(145, 26, 4, 66);
 		panel.add(panMainButton);
 		panMainButton.setBackground(Color.DARK_GRAY);
-		labMenu.setToolTipText("\uBA54\uB274");
-		labMenu.setOpaque(true);
-		labMenu.setBackground(Color.WHITE);
-		labMenu.setHorizontalAlignment(SwingConstants.CENTER);
-		labMenu.setBounds(12, 118, 123, 82);
-
-		panel.add(labMenu);
 		btnUserInfo.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, true));
 		btnUserInfo.setBounds(965, 26, 79, 54);
 
@@ -274,11 +341,11 @@ public class FoodMain extends JFrame {
 		user.getBasket().setOrderCount(lbOrderCount);
 
 		lbOrderCircle.setBounds(1129, 15, 35, 35);
-		URL url = FoodMain.class.getResource("/kitri/foodCourt/user/basket/image/red_circle.png");
+		
 		try {
+			URL url = FoodMain.class.getResource("/img/user/red_circle.png");
 			BufferedImage image = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(
-					image.getScaledInstance(lbOrderCircle.getWidth(), lbOrderCircle.getHeight(), Image.SCALE_FAST));
+			ImageIcon icon = new ImageIcon(image.getScaledInstance(lbOrderCircle.getWidth(), lbOrderCircle.getHeight(), Image.SCALE_FAST));
 			lbOrderCircle.setIcon(icon);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -301,15 +368,10 @@ public class FoodMain extends JFrame {
 		labSearch.setBounds(170, 26, 60, 66);
 		panel.add(labSearch);
 		// ---------------------
-		labSearch.setFont(new Font("±¼¸²", Font.PLAIN, 30));
+		labSearch.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 800);
-
-		btnHansic.setName("1");
-		btnJoongsic.setName("2");
-		btnIlsic.setName("3");
-		btnYangsic.setName("4");
 		
 //		--------------------------ÀÌº¥Æ® µî·ÏºÎ
 		foodMainController = new FoodMainController(this);
@@ -318,11 +380,16 @@ public class FoodMain extends JFrame {
 		btnUserInfo.addActionListener(foodMainController);
 		btnOrderList.addActionListener(foodMainController);
 		searchField.addActionListener(foodMainController);
-
+		
+		//ÁÂÃø ÀÌº¥Æ®
 		btnHansic.addActionListener(foodMainController);
+		pKoreanMenu.addMouseListener(foodMainController);
 		btnJoongsic.addActionListener(foodMainController);
-		btnIlsic.addActionListener(foodMainController);
+		pChineseMenu.addMouseListener(foodMainController);
 		btnYangsic.addActionListener(foodMainController);
+		pAmericanMenu.addMouseListener(foodMainController);
+		btnIlsic.addActionListener(foodMainController);
+		pJapaneseMenu.addMouseListener(foodMainController);
 		
 		foodMainView.labHansic.addActionListener(foodMainController);
 		foodMainView.labJoongsic.addActionListener(foodMainController);

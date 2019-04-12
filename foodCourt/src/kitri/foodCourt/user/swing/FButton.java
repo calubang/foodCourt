@@ -15,36 +15,36 @@ public class FButton extends JButton implements MouseListener{
 	//»ý¼ºÀÚ
 	public FButton() {
 		super();
-		basic();
+		defaultSetting();
 	}
 
 	public FButton(Action arg0) {
 		super(arg0);
-		basic();
+		defaultSetting();
 	}
 
 	public FButton(Icon icon) {
 		super(icon);
-		basic();
+		defaultSetting();
 	}
 
 	public FButton(String arg0, Icon arg1) {
 		super(arg0, arg1);
-		basic();
+		defaultSetting();
 	}
 
 	public FButton(String arg0) {
 		super(arg0);
-		basic();
+		defaultSetting();
 	}
 	
 	public FButton(ImageIcon basic, ImageIcon entered) {
 		super();
-		basic();
+		defaultSetting();
 		setBasic(basic);
 		setEntered(entered);
 	}
-	public void basic() {
+	public void defaultSetting() {
 		this.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 10));
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}

@@ -6,39 +6,54 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
+import oracle.core.lmx.CoreException;
+
 public class RoundPanel extends JPanel implements MouseListener{
 
 	int thickness;
 	int arc;
 	Graphics2D graphics2D;
+	private MouseListener controller;
 	
 	public RoundPanel() {
 		super();
 		thickness = 3;
 		arc = 50;
-		// TODO Auto-generated constructor stub
+		defaultSetting();
 	}
 
 	public RoundPanel(boolean isDoubleBuffered) {
 		super(isDoubleBuffered);
-		// TODO Auto-generated constructor stub
-		
+		defaultSetting();
 	}
 
 	public RoundPanel(LayoutManager layout, boolean isDoubleBuffered) {
 		super(layout, isDoubleBuffered);
-		// TODO Auto-generated constructor stub
+		defaultSetting();
 	}
 
 	public RoundPanel(LayoutManager layout) {
 		super(layout);
-		// TODO Auto-generated constructor stub
+		defaultSetting();
 	}
 	
 	public RoundPanel(int thickness, int arc) {
 		this.thickness = thickness;
 		this.arc = arc;
+		defaultSetting();
 	}
+	
+	public void defaultSetting() {
+		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	}
+	
+	public void setMouseListener() {
+		this.addMouseListener(this);
+	}
+	
+	public void setController(MouseListener controller) {
+		this.controller = controller;
+	} 
 	
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -69,8 +84,7 @@ public class RoundPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		controller.mouseClicked(e);
 	}
 
 	@Override
@@ -87,27 +101,19 @@ public class RoundPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-//		thickness = 5;
-//		Graphics2D g = (Graphics2D)this.getGraphics();
-//		g.setStroke(new BasicStroke(thickness));
-//		paintBorder(g);
-		//setBackground(Color.RED);
-		//setForeground(Color.RED);
+		setBackground(hexToRgb("#FFF8DC"));
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-//		thickness = 3;
-//		Graphics2D g = (Graphics2D)this.getGraphics();
-//		g.setStroke(new BasicStroke(thickness));
-//		paintBorder(g);
+		//setBackground(Color.WHITE);
 	}
 
-//	public boolean contains(int x, int y) {
-//		if (shape == null || !shape.getBounds().equals(getBounds())) {
-//			shape = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 30, 30);
-//		}
-//		return shape.contains(x, y);
-//	}
+	public static Color hexToRgb(String colorStr) {
+	    return new Color(
+	            Integer.valueOf( colorStr.substring( 1, 3 ), 16 ),
+	            Integer.valueOf( colorStr.substring( 3, 5 ), 16 ),
+	            Integer.valueOf( colorStr.substring( 5, 7 ), 16 ) );
+	} 
 	
 }

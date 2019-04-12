@@ -22,8 +22,8 @@ public class SwingFactory {
 		FButton button = null;
 		switch(name) {
 		case "x":
-			ImageIcon basic = new ImageIcon(SwingFactory.class.getResource("/kitri/foodCourt/user/basket/image/x_button.png"));
-			ImageIcon entered = new ImageIcon(SwingFactory.class.getResource("/kitri/foodCourt/user/basket/image/x_button2.png"));
+			ImageIcon basic = new ImageIcon(SwingFactory.class.getResource("/img/user/x_button.png"));
+			ImageIcon entered = new ImageIcon(SwingFactory.class.getResource("/img/user/x_button2.png"));
 			button = new FButton(basic, entered);
 			button.setFocusPainted(false);
 			button.setContentAreaFilled(false);
@@ -32,7 +32,7 @@ public class SwingFactory {
 			return button;
 		case "image":
 			button = new FButton();
-			button.setIcon(new ImageIcon(SwingFactory.class.getResource("/kitri/foodCourt/user/basket/image/notFoundImage.png")));
+			button.setIcon(new ImageIcon(SwingFactory.class.getResource("/img/user/notFoundImage.png")));
 			button.setFocusPainted(false);
 			button.setContentAreaFilled(false);
 			button.setBorderPainted(false);

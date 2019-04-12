@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import kitri.foodCourt.dto.FoodDto;
+import kitri.foodCourt.user.swing.*;
 
 public class UserMenuDetailView extends JPanel {
 	JTextField tfCount;
@@ -18,15 +19,16 @@ public class UserMenuDetailView extends JPanel {
 	JTextArea tfDescription = new JTextArea();
 	FoodDto foodDto;
 	JLabel image;
-	JLabel foodName = new JLabel();
-	JLabel price = new JLabel();
-	JLabel count = new JLabel("\uC218\uB7C9");
-	JLabel point = new JLabel();
-	JPanel panel = new JPanel();
+	FLabel foodName = new FLabel(Font.BOLD, 30);
+	FLabel price = new FLabel(Font.PLAIN, 15);
+	FLabel count = new FLabel(Font.PLAIN, 15);
+	FLabel point = new FLabel(Font.PLAIN, 15);
+	FLabel panel = new FLabel(Font.PLAIN, 15);
 	JButton btnBack = new JButton("\uC774\uC804\uC73C\uB85C");
 	AddOrderListButton btnBasket;
 	public UserMenuDetailView(FoodDto foodDto, FoodMainService service) {
 		tfDescription.setLineWrap(true);
+		tfDescription.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 		BufferedImage bimg;
 		try {
 			bimg = ImageIO.read(new File(UserMenuView.class.getResource(foodDto.getImageAddress()).toURI()));
@@ -35,9 +37,8 @@ public class UserMenuDetailView extends JPanel {
 			
 			image = new JLabel(properImg);
 			foodName.setText(foodDto.getFoodName());
-			foodName.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 28));
 			price.setText("°¡°Ý : " + Integer.toString(foodDto.getPrice()) + " ¿ø");
-			tfDescription.setText(foodDto.getDescription());
+			tfDescription.setText("\n"+foodDto.getDescription());
 			point.setText("Àû¸³ Æ÷ÀÎÆ® : " + Integer.toString(foodDto.getPoint()));
 			this.foodDto = foodDto;
 		} catch (IOException e1) {
@@ -52,14 +53,8 @@ public class UserMenuDetailView extends JPanel {
 		btnBasket.setName("basket");
 		btnBasket.setFoodDto(foodDto);
 		
-		//ÀÌº¥Æ® µî·ÏºÎ ------------------------------------------
-		btnBack.addActionListener(service.foodMainController);
-		btnBasket.addActionListener(service.foodMainController);
-		
-		
 		setBackground(Color.WHITE);
 		setLayout(null);
-		
 		
 		image.setBorder(new MatteBorder(2, 2, 5, 5, (Color) new Color(128, 128, 128)));
 		image.setToolTipText("\uC774\uBBF8\uC9C0");
@@ -82,6 +77,7 @@ public class UserMenuDetailView extends JPanel {
 		tfDescription.setBounds(542, 202, 419, 165);
 		tfDescription.setEditable(false);
 		add(tfDescription);
+		count.setText("¼ö·®");
 		count.setHorizontalAlignment(SwingConstants.CENTER);
 		count.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		
@@ -101,6 +97,7 @@ public class UserMenuDetailView extends JPanel {
 		add(panel);
 		
 		tfCount = new JTextField("1");
+		tfCount.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 		tfcountStr = tfCount.getText();
 		tfCount.setHorizontalAlignment(SwingConstants.CENTER);
 		tfCount.setBounds(653, 385, 308, 35);
@@ -108,14 +105,39 @@ public class UserMenuDetailView extends JPanel {
 		add(tfCount);
 		tfCount.setColumns(10);
 		
+		RoundPanel pBack = new RoundPanel(3, 40);
+		pBack.setBackground(Color.WHITE);
+		pBack.setMouseListener();
+		pBack.setName("back");
+		pBack.setLayout(null);
+		pBack.setBounds(199, 476, 200, 70);
+		add(pBack);
+		
+		FLabel lbBack = new FLabel();
+		//lbBack.setBackground(Color.BLACK);
+		lbBack.setBounds(10, 10, 180, 50);
+		lbBack.setHorizontalAlignment(SwingConstants.CENTER);
+		lbBack.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 30));
+		lbBack.setText("ÀÌÀüÀ¸·Î");
+		pBack.add(lbBack);
 		
 		btnBack.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 26));
-		btnBack.setBounds(199, 476, 223, 92);
-		add(btnBack);
+		btnBack.setBounds(10, 10, 180, 70);
+		btnBack.setBackground(Color.WHITE);
+		btnBack.setFocusable(false);
+		btnBack.setContentAreaFilled(false);
+		btnBack.setBorderPainted(false);
+		//pBack.add(btnBack);
 		
 		btnBasket.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 26));
-		btnBasket.setBounds(585, 476, 223, 92);
+		btnBasket.setBounds(585, 476, 200, 70);
 		add(btnBasket);
+		
+		//ÀÌº¥Æ® µî·ÏºÎ ------------------------------------------
+		pBack.setController(service.foodMainController);
+		btnBack.addActionListener(service.foodMainController);
+		btnBasket.addActionListener(service.foodMainController);
+		
 	}
 	public UserMenuDetailView() {
 		// TODO Auto-generated constructor stub

@@ -22,7 +22,7 @@ public class MenuDao {
 		ResultSet rs = null;
 		try {
 			c = connectionMaker.makeConnection();
-			ps = c.prepareStatement("select food_name, image_address, food_id from fook_food where category_id = ? order by food_name");
+			ps = c.prepareStatement("select food_name, image_address, food_id from fook_food where category_id = ? and lower(food_enable) = lower('y') order by food_name");
 			ps.setInt(1, categori_id);
 			rs = ps.executeQuery();
 			//음식 이름, 이미지주소, 아이디 (메뉴 리스트에 갖고있을 정보만)
@@ -70,7 +70,7 @@ public class MenuDao {
 		try {
 			c = connectionMaker.makeConnection();
 			String str = "'%"+foodName+"%'";
-			ps = c.prepareStatement("select food_name, image_address, food_id from fook_food where food_name like " + str + " order by food_name");
+			ps = c.prepareStatement("select food_name, image_address, food_id from fook_food where food_name like " + str + " and lower(food_enable) = lower('y') order by food_name");
 //			ps.setString(1, foodName); //의문의 에러 발생 해결!!!
 			rs = ps.executeQuery();
 			//음식 이름, 이미지주소, 아이디 (메뉴 리스트에 갖고있을 정보만)
@@ -117,7 +117,7 @@ public class MenuDao {
 		ResultSet rs = null;
 		try {
 			c = connectionMaker.makeConnection();
-			ps = c.prepareStatement("select food_name, image_address, food_id, description, price, point, category_name from fook_food f, fook_category c where f.category_id = c.category_id and food_id = ? order by food_name");
+			ps = c.prepareStatement("select food_name, image_address, food_id, food_description, price, food_point, category_name from fook_food f, fook_category c where f.category_id = c.category_id and food_id = ? and lower(food_enable) = lower('y') order by food_name");
 			ps.setString(1, food_id);
 			rs = ps.executeQuery();
 			if(rs.next()) {
@@ -127,8 +127,8 @@ public class MenuDao {
 				foodDto.setFoodId(rs.getString("food_id"));
 				foodDto.setPrice(rs.getInt("price"));
 				foodDto.setCategoryName(rs.getString("category_name"));
-				foodDto.setDescription(rs.getString("description"));
-				foodDto.setPoint(rs.getInt("point"));
+				foodDto.setDescription(rs.getString("food_description"));
+				foodDto.setPoint(rs.getInt("food_point"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

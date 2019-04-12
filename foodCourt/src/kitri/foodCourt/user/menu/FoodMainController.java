@@ -1,13 +1,14 @@
 package kitri.foodCourt.user.menu;
 
 import kitri.foodCourt.user.main.FoodMain;
+import kitri.foodCourt.user.swing.RoundPanel;
 
 import java.awt.event.*;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class FoodMainController implements ActionListener, KeyListener{
+public class FoodMainController implements ActionListener, KeyListener, MouseListener{
 	FoodMain foodMain = null;
 	public FoodMainService foodMainService = null;
 	public FoodMainController(FoodMain main) {
@@ -34,6 +35,8 @@ public class FoodMainController implements ActionListener, KeyListener{
 			foodMainService.backMenu();
 		} else if(((AddOrderListButton)ob).getName().equals("basket")) {
 			foodMainService.addMenuInbasket(((AddOrderListButton)ob).getFoodDto(), ((AddOrderListButton)ob).getCount());
+		} else if(ob instanceof RoundPanel) {
+			foodMainService.searchCategory(((RoundPanel)ob).getName());
 		}
 			
 	}
@@ -49,6 +52,44 @@ public class FoodMainController implements ActionListener, KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		String name = e.getComponent().getName();
+		if(name.charAt(0) >= '0' && name.charAt(0) <= '9') {
+			foodMainService.searchCategory(name);
+		} else if(name.equals("back")){
+			foodMainService.backMenu();
+		} else if(name.equals("basket")){
+			//e.getComponent().get
+			//foodMainService.addMenuInbasket(((AddOrderListButton)ob).getFoodDto(), ((AddOrderListButton)ob).getCount());
+		}
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 

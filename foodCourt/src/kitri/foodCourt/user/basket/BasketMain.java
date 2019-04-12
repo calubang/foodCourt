@@ -125,7 +125,7 @@ public class BasketMain extends JPanel{
 		JLabel lblBasketImage = new JLabel("");
 		lblBasketImage.setBounds(12, 10, 120, 70);
 		pTop.add(lblBasketImage);
-		lblBasketImage.setIcon(new ImageIcon(this.getClass().getResource("/kitri/foodCourt/user/basket/image/Basket1.png")));
+		lblBasketImage.setIcon(new ImageIcon(this.getClass().getResource("/img/user/Basket1.png")));
 		
 		FLabel lblBasket = new FLabel(Font.BOLD, 40);
 		lblBasket.setBounds(144, 10, 178, 70);

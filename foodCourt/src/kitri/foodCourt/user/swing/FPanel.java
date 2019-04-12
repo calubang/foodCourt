@@ -16,21 +16,25 @@ public class FPanel extends JPanel implements MouseListener {
 	public FPanel() {
 		super();
 		addListener();
+		defaultSetting();
 	}
 
 	public FPanel(boolean isDoubleBuffered) {
 		super(isDoubleBuffered);
 		addListener();
+		defaultSetting();
 	}
 
 	public FPanel(LayoutManager layout, boolean isDoubleBuffered) {
 		super(layout, isDoubleBuffered);
 		addListener();
+		defaultSetting();
 	}
 
 	public FPanel(LayoutManager layout) {
 		super(layout);
 		addListener();
+		defaultSetting();
 	}
 
 	public void setController(MouseListener controller) {
@@ -63,6 +67,10 @@ public class FPanel extends JPanel implements MouseListener {
 
 	public void addListener() {
 		addMouseListener(this);
+	}
+	
+	public void defaultSetting() {
+		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 	
 //	protected void paintComponent(Graphics g) {

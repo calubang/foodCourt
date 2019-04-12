@@ -75,7 +75,7 @@ public class Payment extends JPanel {
 		add(pSeperator);
 		
 		JLabel lbPageImage = new JLabel("");
-		lbPageImage.setIcon(new ImageIcon(Payment.class.getResource("/kitri/foodCourt/user/basket/image/payment.png")));
+		lbPageImage.setIcon(new ImageIcon(Payment.class.getResource("/img/user/payment.png")));
 		lbPageImage.setBounds(12, 10, 120, 70);
 		add(lbPageImage);
 		
