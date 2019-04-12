@@ -174,14 +174,12 @@ public class AdminPaymentService {
 		
 		if (result == JOptionPane.OK_OPTION) {
 			int currentSelectedrow = ap.commonTable.convertRowIndexToModel(ap.commonTable.getSelectedRow());
-			System.out.println(currentSelectedrow);
 			String paymentId = (String)dtmPayment.getValueAt(currentSelectedrow, 0);
-			System.out.println(paymentId);
 			
 			//db에서 삭제
 			if(dao.delete(paymentId) != 1) {
 				//비정상종료
-				JOptionPane.showMessageDialog(ap, "삭제중 오류가 발생하였습니다. 관리자에게 문의하세요.", "오류발생", JOptionPane.ERROR_MESSAGE);
+				warningMessage(ap.deleteBtn, "삭제중 오류가 발생하였습니다. 관리자에게 문의하세요.", "결제 확인 내역 삭제 오류");
 				return;
 			}
 			
