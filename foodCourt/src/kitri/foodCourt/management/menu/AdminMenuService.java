@@ -388,9 +388,30 @@ public class AdminMenuService {
 			warningMessage(am.confirmBtn, "메뉴 가격을 입력하세요.", "메뉴 수정 오류");
 			return;
 		}
+		
+		if (!isConvertDigit(priceStr)) {
+			warningMessage(am.confirmBtn, "메뉴 가격은 숫자만 입력 가능합니다.", "메뉴 수정 오류");
+			return;
+		}
+		
+		if (priceStr.length() > 6) {
+			warningMessage(am.confirmBtn, "메뉴 가격이 너무 큽니다.", "메뉴 수정 오류");
+			return;
+		}
 		int price = Integer.parseInt(priceStr);
 		
-		int point = am.pointTextField.getText().isEmpty() ? (price / 100) : Integer.parseInt(am.pointTextField.getText());
+		String pointStr = am.pointTextField.getText();
+		if (!isConvertDigit(pointStr)) {
+			warningMessage(arm.confirmBtn, "메뉴 포인트는 숫자만 입력 가능합니다.", "메뉴 동록 오류");
+			return;
+		}
+		
+		if (pointStr.length() > 6) {
+			warningMessage(arm.confirmBtn, "메뉴 포인트가 너무 큽니다.", "메뉴 동록 오류");
+			return;
+		}
+		int point = pointStr.isEmpty() ? (price / 100) : Integer.parseInt(pointStr);
+		
 		String food_enable = am.cg.getSelectedCheckbox().equals(am.checkBox1) ? "y" : "n";
 		String food_description = am.descriptionTextArea.getText();
 		int category = am.categoryComboBox.getSelectedIndex() + 1;
@@ -492,9 +513,30 @@ public class AdminMenuService {
 			warningMessage(arm.confirmBtn, "메뉴 가격을 입력하세요.", "메뉴 동록 오류");
 			return;
 		}
+		
+		if (!isConvertDigit(priceStr)) {
+			warningMessage(arm.confirmBtn, "메뉴 가격은 숫자만 입력 가능합니다.", "메뉴 동록 오류");
+			return;
+		}
+		
+		if (priceStr.length() > 6) {
+			warningMessage(arm.confirmBtn, "메뉴 가격이 너무 큽니다.", "메뉴 동록 오류");
+			return;
+		}
 		int price = Integer.parseInt(priceStr);
 		
-		int point = arm.pointTextField.getText().isEmpty() ? (price / 100) : Integer.parseInt(arm.pointTextField.getText());
+		String pointStr = arm.pointTextField.getText();
+		if (!isConvertDigit(pointStr)) {
+			warningMessage(arm.confirmBtn, "메뉴 포인트는 숫자만 입력 가능합니다.", "메뉴 동록 오류");
+			return;
+		}
+		
+		if (pointStr.length() > 6) {
+			warningMessage(arm.confirmBtn, "메뉴 포인트가 너무 큽니다.", "메뉴 동록 오류");
+			return;
+		}
+		int point = pointStr.isEmpty() ? (price / 100) : Integer.parseInt(pointStr);
+		
 		int category = arm.categoryComboBox.getSelectedIndex() + 1;
 		if (category < 1) {
 			warningMessage(arm.confirmBtn, "카테고리를 선택하세요.", "메뉴 등록 오류");
@@ -548,5 +590,17 @@ public class AdminMenuService {
 		}
 		
 		closeWindow(amm.jdR);
+	}
+	
+	private boolean isConvertDigit(String str) {
+		boolean result = true;
+		
+		for (int i = 0; i < str.length(); i++) {
+			if ((str.charAt(i) < '0') || (str.charAt(i) > '9')) {
+				return false;
+			}
+		}
+		
+		return result;
 	}
 }
