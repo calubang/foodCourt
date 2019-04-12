@@ -26,7 +26,7 @@ import kitri.foodCourt.user.menu.*;
 import kitri.foodCourt.user.swing.FLabel;
 
 public class FoodMain extends JFrame {
-	String currentPanelName;
+	public String currentPanelName;
 	public JPanel contentPane;
 	public JTextField searchField;
 	public JPanel panel = new JPanel();
