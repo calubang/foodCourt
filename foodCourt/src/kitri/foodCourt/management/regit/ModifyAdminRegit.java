@@ -14,11 +14,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
 public class ModifyAdminRegit extends JPanel {
-	private JTextField passwordtf;
-	private JTextField pwtf;
-	private JTextField nametf;
-	private JTextField lastnumber;
-	private JTextField midnumber;
+	JTextField passwordtf;
+	JTextField pwtf;
+	JTextField nametf;
+	JTextField lastnumber;
+	JTextField midnumber;
 
 	JPanel mainpanel = new JPanel();
 	JPanel idpanel = new JPanel();
@@ -179,11 +179,11 @@ public class ModifyAdminRegit extends JPanel {
 		joblabel.setForeground(Color.WHITE);
 		joblabel.setFont(new Font("돋움", Font.BOLD, 16));
 		joblabel.setHorizontalAlignment(SwingConstants.CENTER);
-		joblabel.setBounds(0, 0, 108, 42);
+		joblabel.setBounds(0, 0, 99, 42);
 		jobpanel.add(joblabel);
 		
 		JComboBox jobname = new JComboBox();
-		jobname.setBounds(110, 0, 92, 42);
+		jobname.setBounds(107, 1, 85, 42);
 		jobpanel.add(jobname);
 		jobname.addItem("관리자");
 		jobname.addItem("점원");

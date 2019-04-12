@@ -19,7 +19,7 @@ public class ManagermentDao {
 		
 		PreparedStatement ps = null;
 		Connection c = null;
-		ResultSet rs = null;
+		
 		String sql ="insert into FOOK_MANAGER(MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID, HIRE_DATE, ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) values(?,?,?,?,?,?,?,sysdate,?,?,?,?)";
 		try {
 			c = connectionMaker.makeConnection();
