@@ -307,7 +307,11 @@ CREATE SEQUENCE food_id_seq
 insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
 values(food_id_seq.nextval, '한식 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
 insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
+values(food_id_seq.nextval, '한식검색 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
+insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
 values(food_id_seq.nextval, '한식 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
+insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
+values(food_id_seq.nextval, '한식검색 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
 insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
 values(food_id_seq.nextval, '한식 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
 insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
@@ -315,13 +319,21 @@ values(food_id_seq.nextval, '한식 ' || food_id_seq.currval, 12, '맛있는 한식입니
 insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
 values(food_id_seq.nextval, '한식 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
 insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
-values(food_id_seq.nextval, '한식 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
+values(food_id_seq.nextval, '한식검색 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
+insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
+values(food_id_seq.nextval, '한식검색 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
 insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
 values(food_id_seq.nextval, '한식 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
 insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
 values(food_id_seq.nextval, '한식 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
 insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
+values(food_id_seq.nextval, '한식검색 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
+insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
 values(food_id_seq.nextval, '한식 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
+insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
+values(food_id_seq.nextval, '한식 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
+insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
+values(food_id_seq.nextval, '한식검색 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
 insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 
 values(food_id_seq.nextval, '한식 ' || food_id_seq.currval, 12, '맛있는 한식입니다!!!', 1, 16000, '/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg');
 insert into fook_food(food_id, food_name, point, description, category_id, price, image_address) 

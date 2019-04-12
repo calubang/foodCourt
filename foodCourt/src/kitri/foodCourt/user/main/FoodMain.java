@@ -4,10 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-
-//
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
 import java.io.IOException;
 import java.net.URL;
 
@@ -26,8 +25,8 @@ import kitri.foodCourt.user.basket.BasketMain;
 import kitri.foodCourt.user.menu.*;
 import kitri.foodCourt.user.swing.FLabel;
 
-public class FoodMain extends JFrame{
-
+public class FoodMain extends JFrame {
+	String currentPanelName;
 	public JPanel contentPane;
 	public JTextField searchField;
 	public JPanel panel = new JPanel();
@@ -38,34 +37,43 @@ public class FoodMain extends JFrame{
 	public UserMenuDetailView UserMenuDetailView = new UserMenuDetailView();
 	public FoodMainView foodMainView = new FoodMainView();
 	public NoSearchMenuImg noSearchMenuImg = new NoSearchMenuImg();
-	
+
 	public JLabel labSearch = new JLabel("\uAC80\uC0C9");
 	public JPanel panel_6 = new JPanel();
 	public JPanel panChangePanel = new JPanel();
 	public CardLayout card = new CardLayout();
-	
-	public JButton btnMainMenu = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mainbutton.jpg")));
-	public JButton btnHansicMenu = new MainButton("\uD55C\uC2DD");
-	public JButton btnJoongsicMenu = new MainButton("\uC911\uC2DD");
-	public JButton btnIlsicMenu = new MainButton("\uC77C\uC2DD");
-	public JButton btnYangsicMenu = new MainButton("\uC591\uC2DD");
-	
-	public JButton btnSearch = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/search.PNG")));
+
+	public JButton btnMainMenu = new MainButton(
+			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mainbutton.jpg")));
+
+	public JButton btnSearch = new JButton(
+			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/search.PNG")));
 	public JPanel panMainButton = new JPanel();
-	public JLabel labMenu = new JLabel(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/menu.PNG")));
-	public JButton btnUserInfo = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mypage.PNG")));
-	public JLabel labName = new JLabel("\uAD8C\uC601\uCC2C\uB2D8");
-	public JButton btnOrderList = new JButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/basket.png")));
+	public JLabel labMenu = new JLabel(
+			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/menu.PNG")));
+	public JButton btnUserInfo = new JButton(
+			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/mypage.PNG")));
+	public JLabel labName = new JLabel();
+	public JButton btnOrderList = new JButton(
+			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/basket.png")));
 	public JLabel labBasket = new JLabel("\uC8FC\uBB38\uBAA9\uB85D");
 	public JPanel panBarVerRight = new JPanel();
 	public Cursor csorHandCursor = new Cursor(Cursor.HAND_CURSOR);
 	boolean check = false;
-	//장바구니, 결제부분 결합
+	// 장바구니, 결제부분 결합
 	public User user;
 	public BasketMain basketMain;
 	public FLabel lbOrderCircle = new FLabel();
 	public FLabel lbOrderCount = new FLabel(Font.BOLD, 20);
-	
+
+	public JLabel labHansic = new JLabel("\uD55C\uC2DD");
+	public JLabel labJoongsic = new JLabel("\uC911\uC2DD");
+	public JLabel labIlsic = new JLabel("\uC77C\uC2DD");
+	public JLabel labYangsic = new JLabel("\uC591\uC2DD");
+	public JButton btnHansic = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/HansicMin1.jpg")));
+	public JButton btnJoongsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/joongsicMin.jpg")));
+	public JButton btnIlsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/ilsicMin.jpg")));
+	public JButton btnYangsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/yangsicMin.jpg")));
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -93,37 +101,30 @@ public class FoodMain extends JFrame{
 		BasketDetail detail3 = new BasketDetail(food3, 3);
 		BasketDetail detail4 = new BasketDetail(food4, 4);
 		BasketDetail detail5 = new BasketDetail(food5, 5);
-		
+
 		user.getBasket().setOrderCount(lbOrderCount);
 		user.getBasket().add(detail1);
 		user.getBasket().add(detail2);
 		user.getBasket().add(detail3);
 		user.getBasket().add(detail4);
 		user.getBasket().add(detail5);
-		
 	}
-	
+	public void setPanelName(String panelName) {
+		this.currentPanelName = panelName;
+	}
+	public String getPanelName() {
+		return this.currentPanelName;
+	}
+
 	public FoodMain() {
-		//테스트용
+		// 테스트용
 		user = new User("calubang", "안병욱", 5000);
+		labName.setText(user.getName() + "님");
 		test();
-		basketMain = new BasketMain(this); //이시점에서 유저를 넣어준다
-		
-		btnHansicMenu.setName("1");
-		btnJoongsicMenu.setName("2");
-		btnIlsicMenu.setName("3");
-		btnYangsicMenu.setName("4");
-		
+		basketMain = new BasketMain(this);
+
 		labName.setHorizontalAlignment(SwingConstants.CENTER);
 		labName.setVerticalTextPosition(0);
-		btnHansicMenu.setToolTipText("\uD55C\uC2DD");
-		btnHansicMenu.setName("1");
-		btnJoongsicMenu.setToolTipText("\uC911\uC2DD");
-		btnJoongsicMenu.setName("2");
-		btnIlsicMenu.setToolTipText("\uC77C\uC2DD");
-		btnIlsicMenu.setName("3");
-		btnYangsicMenu.setToolTipText("\uC591\uC2DD");
-		btnYangsicMenu.setName("4");
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -139,51 +140,89 @@ public class FoodMain extends JFrame{
 		lbOrderCount.setHorizontalAlignment(SwingConstants.CENTER);
 		lbOrderCount.setBackground(Color.WHITE);
 		lbOrderCount.setCursor(csorHandCursor);
+		btnHansic.setCursor(csorHandCursor);
+		btnJoongsic.setCursor(csorHandCursor);
+		btnIlsic.setCursor(csorHandCursor);
+		btnYangsic.setCursor(csorHandCursor);
 		
 		btnOrderList.setFocusPainted(false);
 		btnOrderList.setContentAreaFilled(false);
-		//btnOrderList.setBorderPainted(false);
 		btnOrderList.setToolTipText("\uC8FC\uBB38\uBAA9\uB85D");
 		btnOrderList.setCursor(csorHandCursor);
 		labName.setCursor(csorHandCursor);
 		labBasket.setCursor(csorHandCursor);
-		
+
 		panel.setBackground(Color.WHITE);
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		panel_5.setBackground(Color.DARK_GRAY);
-		
-		
+
 		panel_5.setBounds(12, 10, 1160, 6);
 		panel.add(panel_5);
 		panel_3.setBackground(Color.DARK_GRAY);
-		
-		
+
 		panel_3.setBounds(12, 102, 1160, 6);
 		panel.add(panel_3);
-		
-		
+
 		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(22, 21, 107, 75);
+		panel_2.setBounds(16, 21, 115, 75);
 		panel.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		btnMainMenu.setToolTipText("\uBA54\uC778");
 		btnMainMenu.setBorder(null);
-		btnMainMenu.setPreferredSize(new Dimension(107, 75));
-		
+		btnMainMenu.setPreferredSize(new Dimension(115, 75));
+
 		btnMainMenu.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnMainMenu.setBorderPainted(false);
 		panel_2.add(btnMainMenu);
 		btnMainMenu.setBackground(Color.WHITE);
-		
-		
-		btnHansicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
-		btnJoongsicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
-		btnIlsicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
-		btnYangsicMenu.setVerticalAlignment(SwingConstants.BOTTOM);
 		panChangePanel.setBackground(Color.WHITE);
 		
-	
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(16, 210, 115, 116);
+		panel.add(panel_1);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		labHansic.setOpaque(true);
+		labHansic.setBackground(Color.WHITE);
+		labHansic.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(labHansic, BorderLayout.SOUTH);
+		panel_1.add(btnHansic, BorderLayout.CENTER);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(16, 337, 115, 116);
+		panel.add(panel_4);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		
+		
+		labJoongsic.setBackground(Color.WHITE);
+		labJoongsic.setOpaque(true);
+		labJoongsic.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_4.add(labJoongsic, BorderLayout.SOUTH);
+		panel_4.add(btnJoongsic, BorderLayout.CENTER);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBounds(16, 463, 115, 116);
+		panel.add(panel_7);
+		panel_7.setLayout(new BorderLayout(0, 0));
+		
+		labIlsic.setBackground(Color.WHITE);
+		labIlsic.setOpaque(true);
+		labIlsic.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_7.add(labIlsic, BorderLayout.SOUTH);
+		panel_7.add(btnIlsic, BorderLayout.CENTER);
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBounds(16, 589, 115, 116);
+		panel.add(panel_8);
+		panel_8.setLayout(new BorderLayout(0, 0));
+		
+		labYangsic.setBackground(Color.WHITE);
+		labYangsic.setOpaque(true);
+		labYangsic.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_8.add(labYangsic, BorderLayout.SOUTH);
+		panel_8.add(btnYangsic, BorderLayout.CENTER);
+
 //		--------------------변하는 패널 부분 카드레이아웃 설정
 		panChangePanel.setLayout(card);
 		panChangePanel.add(UserMenuDetailView, "UserMenuDetailView");
@@ -193,8 +232,9 @@ public class FoodMain extends JFrame{
 		panChangePanel.add(basketMain, "basketMain");
 		panChangePanel.setBounds(160, 118, 1012, 634);
 		panel.add(panChangePanel);
-		card.show(panChangePanel, "foodMainView");
-		
+		currentPanelName = "foodMainView";
+		card.show(panChangePanel, currentPanelName);
+
 		searchField = new JTextField();
 		searchField.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		searchField.setBorder(new MatteBorder(2, 2, 4, 4, (Color) Color.LIGHT_GRAY));
@@ -202,25 +242,12 @@ public class FoodMain extends JFrame{
 		panel.add(searchField);
 		searchField.setColumns(10);
 		panel_6.setBackground(Color.DARK_GRAY);
-		
-		
+
 		panel_6.setBounds(145, 118, 4, 633);
 		panel.add(panel_6);
-		btnHansicMenu.setBounds(22, 210, 103, 90);
-		
-		panel.add(btnHansicMenu);
-		btnJoongsicMenu.setBounds(22, 321, 103, 90);
-		
-		panel.add(btnJoongsicMenu);
-		btnIlsicMenu.setBounds(22, 432, 103, 90);
-		
-		panel.add(btnIlsicMenu);
-		btnYangsicMenu.setBounds(22, 543, 103, 90);
-		
-		panel.add(btnYangsicMenu);
 		btnSearch.setBorder(null);
 		btnSearch.setBounds(826, 42, 40, 38);
-		
+
 		panel.add(btnSearch);
 		panMainButton.setBounds(145, 26, 4, 66);
 		panel.add(panMainButton);
@@ -230,78 +257,75 @@ public class FoodMain extends JFrame{
 		labMenu.setBackground(Color.WHITE);
 		labMenu.setHorizontalAlignment(SwingConstants.CENTER);
 		labMenu.setBounds(12, 118, 123, 82);
-		
+
 		panel.add(labMenu);
 		btnUserInfo.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, true));
 		btnUserInfo.setBounds(965, 26, 79, 54);
-		
+
 		panel.add(btnUserInfo);
 		labName.setBounds(965, 77, 79, 22);
-		
+
 		panel.add(labName);
-		
-		//주문 개수 표시
+
+		// 주문 개수 표시
 		lbOrderCount.setBounds(1129, 15, 35, 35);
 		panel.add(lbOrderCount);
 		user.getBasket().setOrderCount(lbOrderCount);
-		
+
 		lbOrderCircle.setBounds(1129, 15, 35, 35);
 		URL url = FoodMain.class.getResource("/kitri/foodCourt/user/basket/image/red_circle.png");
 		try {
 			BufferedImage image = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(image.getScaledInstance(lbOrderCircle.getWidth(), lbOrderCircle.getHeight(), Image.SCALE_FAST));
+			ImageIcon icon = new ImageIcon(
+					image.getScaledInstance(lbOrderCircle.getWidth(), lbOrderCircle.getHeight(), Image.SCALE_FAST));
 			lbOrderCircle.setIcon(icon);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		panel.add(lbOrderCircle);
-		
+
 		btnOrderList.setBorder(new LineBorder(Color.GRAY, 2, true));
 		btnOrderList.setBounds(1074, 26, 79, 54);
-		
+
 		panel.add(btnOrderList);
 		labBasket.setVerticalTextPosition(SwingConstants.CENTER);
 		labBasket.setHorizontalAlignment(SwingConstants.CENTER);
 		labBasket.setBounds(1074, 77, 79, 22);
-		
+
 		panel.add(labBasket);
 		panBarVerRight.setBackground(Color.DARK_GRAY);
 		panBarVerRight.setBounds(916, 26, 4, 66);
-		
+
 		panel.add(panBarVerRight);
-				labSearch.setBounds(170, 26, 60, 66);
-				panel.add(labSearch);
-		//		---------------------
-				labSearch.setFont(new Font("굴림", Font.PLAIN, 30));
+		labSearch.setBounds(170, 26, 60, 66);
+		panel.add(labSearch);
+		// ---------------------
+		labSearch.setFont(new Font("굴림", Font.PLAIN, 30));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 800);
+
+		btnHansic.setName("1");
+		btnJoongsic.setName("2");
+		btnIlsic.setName("3");
+		btnYangsic.setName("4");
 		
 //		--------------------------이벤트 등록부
 		FoodMainController foodMainController = new FoodMainController(this);
 		btnMainMenu.addActionListener(foodMainController);
 		btnSearch.addActionListener(foodMainController);
-		btnHansicMenu.addActionListener(foodMainController);
-		btnJoongsicMenu.addActionListener(foodMainController);
-		btnIlsicMenu.addActionListener(foodMainController);
-		btnYangsicMenu.addActionListener(foodMainController);
 		btnUserInfo.addActionListener(foodMainController);
 		btnOrderList.addActionListener(foodMainController);
 		searchField.addActionListener(foodMainController);
+
+		btnHansic.addActionListener(foodMainController);
+		btnJoongsic.addActionListener(foodMainController);
+		btnIlsic.addActionListener(foodMainController);
+		btnYangsic.addActionListener(foodMainController);
 		
 		foodMainView.labHansic.addActionListener(foodMainController);
 		foodMainView.labJoongsic.addActionListener(foodMainController);
 		foodMainView.labIlsic.addActionListener(foodMainController);
 		foodMainView.labYangsic.addActionListener(foodMainController);
-		
 	}
-	// 한식 메뉴를 클릭했을때 한식 메뉴 패널에 메뉴 리스트를 세팅하고 setView메소드를 호출해서 메인화면에 add해준다
-	// 메뉴 패널을 메인에 add하지 않고 setvisible을 하게되면 메인 화면을 움직였을때 
-//	public void setView(Component component) {
-//		component.setLocation(160, 118);
-//		FoodMain.add(component);
-//	}
-//	public void removeView(Component component) {
-//		FoodMain.remove(component);
-//	}
 }

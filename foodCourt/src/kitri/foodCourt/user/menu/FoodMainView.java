@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 
 public class FoodMainView extends JPanel {
 	public Cursor hand = new Cursor(Cursor.HAND_CURSOR);
@@ -41,6 +42,7 @@ public class FoodMainView extends JPanel {
 		labHansic.setBounds(0, 0, 330, 251);
 		labHansic.setCursor(hand);
 		panel.add(labHansic);
+		labHansicName.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		
 		
 		labHansicName.setOpaque(true);
@@ -62,6 +64,7 @@ public class FoodMainView extends JPanel {
 		panel_1.add(labIlsic);
 		
 		JLabel label_4 = new JLabel("\uC77C\uC2DD");
+		label_4.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		label_4.setOpaque(true);
 		label_4.setBackground(Color.WHITE);
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
@@ -80,6 +83,7 @@ public class FoodMainView extends JPanel {
 		panel_2.add(labJoongsic);
 		
 		JLabel label_3 = new JLabel("\uC911\uC2DD");
+		label_3.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		label_3.setOpaque(true);
 		label_3.setBackground(Color.WHITE);
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -98,6 +102,7 @@ public class FoodMainView extends JPanel {
 		panel_3.add(labYangsic);
 		
 		JLabel label_5 = new JLabel("\uC591\uC2DD");
+		label_5.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		label_5.setOpaque(true);
 		label_5.setBackground(Color.WHITE);
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);

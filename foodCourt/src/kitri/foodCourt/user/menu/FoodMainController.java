@@ -37,11 +37,10 @@ public class FoodMainController implements ActionListener, KeyListener{
 		}
 			
 	}
-
+	//숫자 이외의 키를 입력시 막는 메소드
 	@Override
 	public void keyTyped(KeyEvent e) {
 		foodMainService.validationCheck(e);
-		
 	}
 
 	@Override

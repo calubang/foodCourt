@@ -18,7 +18,6 @@ public class MenuPanel extends JPanel {
 		setBackground(Color.WHITE);
 		
 		btnImg = new MenuButton(roperImg);
-		btnImg.setBorder(null);
 		labName = new JLabel(foodName);
 		labName.setFont(new Font("±¼¸²", Font.PLAIN, 16));
 		labName.setHorizontalAlignment(SwingConstants.CENTER);

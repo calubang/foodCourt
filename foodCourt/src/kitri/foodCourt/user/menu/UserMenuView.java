@@ -51,12 +51,11 @@ public class UserMenuView extends JPanel {
 		scrollPane.setBorder(null);
 		
 		scrollPane.setViewportView(panel);
-		scrollPane.setBounds(12, 10, 988, 614);
+		scrollPane.setBounds(0, 0, 1012, 634);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		setMenu(list);
 		add(scrollPane);
-//		panel.setPreferredSize(new Dimension(998, 614));
 		
 		
 	}

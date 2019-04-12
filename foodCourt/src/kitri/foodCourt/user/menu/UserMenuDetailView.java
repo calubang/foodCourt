@@ -32,6 +32,7 @@ public class UserMenuDetailView extends JPanel {
 			bimg = ImageIO.read(new File(UserMenuView.class.getResource(foodDto.getImageAddress()).toURI()));
 			ImageIcon properImg; // 적정크기에 맞춰진 이미지를 담을 변수
 			properImg = new ImageIcon(bimg.getScaledInstance((int) (475), (int) (394), Image.SCALE_SMOOTH));
+			
 			image = new JLabel(properImg);
 			foodName.setText(foodDto.getFoodName());
 			foodName.setFont(new Font("맑은고딕", Font.BOLD, 28));
@@ -123,6 +124,8 @@ public class UserMenuDetailView extends JPanel {
 		return this.foodDto;
 	}
 	public int getCount() {
+		if(tfCount.getText().isEmpty() || Integer.parseInt(tfCount.getText()) == 0)
+			return 0;
 		return Integer.parseInt(tfCount.getText()); // 장바구니 추가버튼 액션이벤트가 발생했을때 실행
 	}
 }
