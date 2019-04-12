@@ -42,6 +42,9 @@ public class AdminPaymentService {
     Connection c = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    
+    //Dao
+    public AdminPaymentDao dao;
 	
 	
 	public AdminPaymentService(AdminPaymentControl apc) {
@@ -69,6 +72,8 @@ public class AdminPaymentService {
 		
 		ap.commonTable.setRowSorter(sorter);
 		sorter.setSortKeys(sortKeys);
+		
+		dao = new AdminPaymentDao(this);
 	}
 	
 	
@@ -168,6 +173,20 @@ public class AdminPaymentService {
 		int result = JOptionPane.showOptionDialog(ap.deleteBtn, "삭제하시겠습니까?", "삭제 확인", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 		
 		if (result == JOptionPane.OK_OPTION) {
+			int currentSelectedrow = ap.commonTable.convertRowIndexToModel(ap.commonTable.getSelectedRow());
+			System.out.println(currentSelectedrow);
+			String paymentId = (String)dtmPayment.getValueAt(currentSelectedrow, 0);
+			System.out.println(paymentId);
+			
+			//db에서 삭제
+			if(dao.delete(paymentId) != 1) {
+				//비정상종료
+				JOptionPane.showMessageDialog(ap, "삭제중 오류가 발생하였습니다. 관리자에게 문의하세요.", "오류발생", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			//리스트에서 삭제
+			dtmPayment.removeRow(currentSelectedrow);
 			
 		} else {
 			return;

@@ -53,7 +53,7 @@ public class SwingFactory {
 		switch(name) {
 		case "basketFood":
 			label = new FLabel();
-			label.setFont(new Font("ÈÞ¸Õ¸ðÀ½T", Font.PLAIN, 20));
+			label.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
 			label.setHorizontalAlignment(SwingConstants.CENTER);
 			return label;
 		}

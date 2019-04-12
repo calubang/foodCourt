@@ -3,20 +3,20 @@ package kitri.foodCourt.dto;
 import java.util.Date;
 
 public class FoodDto {
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	private String foodId;				//ï¿½ï¿½ï¿½ï¿½id
-	private String foodName; 		//ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
-	private int categoryId;				//Ä«ï¿½×°ï¿½id
-	private String categoryName;	//Ä«ï¿½×°ï¿½ï¿½Ì¸ï¿½
-	private int price;						//ï¿½ï¿½ï¿½ï¿½
-	private int point;					//ï¿½ï¿½ï¿½ï¿½Æ®
-	private String description;		//ï¿½ï¿½ï¿½ï¿½
-	private String imageAddress;	//ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½
+	//À¯Àú dto
+	private String foodId;				
+	private String foodName; 		
+	private int categoryId;				
+	private String categoryName;	
+	private int price;						
+	private int point;					
+	private String description;		
+	private String imageAddress;	
 	
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	private String managerId;		//ï¿½ï¿½ï¿½ï¿½Ñ¸Å´ï¿½ï¿½ï¿½
-	private Date createDate;		//ï¿½ï¿½ï¿½ï¿½ï¿½
-	private char enable;				//È°ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½
+	//°ü¸®ÀÚ Àü¿ë()
+	private String managerId;		
+	private Date createDate;		
+	private char enable;				
 		
 	public FoodDto() {
 	}
