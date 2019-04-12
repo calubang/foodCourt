@@ -109,7 +109,11 @@ public class BasketImpl implements Basket{
 		totalPrice += detail.getFood().getPrice() * detail.getCount();
 		savePoint += detail.getFood().getPoint() * detail.getCount();
 		if(orderCount != null) {
-			orderCount.setText(detailList.size()+"");
+			if(size == 0) {
+				orderCount.setText("");
+			}else {
+				orderCount.setText(detailList.size()+"");
+			}
 		}
 		return detailList.size();
 	}
@@ -118,7 +122,15 @@ public class BasketImpl implements Basket{
 		BasketDetail detail = detailList.get(index);
 		totalPrice -= detail.getFood().getPrice();
 		savePoint -= detail.getFood().getPoint();
-		return detailList.remove(index);
+		detail = detailList.remove(index);
+		if(orderCount != null) {
+			if(detailList.size() == 0) {
+				orderCount.setText("");
+			}else {
+				orderCount.setText(detailList.size()+"");
+			}
+		}
+		return detail;
 	}
 	//삭제(비교해서 삭제)
 	//없으면 null 있으면 삭제한 객체
