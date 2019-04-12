@@ -118,7 +118,7 @@ public class BasketMain extends JPanel{
 		btnAllCancel.setBounds(29, 2, 44, 44);
 		
 		JPanel pTop = new JPanel();
-		pTop.setBounds(0, 0, 1000, 155);
+		pTop.setBounds(0, 0, 1010, 155);
 		pBasketMain.add(pTop);
 		pTop.setLayout(null);
 		
@@ -133,7 +133,7 @@ public class BasketMain extends JPanel{
 		lblBasket.setText("\uC7A5\uBC14\uAD6C\uB2C8");
 		
 		JPanel pSeparator = new JPanel();
-		pSeparator.setBounds(12, 90, 988, 6);
+		pSeparator.setBounds(0, 90, 1010, 6);
 		pTop.add(pSeparator);
 		pSeparator.setBackground(SystemColor.activeCaption);
 		
