@@ -15,7 +15,7 @@ public class AdminRegisterService {
 
 	AdminRegisterControl arc;
 	AdminMemberInfo ami;
-
+	ManagermentDao managermentDao =new DbFactory().managermentDao();
 	AdminRegister ar;
 	MemberRegister mr;
 	ModifyAdminRegit maR;
@@ -24,7 +24,7 @@ public class AdminRegisterService {
 	List<AdminRegitDto> list = new ArrayList<AdminRegitDto>();
 
 	String[] option = { "예", "아니요" };
-	String[] column = { "아이디", "이름", "비밀번호", "번호1","번호2","번호3", "직업코드", "입사일", "우편번호", "주소", "이메일", "이메일도메인" };
+	
 
 	
 
@@ -44,10 +44,7 @@ public class AdminRegisterService {
 		mR = ami.mR;
 		rm = ami.rm;
 
-		dtm = ami.dtm;
-		for (int i = 0; i < column.length; i++) {
-			dtm.addColumn(column[i]);
-		}
+		
 
 	}
 //	private void closeOracleConnection(Connection c, PreparedStatement ps, ResultSet rs) {

@@ -1,24 +1,25 @@
 package kitri.foodCourt.management.regit;
 
-import kitri.foodCourt.db.OracleConnectionMaker;
+import kitri.foodCourt.management.regit.ConnectionMaker;
 import kitri.foodCourt.dto.AdminRegitDto;
 
 import java.sql.*;
 
-import kitri.foodCourt.db.ConnectionMaker;
+
 
 public class ManagermentDao {
 
 	public ConnectionMaker connectionMaker;
 	
-	public ManagermentDao() {
-		connectionMaker = new OracleConnectionMaker();
+	public ManagermentDao(ConnectionMaker connectionMaker) {
+		this.connectionMaker = connectionMaker;
 	}
 	
 	public int register(AdminRegitDto ard) {
 		
 		PreparedStatement ps = null;
 		Connection c = null;
+		ResultSet rs = null;
 		String sql ="insert into FOOK_MANAGER(MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID, HIRE_DATE, ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) values(?,?,?,?,?,?,?,sysdate,?,?,?,?)";
 		try {
 			c = connectionMaker.makeConnection();

@@ -40,6 +40,7 @@ public class AdminRegisterControl implements ActionListener {
 		} else if (ob == ami.ar.idbtn) {
 			ars.arId();
 		} else if (ob == ami.ar.cancelbtn) {
+			
 			ars.Close(ami.jfAD);
 		} else if (ob == ami.mr.registerbtn) {
 			ars.mrRegister();
@@ -49,7 +50,7 @@ public class AdminRegisterControl implements ActionListener {
 			ars.Close(ami.jfMD);
 		} else if (ob == ami.maR.registerbtn) {
 			ars.maRRegister();
-		} else if (ob == ami.maR.cancelbtn) {
+		} else if (ob == maR.cancelbtn) {
 			System.out.println("1");
 			ami.jfMo.setVisible(false);
 		}else if(ob == ami.mR.registerbtn) {
