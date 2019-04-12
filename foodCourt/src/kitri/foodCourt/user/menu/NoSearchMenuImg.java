@@ -15,7 +15,7 @@ public class NoSearchMenuImg extends JPanel {
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("ë©”ë‰´ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		JLabel lblNewLabel = new JLabel("¸Þ´º°¡ ¾ø½À´Ï´Ù.");
 		lblNewLabel.setOpaque(true);
 		lblNewLabel.setForeground(Color.DARK_GRAY);
 		lblNewLabel.setBackground(Color.LIGHT_GRAY);
