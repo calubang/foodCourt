@@ -50,7 +50,7 @@ public class AdminViewReceipt extends JPanel {
 
 	JButton confirmBtn = new JButton("\uD655\uC778");
 
-	JScrollPane scrollPane = new JScrollPane();
+	JScrollPane scrollPane = new JScrollPane(table);
 	
 	/**
 	 * Create the panel.
@@ -66,7 +66,7 @@ public class AdminViewReceipt extends JPanel {
 		panel.add(scrollPane);
 		table.setRowSelectionAllowed(false);
 		
-		table.setPreferredSize(new Dimension(380, 250));
+		//table.setPreferredSize(new Dimension(380, 250));
 		table.setPreferredScrollableViewportSize(new Dimension(380, 280));
 		table.setShowVerticalLines(true);
 		table.setAutoCreateRowSorter(false);
