@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+encoding//src/kitri/foodCourt/management/payment/AdminPayment.java=MS949
 encoding//src/kitri/foodCourt/management/regit/AdminMemberInfo.java=MS949
 encoding//src/kitri/foodCourt/management/regit/AdminRegister.java=MS949
 encoding//src/kitri/foodCourt/management/regit/AdminRegisterControl.java=MS949
@@ -7,6 +9,8 @@ encoding//src/kitri/foodCourt/management/regit/MemberRegister.java=MS949
 encoding//src/kitri/foodCourt/management/regit/ModifyAdminRegit.java=MS949
 encoding//src/kitri/foodCourt/management/regit/ModifyRegit.java=MS949
 encoding//src/kitri/foodCourt/management/regit/RemoveMember.java=MS949
+=======
+>>>>>>> bf5fdefba2fa26dc5ac5407db90f184c1f350a1e
 encoding//src/kitri/foodCourt/user/basket/BasketMain.java=MS949
 encoding//src/kitri/foodCourt/user/basket/BasketService.java=MS949
 encoding//src/kitri/foodCourt/user/basket/Payment.java=MS949

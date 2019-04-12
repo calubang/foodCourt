@@ -10,6 +10,7 @@ import kitri.foodCourt.user.swing.*;
 
 public class SwingFactory {
 	private static SwingFactory swingFactory = new SwingFactory();
+	private static String options[] = {"¿¹", "¾Æ´Ï¿ä"};
 	
 	private SwingFactory() {}
 	
@@ -35,7 +36,6 @@ public class SwingFactory {
 			button.setFocusPainted(false);
 			button.setContentAreaFilled(false);
 			button.setBorderPainted(false);
-			button.addMouseListener(button);
 			return button;
 		default:
 			button = new FButton();
@@ -78,7 +78,6 @@ public class SwingFactory {
 		case "warning":
 			//ImageIcon icon = new ImageIcon(BasketMain.class.getResource("/kitri/foodCourt/user/basket/image/warning.png"));
 			fOptionPane = new FOptionPane();
-			String options[] = {"¿¹", "¾Æ´Ï¿ä"};
 			UIManager.put("OptionPane.messageFont", new Font("", Font.PLAIN, 15));
 			UIManager.put("OptionPane.buttonFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 			return fOptionPane.showOptionDialog(parentComponent, message, title, JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
@@ -88,6 +87,11 @@ public class SwingFactory {
 			UIManager.put("OptionPane.buttonFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 			fOptionPane.showMessageDialog(parentComponent, message, title, JOptionPane.INFORMATION_MESSAGE);
 			return 0;
+		case "messageChoice":
+			fOptionPane = new FOptionPane();
+			UIManager.put("OptionPane.messageFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
+			UIManager.put("OptionPane.buttonFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
+			return fOptionPane.showOptionDialog(parentComponent, message, title, JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 		case "errorMessage":
 			fOptionPane = new FOptionPane();
 			UIManager.put("OptionPane.messageFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));

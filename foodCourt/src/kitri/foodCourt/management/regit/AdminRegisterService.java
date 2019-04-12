@@ -15,16 +15,16 @@ public class AdminRegisterService {
 
 	AdminRegisterControl arc;
 	AdminMemberInfo ami;
-
+	ManagermentDao managermentDao =new DbFactory().managermentDao();
 	AdminRegister ar;
 	MemberRegister mr;
 	ModifyAdminRegit maR;
 	RemoveMember rm;
 	ModifyRegit mR;
-
+	List<AdminRegitDto> list = new ArrayList<AdminRegitDto>();
 
 	String[] option = { "¿¹", "¾Æ´Ï¿ä" };
-	String[] column = { "¾ÆÀÌµð", "ÀÌ¸§", "ºñ¹Ð¹øÈ£", "¹øÈ£1","¹øÈ£2","¹øÈ£3", "Á÷¾÷ÄÚµå", "ÀÔ»çÀÏ", "¿ìÆí¹øÈ£", "ÁÖ¼Ò", "ÀÌ¸ÞÀÏ", "ÀÌ¸ÞÀÏµµ¸ÞÀÎ" };
+	
 
 	
 
@@ -44,105 +44,102 @@ public class AdminRegisterService {
 		mR = ami.mR;
 		rm = ami.rm;
 
-		dtm = ami.dtm;
-		for (int i = 0; i < column.length; i++) {
-			dtm.addColumn(column[i]);
-		}
+		
 
 	}
-	private void closeOracleConnection(Connection c, PreparedStatement ps, ResultSet rs) {
-		if(rs != null) {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				rs = null;
-			}
-		}
-		
-		if(ps != null) {
-			try {
-				ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				ps = null;
-			}
-		}
-		
-		if(c != null) {
-			try {
-				c.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				c = null;
-			}
-		}
-	}
+//	private void closeOracleConnection(Connection c, PreparedStatement ps, ResultSet rs) {
+//		if(rs != null) {
+//			try {
+//				rs.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} finally {
+//				rs = null;
+//			}
+//		}
+//		
+//		if(ps != null) {
+//			try {
+//				ps.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} finally {
+//				ps = null;
+//			}
+//		}
+//		
+//		if(c != null) {
+//			try {
+//				c.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} finally {
+//				c = null;
+//			}
+//		}
+//	}
 	
-	public void showview() {
-		List<AdminRegitDto> list = new ArrayList<AdminRegitDto>();
-		ListIterator<AdminRegitDto> iterator;
-		AdminRegitDto adminRegitDto = null;
-		
-		Object[] rowData = new Object[12];
-		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "dam", "dam");
-			
-			ps = c.prepareStatement("select *" 
-								  + "from FOOK_MANAGER");
-			
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				adminRegitDto = new AdminRegitDto(rs.getString("MANAGER_ID"), rs.getString("NAME"),rs.getString("PASSWORD"), rs.getString("PHONE_FIRST"), rs.getString("PHONE_MIDDLE"),rs.getString("PHONE_LAST"), rs.getString("JOB_ID"), rs.getDate("HIRE_DATE"), rs.getString("ADDRESS_ZIP"),rs.getString("ADDRESS"), rs.getString("EMAIL"), rs.getString("EMAIL_DOMAIN"));
-
+//	public void showview() {
+//		List<AdminRegitDto> list = new ArrayList<AdminRegitDto>();
+//		ListIterator<AdminRegitDto> iterator;
+//		AdminRegitDto adminRegitDto = null;
+//		
+//		Object[] rowData = new Object[12];
+//		
+//		try {
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "dam", "dam");
+//			
+//			ps = c.prepareStatement("select *" 
+//								  + "from FOOK_MANAGER");
+//			
+//			rs = ps.executeQuery();
+//
+//			while (rs.next()) {
+//				adminRegitDto = new AdminRegitDto(rs.getString("MANAGER_ID"), rs.getString("NAME"),rs.getString("PASSWORD"), rs.getString("PHONE_FIRST"), rs.getString("PHONE_MIDDLE"),rs.getString("PHONE_LAST"), rs.getString("JOB_ID"), rs.getDate("HIRE_DATE"), rs.getString("ADDRESS_ZIP"),rs.getString("ADDRESS"), rs.getString("EMAIL"), rs.getString("EMAIL_DOMAIN"));
+//
 //				AdminRegitDto.setPoint(rs.getInt("food_point"));
 //				AdminRegitDto.setDescription(rs.getString("food_description"));
 //				AdminRegitDto.setManagerId(rs.getString("manager_id"));
 //				AdminRegitDto.setCreateDate(rs.getDate("create_date"));
 //				AdminRegitDto.setEnable(rs.getString("food_enable").charAt(0));
-				
-				list.add(adminRegitDto);
-			}
-
-			iterator = list.listIterator();
-			
-			while(iterator.hasNext()) {
-				adminRegitDto = iterator.next();
-				
-				rowData[0] = adminRegitDto.getManagerId();
-				rowData[1] = adminRegitDto.getName();
-				rowData[2] = adminRegitDto.getPassword();
-				rowData[3] = adminRegitDto.getPhoneFirst();
-				rowData[4] = adminRegitDto.getPhoneMiddle();
-				rowData[5] = adminRegitDto.getPhoneLast();
-				rowData[6] = adminRegitDto.getJobId();
-				rowData[7] = adminRegitDto.getHireDate();
-				rowData[8] = adminRegitDto.getAdressZip();
-				rowData[9] = adminRegitDto.getAdress();
-				rowData[10] = adminRegitDto.getEmail();
-				rowData[11] = adminRegitDto.getEmailDomain();
-				
-				dtm.addRow(rowData);
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeOracleConnection(c, ps, rs);
-		}
-	}
-
-	
-	private void warningMessage(Component component, Object msg, String title) {
-		JOptionPane.showMessageDialog(component, msg, title, JOptionPane.WARNING_MESSAGE);
-	}
+//				
+//				list.add(adminRegitDto);
+//			}
+//
+//			iterator = list.listIterator();
+//			
+//			while(iterator.hasNext()) {
+//				adminRegitDto = iterator.next();
+//				
+//				rowData[0] = adminRegitDto.getManagerId();
+//				rowData[1] = adminRegitDto.getName();
+//				rowData[2] = adminRegitDto.getPassword();
+//				rowData[3] = adminRegitDto.getPhoneFirst();
+//				rowData[4] = adminRegitDto.getPhoneMiddle();
+//				rowData[5] = adminRegitDto.getPhoneLast();
+//				rowData[6] = adminRegitDto.getJobId();
+//				rowData[7] = adminRegitDto.getHireDate();
+//				rowData[8] = adminRegitDto.getAdressZip();
+//				rowData[9] = adminRegitDto.getAdress();
+//				rowData[10] = adminRegitDto.getEmail();
+//				rowData[11] = adminRegitDto.getEmailDomain();
+//				
+//				dtm.addRow(rowData);
+//			}
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			closeOracleConnection(c, ps, rs);
+//		}
+//	}
+//
+//	
+//	private void warningMessage(Component component, Object msg, String title) {
+//		JOptionPane.showMessageDialog(component, msg, title, JOptionPane.WARNING_MESSAGE);
+//	}
 	
 	public void showadminRegister() {
 		
@@ -182,58 +179,58 @@ public class AdminRegisterService {
 	
 
 	public void showdelete() {
-		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½?\n(ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ù½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.)", "ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
+		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?\n(»èÁ¦ÇÏ¸é ´Ù½Ã µÇµ¹¸± ¼ö ¾ø½À´Ï´Ù.)", "»èÁ¦ È®ÀÎ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
 	public void arRegister() {
-		System.out.println("start");
-		int currentSelectedrow = ami.commonTable.convertRowIndexToModel(ami.commonTable.getSelectedRow());
-		int result = 0;	
-		System.out.println("1");
-		
-		Object[] rowData = new Object[12];
-		System.out.println("11");
-		String managerid = ar.idtf.getText();
-		System.out.println(ar.idtf.getText());
-		if (managerid.isEmpty()) {
-			warningMessage(ar.adminRegister, "¾ÆÀÌµð°¡ ÀûÇÕÇÏÁö¾Ê½À´Ï´Ù", "¾ÆÀÌµð ¿À·ù");
-			return;
-		}
-		System.out.println("3");
-		String managername = ar.nametf.getText();
-		System.out.println("4");
-		if (managername.isEmpty()) {
-			warningMessage(ar.adminRegister, "ÀÌ¸§ÀÌ ÀûÇÕÇÏÁö¾Ê½À´Ï´Ù", "ÀÌ¸§ ¿À·ù");
-			return;
-		}
-		System.out.println("5");
-		String managerpass = ar.passwordtf.getText();
-		System.out.println("6");
-		if (managerpass.isEmpty()) {
-			warningMessage(ar.adminRegister, "ºñ¹Ð¹øÈ£°¡ ÀûÇÕÇÏÁö¾Ê½À´Ï´Ù", "ºñ¹Ð¹øÈ£ ¿À·ù");
-			return;
-		}		
-		System.out.println("7");
-		String managerpw = ar.pwtf.getText();
-		if (managerpw.isEmpty()) {
-			warningMessage(ar.adminRegister, "ºñ¹Ð¹øÈ£°¡ ÀÏÄ¡ÇÏÁö¾Ê½À´Ï´Ù.", "ºñ¹Ð¹øÈ£ ¿À·ù");
-			return;
-		}
-		String managerphone1 = (String) ar.fristnumber.getItemAt(0);
-		if (managerphone1.isEmpty()) {
-			warningMessage(ar.adminRegister, "¾ÕÀÚ¸®¸¦ ¼±ÅÃÇØ¾ß ÇÕ´Ï´Ù", "¹øÈ£ ¿À·ù");
-			return;
-		}
-		String managerphone2 = ar.midnumber.getText();
-		if (managerphone2.isEmpty()) {
-			warningMessage(ar.adminRegister, "°¡¿îµ¥ÀÚ¸®¸¦ ¼±ÅÃÇØ¾ß ÇÕ´Ï´Ù", "¹øÈ£ ¿À·ù");
-			return;
-		}
-		String managerphone3 = ar.lastnumber.getText();
-		if (managerphone3.isEmpty()) {
-			warningMessage(ar.adminRegister, "µÞÀÚ¸®¸¦ ¼±ÅÃÇØ¾ß ÇÕ´Ï´Ù", "¹øÈ£ ¿À·ù");
-			return;
-		}
+//		System.out.println("start");
+//		int currentSelectedrow = ami.commonTable.convertRowIndexToModel(ami.commonTable.getSelectedRow());
+//		int result = 0;	
+//		System.out.println("1");
+//		
+//		Object[] rowData = new Object[12];
+//		System.out.println("11");
+//		String managerid = ar.idtf.getText();
+//		System.out.println(ar.idtf.getText());
+//		if (managerid.isEmpty()) {
+//			warningMessage(ar.adminRegister, "¾ÆÀÌµð°¡ ÀûÇÕÇÏÁö¾Ê½À´Ï´Ù", "¾ÆÀÌµð ¿À·ù");
+//			return;
+//		}
+//		System.out.println("3");
+//		String managername = ar.nametf.getText();
+//		System.out.println("4");
+//		if (managername.isEmpty()) {
+//			warningMessage(ar.adminRegister, "ÀÌ¸§ÀÌ ÀûÇÕÇÏÁö¾Ê½À´Ï´Ù", "ÀÌ¸§ ¿À·ù");
+//			return;
+//		}
+//		System.out.println("5");
+//		String managerpass = ar.passwordtf.getText();
+//		System.out.println("6");
+//		if (managerpass.isEmpty()) {
+//			warningMessage(ar.adminRegister, "ºñ¹Ð¹øÈ£°¡ ÀûÇÕÇÏÁö¾Ê½À´Ï´Ù", "ºñ¹Ð¹øÈ£ ¿À·ù");
+//			return;
+//		}		
+//		System.out.println("7");
+//		String managerpw = ar.pwtf.getText();
+//		if (managerpw.isEmpty()) {
+//			warningMessage(ar.adminRegister, "ºñ¹Ð¹øÈ£°¡ ÀÏÄ¡ÇÏÁö¾Ê½À´Ï´Ù.", "ºñ¹Ð¹øÈ£ ¿À·ù");
+//			return;
+//		}
+//		String managerphone1 = (String) ar.fristnumber.getItemAt(0);
+//		if (managerphone1.isEmpty()) {
+//			warningMessage(ar.adminRegister, "¾ÕÀÚ¸®¸¦ ¼±ÅÃÇØ¾ß ÇÕ´Ï´Ù", "¹øÈ£ ¿À·ù");
+//			return;
+//		}
+//		String managerphone2 = ar.midnumber.getText();
+//		if (managerphone2.isEmpty()) {
+//			warningMessage(ar.adminRegister, "°¡¿îµ¥ÀÚ¸®¸¦ ¼±ÅÃÇØ¾ß ÇÕ´Ï´Ù", "¹øÈ£ ¿À·ù");
+//			return;
+//		}
+//		String managerphone3 = ar.lastnumber.getText();
+//		if (managerphone3.isEmpty()) {
+//			warningMessage(ar.adminRegister, "µÞÀÚ¸®¸¦ ¼±ÅÃÇØ¾ß ÇÕ´Ï´Ù", "¹øÈ£ ¿À·ù");
+//			return;
+//		}
 //		String jobid = ar;	
 //		int price = Integer.parseInt(priceStr);
 //		
@@ -244,61 +241,61 @@ public class AdminRegisterService {
 //			return;
 //		}
 //		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "dam", "dam");
-			
-			ps = c.prepareStatement("insert into FOOK_MANAGER (MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID, HIRE_DATE, ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) "
-												 + "values ((?), (?), (?), (?), (?), (?), (?), sysdate, (?), (?), (?), (?)");
-			
-			ps.setString(1, managerid);
-			ps.setString(2, managername);
-			ps.setString(3, managerpass);
-			ps.setString(4, managerpw);
-			ps.setString(5, managerphone1);
-			ps.setString(6, managerphone2);
-			ps.setString(7, managerphone3);
-//			ps.setString(8, );
-//			ps.setString(9, food_enable);
-//			ps.setString(10, food_enable);
-//			ps.setString(11, food_enable);
-//			ps.setString(12, food_enable);
-			
-			result = ps.executeUpdate();
-
-			ps.close();
-			
-			ps = c.prepareStatement("select managerid, managername, managerpass,managerpw ,managerphone1,managerphone2,managerphone3"
-								  + "from FOOK_MANAGER " );
-			
-			rs = ps.executeQuery();
-			
-			if ((result != 0) && rs.next()) {
-				rowData[0] = rs.getString("managerid");
-				rowData[1] = rs.getString("managername");
-				rowData[2] = rs.getString("managerpass");
-				rowData[3] = rs.getString("managerid");
-				rowData[4] = rs.getString("managerid");
-//				rowData[5] = manager_id;
-//				rowData[6] = rs.getDate("create_date");
-//				rowData[7] = food_enable;
-			}
-			
-			dtm.addRow(rowData);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeOracleConnection(c, ps, rs);
-		}
-		
-		Close(ami.jfAD);
+//		try {
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "dam", "dam");
+//			
+//			ps = c.prepareStatement("insert into FOOK_MANAGER (MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID, HIRE_DATE, ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) "
+//												 + "values ((?), (?), (?), (?), (?), (?), (?), sysdate, (?), (?), (?), (?)");
+//			
+//			ps.setString(1, managerid);
+//			ps.setString(2, managername);
+//			ps.setString(3, managerpass);
+//			ps.setString(4, managerpw);
+//			ps.setString(5, managerphone1);
+//			ps.setString(6, managerphone2);
+//			ps.setString(7, managerphone3);
+////			ps.setString(8, );
+////			ps.setString(9, food_enable);
+////			ps.setString(10, food_enable);
+////			ps.setString(11, food_enable);
+////			ps.setString(12, food_enable);
+//			
+//			result = ps.executeUpdate();
+//
+//			ps.close();
+//			
+//			ps = c.prepareStatement("select managerid, managername, managerpass,managerpw ,managerphone1,managerphone2,managerphone3"
+//								  + "from FOOK_MANAGER " );
+//			
+//			rs = ps.executeQuery();
+//			
+//			if ((result != 0) && rs.next()) {
+//				rowData[0] = rs.getString("managerid");
+//				rowData[1] = rs.getString("managername");
+//				rowData[2] = rs.getString("managerpass");
+//				rowData[3] = rs.getString("managerid");
+//				rowData[4] = rs.getString("managerid");
+////				rowData[5] = manager_id;
+////				rowData[6] = rs.getDate("create_date");
+////				rowData[7] = food_enable;
+//			}
+//			
+//			dtm.addRow(rowData);
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			closeOracleConnection(c, ps, rs);
+//		}
+//		
+//		Close(ami.jfAD);
 	}
 	
 
 	public void arId() {
-		int result = JOptionPane.showOptionDialog(ar, "ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½Ö½ï¿½ï¿½Ï´ï¿", "ï¿½ßºï¿½È®ï¿½ï¿½", JOptionPane.YES_OPTION,
+		int result = JOptionPane.showOptionDialog(ar, "»ç¿ëÇÏ½Ã°Ú½À´Ï±î", "Áßº¹ È®ÀÎ", JOptionPane.YES_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
@@ -314,7 +311,7 @@ public class AdminRegisterService {
 	}
 
 	public void mrId() {
-		int result = JOptionPane.showOptionDialog(ar, "ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½Ö½ï¿½ï¿½Ï´ï¿", "ï¿½ßºï¿½È®ï¿½ï¿½", JOptionPane.YES_OPTION,
+		int result = JOptionPane.showOptionDialog(ar, "»ç¿ëÇÏ½Ã°Ú½À´Ï±î", "Áßº¹È®ÀÎ", JOptionPane.YES_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 

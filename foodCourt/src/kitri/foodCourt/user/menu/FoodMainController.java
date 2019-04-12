@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 public class FoodMainController implements ActionListener, KeyListener{
 	FoodMain foodMain = null;
-	FoodMainService foodMainService = null;
+	public FoodMainService foodMainService = null;
 	public FoodMainController(FoodMain main) {
 		this.foodMain = main;
 		foodMainService = new FoodMainService(this);

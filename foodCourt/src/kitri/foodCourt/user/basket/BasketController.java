@@ -2,14 +2,16 @@ package kitri.foodCourt.user.basket;
 
 
 import java.awt.event.*;
+
+import javax.swing.JPanel;
+
 import kitri.foodCourt.user.swing.FButton;
+import kitri.foodCourt.user.swing.FPanel;
 
 public class BasketController implements ActionListener, MouseListener{
 
 	public BasketMain basketMain;
 	public BasketService service;
-	
-	String[] options = {"예", "아니오"};
 	
 	public BasketController(BasketMain basketMain) {
 		this.basketMain = basketMain;
@@ -38,17 +40,19 @@ public class BasketController implements ActionListener, MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		service.goFoodDetail();
+		service.goFoodDetail(e.getComponent().getName());
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		
+		FPanel temp = (FPanel)e.getComponent().getParent();
+		temp.mouseEntered(e);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		
+		FPanel temp = (FPanel)e.getComponent().getParent();
+		temp.mouseExited(e);
 	}
 
 	@Override

@@ -46,7 +46,8 @@ public class AdminMenuManagement extends JPanel {
 	JPanel picturePanel = new JPanel();
 	JPanel menuPanel = new JPanel();
 
-	JScrollPane scrollPane = new JScrollPane(commonTable);
+	JScrollPane scrollPaneTable = new JScrollPane(commonTable);
+	JScrollPane scrollPaneDecription = new JScrollPane(descriptionTextArea);
 	
 	JButton registerBtn = new JButton("\uB4F1\uB85D");
 	JButton modifyBtn = new JButton("\uC218\uC815");
@@ -98,8 +99,8 @@ public class AdminMenuManagement extends JPanel {
 		commonTable.setAutoCreateRowSorter(true);
 		commonTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		scrollPane.setBounds(0, 58, 791, 664);
-		add(scrollPane);
+		scrollPaneTable.setBounds(0, 58, 791, 664);
+		add(scrollPaneTable);
 
 		menuPanel.setLayout(new GridLayout(3, 1, 0, 35));
 		menuPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uBA54\uB274", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 40, 40, 40)));
@@ -111,12 +112,13 @@ public class AdminMenuManagement extends JPanel {
 
 		descriptionPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uC74C\uC2DD \uC124\uBA85", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		descriptionPanel.setBounds(799, 234, 209, 145);
+		
 		add(descriptionPanel);
 		descriptionPanel.setLayout(new BorderLayout(0, 0));
 		descriptionTextArea.setEditable(false);
 		descriptionTextArea.setLineWrap(true);
 		
-		descriptionPanel.add(descriptionTextArea, BorderLayout.CENTER);
+		descriptionPanel.add(scrollPaneDecription, BorderLayout.CENTER);
 
 		add(menuPanel);
 		

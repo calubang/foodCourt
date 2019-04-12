@@ -41,9 +41,12 @@ public class BasketService {
 		basketMain.dataSetting();
 	}
 
-	public void goFoodDetail() {
+	public void goFoodDetail(String foodId) {
 		//food상세 정보로 이동
-		JOptionPane.showMessageDialog(basketMain, "음식상세정보로 이동(개발해야함)", "경고", JOptionPane.WARNING_MESSAGE);
+		int result = SwingFactory.getOptionPane("messageChoice", basketMain, "상세정보", "음식 상세정보로 이동하시겠습니까?");
+		if(result == 0) {
+			basketMain.foodMain.foodMainController.foodMainService.searchMenuDetail(foodId);
+		}
 	}
 
 }

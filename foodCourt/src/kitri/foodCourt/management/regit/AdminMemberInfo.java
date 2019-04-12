@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import kitri.foodCourt.management.member.AdminTable;
 import kitri.foodCourt.management.member.MemberTable;
@@ -49,20 +50,14 @@ public class AdminMemberInfo extends JPanel {
 	ModifyRegit mR;
 	RemoveMember rm;
 
-	DefaultTableModel dtm = new DefaultTableModel();
-	JTable commonTable = new JTable(dtm) {
-		@Override
-		public boolean isCellEditable(int row, int column) {
-			return false;
-		};
-	};
+
 
 	JFrame jfA = new JFrame();
 
-	JDialog jfAD = new JDialog(jfA, "ê´€ë¦¬ìë“±ë¡");
+	JDialog jfAD = new JDialog(jfA, "°ü¸®ÀÚµî·Ï");
 
 	JFrame jfM = new JFrame();
-	JDialog jfMD = new JDialog(jfM, "íšŒì›ë“±ë¡");
+	JDialog jfMD = new JDialog(jfM, "È¸¿øµî·Ï");
 
 	JFrame jfMo = new JFrame();
 	JDialog jfMoD = new JDialog();
@@ -80,7 +75,6 @@ public class AdminMemberInfo extends JPanel {
 
 	public AdminMemberInfo() {
 
-		// ìˆ˜ì •ì°½ ê´€ë ¨
 		
 		jpaMo = new JPanel();
 		card = new CardLayout();
@@ -89,20 +83,21 @@ public class AdminMemberInfo extends JPanel {
 		jpaMo.setLayout(card);
 		jpaMo.add(maR, "adminModi");
 		jpaMo.add(mR, "memberModi");
+		
 		// jpaMo.setBounds(160, 118, 1012, 634);
-		jfMo.add(jpaMo);
+		jfMo.getContentPane().add(jpaMo);
 		
 		setSize(new Dimension(1007, 722));
 		setLayout(null);
 
 		searchLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		searchLabel.setFont(new Font("å ì™ì˜™å ì™ì˜™", Font.PLAIN, 24));
+		searchLabel.setFont(new Font("µ¸¿ò", Font.PLAIN, 24));
 		searchLabel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		searchLabel.setBounds(398, 0, 110, 60);
 		add(searchLabel);
 
 		searchTextField = new JTextField();
-		searchTextField.setFont(new Font("å ì™ì˜™å ì™ì˜™", Font.PLAIN, 24));
+		searchTextField.setFont(new Font("µ¸¿òµ¸¿ò", Font.PLAIN, 24));
 		searchTextField.setColumns(10);
 		searchTextField.setBorder(new LineBorder(Color.BLACK, 1, true));
 		searchTextField.setBounds(508, 0, 500, 60);
@@ -115,6 +110,7 @@ public class AdminMemberInfo extends JPanel {
 						new EmptyBorder(40, 40, 40, 40)));
 		memberMenuPanel.setBounds(799, 128, 209, 594);
 		memberMenuPanel.setLayout(new GridLayout(4, 1, 0, 60));
+		adminMemberRegisterBtn.setFont(new Font("µ¸¿ò", Font.PLAIN, 12));
 		memberMenuPanel.add(adminMemberRegisterBtn);
 		memberMenuPanel.add(memberRegisterBtn);
 		modifyBtn.addActionListener(new ActionListener() {
@@ -154,11 +150,11 @@ public class AdminMemberInfo extends JPanel {
 		add(tablePanel);
 
 //		add listener
-		arc = new AdminRegisterControl(this);
 		ar = new AdminRegister();
 		mr = new MemberRegister();
-		maR = new ModifyAdminRegit();
-		mR = new ModifyRegit();
+		//maR = new ModifyAdminRegit();
+		//mR = new ModifyRegit();
+		arc = new AdminRegisterControl(this);
 
 		adminMemberRegisterBtn.addActionListener(arc);
 		memberRegisterBtn.addActionListener(arc);

@@ -65,7 +65,7 @@ public class FoodMain extends JFrame {
 	public BasketMain basketMain;
 	public FLabel lbOrderCircle = new FLabel();
 	public FLabel lbOrderCount = new FLabel(Font.BOLD, 20);
-	public FoodMainController foodMainController;
+<<<<<<< HEAD
 
 	public JLabel labHansic = new JLabel("\uD55C\uC2DD");
 	public JLabel labJoongsic = new JLabel("\uC911\uC2DD");
@@ -75,6 +75,10 @@ public class FoodMain extends JFrame {
 	public JButton btnJoongsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/joongsicMin.jpg")));
 	public JButton btnIlsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/ilsicMin.jpg")));
 	public JButton btnYangsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/yangsicMin.jpg")));
+=======
+	public FoodMainController foodMainController;
+	
+>>>>>>> bf5fdefba2fa26dc5ac5407db90f184c1f350a1e
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

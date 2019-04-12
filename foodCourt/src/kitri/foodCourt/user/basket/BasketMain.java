@@ -290,6 +290,7 @@ public class BasketMain extends JPanel{
 		//음식설명용 패널 - 차후 클릭하면 효과있음
 		FPanel pFoodInfo = SwingFactory.getInstance().getPanel("basketFood");
 		pFoodInfo.setBounds(93, 0, 350, 100);
+		pFoodInfo.setName(detail.getFood().getFoodId());
 		pFood.add(pFoodInfo);
 		
 		//음식사진
@@ -305,7 +306,7 @@ public class BasketMain extends JPanel{
 				e.printStackTrace();
 			}
 		}
-		
+		btnFoodImage.setName(detail.getFood().getFoodId());
 		pFoodInfo.add(btnFoodImage);
 		
 		//음식이름
@@ -313,6 +314,7 @@ public class BasketMain extends JPanel{
 		lFoodName.setText(detail.getFood().getFoodName());
 		lFoodName.setHorizontalAlignment(SwingConstants.LEFT);
 		lFoodName.setBounds(144, 15, 190, 70);
+		lFoodName.setName(detail.getFood().getFoodId());
 		pFoodInfo.add(lFoodName);
 		
 		//포인트
@@ -341,7 +343,9 @@ public class BasketMain extends JPanel{
 		
 		//이벤트
 		btnX.addActionListener(controller);
-		pFoodInfo.addMouseListener(controller);
+		pFoodInfo.setController(controller);
+		btnFoodImage.addMouseListener(controller);
+		lFoodName.addMouseListener(controller);
 		
 		return pFood;
 	}
