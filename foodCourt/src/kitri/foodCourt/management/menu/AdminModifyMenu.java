@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
@@ -19,6 +20,7 @@ import javax.swing.border.LineBorder;
 public class AdminModifyMenu extends JPanel {
 
 	JPanel picturePanel = new JPanel();
+	JPanel descriptionPanel = new JPanel();
 
 	JComboBox<String> categoryComboBox = new JComboBox<String>(new String[] {"한식", "중식", "일식", "양식"});
 	
@@ -40,6 +42,8 @@ public class AdminModifyMenu extends JPanel {
 	JTextField menuCodeTextField = new JTextField();
 	
 	JTextArea descriptionTextArea = new JTextArea();
+	
+	JScrollPane scrollPanelDecription = new JScrollPane(descriptionTextArea);
 	
 	CheckboxGroup cg = new CheckboxGroup();
 	Checkbox checkBox1 = new Checkbox("판매 가능", cg, true);
@@ -100,11 +104,17 @@ public class AdminModifyMenu extends JPanel {
 		descriptionLabel.setBounds(297, 390, 80, 40);
 		add(descriptionLabel);
 		
+		descriptionPanel.setBounds(384, 390, 290, 100);
+		descriptionPanel.setLayout(new BorderLayout(0, 0));
+		descriptionPanel.add(scrollPanelDecription);
+		
 		descriptionTextArea.setText("해당 음식에 대한 가벼운 설명");
 		descriptionTextArea.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		descriptionTextArea.setBounds(384, 390, 290, 100);
+		//descriptionTextArea.setBounds(384, 390, 290, 100);
 		descriptionTextArea.setLineWrap(true);
-		add(descriptionTextArea);
+		//add(descriptionTextArea);
+
+		add(descriptionPanel, BorderLayout.CENTER);
 		
 		menuCodeLabel.setBounds(297, 40, 80, 40);
 		add(menuCodeLabel);

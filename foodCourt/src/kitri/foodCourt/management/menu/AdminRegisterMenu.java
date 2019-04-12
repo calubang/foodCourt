@@ -1,6 +1,8 @@
 package kitri.foodCourt.management.menu;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -17,6 +19,7 @@ import javax.swing.JTextArea;
 public class AdminRegisterMenu extends JPanel {
 
 	JPanel picturePanel = new JPanel();
+	JPanel descriptionPanel = new JPanel();
 
 	JComboBox<String> categoryComboBox = new JComboBox<String>(new String[] {"한식", "중식", "일식", "양식"});
 	
@@ -35,6 +38,8 @@ public class AdminRegisterMenu extends JPanel {
 	JTextField pointTextField = new JTextField();
 	
 	JTextArea descriptionTextArea = new JTextArea();
+	
+	JScrollPane scrollPanelDecription = new JScrollPane(descriptionTextArea);
 	
 	
 	/**
@@ -92,10 +97,16 @@ public class AdminRegisterMenu extends JPanel {
 		descriptionLabel.setBounds(297, 250, 80, 40);
 		add(descriptionLabel);
 		
+		descriptionPanel.setBounds(384, 250, 290, 240);
+		descriptionPanel.setLayout(new BorderLayout(0, 0));
+		descriptionPanel.add(scrollPanelDecription);
+		
 		descriptionTextArea.setText("");
 		descriptionTextArea.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		descriptionTextArea.setBounds(384, 250, 290, 240);
+		//descriptionTextArea.setBounds(384, 250, 290, 240);
 		descriptionTextArea.setLineWrap(true);
-		add(descriptionTextArea);
+		//add(descriptionTextArea);
+		
+		add(descriptionPanel, BorderLayout.CENTER);
 	}
 }

@@ -65,6 +65,7 @@ public class FoodMain extends JFrame{
 	public BasketMain basketMain;
 	public FLabel lbOrderCircle = new FLabel();
 	public FLabel lbOrderCount = new FLabel(Font.BOLD, 20);
+	public FoodMainController foodMainController;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -278,7 +279,7 @@ public class FoodMain extends JFrame{
 		setBounds(100, 100, 1200, 800);
 		
 //		--------------------------이벤트 등록부
-		FoodMainController foodMainController = new FoodMainController(this);
+		foodMainController = new FoodMainController(this);
 		btnMainMenu.addActionListener(foodMainController);
 		btnSearch.addActionListener(foodMainController);
 		btnHansicMenu.addActionListener(foodMainController);
