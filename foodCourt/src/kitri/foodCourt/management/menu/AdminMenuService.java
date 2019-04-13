@@ -1,7 +1,9 @@
 package kitri.foodCourt.management.menu;
 
 import java.awt.Component;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -22,8 +24,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
-import kitri.foodCourt.dto.FoodDto;
 
 
 public class AdminMenuService {
@@ -38,18 +38,28 @@ public class AdminMenuService {
 	
 	DefaultTableModel dtm;
 	TableRowSorter<TableModel> sorter;
-	
 	List<RowSorter.SortKey> sortKeys = new ArrayList<>(column.length);
 	
 	JFileChooser chooser = new JFileChooser();
     FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF & PNG Images", "jpg", "gif", "png");
 	
+    // Default Directory
+    String currentPath = File.separator + "img" + File.separator + "food";
+
+    // For OracleDB
     Connection c = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
     
-    
-	public AdminMenuService(AdminMenuControl amc) {
+
+    /**
+     * 1. Add JTable columns.
+     * 2. Add sorter to each columns.
+     * 3. Fix available image file extensions.
+     * 
+     * @param amc AdminMenuControl object
+     */
+    public AdminMenuService(AdminMenuControl amc) {
 		this.amc = amc;
 		amm = this.amc.amm;
 		arm = amm.arm;
@@ -57,25 +67,28 @@ public class AdminMenuService {
 		
 		dtm = amm.dtm;
 		
-		
-		// Set Table column
 		for (int i = 0; i < column.length; i++) {
 			dtm.addColumn(column[i]);
 		}
 		
 		sorter = new TableRowSorter<TableModel>(amm.commonTable.getModel());
-		
 		for (int i = 0; i < column.length; i++) {
 			sortKeys.add(new RowSorter.SortKey(i, SortOrder.ASCENDING));
 		}
-		
 		amm.commonTable.setRowSorter(sorter);
 		sorter.setSortKeys(sortKeys);
 		
 		chooser.setFileFilter(filter);
 	}
 	
-	
+	/**
+	 * Finally close SQL connection if each object is not null.
+	 * 
+	 * @param comp Component which warning occured.
+	 * @param c Connection object
+	 * @param ps PreparedStatement object
+	 * @param rs ResultSet object
+	 */
 	private void closeOracleConnection(Component comp, Connection c, PreparedStatement ps, ResultSet rs) {
 		if(rs != null) {
 			try {
@@ -108,6 +121,10 @@ public class AdminMenuService {
 		}
 	}
 	
+	/**
+	 * Show Menu register window.
+	 * When register window is opened, each components are reset.
+	 */
 	public void showRegisterWindow() {
 		arm.menuNameTextField.setText("");
 		arm.priceTextField.setText("");
@@ -123,13 +140,18 @@ public class AdminMenuService {
 		amm.jdR.setVisible(true);
 	}
 	
+	/**
+	 * Show Menu register window.
+	 * When register window is opened, information of currently selected row is showed.
+	 * 
+	 * Process : 1) Check if menu is selected
+	 *           2) Get information from DB
+	 */
 	public void showModifyWindow() {
-		FoodDto foodDto = null;
 		ImageIcon image = null;
-		
 		String imgUrl = null;
+
 		int rowSelect = amm.commonTable.getSelectedRow();
-		
 		if (rowSelect == -1) {
 			warningMessage(amm.modifyBtn, "수정할 메뉴가 없습니다.", "메뉴 수정 오류");
 			closeWindow(amm.jdM);
@@ -149,26 +171,20 @@ public class AdminMenuService {
 			ps.setString(1, (String)dtm.getValueAt(rowSelect, 0));
 			rs = ps.executeQuery();
 
-			while (rs.next()) {
-				foodDto = new FoodDto(rs.getString("food_id"), rs.getString("food_name"), rs.getInt("category_id"), null, rs.getInt("price"), rs.getString("image_address"));
-
-				foodDto.setPoint(rs.getInt("food_point"));
-				foodDto.setDescription(rs.getString("food_description"));
-				foodDto.setManagerId(rs.getString("manager_id"));
-				foodDto.setCreateDate(rs.getDate("create_date"));
-				foodDto.setEnable(rs.getString("food_enable").charAt(0));
+			if (rs.next()) {
+				am.menuCodeTextField.setText(rs.getString("food_id"));
+				am.menuNameTextField.setText(rs.getString("food_name"));
+				am.priceTextField.setText(String.valueOf(rs.getInt("price")));
+				am.pointTextField.setText(String.valueOf(rs.getInt("food_point")));
+				am.descriptionTextArea.setText(rs.getString("food_description"));
+				am.categoryComboBox.setSelectedIndex(rs.getInt("category_id") - 1);
+				am.cg.setSelectedCheckbox((rs.getString("food_enable").charAt(0) == 'y') ? am.checkBox1 : am.checkBox2);
+				
+				imgUrl = rs.getString("image_address");
 			}
 
-			am.menuCodeTextField.setText(foodDto.getFoodId());
-			am.menuNameTextField.setText(foodDto.getFoodName());
-			am.priceTextField.setText(String.valueOf(foodDto.getPrice()));
-			am.pointTextField.setText(String.valueOf(foodDto.getPoint()));
-			am.descriptionTextArea.setText(foodDto.getDescription());
-			am.categoryComboBox.setSelectedIndex(foodDto.getCategoryId() - 1);
-			am.cg.setSelectedCheckbox((foodDto.getEnable() == 'y') ? am.checkBox1 : am.checkBox2);
-			
-			imgUrl = foodDto.getImageAddress();
-			image = new ImageIcon(AdminMenuService.class.getResource(imgUrl));
+			File f = new File(currentPath + File.separator + imgUrl);
+			image = new ImageIcon(AdminMenuService.class.getResource(f.getPath().replace("\\", "/")));
 			
 			am.pictureLabel.setIcon(image);
 		} catch (ClassNotFoundException e) {
@@ -186,6 +202,15 @@ public class AdminMenuService {
 		amm.jdM.setVisible(true);
 	}
 	
+	/**
+	 * Show Menu deletion window.
+	 * When "OK" is selected, data is removed to JTable and DB.
+	 * 
+	 * Process : 1) Ask if menu is really delete
+	 *           2) If OK, remove menu from DB and JTable
+	 *           3) If No, method ends
+	 *           4) If menu is not selected, show warning message
+	 */
 	public void showDeleteWindow() {
 		int resultQuery = 0;
 		
@@ -226,11 +251,13 @@ public class AdminMenuService {
 		}
 	}
 	
+	/**
+	 * Show Menu to JTable.
+	 * 
+	 * Process : 1) Get all menu information
+	 *           2) Add JTable using TableModel
+	 */
 	public void showMenu() {
-		List<FoodDto> list = new ArrayList<FoodDto>();
-		ListIterator<FoodDto> iterator;
-		FoodDto foodDto = null;
-		
 		Object[] rowData = new Object[8];
 		
 		try {
@@ -244,30 +271,14 @@ public class AdminMenuService {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				foodDto = new FoodDto(rs.getString("food_id"), rs.getString("food_name"), rs.getInt("category_id"), rs.getString("category_name"), rs.getInt("price"), rs.getString("image_address"));
-
-				foodDto.setPoint(rs.getInt("food_point"));
-				foodDto.setDescription(rs.getString("food_description"));
-				foodDto.setManagerId(rs.getString("manager_id"));
-				foodDto.setCreateDate(rs.getDate("create_date"));
-				foodDto.setEnable(rs.getString("food_enable").charAt(0));
-				
-				list.add(foodDto);
-			}
-
-			iterator = list.listIterator();
-			
-			while(iterator.hasNext()) {
-				foodDto = iterator.next();
-				
-				rowData[0] = foodDto.getFoodId();
-				rowData[1] = foodDto.getFoodName();
-				rowData[2] = foodDto.getCategoryName();
-				rowData[3] = foodDto.getPrice();
-				rowData[4] = foodDto.getPoint();
-				rowData[5] = foodDto.getManagerId();
-				rowData[6] = foodDto.getCreateDate().toString();
-				rowData[7] = foodDto.getEnable() == 'y' ? "주문 가능" : "주문 불가능";
+				rowData[0] = rs.getString("food_id");
+				rowData[1] = rs.getString("food_name");
+				rowData[2] = rs.getString("category_name");
+				rowData[3] = rs.getInt("price");
+				rowData[4] = rs.getInt("food_point");
+				rowData[5] = rs.getString("manager_id");
+				rowData[6] = rs.getDate("create_date").toString();
+				rowData[7] = (rs.getString("food_enable").charAt(0) == 'y') ? "주문 가능" : "주문 불가능";
 				
 				dtm.addRow(rowData);
 			}
@@ -280,7 +291,13 @@ public class AdminMenuService {
 		}
 	}
 
-
+	/**
+	 * Show menu image and description.
+	 * 
+	 * Process : 1) Get image file name and description
+	 *           2) Show iamge to JLabel
+	 *           3) Show description to JTextArea
+	 */
 	public void showImageDescription() {
 		int currentSelectedrow = amm.commonTable.getSelectedRow();
 		if (currentSelectedrow >= 0) {
@@ -314,17 +331,28 @@ public class AdminMenuService {
 				closeOracleConnection(amm.commonTable, c, ps, rs);
 			}
 			
-			ImageIcon image = new ImageIcon(AdminMenuService.class.getResource(imgUrl));
+			File f = new File(currentPath + File.separator + imgUrl);
+			ImageIcon image = new ImageIcon(AdminMenuService.class.getResource(f.getPath().replace("\\", "/")));
 			amm.pictureLabel.setIcon(image);
 			
 			amm.descriptionTextArea.setText(description);
 		}
 	}
 
+	/**
+	 * Close JDialog window
+	 * 
+	 * @param jd Which JDialog is closed
+	 */
 	public void closeWindow(JDialog jd) {
 		jd.dispose();
 	}
 
+	/**
+	 * Search Menu in JTable.
+	 * If menu is exactly equals in JTable, row is selected.
+	 * If no one is matched, warning message occurs.
+	 */
 	public void searchFood() {
 		String str = amm.searchTextField.getText().trim();
 		
@@ -339,16 +367,24 @@ public class AdminMenuService {
 		warningMessage(amm.searchTextField, "찾는 메뉴가 없습니다.", "메뉴 검색 오류");
 	}
 
+	/**
+	 * Open File chooser dialog and select image file.
+	 * It is possible to select file in absolute and relative path.
+	 * 
+	 * When image is selected, show in JLabel.
+	 * 
+	 * @param ob Which button is selected
+	 */
 	public void findImage(Object ob) {
-		chooser.setCurrentDirectory(new File("." + File.separator + "src" + File.separator + "kitri" + File.separator + "foodCourt" + File.separator + "management" + File.separator + "menu" + File.separator + "image"));
+		chooser.setCurrentDirectory(new File("." + File.separator + "src" + currentPath));
 		int choice = chooser.showOpenDialog((Component)ob);
 		String imgUrl = null;
 		ImageIcon image = null;
 		
 		if (choice == JFileChooser.APPROVE_OPTION) {
 			String fullpath = chooser.getSelectedFile().toString();
-			imgUrl = fullpath.substring(fullpath.indexOf("kitri") - 1, fullpath.length()).replace('\\', '/');
-			image = new ImageIcon(AdminMenuService.class.getResource(imgUrl));
+			imgUrl = fullpath.replace('\\', '/');
+			image = new ImageIcon(imgUrl);
 			
 			if (ob == arm.registerImageBtn) {
 				arm.pictureLabel.setText(null);
@@ -361,10 +397,25 @@ public class AdminMenuService {
 		}
 	}
 
+	/**
+	 * Show warning message.
+	 * 
+	 * @param component Which component cause the warning
+	 * @param msg Warning message
+	 * @param title Title message
+	 */
 	private void warningMessage(Component component, Object msg, String title) {
 		JOptionPane.showMessageDialog(component, msg, title, JOptionPane.WARNING_MESSAGE);
 	}
 	
+	/**
+	 * Process modify menu
+	 * 
+	 * Process : 1) Check each field values are validated
+	 *           2) Check new named menu is duplicated with other menus
+	 *           3) If image is not exist in folder, then copied into folder
+	 *           4) Update values to DB and JTable
+	 */
 	public void modifyMenu() {
 		int currentSelectedrow = amm.commonTable.convertRowIndexToModel(amm.commonTable.getSelectedRow());
 		int result = 0;
@@ -381,6 +432,18 @@ public class AdminMenuService {
 		if (food_name.isEmpty()) {
 			warningMessage(am.confirmBtn, "메뉴 이름을 입력하세요.", "메뉴 수정 오류");
 			return;
+		}
+		
+		int rowCount = dtm.getRowCount();
+		for(int i = 0; i < rowCount; i++) {
+			if (i == amm.commonTable.getSelectedRow()) {
+				continue;
+			}
+			
+			if (food_name.equals((String)amm.commonTable.getValueAt(i, 1))) {
+				warningMessage(am.confirmBtn, "중복되는 메뉴가 있습니다.", "메뉴 수정 오류");
+				return;
+			}
 		}
 		
 		String priceStr = am.priceTextField.getText();
@@ -426,11 +489,38 @@ public class AdminMenuService {
 			return;
 		}		
 		String fullpath = food_image.toString();
-		String imgUrl = fullpath.substring(fullpath.indexOf("kitri") - 1, fullpath.length());
+		String imgUrl = fullpath.substring(fullpath.lastIndexOf("/") + 1, fullpath.length());
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			
+			ps = c.prepareStatement("select image_address "
+					  + "from fook_food "
+					  + "where image_address = (?)");
+
+			ps.setString(1, imgUrl);
+			
+			rs = ps.executeQuery();
+			
+			if (!rs.next()) {
+				try {
+					BufferedImage image = null;
+
+					File fin = new File(fullpath);
+					File fout = new File("." + File.separator + "src" + currentPath + File.separator + imgUrl);
+
+					if (!fout.exists()) {
+						image = ImageIO.read(fin);
+						ImageIO.write(image, "jpg", fout);
+					}
+				} catch (IOException e) {
+					warningMessage(am.confirmBtn, "메뉴 이미지 복사 중 에러가 발생하였습니다.", "메뉴 수정 오류");
+				}
+			}
+			
+			rs.close();
+			ps.close();
 			
 			ps = c.prepareStatement("update fook_food "
 								  + "set food_name = (?), category_id = (?), price = (?), food_point = (?), food_description = (?), image_address = (?), food_enable = (?) "
@@ -473,7 +563,7 @@ public class AdminMenuService {
 				}
 			}
 			
-			amm.commonTable.setRowSelectionInterval(currentSelectedrow, currentSelectedrow);
+			amm.commonTable.setRowSelectionInterval(amm.commonTable.getSelectedRow(), amm.commonTable.getSelectedRow());
 		} catch (ClassNotFoundException e) {
 			warningMessage(am.confirmBtn, "드라이버를 찾을 수 없습니다.", "메뉴 수정 오류");
 		} catch (SQLException e) {
@@ -485,6 +575,14 @@ public class AdminMenuService {
 		closeWindow(amm.jdM);
 	}
 
+	/**
+	 * Process register menu
+	 * 
+	 * Process : 1) Check each field values are validated
+	 *           2) Check new named menu is duplicated with other menus
+	 *           3) If image is not exist in folder, then copied into folder
+	 *           4) Insert values to DB and JTable
+	 */
 	public void registerMenu() {
 		int result = 0;
 		
@@ -496,15 +594,24 @@ public class AdminMenuService {
 			return;
 		}
 		
+		int rowCount = dtm.getRowCount();
+		for(int i = 0; i < rowCount; i++) {
+			if (food_name.equals((String)amm.commonTable.getValueAt(i, 1))) {
+				warningMessage(arm.confirmBtn, "중복되는 메뉴가 있습니다.", "메뉴 등록 오류");
+				return;
+			}
+		}
+		
 		String food_enable = "y";
 		String food_description = arm.descriptionTextArea.getText();
+		
 		Icon food_image = arm.pictureLabel.getIcon();
 		if (food_image == null) {
 			warningMessage(arm.confirmBtn, "메뉴 이미지를 선택하세요.", "메뉴 등록 오류");
 			return;
 		}		
 		String fullpath = food_image.toString();
-		String imgUrl = fullpath.substring(fullpath.indexOf("kitri") - 1, fullpath.length());
+		String imgUrl = fullpath.substring(fullpath.lastIndexOf("/") + 1, fullpath.length());
 		
 		String manager_id = "Admin123";	// TODO jwlee use to real manager_id
 		
@@ -547,6 +654,33 @@ public class AdminMenuService {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 			
+			ps = c.prepareStatement("select image_address "
+					  + "from fook_food "
+					  + "where image_address = (?)");
+
+			ps.setString(1, imgUrl);
+			
+			rs = ps.executeQuery();
+			
+			if (!rs.next()) {
+				try {
+					BufferedImage image = null;
+
+					File fin = new File(fullpath);
+					File fout = new File("." + File.separator + "src" + currentPath + File.separator + imgUrl);
+					
+					if (!fout.exists()) {
+						image = ImageIO.read(fin);
+						ImageIO.write(image, "jpg", fout);
+					}
+				} catch (IOException e) {
+					warningMessage(arm.confirmBtn, "메뉴 이미지 복사 중 에러가 발생하였습니다.", "메뉴 등록 오류");
+				}
+			}
+			
+			rs.close();
+			ps.close();
+			
 			ps = c.prepareStatement("insert into fook_food (food_id, food_name, category_id, price, food_point, food_description, image_address, manager_id, create_date, food_enable) "
 												 + "values (food_fid_seq.nextval, (?), (?), (?), (?), (?), (?), (?), sysdate, (?))");
 			
@@ -577,7 +711,7 @@ public class AdminMenuService {
 				rowData[4] = point;
 				rowData[5] = manager_id;
 				rowData[6] = rs.getDate("create_date");
-				rowData[7] = food_enable;
+				rowData[7] = food_enable.equals("y") ? "주문 가능" : "주문 불가능";
 			}
 			
 			dtm.addRow(rowData);
