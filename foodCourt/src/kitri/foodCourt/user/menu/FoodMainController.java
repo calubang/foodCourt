@@ -3,6 +3,7 @@ package kitri.foodCourt.user.menu;
 import kitri.foodCourt.user.main.FoodMain;
 import kitri.foodCourt.user.swing.RoundPanel;
 
+import java.awt.Color;
 import java.awt.event.*;
 
 import javax.swing.JButton;
@@ -29,15 +30,17 @@ public class FoodMainController implements ActionListener, KeyListener, MouseLis
 			foodMainService.orderList();
 		else if(ob instanceof MenuButton) {
 			foodMainService.searchMenuDetail(((MenuButton) ob).getName());
+		} else if(ob instanceof RoundPanel) {
+			foodMainService.searchCategory(((RoundPanel)ob).getName());
 		} else if(ob instanceof MainButton){
 			foodMainService.searchCategory(((JButton)ob).getName());
+		} else if(ob == foodMain.pfPassword) {
+			foodMainService.isCorrectPassword();
 		} else if(((JButton)ob).getName().equals("back")) {
 			foodMainService.backMenu();
 		} else if(((AddOrderListButton)ob).getName().equals("basket")) {
 			foodMainService.addMenuInbasket(((AddOrderListButton)ob).getFoodDto(), ((AddOrderListButton)ob).getCount());
-		} else if(ob instanceof RoundPanel) {
-			foodMainService.searchCategory(((RoundPanel)ob).getName());
-		}
+		} 
 			
 	}
 	//숫자 이외의 키를 입력시 막는 메소드
@@ -63,16 +66,13 @@ public class FoodMainController implements ActionListener, KeyListener, MouseLis
 		} else if(name.equals("back")){
 			foodMainService.backMenu();
 		} else if(name.equals("basket")){
-			//e.getComponent().get
-			//foodMainService.addMenuInbasket(((AddOrderListButton)ob).getFoodDto(), ((AddOrderListButton)ob).getCount());
+
 		}
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class Form extends JFrame { // 이미지 줄이는 프로그램 예제
 	public Form() {
 		System.out.println("생성자");
 		try{
-			bimg = ImageIO.read(new File(Form.class.getResource("/kitri/foodCourt/user/menu/menuImage/junjoobibimbab.jpg").toURI())); //이미지 로드
+			bimg = ImageIO.read(new File(Form.class.getResource("/img/user/junjoobibimbab.jpg").toURI())); //이미지 로드
 			System.out.println("이미지 로드 완료");
 			width = bimg.getWidth();
 			height = bimg.getHeight();

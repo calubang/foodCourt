@@ -30,6 +30,7 @@ public class Payment extends JPanel {
 	public FLabel lbUserPoint;
 	
 	public Payment(BasketMain basketMain) {
+		setBackground(Color.WHITE);
 		this.basketMain = basketMain;
 		receipt = new Receipt();
 		receipt.user = basketMain.user;
@@ -71,23 +72,25 @@ public class Payment extends JPanel {
 		
 		JPanel pSeperator = new JPanel();
 		pSeperator.setBackground(SystemColor.activeCaption);
-		pSeperator.setBounds(12, 90, 988, 6);
+		pSeperator.setBounds(0, 60, 1012, 6);
 		add(pSeperator);
 		
 		JLabel lbPageImage = new JLabel("");
 		lbPageImage.setIcon(new ImageIcon(Payment.class.getResource("/img/user/payment.png")));
-		lbPageImage.setBounds(12, 10, 120, 70);
+		lbPageImage.setBounds(0, 0, 120, 50);
 		add(lbPageImage);
 		
 		FLabel lbPageName = new FLabel(Font.BOLD, 40);
+		lbPageName.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
 		lbPageName.setText("\uACB0\uC81C");
-		lbPageName.setBounds(144, 10, 178, 70);
+		lbPageName.setBounds(130, 0, 178, 50);
 		add(lbPageName);
 		
 		JPanel pTotalPrice = new JPanel();
+		pTotalPrice.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		pTotalPrice.setLayout(null);
 		pTotalPrice.setBackground(SystemColor.inactiveCaptionBorder);
-		pTotalPrice.setBounds(12, 106, 988, 85);
+		pTotalPrice.setBounds(0, 75, 1012, 85);
 		add(pTotalPrice);
 		
 		FLabel label_1 = new FLabel();
@@ -117,7 +120,7 @@ public class Payment extends JPanel {
 		pCash.setBackground(new Color(255, 255, 240));
 		//pCash.addMouseListener(pCash);
 		//pCash.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		pCash.setBounds(100, 220, 200, 180);
+		pCash.setBounds(100, 210, 200, 180);
 		add(pCash);
 		pCash.setLayout(null);
 		
@@ -138,7 +141,7 @@ public class Payment extends JPanel {
 		RoundPanel pCard = new RoundPanel();
 		pCard.setBackground(new Color(255, 255, 240));
 		pCard.setLayout(null);
-		pCard.setBounds(400, 220, 200, 180);
+		pCard.setBounds(400, 210, 200, 180);
 		add(pCard);
 		
 		tfCard = new JTextField();
@@ -158,7 +161,7 @@ public class Payment extends JPanel {
 		RoundPanel pPoint = new RoundPanel();
 		pPoint.setBackground(new Color(255, 255, 240));
 		pPoint.setLayout(null);
-		pPoint.setBounds(700, 220, 200, 180);
+		pPoint.setBounds(700, 210, 200, 180);
 		add(pPoint);
 		
 		FLabel lbPointText = new FLabel(Font.BOLD, 20);
@@ -181,24 +184,27 @@ public class Payment extends JPanel {
 		pPoint.add(tfPoint);
 		
 		btnReceiptConfirm = SwingFactory.getButton("");
+		btnReceiptConfirm.setBackground(SystemColor.inactiveCaptionBorder);
 		btnReceiptConfirm.setName("receiptConfirm");
 		btnReceiptConfirm.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		btnReceiptConfirm.setText("\uC601\uC218\uC99D\uD655\uC778");
-		btnReceiptConfirm.setBounds(480, 470, 140, 45);
+		btnReceiptConfirm.setBounds(480, 460, 140, 45);
 		add(btnReceiptConfirm);
 		
 		btnPayment = SwingFactory.getButton("");
+		btnPayment.setBackground(SystemColor.inactiveCaptionBorder);
 		btnPayment.setName("payment");
 		btnPayment.setText("\uACB0\uC81C");
 		btnPayment.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		btnPayment.setBounds(650, 470, 140, 45);
+		btnPayment.setBounds(650, 460, 140, 45);
 		add(btnPayment);
 		
 		btnCancel = SwingFactory.getButton("");
+		btnCancel.setBackground(SystemColor.inactiveCaptionBorder);
 		btnCancel.setName("cancel");
 		btnCancel.setText("\uCDE8\uC18C");
 		btnCancel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		btnCancel.setBounds(820, 470, 140, 45);
+		btnCancel.setBounds(820, 460, 140, 45);
 		add(btnCancel);
 	
 	}

@@ -1,16 +1,21 @@
 package kitri.foodCourt.user.basket;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import kitri.foodCourt.user.main.FoodMain;
 import kitri.foodCourt.user.swing.*;
 
 public class SwingFactory {
 	private static SwingFactory swingFactory = new SwingFactory();
-	private static String options[] = {"¿¹", "¾Æ´Ï¿ä"};
+	private static String yesOrno[] = {"¿¹", "¾Æ´Ï¿ä"};
+	private static String OkOrCancel[] = {"È®ÀÎ", "Ãë¼Ò"};
 	
 	private SwingFactory() {}
 	
@@ -72,7 +77,7 @@ public class SwingFactory {
 		return panel;
 	}
 	
-	public static int getOptionPane(String name, Container parentComponent, String title, String message) {
+	public static int getOptionPane(String name, Container parentComponent, String title, Object message) {
 		FOptionPane fOptionPane = null;
 		switch(name) {
 		case "warning":
@@ -80,7 +85,7 @@ public class SwingFactory {
 			fOptionPane = new FOptionPane();
 			UIManager.put("OptionPane.messageFont", new Font("", Font.PLAIN, 15));
 			UIManager.put("OptionPane.buttonFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
-			return fOptionPane.showOptionDialog(parentComponent, message, title, JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			return fOptionPane.showOptionDialog(parentComponent, message, title, JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, yesOrno, yesOrno[0]);
 		case "message":
 			fOptionPane = new FOptionPane();
 			UIManager.put("OptionPane.messageFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
@@ -91,15 +96,46 @@ public class SwingFactory {
 			fOptionPane = new FOptionPane();
 			UIManager.put("OptionPane.messageFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 			UIManager.put("OptionPane.buttonFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
-			return fOptionPane.showOptionDialog(parentComponent, message, title, JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			return fOptionPane.showOptionDialog(parentComponent, message, title, JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, yesOrno, yesOrno[0]);
 		case "errorMessage":
 			fOptionPane = new FOptionPane();
 			UIManager.put("OptionPane.messageFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 			UIManager.put("OptionPane.buttonFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 			fOptionPane.showMessageDialog(parentComponent, message, title, JOptionPane.ERROR_MESSAGE);
 			return 0;
+		case "inputPassword":
+			fOptionPane = new FOptionPane();
+			int option;
+			UIManager.put("OptionPane.messageFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
+			UIManager.put("OptionPane.buttonFont", new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
+			ImageIcon icon = new ImageIcon(SwingFactory.class.getResource("/img/user/password.png"));
+			return fOptionPane.showOptionDialog(parentComponent, message, title, JOptionPane.OK_CANCEL_OPTION , JOptionPane.QUESTION_MESSAGE, icon , OkOrCancel, message);
+
 		default:
 			return 0;
 		}
+	}
+	
+	public static Icon getScaledImage(int width, int height, String fileName, int hints) {
+		ImageIcon icon = null;		
+		try {
+			URL url = SwingFactory.class.getResource(fileName);
+			BufferedImage bufferedImage = ImageIO.read(url);
+			icon = new ImageIcon(bufferedImage.getScaledInstance(width, height, hints));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			try {
+				URL url = SwingFactory.class.getResource("/img/user/notFoundImage.png");
+				BufferedImage bufferedImage;
+				bufferedImage = ImageIO.read(url);
+				icon = new ImageIcon(bufferedImage.getScaledInstance(width, height, hints));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+		}
+		return icon;
 	}
 }

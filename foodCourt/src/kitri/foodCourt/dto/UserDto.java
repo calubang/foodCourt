@@ -79,6 +79,29 @@ public class UserDto {
 	public void setUserPoint(int userPoint) {
 		this.userPoint = userPoint;
 	}
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPasswordQuiz() {
+		return passwordQuiz;
+	}
+
+	public void setPasswordQuiz(String passwordQuiz) {
+		this.passwordQuiz = passwordQuiz;
+	}
+
+	public String getPasswordAnswer() {
+		return passwordAnswer;
+	}
+
+	public void setPasswordAnswer(String passwordAnswer) {
+		this.passwordAnswer = passwordAnswer;
+	}
 
 	@Override
 	public String toString() {

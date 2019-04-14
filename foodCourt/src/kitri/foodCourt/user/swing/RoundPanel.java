@@ -41,6 +41,7 @@ public class RoundPanel extends JPanel implements MouseListener{
 		this.thickness = thickness;
 		this.arc = arc;
 		defaultSetting();
+		//setMouseListener();
 	}
 	
 	public void defaultSetting() {
@@ -58,10 +59,13 @@ public class RoundPanel extends JPanel implements MouseListener{
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D graphics2d = (Graphics2D) g;
-		this.graphics2D = graphics2d;
 		graphics2d.setColor(getBackground());
-		graphics2d.setStroke(new BasicStroke(thickness));
 		graphics2d.fillRoundRect(thickness/2, thickness/2, getWidth()-thickness, getHeight()-thickness, arc, arc);
+		//hexToRgb("#FFF8DC")
+		//graphics2d.setStroke(new BasicStroke(thickness));
+		//graphics2d.setColor(getForeground());
+		//graphics2d.drawRoundRect(thickness/2, thickness/2, getWidth()-thickness, getHeight()-thickness, arc, arc);
+		
 	}
 	
 	@Override
@@ -77,14 +81,16 @@ public class RoundPanel extends JPanel implements MouseListener{
 	protected void paintBorder(Graphics g) {
 		Graphics2D graphics2d = (Graphics2D) g;
 		graphics2d.setColor(getForeground());
-		graphics2d.drawRoundRect(thickness/2, thickness/2, getWidth()-thickness, getHeight()-thickness, arc, arc);
 		graphics2d.setStroke(new BasicStroke(thickness));
+		graphics2d.drawRoundRect(thickness/2, thickness/2, getWidth()-thickness, getHeight()-thickness, arc, arc);
 		//super.paintBorder(g);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		controller.mouseClicked(e);
+		if(controller != null) {
+			controller.mouseClicked(e);
+		}
 	}
 
 	@Override
@@ -101,12 +107,12 @@ public class RoundPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		setBackground(hexToRgb("#FFF8DC"));
+		e.getComponent().setBackground(hexToRgb("#FFF8DC"));
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		//setBackground(Color.WHITE);
+		e.getComponent().setBackground(Color.WHITE);
 	}
 
 	public static Color hexToRgb(String colorStr) {

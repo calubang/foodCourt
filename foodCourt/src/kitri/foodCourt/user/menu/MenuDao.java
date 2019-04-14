@@ -4,16 +4,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import kitri.foodCourt.db.ConnectionMaker;
+import kitri.foodCourt.db.DbFactory;
 import kitri.foodCourt.dto.FoodDto;
-import kitri.foodCourt.user.menu.jdbc.ConnectionMaker;
 
 public class MenuDao {
 
 	private ConnectionMaker connectionMaker;
-	public MenuDao(ConnectionMaker connectionMaker) {
-		this.connectionMaker = connectionMaker;
-	}
 	
+	public MenuDao() {
+		this.connectionMaker = DbFactory.connectionMaker("oracle");
+	}
+
 	//카테고리 메뉴 클릭시 음식 메뉴 얻어오기
 	public List<FoodDto> getMenubyCategory(int categori_id) {
 		List<FoodDto> list = new ArrayList<FoodDto>();

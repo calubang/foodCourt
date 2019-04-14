@@ -1,5 +1,7 @@
 package kitri.foodCourt.user.menu;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
@@ -7,14 +9,17 @@ import javax.swing.*;
 
 import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.BasketDetail;
+import kitri.foodCourt.user.basket.SwingFactory;
 import kitri.foodCourt.user.main.FoodMain;
 import kitri.foodCourt.user.menu.jdbc.DaoFactory;
+import kitri.foodCourt.user.swing.FLabel;
+import kitri.foodCourt.user.swing.FOptionPane;
 
 public class FoodMainService {
 	FoodMainController foodMainController;
 	FoodMain foodMain;
-	MenuDao menuDao = new DaoFactory().menuDao();
-	ImageIcon icon = new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/basket.png"));
+	MenuDao menuDao = new MenuDao();
+	ImageIcon icon = new ImageIcon(FoodMain.class.getResource("/img/user/basket.png"));
 
 	public FoodMainService(FoodMainController foodMainController) {
 		this.foodMainController = foodMainController;
@@ -98,6 +103,40 @@ public class FoodMainService {
 
 	// 유저 페이지로 (유저 정보 버튼)
 	public void userInfo() {
+		foodMain.pfPassword.setText("");
+		if(foodMain.currentPanelName.equals("userInfo")) {
+			foodMain.currentPanelName = "userInfo";
+			foodMain.userInfo.dataSetting();
+			foodMain.card.show(foodMain.panChangePanel, "userInfo");
+			return;
+		}
+		Object option;
+		FOptionPane fOptionPane = foodMain.fOptionPane;
+		UIManager.put("OptionPane.messageFont", new Font("맑은 고딕", Font.PLAIN, 15));
+		UIManager.put("OptionPane.buttonFont", new Font("맑은 고딕", Font.PLAIN, 15));
+		ImageIcon optionIcon = new ImageIcon(SwingFactory.class.getResource("/img/user/password.png"));
+		fOptionPane.setMessage(foodMain.pPassword);
+		fOptionPane.setOptionType(JOptionPane.OK_CANCEL_OPTION);
+		fOptionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
+		fOptionPane.setIcon(optionIcon);
+		fOptionPane.setOptions(new String[]{"확인", "취소"});
+		fOptionPane.setInitialValue(foodMain.pPassword);
+		foodMain.dgPassword.setVisible(true);
+		
+		option = fOptionPane.getValue();
+		if(option.equals("확인")) {
+			isCorrectPassword();
+		}
+	}
+	public void isCorrectPassword() {
+		if(foodMain.user.getPassword().equals(new String(foodMain.pfPassword.getPassword()))) {
+			foodMain.dgPassword.setVisible(false);
+			foodMain.currentPanelName = "userInfo";
+			foodMain.userInfo.dataSetting();
+			foodMain.card.show(foodMain.panChangePanel, "userInfo");
+		} else {
+			SwingFactory.getOptionPane("message", foodMain.dgPassword, "비밀번호 오류", "비밀번호가 틀렸습니다.");
+		}
 	}
 
 	// 주문목록 페이지로 (주문목록 버튼)
@@ -131,4 +170,6 @@ public class FoodMainService {
 			foodMain.card.show(foodMain.panChangePanel, foodMain.getPanelName());
 		}
 	}
+
+	
 }

@@ -38,18 +38,6 @@ public class Receipt extends JFrame {
 	
 	//늘어날 size
 	public final int COLUMN_HEIGHT = 30;
-
-	// 테스트용
-	//BasketMain basket = new BasketMain();
-//	public static void main(String[] args) {
-//		BasketMain basketMain = new BasketMain();
-//		basketMain.setVisible(false);
-//		Receipt receipt = new Receipt();
-//		receipt.user = basketMain.user;
-//		receipt.dataSetting();
-//		receipt.setVisible(true);
-//	}
-	
 	
 	public Receipt() {
 		initView();
@@ -78,6 +66,9 @@ public class Receipt extends JFrame {
 		pPayment.setBounds(pPayment.getX(), pPayment.getY() + changeSize, pPayment.getWidth(), pPayment.getHeight());
 		pTotal.setBounds(pTotal.getX(), pTotal.getY() + changeSize, pTotal.getWidth(), pTotal.getHeight());
 		pBottom.setBounds(pBottom.getX(), pBottom.getY() + changeSize, pBottom.getWidth(), pBottom.getHeight());
+		
+		//입력한 금액세팅
+		
 	}
 	public void clear() {
 		int size = foodTableMode.getRowCount();

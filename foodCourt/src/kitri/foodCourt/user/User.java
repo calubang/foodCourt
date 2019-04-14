@@ -4,13 +4,16 @@ import kitri.foodCourt.dto.UserDto;
 
 public class User {
 	//공통정보 
-	String userId;
-	String name;
-	String phoneNumberFirst;
-	String phoneNumberMiddle;
-	String phoneNumberlast;
-	int userPoint;
+	private String userId;
+	private String name;
+	private String phoneNumberFirst;
+	private String phoneNumberMiddle;
+	private String phoneNumberlast;
+	private int userPoint;
 	
+	//19.04.14 패스워드 추가
+	private String password;
+
 	//하나의 장바구니
 	Basket basket;
 
@@ -58,6 +61,35 @@ public class User {
 	public Basket getBasket() {
 		return basket;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	//dto생성 or dto로 데이터변경
+	public void setDto(UserDto userDto) {
+		this.userId = userDto.getUserId();
+		this.name = userDto.getName();
+		this.phoneNumberFirst = userDto.getPhoneNumberFirst();
+		this.phoneNumberMiddle = userDto.getPhoneNumberMiddle();
+		this.phoneNumberlast = userDto.getPhoneNumberlast();
+		this.userPoint = userDto.getUserPoint();
+		this.password = userDto.getPassword();
+	}
+	public UserDto getDto() {
+		UserDto userDto = new UserDto();
+		userDto.setUserId(userId);
+		userDto.setPassword(password);
+		userDto.setName(name);
+		userDto.setPhoneNumberFirst(phoneNumberFirst);
+		userDto.setPhoneNumberMiddle(phoneNumberMiddle);
+		userDto.setPhoneNumberlast(phoneNumberlast);
+		userDto.setUserPoint(userPoint);
+		return userDto;
+	}
+	
 
 	@Override
 	public String toString() {

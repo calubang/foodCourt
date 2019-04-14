@@ -19,11 +19,11 @@ import javax.swing.JLabel;
 
 public class FoodMainView extends JPanel {
 	public Cursor hand = new Cursor(Cursor.HAND_CURSOR);
-	public JButton labHansic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/hansic.jpg")));
+	public JButton labHansic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/img/user/koreanFoodImageBig.png")));
 	public JLabel labHansicName = new JLabel("\uD55C  \uC2DD");
-	public JButton labIlsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/ilsic.jpg")));
-	public JButton labJoongsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/joongsic.jpg")));
-	public JButton labYangsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/kitri/foodCourt/user/menu/mainImage/yangsic.jpeg")));
+	public JButton labIlsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/img/user/japaneseFoodImageBig.png")));
+	public JButton labJoongsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/img/user/chineseFoodImageBig.png")));
+	public JButton labYangsic = new MainButton(new ImageIcon(FoodMainView.class.getResource("/img/user/americanFoodImageBig.png")));
 	public FoodMainView() {
 		
 		labHansic.setName("1");
@@ -50,15 +50,8 @@ public class FoodMainView extends JPanel {
 		labHansic.setFocusable(false);
 		labHansic.setContentAreaFilled(false);
 		labHansic.setBorderPainted(false);
-		try {
-			String btnImageName = "koreanFoodImage.png";
-			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
-			BufferedImage bufferedImage = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(labHansic.getWidth()+10, labHansic.getHeight()+10, Image.SCALE_SMOOTH));
-			labHansic.setIcon(icon);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		//340  240
+
 		labHansicName.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
 		labHansicName.setOpaque(true);
 		labHansicName.setBackground(Color.WHITE);
@@ -83,19 +76,8 @@ public class FoodMainView extends JPanel {
 		labJoongsic.setContentAreaFilled(false);
 		labJoongsic.setBorderPainted(false);
 		pChinese.add(labJoongsic);
-		try {
-			String btnImageName = "chineseFoodImage.png";
-			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
-			BufferedImage bufferedImage = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(labJoongsic.getWidth(), labJoongsic.getHeight(), Image.SCALE_SMOOTH));
-			labJoongsic.setIcon(icon);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
-		//chineseFoodImage
-		
-		
+		//280 23023
+
 		JLabel label_3 = new JLabel("\uC911  \uC2DD");
 		label_3.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
 		label_3.setOpaque(true);
@@ -119,16 +101,6 @@ public class FoodMainView extends JPanel {
 		labIlsic.setFocusable(false);
 		labIlsic.setContentAreaFilled(false);
 		labIlsic.setBorderPainted(false);
-		try {
-			String btnImageName = "japaneseFoodImage.png";
-			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
-			BufferedImage bufferedImage = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(labIlsic.getWidth(), labIlsic.getHeight(), Image.SCALE_SMOOTH));
-			labIlsic.setIcon(icon);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
 		
 		JLabel label_4 = new JLabel("\uC77C  \uC2DD");
 		label_4.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
@@ -152,17 +124,6 @@ public class FoodMainView extends JPanel {
 		labYangsic.setFocusable(false);
 		labYangsic.setContentAreaFilled(false);
 		labYangsic.setBorderPainted(false);
-		try {
-			String btnImageName = "americanFoodImage.png";
-			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
-			BufferedImage bufferedImage = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(labYangsic.getWidth(), labYangsic.getHeight(), Image.SCALE_SMOOTH));
-			labYangsic.setIcon(icon);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
-		//americanFoodImage
 		
 		JLabel label_5 = new JLabel("\uC591  \uC2DD");
 		label_5.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));

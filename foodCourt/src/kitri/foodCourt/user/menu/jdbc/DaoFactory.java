@@ -9,7 +9,7 @@ public class DaoFactory {
 	}
 	public MenuDao menuDao() {
 		ConnectionMaker connectionMaker = connectionMaker();
-		MenuDao userDao = new MenuDao(connectionMaker);
+		MenuDao userDao = new MenuDao();
 		return userDao;
 	}
 }

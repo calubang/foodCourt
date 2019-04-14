@@ -1,9 +1,7 @@
 package kitri.foodCourt.user.main;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -11,20 +9,16 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.*;
 import javax.swing.border.*;
 
 import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.BasketDetail;
 import kitri.foodCourt.user.User;
-import kitri.foodCourt.user.basket.BasketMain;
+import kitri.foodCourt.user.basket.*;
 import kitri.foodCourt.user.menu.*;
-import kitri.foodCourt.user.swing.FLabel;
-import kitri.foodCourt.user.swing.RoundPanel;
+import kitri.foodCourt.user.swing.*;
 
 public class FoodMain extends JFrame {
 	public String currentPanelName;
@@ -47,12 +41,12 @@ public class FoodMain extends JFrame {
 	public JButton btnMainMenu = new MainButton();
 
 	public JButton btnSearch = new JButton(
-			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/search.PNG")));
+			new ImageIcon(FoodMain.class.getResource("/img/user/search.PNG")));
 	public JPanel panMainButton = new JPanel();
 	public JButton btnUserInfo = new JButton();
 	public JLabel labName = new JLabel();
 	public JButton btnOrderList = new JButton(
-			new ImageIcon(FoodMain.class.getResource("/kitri/foodCourt/user/menu/mainImage/basket.png")));
+			new ImageIcon(FoodMain.class.getResource("/img/user/basket.png")));
 	public JLabel labBasket = new JLabel("\uC8FC\uBB38\uBAA9\uB85D");
 	public JPanel panBarVerRight = new JPanel();
 	public Cursor csorHandCursor = new Cursor(Cursor.HAND_CURSOR);
@@ -63,15 +57,24 @@ public class FoodMain extends JFrame {
 	public FLabel lbOrderCircle = new FLabel();
 	public FLabel lbOrderCount = new FLabel(Font.BOLD, 20);
 	public FoodMainController foodMainController;
+	
+	//유저정보 결합
+	public UserInfo userInfo;
+	public JPasswordField pfPassword;
+	public JPanel pPassword;
+	public FOptionPane fOptionPane;
+	public JDialog dgPassword;
 
 	public JLabel labHansic = new JLabel("\uD55C  \uC2DD");
 	public JLabel labJoongsic = new JLabel("\uC911  \uC2DD");
 	public JLabel labIlsic = new JLabel("\uC77C  \uC2DD");
 	public JLabel labYangsic = new JLabel("\uC591  \uC2DD");
-	public JButton btnHansic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/koreanFoodImage.png")));
-	public JButton btnJoongsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/chineseFoodImage.png")));
-	public JButton btnIlsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/JapaneseFoodImage.png")));
-	public JButton btnYangsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/americanFoodImage.png")));
+	public JButton btnHansic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/koreanFoodImageSmall.png")));
+	public JButton btnJoongsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/chineseFoodImageSmall.png")));
+	public JButton btnIlsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/JapaneseFoodImageSmall.png")));
+	public JButton btnYangsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/americanFoodImageSmall.png")));
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -95,6 +98,10 @@ public class FoodMain extends JFrame {
 	public FoodMain() {
 		// 테스트용
 		user = new User("calubang", "안병욱", 5000);
+		user.setPhoneNumberFirst("010");
+		user.setPhoneNumberMiddle("7163");
+		user.setPhoneNumberlast("3863");
+		user.setPassword("123456");
 		user.getBasket().setOrderCount(lbOrderCount);
 		labName.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		labName.setText(user.getName() + "님");
@@ -102,6 +109,7 @@ public class FoodMain extends JFrame {
 		//본코드
 		setTitle("풉키에 오신 것을 환영합니다.");
 		basketMain = new BasketMain(this);
+		userInfo = new UserInfo(this);
 
 		labName.setHorizontalAlignment(SwingConstants.CENTER);
 		labName.setVerticalTextPosition(0);
@@ -112,8 +120,23 @@ public class FoodMain extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		panel.setBorder(null);
 		btnSearch.setToolTipText("\uAC80\uC0C9");
+		
+		//패스워드 확인용 패널
+		fOptionPane = new FOptionPane();
+		dgPassword = fOptionPane.createDialog(this, "비민번호 확인");
+		dgPassword.setBounds(600, 400, dgPassword.getWidth(), dgPassword.getHeight());
+		pPassword = new JPanel();
+		pPassword.setLayout(new BorderLayout());
+		FLabel label = new FLabel(Font.PLAIN, 15);
+		pfPassword = new JPasswordField();
+		label.setText("비밀번호를 입력하세요.");
+		pPassword.add(label, BorderLayout.NORTH);
+		pPassword.add(pfPassword, BorderLayout.CENTER);
+		
+		
 		// 커서 모양지정
 		btnSearch.setCursor(csorHandCursor);
+		btnMainMenu.setIcon(null);
 		btnMainMenu.setBounds(0, 0, 120, 75);
 		btnMainMenu.setCursor(csorHandCursor);
 		btnUserInfo.setIcon(new ImageIcon(FoodMain.class.getResource("/img/user/myInfo.png")));
@@ -136,11 +159,11 @@ public class FoodMain extends JFrame {
 		panel.setBackground(Color.WHITE);
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		panel_5.setBackground(Color.DARK_GRAY);
+		panel_5.setBackground(SystemColor.activeCaption);
 
 		panel_5.setBounds(12, 10, 1160, 6);
 		panel.add(panel_5);
-		panel_3.setBackground(Color.DARK_GRAY);
+		panel_3.setBackground(SystemColor.activeCaption);
 
 		panel_3.setBounds(12, 102, 1160, 6);
 		panel.add(panel_3);
@@ -150,22 +173,8 @@ public class FoodMain extends JFrame {
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		btnMainMenu.setToolTipText("\uBA54\uC778");
-		btnMainMenu.setBorder(null);
 		btnMainMenu.setPreferredSize(new Dimension(115, 75));
-		try {
-			String btnImageName = "home2.png";
-			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
-			BufferedImage bufferedImage = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(btnMainMenu.getWidth(), btnMainMenu.getHeight(), Image.SCALE_FAST));
-			btnMainMenu.setIcon(icon);
-			btnMainMenu.setFocusable(false);
-			btnMainMenu.setContentAreaFilled(false);
-			btnMainMenu.setBorderPainted(false);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-
-		btnMainMenu.setVerticalAlignment(SwingConstants.BOTTOM);
+		btnMainMenu.setIcon(new ImageIcon(FoodMain.class.getResource("/img/user/home2.png")));
 		btnMainMenu.setBorderPainted(false);
 		panel_2.add(btnMainMenu);
 		btnMainMenu.setBackground(Color.WHITE);
@@ -178,22 +187,6 @@ public class FoodMain extends JFrame {
 		pKoreanMenu.setBounds(16, 120, 115, 100);
 		panel.add(pKoreanMenu);
 		pKoreanMenu.setLayout(null);
-		btnHansic.setBounds(10, 10, 95, 70);
-		btnHansic.setCursor(csorHandCursor);
-		pKoreanMenu.add(btnHansic);
-		btnHansic.setName("1");
-		btnHansic.setFocusable(false);
-		btnHansic.setContentAreaFilled(false);
-		btnHansic.setBorderPainted(false);
-		try {
-			String btnImageName = "koreanFoodImage.png";
-			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
-			BufferedImage bufferedImage = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(btnHansic.getWidth()+20, btnHansic.getHeight()+20, Image.SCALE_FAST));
-			btnHansic.setIcon(icon);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		
 		labHansic.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		labHansic.setBounds(10, 70, 95, 20);
@@ -201,7 +194,14 @@ public class FoodMain extends JFrame {
 		labHansic.setBackground(Color.WHITE);
 		labHansic.setHorizontalAlignment(SwingConstants.CENTER);
 		pKoreanMenu.add(labHansic);		
-		
+		btnHansic.setBounds(10, 10, 95, 70);
+		btnHansic.setCursor(csorHandCursor);
+		pKoreanMenu.add(btnHansic);
+		btnHansic.setName("1");
+		btnHansic.setFocusable(false);
+		btnHansic.setContentAreaFilled(false);
+		btnHansic.setBorderPainted(false);
+	
 		//chineseMenu
 		RoundPanel pChineseMenu = new RoundPanel(2, 40);
 		pChineseMenu.setName("2");
@@ -209,31 +209,22 @@ public class FoodMain extends JFrame {
 		pChineseMenu.setBounds(16, 230, 115, 100);
 		panel.add(pChineseMenu);
 		pChineseMenu.setLayout(null);
+		
+		labJoongsic.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		labJoongsic.setSize(95, 20);
+		labJoongsic.setLocation(10, 70);
+		labJoongsic.setBackground(Color.WHITE);
+		labJoongsic.setOpaque(true);
+		labJoongsic.setHorizontalAlignment(SwingConstants.CENTER);
+		pChineseMenu.add(labJoongsic, BorderLayout.SOUTH);
 		btnJoongsic.setSize(95, 60);
 		btnJoongsic.setLocation(10, 10);
 		btnJoongsic.setCursor(csorHandCursor);
 		pChineseMenu.add(btnJoongsic, BorderLayout.CENTER);
 		btnJoongsic.setName("2");
-		
-		labJoongsic.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		labJoongsic.setSize(95, 20);
-		labJoongsic.setLocation(10, 70);
 		btnJoongsic.setFocusable(false);
 		btnJoongsic.setContentAreaFilled(false);
 		btnJoongsic.setBorderPainted(false);
-		try {
-			String btnImageName = "chineseFoodImage.png";
-			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
-			BufferedImage bufferedImage = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(btnJoongsic.getWidth(), btnJoongsic.getHeight(), Image.SCALE_FAST));
-			btnJoongsic.setIcon(icon);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		labJoongsic.setBackground(Color.WHITE);
-		labJoongsic.setOpaque(true);
-		labJoongsic.setHorizontalAlignment(SwingConstants.CENTER);
-		pChineseMenu.add(labJoongsic, BorderLayout.SOUTH);
 		
 		//japaneseFood
 		RoundPanel pJapaneseMenu = new RoundPanel(2, 40);
@@ -242,11 +233,7 @@ public class FoodMain extends JFrame {
 		pJapaneseMenu.setBounds(16, 340, 115, 100);
 		panel.add(pJapaneseMenu);
 		pJapaneseMenu.setLayout(null);
-		btnIlsic.setBounds(10, 10, 95, 60);
-		btnIlsic.setCursor(csorHandCursor);
-		pJapaneseMenu.add(btnIlsic);
-		btnIlsic.setName("3");
-
+		
 		labIlsic.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		labIlsic.setBounds(10, 70, 95, 20);
 		
@@ -254,18 +241,13 @@ public class FoodMain extends JFrame {
 		labIlsic.setOpaque(true);
 		labIlsic.setHorizontalAlignment(SwingConstants.CENTER);
 		pJapaneseMenu.add(labIlsic);
+		btnIlsic.setBounds(10, 10, 95, 60);
+		btnIlsic.setCursor(csorHandCursor);
+		pJapaneseMenu.add(btnIlsic);
+		btnIlsic.setName("3");
 		btnIlsic.setFocusable(false);
 		btnIlsic.setContentAreaFilled(false);
 		btnIlsic.setBorderPainted(false);
-		try {
-			String btnImageName = "japaneseFoodImage.png";
-			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
-			BufferedImage bufferedImage = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(btnIlsic.getWidth(), btnIlsic.getHeight(), Image.SCALE_DEFAULT));
-			btnIlsic.setIcon(icon);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		
 		//americanFood
 		RoundPanel pAmericanMenu = new RoundPanel(2, 40);
@@ -274,37 +256,30 @@ public class FoodMain extends JFrame {
 		pAmericanMenu.setBounds(16, 450, 115, 100);
 		panel.add(pAmericanMenu);
 		pAmericanMenu.setLayout(null);
-		btnYangsic.setBounds(10, 10, 95, 60);
-		btnYangsic.setCursor(csorHandCursor);
-		pAmericanMenu.add(btnYangsic);
-		btnYangsic.setName("4");
 		labYangsic.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		labYangsic.setBounds(10, 70, 95, 20);
 		labYangsic.setBackground(Color.WHITE);
 		labYangsic.setOpaque(true);
 		labYangsic.setHorizontalAlignment(SwingConstants.CENTER);
 		pAmericanMenu.add(labYangsic);
+		btnYangsic.setBounds(10, 10, 95, 60);
+		btnYangsic.setCursor(csorHandCursor);
+		pAmericanMenu.add(btnYangsic);
+		btnYangsic.setName("4");
 		
 		btnYangsic.setFocusable(false);
 		btnYangsic.setContentAreaFilled(false);
 		btnYangsic.setBorderPainted(false);
-		try {
-			String btnImageName = "americanFoodImage.png";
-			URL url = FoodMain.class.getResource("/img/user/"+btnImageName);
-			BufferedImage bufferedImage = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(bufferedImage.getScaledInstance(btnYangsic.getWidth(), btnYangsic.getHeight(), Image.SCALE_SMOOTH));
-			btnYangsic.setIcon(icon);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 
 //		--------------------변하는 패널 부분 카드레이아웃 설정
 		panChangePanel.setLayout(card);
+		UserMenuDetailView.setBackground(Color.WHITE);
 		panChangePanel.add(UserMenuDetailView, "UserMenuDetailView");
 		panChangePanel.add(userMenuView, "userMenuView");
 		panChangePanel.add(foodMainView, "foodMainView");
 		panChangePanel.add(noSearchMenuImg, "noSearchMenuImg");
 		panChangePanel.add(basketMain, "basketMain");
+		panChangePanel.add(userInfo, "userInfo");
 		panChangePanel.setBounds(160, 118, 1012, 634);
 		panel.add(panChangePanel);
 		currentPanelName = "foodMainView";
@@ -312,22 +287,22 @@ public class FoodMain extends JFrame {
 
 		searchField = new JTextField();
 		searchField.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		searchField.setBorder(new MatteBorder(2, 2, 4, 4, (Color) Color.LIGHT_GRAY));
+		searchField.setBorder(new MatteBorder(2, 2, 4, 4, (Color) Color.BLACK));
 		searchField.setBounds(240, 42, 553, 38);
 		panel.add(searchField);
 		searchField.setColumns(10);
-		panel_6.setBackground(Color.DARK_GRAY);
+		panel_6.setBackground(SystemColor.activeCaption);
 
 		panel_6.setBounds(145, 118, 4, 633);
 		panel.add(panel_6);
-		btnSearch.setBorder(null);
+		btnSearch.setBorder(new LineBorder(SystemColor.activeCaption, 1, true));
 		btnSearch.setBounds(826, 42, 40, 38);
 
 		panel.add(btnSearch);
 		panMainButton.setBounds(145, 26, 4, 66);
 		panel.add(panMainButton);
-		panMainButton.setBackground(Color.DARK_GRAY);
-		btnUserInfo.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, true));
+		panMainButton.setBackground(SystemColor.activeCaption);
+		btnUserInfo.setBorder(new LineBorder(SystemColor.activeCaption, 1, true));
 		btnUserInfo.setBounds(965, 26, 79, 54);
 
 		panel.add(btnUserInfo);
@@ -341,18 +316,10 @@ public class FoodMain extends JFrame {
 		user.getBasket().setOrderCount(lbOrderCount);
 
 		lbOrderCircle.setBounds(1129, 15, 35, 35);
-		
-		try {
-			URL url = FoodMain.class.getResource("/img/user/red_circle.png");
-			BufferedImage image = ImageIO.read(url);
-			ImageIcon icon = new ImageIcon(image.getScaledInstance(lbOrderCircle.getWidth(), lbOrderCircle.getHeight(), Image.SCALE_FAST));
-			lbOrderCircle.setIcon(icon);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		lbOrderCircle.setIcon(new ImageIcon(FoodMain.class.getResource("/img/user/red_circle.png")));
 		panel.add(lbOrderCircle);
 
-		btnOrderList.setBorder(new LineBorder(Color.GRAY, 2, true));
+		btnOrderList.setBorder(new LineBorder(SystemColor.activeCaption, 1, true));
 		btnOrderList.setBounds(1074, 26, 79, 54);
 
 		panel.add(btnOrderList);
@@ -361,7 +328,7 @@ public class FoodMain extends JFrame {
 		labBasket.setBounds(1074, 77, 79, 22);
 
 		panel.add(labBasket);
-		panBarVerRight.setBackground(Color.DARK_GRAY);
+		panBarVerRight.setBackground(SystemColor.activeCaption);
 		panBarVerRight.setBounds(916, 26, 4, 66);
 
 		panel.add(panBarVerRight);
@@ -380,6 +347,9 @@ public class FoodMain extends JFrame {
 		btnUserInfo.addActionListener(foodMainController);
 		btnOrderList.addActionListener(foodMainController);
 		searchField.addActionListener(foodMainController);
+		
+		//패스워드 확인용 텍스트필드
+		pfPassword.addActionListener(foodMainController);
 		
 		//좌측 이벤트
 		btnHansic.addActionListener(foodMainController);

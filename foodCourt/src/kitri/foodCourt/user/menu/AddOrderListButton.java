@@ -20,4 +20,5 @@ public class AddOrderListButton extends JButton{
 	public int getCount() {
 		return userMenuDetailView.getCount();
 	}
+	
 }
