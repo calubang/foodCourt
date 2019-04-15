@@ -416,20 +416,20 @@ insert into fook_category(category_id, category_name) values (4, '양식');
 
 -- FOOD
 insert into fook_food(food_id, food_name, category_id, price, food_point, food_description, image_address, manager_id, create_date, food_enable)
-values (food_fid_seq.nextval, '볶음밥', 1, 6000, 60, '신선한 야채를 사용.', '/kitri/foodCourt/management/menu/image/bokeumbap.jpg', 'Clerk123', sysdate, 'y');
+values (food_fid_seq.nextval, '볶음밥', 1, 6000, 60, '신선한 야채를 사용.', 'bokeumbap.jpg', 'Clerk123', sysdate, 'y');
 insert into fook_food(food_id, food_name, category_id, price, food_point, food_description, image_address, manager_id, create_date, food_enable)
-values (food_fid_seq.nextval, '자장면', 2, 5000, 50, '직접 수타로 만듦.', '/kitri/foodCourt/management/menu/image/jajangmyeon.jpg', 'Clerk123', sysdate, 'y');
+values (food_fid_seq.nextval, '자장면', 2, 5000, 50, '직접 수타로 만듦.', 'jajangmyeon.jpg', 'Clerk123', sysdate, 'y');
 insert into fook_food(food_id, food_name, category_id, price, food_point, food_description, image_address, manager_id, create_date, food_enable)
-values (food_fid_seq.nextval, '소바', 3, 7000, 70, '메밀이 들어감.', '/kitri/foodCourt/management/menu/image/soba.jpg', 'Clerk123', sysdate, 'y');
+values (food_fid_seq.nextval, '소바', 3, 7000, 70, '메밀이 들어감.', 'soba.jpg', 'Clerk123', sysdate, 'y');
 insert into fook_food(food_id, food_name, category_id, price, food_point, food_description, image_address, manager_id, create_date, food_enable)
-values (food_fid_seq.nextval, '스테이크', 4, 9500, 95, '뉴질랜드산 소고기를 사용.', '/kitri/foodCourt/management/menu/image/steak.jpg', 'Admin123', sysdate, 'y');
-INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('6', '테스트1', '1', '6000', '60', '국내산 콩 사용1', '/img/food/ilsic.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
-INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('7', '테스트2', '2', '6000', '60', '국내산 콩 사용2', '/img/food/jajangmyeon.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
-INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('8', '테스트3', '3', '6000', '60', '국내산 콩 사용3', '/img/food/joongsic.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
-INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('9', '테스트4', '4', '6000', '60', '국내산 콩 사용4', '/img/food/junjoobibimbab.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
-INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('10', '테스트5', '1', '6000', '60', '국내산 콩 사용5', '/img/food/soba.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
-INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('11', '테스트6', '2', '6000', '60', '국내산 콩 사용6', '/img/food/steak.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
-INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('12', '테스트7', '3', '6000', '60', '국내산 콩 사용7', '/img/food/yangsic.jpeg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
+values (food_fid_seq.nextval, '스테이크', 4, 9500, 95, '뉴질랜드산 소고기를 사용.', 'steak.jpg', 'Admin123', sysdate, 'y');
+INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('6', '테스트1', '1', '6000', '60', '국내산 콩 사용1', 'ilsic.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
+INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('7', '테스트2', '2', '6000', '60', '국내산 콩 사용2', 'jajangmyeon.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
+INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('8', '테스트3', '3', '6000', '60', '국내산 콩 사용3', 'joongsic.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
+INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('9', '테스트4', '4', '6000', '60', '국내산 콩 사용4', 'junjoobibimbab.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
+INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('10', '테스트5', '1', '6000', '60', '국내산 콩 사용5', 'soba.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
+INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('11', '테스트6', '2', '6000', '60', '국내산 콩 사용6', 'steak.jpg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
+INSERT INTO "FOOK"."FOOK_FOOD" (FOOD_ID, FOOD_NAME, CATEGORY_ID, PRICE, FOOD_POINT, FOOD_DESCRIPTION, IMAGE_ADDRESS, MANAGER_ID, CREATE_DATE, FOOD_ENABLE) VALUES ('12', '테스트7', '3', '6000', '60', '국내산 콩 사용7', 'yangsic.jpeg', 'Admin123', TO_DATE('2019-04-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'y');
 
 
 -- USER
