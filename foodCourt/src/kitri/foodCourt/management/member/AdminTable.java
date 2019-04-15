@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import kitri.foodCourt.db.ConnectionMaker;
 import kitri.foodCourt.db.DbFactory;
-import kitri.foodCourt.management.regit.DBConnection;
+
 
 public class AdminTable extends JPanel {
 

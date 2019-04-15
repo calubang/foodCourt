@@ -8,7 +8,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import kitri.foodCourt.management.regit.DBConnection;
+import kitri.foodCourt.db.ConnectionMaker;
+import kitri.foodCourt.db.DbFactory;
 
 public class MemberTable extends JPanel {
 
@@ -16,6 +17,7 @@ public class MemberTable extends JPanel {
 	DefaultTableModel dtm = new DefaultTableModel();
 	private JTable memberTable = new JTable(dtm);
 	
+	private ConnectionMaker connectionMaker;
 	Connection conn = null;
 	PreparedStatement pstm = null;
 	ResultSet rs = null;
@@ -25,11 +27,13 @@ public class MemberTable extends JPanel {
 	 * Create the panel.
 	 */
 	public MemberTable() {
+		connectionMaker = DbFactory.connectionMaker("oracle");
+		
 		Object[] rowData = new Object[11];
 		try {
 
-			String quary = "SELECT user_id,password,phone_first,phone_middle,phone_last,user_point,password_quiz,password_answer,join_date,secession_date,enable FROM FOOK_USER";
-			conn = DBConnection.getConnection();
+			String quary = "SELECT user_id,password,phone_first||phone_middle||phone_last,user_point,password_quiz,password_answer,join_date,secession_date,enable FROM FOOK_USER";
+			conn = connectionMaker.makeConnection();
 			pstm = conn.prepareStatement(quary);
 			rs = pstm.executeQuery();
 			
