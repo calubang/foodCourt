@@ -19,8 +19,9 @@ public class AdminTable extends JPanel {
 	Connection conn = null;
 	PreparedStatement pstm = null;
 	ResultSet rs = null;
-	
+
 	String[] column = { "관리자ID", "이름", "핸드폰번호", "직업코드", "입사일", "우편번호", "주소", "이메일", "이메일도메인" };
+
 	/**
 	 * Create the panel.
 	 */
@@ -28,13 +29,11 @@ public class AdminTable extends JPanel {
 		Object[] rowData = new Object[12];
 		try {
 
-			String quary = "SELECT* FROM FOOK_MANAGER";
+			String quary = "SELECT * FROM FOOK_MANAGER";
 			conn = DBConnection.getConnection();
 			pstm = conn.prepareStatement(quary);
 			rs = pstm.executeQuery();
-			
-			
-			
+
 			while (rs.next()) {
 
 				rowData[0] = rs.getString("MANAGER_ID");
@@ -49,10 +48,10 @@ public class AdminTable extends JPanel {
 				rowData[9] = rs.getString("ADDRESS");
 				rowData[10] = rs.getString("EMAIL");
 				rowData[11] = rs.getString("EMAIL_DOMAIN");
-				
+
 				dtm.addRow(rowData);
-			
 			}
+		
 			
 		} catch (SQLException sqle) {
 			System.out.println("SELECT문에서 예외 발생");
@@ -73,16 +72,16 @@ public class AdminTable extends JPanel {
 			} catch (Exception e) {
 				throw new RuntimeException(e.getMessage());
 			}
-			
+
 		}
-		
+
 		for (int i = 0; i < column.length; i++) {
 			dtm.addColumn(column[i]);
 		}
 		adminTable = new JTable(dtm);
 		setSize(new Dimension(780, 640));
 		setLayout(null);
-		
+
 		scrollPane.setBounds(0, 0, 780, 640);
 		scrollPane.setViewportView(adminTable);
 		add(scrollPane);

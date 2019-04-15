@@ -15,7 +15,7 @@ public class DBConnection
     
         	String user = "dam"; 
             String pw = "dam";
-            String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+            String url = "jdbc:oracle:thin:@192.168.14.41:1521:orcl";
             //jdbc라는 프로토콜을 쓴다는것 thin:@ 까지 프로토콜
             
             Class.forName("oracle.jdbc.driver.OracleDriver"); 
