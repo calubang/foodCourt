@@ -77,16 +77,7 @@ public class MemberTable extends JPanel {
 		}
 		
 		
-		for (int i = 0; i < column.length; i++) {
-			dtm.addColumn(column[i]);
-		}
 		
-		setSize(new Dimension(780, 640));
-		setLayout(null);
-		
-		scrollPane.setBounds(0, 0, 780, 640);
-		scrollPane.setViewportView(memberTable);
-		add(scrollPane);
 	}
 
 }

@@ -28,7 +28,7 @@ public class AdminRegister extends JPanel {
 	JPanel phonepanel = new JPanel();
 	JPanel selectpanel = new JPanel();
 	JPanel etcpanel = new JPanel();
-
+	JComboBox jobname = new JComboBox();
 	JLabel adminRegister = new JLabel("\uAD00\uB9AC\uC790 \uB4F1\uB85D");
 	JLabel idlabel = new JLabel("\uC544\uC774\uB514");
 	JLabel etclabel = new JLabel("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
@@ -184,7 +184,7 @@ public class AdminRegister extends JPanel {
 		joblabel.setBounds(0, 0, 105, 51);
 		jobpanel.add(joblabel);
 		
-		JComboBox jobname = new JComboBox();
+		
 		jobname.setBounds(105, 0, 116, 51);
 		jobpanel.add(jobname);
 		jobname.addItem("°ü¸®ÀÚ");

@@ -38,7 +38,8 @@ public class AdminMemberInfo extends JPanel {
 	JButton adminBtn = new JButton("\uAD00\uB9AC\uC790");
 	JButton memberBtn = new JButton("\uD68C\uC6D0");
 
-	AdminTable at = new AdminTable();
+	AdminTable at  = new AdminTable();
+	DefaultTableModel model = new DefaultTableModel();
 	MemberTable mt = new MemberTable();
 
 	CardLayout cl = new CardLayout(0, 0);
@@ -148,6 +149,8 @@ public class AdminMemberInfo extends JPanel {
 		cl.show(tablePanel, "AdminTable");
 
 		add(tablePanel);
+		//테이블 구조 생성
+		
 
 //		add listener
 		ar = new AdminRegister();

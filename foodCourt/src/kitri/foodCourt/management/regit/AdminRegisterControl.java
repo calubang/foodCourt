@@ -29,7 +29,7 @@ public class AdminRegisterControl implements ActionListener {
 
 		if (ob == ami.adminMemberRegisterBtn) {
 			ars.showadminRegister();
-		} else if (ob == ami.memberRegisterBtn) {
+		}else if (ob == ami.memberRegisterBtn) {
 			ars.showmemberRegister();
 		} else if (ob == ami.modifyBtn) {
 			ars.showmodify();
@@ -39,8 +39,7 @@ public class AdminRegisterControl implements ActionListener {
 			ars.arRegister();
 		} else if (ob == ami.ar.idbtn) {
 			ars.arId();
-		} else if (ob == ami.ar.cancelbtn) {
-			
+		} else if (ob == ami.ar.cancelbtn) {	
 			ars.Close(ami.jfAD);
 		} else if (ob == ami.mr.registerbtn) {
 			ars.mrRegister();
