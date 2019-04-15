@@ -56,8 +56,6 @@ public class LoginService {
 					javax.swing.JOptionPane.showMessageDialog(logc.login, "로그인 성공.");
 					checking += 1;
 				}
-				
-				
 			}
 			
 			if ((logc.login.idtextField.getText().isEmpty()) || (logc.login.pwtextfd.getPassword().length == 0)) {
