@@ -12,6 +12,8 @@ import javax.swing.*;
 import kitri.foodCourt.db.ConnectionMaker;
 import kitri.foodCourt.db.DbFactory;
 import kitri.foodCourt.dto.AdminRegitDto;
+import kitri.foodCourt.management.member.AdminTable;
+import kitri.foodCourt.management.member.MemberTable;
 
 public class AdminRegisterService {
 
@@ -23,7 +25,9 @@ public class AdminRegisterService {
 	ModifyAdminRegit maR;
 	RemoveMember rm;
 	ModifyRegit mR;
-
+	
+	AdminTable at;
+	
 	List<AdminRegitDto> list = new ArrayList<AdminRegitDto>();
 	AdminRegitDto AdminRegitDto;
 	String[] option = { "예", "아니요" };
@@ -51,7 +55,7 @@ public class AdminRegisterService {
 		maR = ami.maR;
 		mR = ami.mR;
 		rm = ami.rm;
-
+		
 	}
 
 	// 관리자등록
@@ -117,8 +121,11 @@ public class AdminRegisterService {
 
 	// 관리자/회원삭제
 	public void showdelete() {
+		int resultQuery = 0;
+		
 		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "정말 삭제하시겠습니까?\n(삭제하면 다시 되돌릴 수 없습니다.)", "삭제 확인",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
+
 	}
 
 	// 관리자창 - 등록버튼
@@ -133,6 +140,9 @@ public class AdminRegisterService {
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd");
 		String str = dayTime.format(new Date());
 		String jobid = ami.ar.jobname.getSelectedItem().toString();
+		String email = ami.ar.email.getText();
+		String domain = ami.ar.emaildomain.getText();
+		String address = ami.ar.addresstf.getText();
 		int r = 0;
 
 		String quary = "insert into fook_manager(MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID,ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) values(?,?,?,?,?,?,?,?,?,?,?)";
@@ -157,12 +167,14 @@ public class AdminRegisterService {
 			pstm.setString(5, nummid);
 			pstm.setString(6, numlast);
 			pstm.setString(7, jobid);
-//			pstm.setString(8, question);
-//			pstm.setString(9, answer);
-//			pstm.setString(10, "N");
+			pstm.setString(8, null);
+			pstm.setString(9, address);
+			pstm.setString(10,email);
+			pstm.setString(11,domain);
 
 			r = pstm.executeUpdate();
-
+			System.out.println("등록");
+			ar.setVisible(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

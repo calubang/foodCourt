@@ -51,7 +51,7 @@ public class AdminMemberInfo extends JPanel {
 	ModifyRegit mR;
 	RemoveMember rm;
 
-
+	ListSelectionModel lsm;
 
 	JFrame jfA = new JFrame();
 
@@ -65,9 +65,6 @@ public class AdminMemberInfo extends JPanel {
 	JPanel jpaMo;
 	CardLayout card = new CardLayout();
 
-
-
-	
 	boolean check = false;
 
 	/**
@@ -187,6 +184,8 @@ public class AdminMemberInfo extends JPanel {
 		mR.cancelbtn.addActionListener(arc);
 		mR.pwtf.addKeyListener(arc);
 		mR.passwordtf.addKeyListener(arc);
+		
+	
 	}
 
 }

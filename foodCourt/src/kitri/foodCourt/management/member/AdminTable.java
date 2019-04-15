@@ -17,14 +17,14 @@ public class AdminTable extends JPanel {
 
 	JScrollPane scrollPane = new JScrollPane();
 	DefaultTableModel dtm = new DefaultTableModel();
-	private JTable adminTable;
+	JTable adminTable;
 	
 	private ConnectionMaker connectionMaker;
 	Connection conn = null;
 	PreparedStatement pstm = null;
 	ResultSet rs = null;
 
-	String[] column = { "관리자ID", "이름", "핸드폰번호", "직업코드", "입사일", "우편번호", "주소", "이메일", "이메일도메인" };
+	String[] column = { "관리자ID", "이름","비밀번호", "핸드폰번호", "직급", "입사일", "우편번호", "주소", "이메일", "이메일도메인" };
 
 	/**
 	 * Create the panel.
@@ -53,10 +53,10 @@ public class AdminTable extends JPanel {
 	}
 	
 	public void selectAdmin() {
-		Object[] rowData = new Object[12];
+		Object[] rowData = new Object[10];
 		try {
 
-			String quary = "SELECT MANAGER_ID,NAME,PASSWORD,PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST,JOB_ID,HIRE_DATE,ADDRESS_ZIP,ADDRESS,EMAIL,EMAIL_DOMAIN FROM FOOK_MANAGER";
+			String quary = "SELECT MANAGER_ID,NAME,PASSWORD,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn,fj.job_name,HIRE_DATE,ADDRESS_ZIP,ADDRESS,EMAIL,EMAIL_DOMAIN FROM FOOK_MANAGER fm , fook_job fj where fm.job_id = fj.job_id";
 			conn = connectionMaker.makeConnection();
 			pstm = conn.prepareStatement(quary);
 			rs = pstm.executeQuery();
@@ -66,15 +66,13 @@ public class AdminTable extends JPanel {
 				rowData[0] = rs.getString("manager_id");
 				rowData[1] = rs.getString("NAME");
 				rowData[2] = rs.getString("PASSWORD");
-				rowData[3] = rs.getString("PHONE_FIRST");
-				rowData[4] = rs.getString("PHONE_MIDDLE");
-				rowData[5] = rs.getString("PHONE_LAST");
-				rowData[6] = rs.getString("JOB_ID");
-				rowData[7] = rs.getDate("HIRE_DATE");
-				rowData[8] = rs.getString("ADDRESS_ZIP");
-				rowData[9] = rs.getString("ADDRESS");
-				rowData[10] = rs.getString("EMAIL");
-				rowData[11] = rs.getString("EMAIL_DOMAIN");
+				rowData[3] = rs.getString("pn");
+				rowData[4] = rs.getString("job_name");
+				rowData[5] = rs.getDate("HIRE_DATE");
+				rowData[6] = rs.getString("ADDRESS_ZIP");
+				rowData[7] = rs.getString("ADDRESS");
+				rowData[8] = rs.getString("email");
+				rowData[9] = rs.getString("EMAIL_DOMAIN");
 				
 				
 				dtm.addRow(rowData);				
