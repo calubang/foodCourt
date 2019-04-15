@@ -17,6 +17,7 @@ import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.BasketDetail;
 import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.controller.FoodMainController;
+import kitri.foodCourt.user.login.LoginMain;
 import kitri.foodCourt.user.swing.*;
 
 public class FoodMain extends JFrame {
@@ -73,13 +74,16 @@ public class FoodMain extends JFrame {
 	public JButton btnIlsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/JapaneseFoodImageSmall.png")));
 	public JButton btnYangsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/americanFoodImageSmall.png")));
 	
+	//·Î±×ÀÎ ºÎºÐ °áÇÕ
+	public LoginMain loginMain;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					FoodMain frame = new FoodMain();
-					frame.setVisible(true);
+					//frame.setVisible(true);
+					frame.loginMain.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -101,15 +105,21 @@ public class FoodMain extends JFrame {
 		user.setPhoneNumberMiddle("7163");
 		user.setPhoneNumberlast("3863");
 		user.setPassword("123456");
+		
 		user.getBasket().setOrderCount(lbOrderCount);
-		labName.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
+		
 		labName.setText(user.getName() + "´Ô");
+		
+		
 		
 		//º»ÄÚµå
 		setTitle("Ç±Å°¿¡ ¿À½Å °ÍÀ» È¯¿µÇÕ´Ï´Ù.");
+		loginMain = new LoginMain(this);
+		this.setVisible(false);
 		basketMain = new BasketMain(this);
 		userInfo = new UserInfo(this);
-
+		
+		labName.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		labName.setHorizontalAlignment(SwingConstants.CENTER);
 		labName.setVerticalTextPosition(0);
 		contentPane = new JPanel();
@@ -363,5 +373,8 @@ public class FoodMain extends JFrame {
 		foodMainView.labJoongsic.addActionListener(foodMainController);
 		foodMainView.labIlsic.addActionListener(foodMainController);
 		foodMainView.labYangsic.addActionListener(foodMainController);
+	}
+	
+	public void dataSetting(User user) {
 	}
 }

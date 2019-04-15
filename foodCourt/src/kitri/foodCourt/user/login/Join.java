@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import kitri.foodCourt.util.Constance;
  
 public class Join extends JPanel
 {
@@ -169,7 +171,7 @@ public class Join extends JPanel
      
      JLabel lblNewLabel = new JLabel("");
      lblNewLabel.setBackground(Color.WHITE);
-     lblNewLabel.setIcon(new ImageIcon(Join.class.getResource("/kitri/foodCourt/user/member/duck.png")));
+     lblNewLabel.setIcon(new ImageIcon(Join.class.getResource(Constance.userImagePath + "duck.png")));
      lblNewLabel.setBounds(861, 453, 327, 308);
      add(lblNewLabel);
      

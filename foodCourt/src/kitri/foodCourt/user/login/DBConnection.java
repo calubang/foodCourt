@@ -13,9 +13,9 @@ public class DBConnection
         Connection conn = null;
         try {
     
-        	String user = "kitri"; 
-            String pw = "kitri";
-            String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+        	String user = "fook"; 
+            String pw = "fook";
+            String url = "jdbc:oracle:thin:@192.168.14.111:1521:orcl";
             // jdbc라는 프로토콜을 쓴다는것 thin:@ 까지 프로토콜
             // 포트번호 바꿈.
             

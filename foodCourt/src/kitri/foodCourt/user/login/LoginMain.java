@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import kitri.foodCourt.user.view.FoodMain;
+
 public class LoginMain extends JFrame {
 	
 	JPanel contentPane;
@@ -16,27 +18,30 @@ public class LoginMain extends JFrame {
 
 	JPanel panMain = new JPanel();
 	CardLayout card = new CardLayout();
+	
+	public FoodMain foodMain;
 
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginMain frame = new LoginMain();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					LoginMain frame = new LoginMain();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	FindIdMain findIdMain = new FindIdMain(this);
 	FindPwMain findPwMain = new FindPwMain(this);
 	LoginControl loginControl;
 
 	
-	public LoginMain() {
+	public LoginMain(FoodMain foodMain) {
+		this.foodMain = foodMain;
 		this.loginControl = new LoginControl(this);
 
 		this.contentPane = new JPanel();

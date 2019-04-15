@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import kitri.foodCourt.user.User;
+import kitri.foodCourt.user.view.FoodMain;
  
 public class LoginService {
     
@@ -89,7 +90,10 @@ public class LoginService {
 					user.setPhoneNumberlast(rs.getString("phone_last"));
 					user.setPassword(rs.getString("password"));
 					
-					System.out.println(user);
+					logc.loginMain.setVisible(false);
+					logc.loginMain.foodMain.setVisible(true);
+					
+					
 				}
 			}
 			
