@@ -45,8 +45,6 @@ public class LoginMain extends JFrame {
 	public LoginMain() {
 		//시작부
 		setTitle("풉키에 오신것을 환영합니다.");
-		this.user =  new User();
-		foodMain = new FoodMain(user);
 		
 		this.loginControl = new LoginControl(this);
 		this.contentPane = new JPanel();

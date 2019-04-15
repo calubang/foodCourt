@@ -1,5 +1,6 @@
 package kitri.foodCourt.management.member;
 
+import java.awt.Dimension;
 import java.util.Vector;
 
 import javax.swing.JPanel;
@@ -25,20 +26,25 @@ public class MemberTable extends JPanel {
 
 	
 	public MemberTable() {
-
-		
-
 		dao = new AdminUserDao();
 		initView();
-		
 		initData();
 		
 	}
 	
 	public void initView() {
+		setSize(new Dimension(780, 640));
+		setLayout(null);
+
+		scrollPane.setBounds(0, 0, 780, 640);
+		scrollPane.setViewportView(memberTable);
+		add(scrollPane);
+		
 		for (int i = 0; i < column.length; i++) {
 			tableModel.addColumn(column[i]);
 		}
+		
+		memberTable.setEnabled(false);
 		
 	}
 	
@@ -73,8 +79,6 @@ public class MemberTable extends JPanel {
 
 		
 			tableModel.addRow(temp);
-
-			
 		}
 	}
 

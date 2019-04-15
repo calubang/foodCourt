@@ -84,6 +84,9 @@ public class LoginService {
 					javax.swing.JOptionPane.showMessageDialog(logc.login, "로그인 성공.");
 					checking += 1;
 					//성공 
+					
+					
+					logc.loginMain.user = new User();
 					User user = logc.loginMain.user;
 					
 					user.setUserId(user_id);
@@ -95,6 +98,13 @@ public class LoginService {
 					user.setUserPoint(rs.getInt("user_point"));
 					user.setPasswordQuiz(rs.getString("password_quiz"));
 					user.setPasswordAnswer(rs.getString("password_answer"));
+					
+					//FoodMain 
+					if(logc.loginMain.foodMain != null) {
+						logc.loginMain.foodMain.user = user;
+					}else {
+						logc.loginMain.foodMain = new FoodMain(user);
+					}
 					
 					logc.loginMain.setVisible(false);
 					logc.loginMain.foodMain.dataSetting();
@@ -290,6 +300,7 @@ public class LoginService {
 			if(r == 1) {
 				//정상적으로 회원가입됨
 				//성공 
+				logc.loginMain.user = new User();
 				User user = logc.loginMain.user;
 				
 				user.setUserId(id);
@@ -301,6 +312,13 @@ public class LoginService {
 				user.setUserPoint(0);
 				user.setPasswordQuiz(question);
 				user.setPasswordAnswer(answer);
+				
+				//FoodMain 
+				if(logc.loginMain.foodMain != null) {
+					logc.loginMain.foodMain.user = user;
+				}else {
+					logc.loginMain.foodMain = new FoodMain(user);
+				}
 				
 				logc.loginMain.setVisible(false);
 				logc.loginMain.foodMain.dataSetting();
