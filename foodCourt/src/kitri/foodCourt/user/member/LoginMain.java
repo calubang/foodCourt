@@ -2,10 +2,13 @@ package kitri.foodCourt.user.member;
 
 import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.awt.event.KeyListener;
+
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class LoginMain extends javax.swing.JFrame {
+public class LoginMain extends JFrame {
 	
 	JPanel contentPane;
 	Login panLogin = new Login(this);
@@ -13,7 +16,6 @@ public class LoginMain extends javax.swing.JFrame {
 
 	JPanel panMain = new JPanel();
 	CardLayout card = new CardLayout();
-
 
 
 	public static void main(String[] args) {
@@ -32,7 +34,7 @@ public class LoginMain extends javax.swing.JFrame {
 	FindIdMain findIdMain = new FindIdMain(this);
 	FindPwMain findPwMain = new FindPwMain(this);
 	LoginControl loginControl;
-	
+
 	
 	public LoginMain() {
 		this.loginControl = new LoginControl(this);
@@ -64,24 +66,30 @@ public class LoginMain extends javax.swing.JFrame {
 		this.findIdMain.findId.nextbtn.addActionListener(this.loginControl);
 		this.findIdMain.findId.cancelbtn.addActionListener(this.loginControl);
 		this.findIdMain.findIdCheck.Confirm.addActionListener(this.loginControl);
-
 		
 //		비밀번호 찾기 페이지
-		this.findPwMain.findPw.nextbtn.addActionListener(this.loginControl);
-		this.findPwMain.findPw.cancelbtn.addActionListener(this.loginControl);
-		this.findPwMain.findPw.idfindbtn.addActionListener(this.loginControl);
+		findPwMain.findPw.nextbtn.addActionListener(this.loginControl);
+		findPwMain.findPw.cancelbtn.addActionListener(this.loginControl);
+		findPwMain.findPw.idfindbtn.addActionListener(this.loginControl);
+		
 //		-----------------------------------------------------------------------------------------
 		this.findPwMain.findPwCheck.nextbtn.addActionListener(this.loginControl);
 		this.findPwMain.findPwCheck.cancelbtn.addActionListener(this.loginControl);
 //		-----------------------------------------------------------------------------------------
-		this.findPwMain.findRPw.cancelbtn.addActionListener(this.loginControl);
-		this.findPwMain.findRPw.confirmbtn.addActionListener(this.loginControl);
+		findPwMain.findRPw.cancelbtn.addActionListener(this.loginControl);
+		findPwMain.findRPw.confirmbtn.addActionListener(this.loginControl);
+		findPwMain.findRPw.againPwTF.addKeyListener(loginControl);
+		findPwMain.findRPw.pwTF.addKeyListener(loginControl);
 		
 //		회원가입 페이지
-		this.panJoin.cancelbtn.addActionListener(this.loginControl);
-		this.panJoin.sinupbtn.addActionListener(this.loginControl);
-		this.panJoin.doublechekbtn.addActionListener(this.loginControl);
-		
+		panJoin.cancelbtn.addActionListener(loginControl);
+		panJoin.doublechekbtn.addActionListener(loginControl);
+		panJoin.pwTextFD.addKeyListener(loginControl);
+		panJoin.pwCheckFD.addKeyListener(loginControl);
+		panJoin.comboBox.addActionListener(loginControl);
+		panJoin.signupbtn.addActionListener(loginControl);
+		panJoin.questionTF.addActionListener(loginControl);
+		panJoin.answerTF.addActionListener(loginControl);
 		
 	}
 }

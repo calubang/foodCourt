@@ -47,7 +47,7 @@ public class FindIdCheck extends JPanel {
     label_2.setBounds(24, 50, 206, 37);
     add(label_2);
     
-    this.nameL = new JLabel("아이디");
+    this.nameL = new JLabel("이름");
     this.nameL.setHorizontalAlignment(0);
     this.nameL.setFont(new Font("굴림", 0, 17));
     this.nameL.setBounds(167, 179, 283, 37);

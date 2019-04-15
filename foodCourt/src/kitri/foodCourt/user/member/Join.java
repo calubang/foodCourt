@@ -7,22 +7,35 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
  
 public class Join extends JPanel
 {
    public JTextField idTextFD;
-   public JTextField pwTextFD;
-   public JTextField pwCheckFD;
    public JTextField nameFD;
    public JTextField phLastFD;
    public JTextField phMiddleFD;
    public JButton cancelbtn;
-   public JButton sinupbtn;
+   public JButton signupbtn;
    public JButton doublechekbtn;
    public JComboBox comboBox;
+   public JPasswordField pwTextFD; 
+   public JPasswordField pwCheckFD;
+   public JLabel pwCheckL;
   
    public LoginMain loginMain;
+   public JTextField questionTF;
+   public JTextField answerTF;
+   private JLabel label_7;
+   private JLabel label_8;
+   private JLabel lblNewLabel_1;
+   private JLabel label_10;
+   private JLabel label_11;
+   private JLabel label_12;
+   private JLabel label_13;
+   private JLabel label_14;
    
    public Join(LoginMain loginMain)
    {
@@ -37,7 +50,7 @@ public class Join extends JPanel
      label.setForeground(Color.WHITE);
      label.setFont(new Font("±¼¸²", 0, 14));
      label.setBackground(new Color(0, 153, 255));
-     label.setBounds(258, 266, 121, 30);
+     label.setBounds(145, 233, 121, 30);
      add(label);
      
      JLabel label_1 = new JLabel("È¸¿ø°¡ÀÔ");
@@ -48,7 +61,7 @@ public class Join extends JPanel
      
      this.idTextFD = new JTextField();
      this.idTextFD.setColumns(10);
-     this.idTextFD.setBounds(408, 267, 319, 30);
+     this.idTextFD.setBounds(295, 234, 319, 30);
      add(this.idTextFD);
      
      JLabel label_2 = new JLabel("ºñ¹Ð¹øÈ£");
@@ -57,12 +70,14 @@ public class Join extends JPanel
      label_2.setForeground(Color.WHITE);
      label_2.setFont(new Font("±¼¸²", 0, 14));
      label_2.setBackground(new Color(0, 153, 255));
-     label_2.setBounds(258, 365, 121, 30);
+     label_2.setBounds(145, 332, 121, 30);
      add(label_2);
      
-     this.pwTextFD = new JTextField();
+     
+     this.pwTextFD = new JPasswordField();
+     this.pwTextFD.setEchoChar('*');
      this.pwTextFD.setColumns(10);
-     this.pwTextFD.setBounds(408, 366, 319, 30);
+     this.pwTextFD.setBounds(295, 333, 319, 30);
      add(this.pwTextFD);
      
      JLabel label_3 = new JLabel("ºñ¹Ð¹øÈ£ È®ÀÎ");
@@ -71,12 +86,13 @@ public class Join extends JPanel
      label_3.setForeground(Color.WHITE);
      label_3.setFont(new Font("±¼¸²", 0, 14));
      label_3.setBackground(new Color(0, 153, 255));
-     label_3.setBounds(258, 420, 121, 30);
-     add(label_3);
+     label_3.setBounds(145, 387, 121, 30);
+     add(label_3);;
      
-     this.pwCheckFD = new JTextField();
+     this.pwCheckFD = new JPasswordField();
+     this.pwCheckFD.setEchoChar('*');
      this.pwCheckFD.setColumns(10);
-     this.pwCheckFD.setBounds(408, 421, 319, 30);
+     this.pwCheckFD.setBounds(295, 388, 319, 30);
      add(this.pwCheckFD);
      
      JLabel label_4 = new JLabel("ÀÌ¸§");
@@ -85,12 +101,12 @@ public class Join extends JPanel
      label_4.setForeground(Color.WHITE);
      label_4.setFont(new Font("±¼¸²", 0, 14));
      label_4.setBackground(new Color(0, 153, 255));
-     label_4.setBounds(258, 469, 121, 30);
+     label_4.setBounds(145, 436, 121, 30);
      add(label_4);
      
      this.nameFD = new JTextField();
      this.nameFD.setColumns(10);
-     this.nameFD.setBounds(408, 470, 319, 30);
+     this.nameFD.setBounds(295, 437, 319, 30);
      add(this.nameFD);
      
      JLabel label_5 = new JLabel("ÈÞ´ëÀüÈ­");
@@ -99,55 +115,51 @@ public class Join extends JPanel
      label_5.setForeground(Color.WHITE);
      label_5.setFont(new Font("±¼¸²", 0, 14));
      label_5.setBackground(new Color(0, 153, 255));
-     label_5.setBounds(258, 522, 121, 30);
+     label_5.setBounds(145, 489, 121, 30);
      add(label_5);
      
      this.phLastFD = new JTextField();
      this.phLastFD.setColumns(10);
-     this.phLastFD.setBounds(625, 523, 102, 30);
+     this.phLastFD.setBounds(512, 490, 102, 30);
      add(this.phLastFD);
      
      this.phMiddleFD = new JTextField();
      this.phMiddleFD.setColumns(10);
-     this.phMiddleFD.setBounds(511, 524, 102, 30);
+     this.phMiddleFD.setBounds(398, 491, 102, 30);
      add(this.phMiddleFD);
      
      this.doublechekbtn = new JButton("Áßº¹È®ÀÎ");
-     this.doublechekbtn.setBounds(728, 266, 97, 31);
+     this.doublechekbtn.setBounds(615, 233, 97, 31);
      add(this.doublechekbtn);
      
-     JLabel label_6 = new JLabel("6ÀÚ¸®ÀÌ»ó ¹®ÀÚ, ¼ýÀÚ Á¶ÇÕ");
+     JLabel label_6 = new JLabel("6\uC790\uB9AC\uC774\uC0C1 \uC785\uB825\uD574 \uC8FC\uC138\uC694.");
      label_6.setHorizontalAlignment(2);
      label_6.setFont(new Font("±¼¸²", 0, 11));
-     label_6.setBounds(408, 348, 137, 15);
+     label_6.setBounds(295, 315, 137, 15);
      add(label_6);
      
-     JLabel label_7 = new JLabel("ºñ¹Ð¹øÈ£°¡ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù.");
-     label_7.setHorizontalAlignment(2);
-     label_7.setBounds(728, 373, 176, 15);
-     add(label_7);
-     
-     JLabel label_8 = new JLabel("ºñ¹Ð¹øÈ£°¡ ´Ù¸¨´Ï´Ù.");
-     label_8.setHorizontalAlignment(2);
-     label_8.setBounds(728, 428, 155, 15);
-     add(label_8);
+     pwCheckL = new JLabel("");
+     pwCheckL.setFont(new Font("±¼¸²", Font.PLAIN, 11));
+     pwCheckL.setHorizontalAlignment(2);
+     pwCheckL.setBounds(295, 373, 193, 15);
+     add(pwCheckL);
      
      this.comboBox = new JComboBox();
-     this.comboBox.setBounds(408, 523, 89, 30);
+     this.comboBox.setBounds(295, 490, 89, 30);
      add(comboBox);
      comboBox.addItem("010");
      comboBox.addItem("011");
      comboBox.addItem("017");
      comboBox.addItem("019");
      
-     this.sinupbtn = new JButton("È¸¿ø°¡ÀÔ");
-     this.sinupbtn.setFont(new Font("±¼¸²", 0, 14));
-     this.sinupbtn.setBounds(418, 668, 121, 30);
-     add(this.sinupbtn);
+     this.signupbtn = new JButton("È¸¿ø°¡ÀÔ");
+     this.signupbtn.setFont(new Font("±¼¸²", 0, 14));
+     this.signupbtn.setBounds(512, 664, 121, 30);
+     add(this.signupbtn);
      
      this.cancelbtn = new JButton("Ãë¼Ò");
      this.cancelbtn.setFont(new Font("±¼¸²", 0, 14));
-     this.cancelbtn.setBounds(551, 668, 121, 30);
+     this.cancelbtn.setBounds(645, 664, 121, 30);
      add(this.cancelbtn);
      
      JPanel panel = new JPanel();
@@ -160,6 +172,82 @@ public class Join extends JPanel
      lblNewLabel.setIcon(new ImageIcon(Join.class.getResource("/kitri/foodCourt/user/member/duck.png")));
      lblNewLabel.setBounds(861, 453, 327, 308);
      add(lblNewLabel);
+     
+     label_7 = new JLabel("\uC9C8\uBB38");
+     label_7.setOpaque(true);
+     label_7.setHorizontalAlignment(SwingConstants.CENTER);
+     label_7.setForeground(Color.WHITE);
+     label_7.setFont(new Font("±¼¸²", Font.PLAIN, 14));
+     label_7.setBackground(new Color(0, 153, 255));
+     label_7.setBounds(651, 331, 121, 30);
+     add(label_7);
+     
+     questionTF = new JTextField();
+     questionTF.setColumns(10);
+     questionTF.setBounds(801, 332, 319, 30);
+     add(questionTF);
+     
+     label_8 = new JLabel("\uB2F5\uBCC0");
+     label_8.setOpaque(true);
+     label_8.setHorizontalAlignment(SwingConstants.CENTER);
+     label_8.setForeground(Color.WHITE);
+     label_8.setFont(new Font("±¼¸²", Font.PLAIN, 14));
+     label_8.setBackground(new Color(0, 153, 255));
+     label_8.setBounds(651, 386, 121, 30);
+     add(label_8);
+     
+     answerTF = new JTextField();
+     answerTF.setColumns(10);
+     answerTF.setBounds(801, 387, 319, 30);
+     add(answerTF);
+     
+     JLabel label_9 = new JLabel("\uBE44\uBC00\uBC88\uD638\uB97C \uCC3E\uC744\uB54C\uC758 \uC9C8\uBB38\uC744 \uC785\uB825\uD574 \uC8FC\uC138\uC694.");
+     label_9.setHorizontalAlignment(SwingConstants.LEFT);
+     label_9.setFont(new Font("±¼¸²", Font.PLAIN, 11));
+     label_9.setBounds(801, 314, 230, 15);
+     add(label_9);
+     
+     lblNewLabel_1 = new JLabel("* \uD544\uC218 \uC785\uB825\uBC14\uB78D\uB2C8\uB2E4.");
+     lblNewLabel_1.setFont(new Font("±¼¸²", Font.PLAIN, 11));
+     lblNewLabel_1.setForeground(Color.RED);
+     lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
+     lblNewLabel_1.setBounds(145, 208, 121, 15);
+     add(lblNewLabel_1);
+     
+     label_10 = new JLabel("*");
+     label_10.setFont(new Font("±¼¸²", Font.BOLD, 16));
+     label_10.setHorizontalAlignment(SwingConstants.LEFT);
+     label_10.setForeground(Color.RED);
+     label_10.setBounds(134, 332, 13, 15);
+     add(label_10);
+     
+     label_11 = new JLabel("*");
+     label_11.setHorizontalAlignment(SwingConstants.LEFT);
+     label_11.setForeground(Color.RED);
+     label_11.setFont(new Font("±¼¸²", Font.BOLD, 16));
+     label_11.setBounds(134, 233, 13, 15);
+     add(label_11);
+     
+     label_12 = new JLabel("*");
+     label_12.setHorizontalAlignment(SwingConstants.LEFT);
+     label_12.setForeground(Color.RED);
+     label_12.setFont(new Font("±¼¸²", Font.BOLD, 16));
+     label_12.setBounds(134, 387, 13, 15);
+     add(label_12);
+     
+     label_13 = new JLabel("*");
+     label_13.setHorizontalAlignment(SwingConstants.LEFT);
+     label_13.setForeground(Color.RED);
+     label_13.setFont(new Font("±¼¸²", Font.BOLD, 16));
+     label_13.setBounds(134, 436, 13, 15);
+     add(label_13);
+     
+     label_14 = new JLabel("*");
+     label_14.setHorizontalAlignment(SwingConstants.LEFT);
+     label_14.setForeground(Color.RED);
+     label_14.setFont(new Font("±¼¸²", Font.BOLD, 16));
+     label_14.setBounds(134, 489, 13, 15);
+     add(label_14);
    }
 }
 
