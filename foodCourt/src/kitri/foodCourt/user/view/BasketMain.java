@@ -254,7 +254,7 @@ public class BasketMain extends JPanel{
 		pFood.setBackground(SystemColor.inactiveCaptionBorder);
 		//x버튼
 		FButton btnX = SwingFactory.getInstance().getButton("x");
-		btnX.setName(index+"cancel");
+		//btnX.setName(index+"cancel");
 		btnX.setBounds(26, 33, 44, 44);
 		pFood.add(btnX);
 		btnX.setName("x"+index);
@@ -297,6 +297,18 @@ public class BasketMain extends JPanel{
 		lPoint.setBounds(420, 33, 100, 44);
 		pFood.add(lPoint);
 		
+		//수량증가 화살표
+		FButton btnUpCount = SwingFactory.getButton("up");
+		btnUpCount.setName("u"+index);
+		btnUpCount.setBounds(595, 10, 30, 30);
+		pFood.add(btnUpCount);
+
+		//수량감소 화살표
+		FButton btnDownCount = SwingFactory.getButton("down");
+		btnDownCount.setName("d"+index);
+		btnDownCount.setBounds(595, 70, 30, 30);
+		pFood.add(btnDownCount);
+	
 		//수량
 		FLabel lCount = SwingFactory.getInstance().getLabel("basketFood");
 		lCount.setText(String.valueOf(detail.getCount()));
@@ -320,6 +332,8 @@ public class BasketMain extends JPanel{
 		pFoodInfo.setController(controller);
 		btnFoodImage.addMouseListener(controller);
 		lFoodName.addMouseListener(controller);
+		btnUpCount.addActionListener(controller);
+		btnDownCount.addActionListener(controller);
 		
 		return pFood;
 	}

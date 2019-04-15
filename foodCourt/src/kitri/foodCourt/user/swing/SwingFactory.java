@@ -25,10 +25,12 @@ public class SwingFactory {
 	
 	public static FButton getButton(String name) {
 		FButton button = null;
+		ImageIcon basic = null;
+		ImageIcon entered = null;
 		switch(name) {
 		case "x":
-			ImageIcon basic = new ImageIcon(SwingFactory.class.getResource("/img/user/x_button.png"));
-			ImageIcon entered = new ImageIcon(SwingFactory.class.getResource("/img/user/x_button2.png"));
+			basic = new ImageIcon(SwingFactory.class.getResource("/img/user/x_button.png"));
+			entered = new ImageIcon(SwingFactory.class.getResource("/img/user/x_button2.png"));
 			button = new FButton(basic, entered);
 			button.setFocusPainted(false);
 			button.setContentAreaFilled(false);
@@ -41,6 +43,25 @@ public class SwingFactory {
 			button.setFocusPainted(false);
 			button.setContentAreaFilled(false);
 			button.setBorderPainted(false);
+			return button;
+		case "up":
+			basic = new ImageIcon(SwingFactory.class.getResource("/img/user/upIconSmall.png"));
+			entered = new ImageIcon(SwingFactory.class.getResource("/img/user/upIcon.png"));
+			button = new FButton(basic, entered);
+			button.setBackground(Color.WHITE);
+			button.setFocusPainted(false);
+			button.setContentAreaFilled(false);
+			button.setBorderPainted(false);
+			button.addMouseListener(button);
+			return button;
+		case "down":
+			basic = new ImageIcon(SwingFactory.class.getResource("/img/user/downIconSmall.png"));
+			entered = new ImageIcon(SwingFactory.class.getResource("/img/user/downIcon.png"));
+			button = new FButton(basic, entered);
+			button.setFocusPainted(false);
+			button.setContentAreaFilled(false);
+			button.setBorderPainted(false);
+			button.addMouseListener(button);
 			return button;
 		default:
 			button = new FButton();

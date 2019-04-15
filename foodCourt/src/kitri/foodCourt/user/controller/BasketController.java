@@ -35,8 +35,17 @@ public class BasketController implements ActionListener, MouseListener{
 			service.payment();
 			break;
 		default:
+			char meaning = name.charAt(0);
 			int index = name.charAt(1) - 48;
-			service.delete(index);
+			if(meaning == 'u') {
+				//수량증가
+				service.countUp(index);
+			}else if(meaning == 'd') {
+				//수량감소
+				service.countDown(index);
+			}else if(meaning == 'x') {
+				service.delete(index);
+			}
 		}
 	}
 

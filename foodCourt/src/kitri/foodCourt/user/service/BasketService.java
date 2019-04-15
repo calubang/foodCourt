@@ -1,12 +1,13 @@
 package kitri.foodCourt.user.service;
 
+import java.awt.Component;
 import java.awt.Font;
 
 import javax.swing.*;
 
+import kitri.foodCourt.user.BasketDetail;
 import kitri.foodCourt.user.controller.BasketController;
-import kitri.foodCourt.user.swing.FOptionPane;
-import kitri.foodCourt.user.swing.SwingFactory;
+import kitri.foodCourt.user.swing.*;
 import kitri.foodCourt.user.view.BasketMain;
 
 public class BasketService {
@@ -50,6 +51,54 @@ public class BasketService {
 		if(result == 0) {
 			basketMain.foodMain.foodMainController.foodMainService.searchMenuDetail(foodId);
 		}
+	}
+	
+	//수량증가
+	public void countUp(int index) {
+		Component components[] = basketMain.pMiddle.getComponents();
+		
+		//장바구니 안에서 데이터변경
+		int price = basketMain.user.getBasket().upCount(index);
+		
+		//해당 라벨위치로 접근해서 값변경
+		FLabel temp = (FLabel)components[index].getComponentAt(570, 50);
+		int count = Integer.parseInt(temp.getText()) + 1;
+		temp.setText(count+"");
+		
+		//음식총가격 변경
+		temp = (FLabel)components[index].getComponentAt(880, 50);
+		temp.setText(price+"");
+		
+		//결제 총금액 변경
+		basketMain.lblTotalPrice.setText(basketMain.user.getBasket().getTotalPrice()+"");
+		basketMain.lblTotalPoint.setText(basketMain.user.getBasket().getSavePoint()+"");
+
+	}
+	
+	//수량감소
+	public void countDown(int index) {
+		Component components[] = basketMain.pMiddle.getComponents();
+		FLabel temp = (FLabel)components[index].getComponentAt(570, 50);
+		int count = Integer.parseInt(temp.getText());
+		
+		if(count == 1) {
+			SwingFactory.getOptionPane("message", basketMain, "갯수 오류", "최소 1개는 주문해야합니다.");
+			return;
+		}
+		
+		//장바구니 안에서 데이터변경
+		int price = basketMain.user.getBasket().downCount(index);
+		
+		//해당 라벨위치로 접근해서 값변경
+		count--;
+		temp.setText(count+"");
+		
+		temp = (FLabel)components[index].getComponentAt(880, 50);
+		temp.setText(price+"");
+		
+		//결제 총금액 변경
+		basketMain.lblTotalPrice.setText(basketMain.user.getBasket().getTotalPrice()+"");
+		basketMain.lblTotalPoint.setText(basketMain.user.getBasket().getSavePoint()+"");
 	}
 
 }

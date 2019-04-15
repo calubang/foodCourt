@@ -168,6 +168,25 @@ public class BasketImpl implements Basket{
 		return size;
 	}
 	
+	//수량한개증가
+	public int upCount(int index){
+		BasketDetail detail = detailList.get(index);
+		detail.setCount(detail.getCount()+1);
+		totalPrice += detail.getFood().getPrice();
+		savePoint += detail.getFood().getPoint();
+		return detail.getFood().getPrice()*detail.getCount();
+	}
+	
+	//수량한개감소
+	public int downCount(int index){
+		BasketDetail detail = detailList.get(index);
+		detail.setCount(detail.getCount()-1);
+		totalPrice -= detail.getFood().getPrice();
+		savePoint -= detail.getFood().getPoint();
+		return detail.getFood().getPrice()*detail.getCount();
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "BasketImpl [requestNumber=" + requestNumber + ", paymentDate=" + paymentDate + ", totalPrice="
