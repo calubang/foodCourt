@@ -1,8 +1,6 @@
 package kitri.foodCourt.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class OracleConnectionMaker implements ConnectionMaker{
 
@@ -19,5 +17,18 @@ public class OracleConnectionMaker implements ConnectionMaker{
 			e.printStackTrace();
 		}
 		return c;
+	}
+	
+	@Override
+	public void closeConnection(Connection con, PreparedStatement ps, ResultSet rs) throws SQLException {
+		if(rs != null) {
+			rs.close();
+		}
+		if(ps != null) {
+			ps.close();
+		}
+		if(con != null) {
+			con.close();
+		}
 	}
 }
