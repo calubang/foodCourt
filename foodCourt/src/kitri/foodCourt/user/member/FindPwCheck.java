@@ -12,10 +12,10 @@ import javax.swing.JTextField;
  
  public class FindPwCheck extends JPanel
 {
-   public JTextField questionTF;
-   public JTextField answerTF;
    public JButton nextbtn;
    public JButton cancelbtn;
+   public JLabel questionL;
+   public JTextField answerTF;
    
    FindPwMain findPwMain;
    
@@ -77,21 +77,20 @@ import javax.swing.JTextField;
      label_4.setBounds(60, 156, 75, 37);
      add(label_4);
      
-     this.questionTF = new JTextField();
-     this.questionTF.setColumns(10);
-     this.questionTF.setBounds(147, 156, 307, 37);
-     add(this.questionTF);
-     
      JLabel label_6 = new JLabel("´äº¯");
      label_6.setHorizontalAlignment(2);
      label_6.setFont(new Font("±¼¸²", 0, 17));
      label_6.setBounds(60, 213, 75, 37);
      add(label_6);
      
-     this.answerTF = new JTextField();
-     this.answerTF.setColumns(10);
-     this.answerTF.setBounds(147, 213, 307, 37);
-     add(this.answerTF);
+     answerTF = new JTextField();
+     answerTF.setColumns(10);
+     answerTF.setBounds(147, 213, 307, 37);
+     add(answerTF);
+     
+     questionL = new JLabel("\uC9C8\uBB38 \uBD88\uB7EC\uC624\uAE30.");
+     questionL.setBounds(147, 156, 307, 37);
+     add(questionL);
      
 //   this.nextbtn.addActionListener(new FindPwCheck.1(this));
 
