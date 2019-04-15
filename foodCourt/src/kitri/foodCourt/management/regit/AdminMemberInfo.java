@@ -144,6 +144,8 @@ public class AdminMemberInfo extends JPanel {
 		tablePanel.add("AdminTable", at);
 		tablePanel.add("MemberTable", mt);
 		cl.show(tablePanel, "AdminTable");
+		
+		
 
 		add(tablePanel);
 		//테이블 구조 생성

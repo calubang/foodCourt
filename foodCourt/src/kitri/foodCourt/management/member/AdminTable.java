@@ -48,15 +48,28 @@ public class AdminTable extends JPanel {
 		scrollPane.setBounds(0, 0, 780, 640);
 		scrollPane.setViewportView(adminTable);
 		add(scrollPane);
-		
-		selectAdmin();
 	}
 	
 	public void selectAdmin() {
 		Object[] rowData = new Object[10];
 		try {
 
-			String quary = "SELECT MANAGER_ID,NAME,PASSWORD,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn,fj.job_name,HIRE_DATE,ADDRESS_ZIP,ADDRESS,EMAIL,EMAIL_DOMAIN FROM FOOK_MANAGER fm , fook_job fj where fm.job_id = fj.job_id";
+			String quary = 
+					"SELECT \n" + 
+					"    MANAGER_ID\n" + 
+					"    ,NAME\n" + 
+					"    ,PASSWORD\n" + 
+					"    ,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn\n" + 
+					"    ,fj.job_name as job_name\n" + 
+					"    ,HIRE_DATE\n" + 
+					"    ,ADDRESS_ZIP\n" + 
+					"    ,ADDRESS\n" + 
+					"    ,EMAIL\n" + 
+					"    ,EMAIL_DOMAIN \n" + 
+					"FROM \n" + 
+					"    FOOK_MANAGER fm \n" + 
+					"    , fook_job fj \n" + 
+					"where fm.job_id = fj.job_id(+)";
 			conn = connectionMaker.makeConnection();
 			pstm = conn.prepareStatement(quary);
 			rs = pstm.executeQuery();
