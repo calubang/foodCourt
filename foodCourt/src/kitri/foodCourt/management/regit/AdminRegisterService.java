@@ -26,7 +26,7 @@ public class AdminRegisterService {
 	RemoveMember rm;
 	ModifyRegit mR;
 	
-	AdminTable at;
+	AdminTable at = new AdminTable();
 	
 	List<AdminRegitDto> list = new ArrayList<AdminRegitDto>();
 	AdminRegitDto AdminRegitDto;
@@ -69,7 +69,7 @@ public class AdminRegisterService {
 		ami.ar.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
 
 		ami.jfAD.getContentPane().add(ami.ar);
-		ami.jfAD.setSize(600, 650);
+		ami.jfAD.setSize(600, 740);
 		ami.jfAD.setModal(true);
 		ami.jfAD.setVisible(true);
 
@@ -110,12 +110,13 @@ public class AdminRegisterService {
 		if (ami.check == false) {
 
 			ami.card.show(ami.jpaMo, "adminModi");
+			ami.jfMo.setSize(600, 740);
 
 		} else {
 			ami.card.show(ami.jpaMo, "memberModi");
+			ami.jfMo.setSize(600, 650);
 
 		}
-		ami.jfMo.setSize(600, 650);
 		ami.jfMo.setVisible(true);
 	}
 
@@ -135,8 +136,8 @@ public class AdminRegisterService {
 		String pwtf = ami.ar.pwtf.getText();
 		String name = ami.ar.nametf.getText();
 		String numfirst = ami.ar.fristnumber.getSelectedItem().toString();
-		String nummid = ami.ar.idtf.getText();
-		String numlast = ami.ar.idtf.getText();
+		String nummid = ami.ar.midnumber.getText();
+		String numlast = ami.ar.lastnumber.getText();
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd");
 		String str = dayTime.format(new Date());
 		String jobid = ami.ar.jobname.getSelectedItem().toString();
@@ -173,8 +174,9 @@ public class AdminRegisterService {
 			pstm.setString(11,domain);
 
 			r = pstm.executeUpdate();
-			System.out.println("등록");
-			ar.setVisible(false);
+			JOptionPane.showMessageDialog(ami.ar, "등록되었습니다");
+			
+			ami.jfAD.setVisible(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -240,7 +242,60 @@ public class AdminRegisterService {
 
 	// 회원등록창
 	public void mrRegister() {
+		String id = ami.mr.idtf.getText();
+		String pw = ami.mr.passwordtf.getText();
+		String pwtf = ami.mr.pwtf.getText();
+		String name = ami.mr.nametf.getText();
+		String numfirst = ami.mr.fristnumber.getSelectedItem().toString();
+		String nummid = ami.mr.midnumber.getText();
+		String numlast = ami.mr.lastnumber.getText();
+		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd");
+		String str = dayTime.format(new Date());
+		
+		int r = 0;
 
+		String quary = "insert into fook_manager(user_id, PASSWORD,NAME, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, user_point,password_quiz, password_answer, enable) values(?,?,?,?,?,?,?,?,?,?)";
+
+		if (id.isEmpty() || pw.isEmpty() || pwtf.isEmpty() || name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()) { 
+			JOptionPane.showMessageDialog(ami.ar, "빈 공간을 입력해 주세요.");
+		} else if (checkid == 0 || checkid == 1) {
+			JOptionPane.showMessageDialog(ami.ar, "중복 확인을 눌러주세요.");
+		} else if (!(checkidjoin.equals(id))) {
+			JOptionPane.showMessageDialog(ami.ar, "중복 확인을 눌러주세요.");
+		} else if (pwcheck == 0) {
+			JOptionPane.showMessageDialog(ami.ar, "비밀번호를 확인해 주세요.");
+		}
+		try {
+			conn = connectionMaker.makeConnection();
+			pstm = conn.prepareStatement(quary);
+
+			pstm.setString(1, id);
+			pstm.setString(2, name);
+			pstm.setString(3, pw);
+			pstm.setString(4, numfirst);
+			pstm.setString(5, nummid);
+			pstm.setString(6, numlast);
+//			pstm.setString(7, jobid);
+			pstm.setString(8, null);
+//			pstm.setString(9, address);
+//			pstm.setString(10,email);
+//			pstm.setString(11,domain);
+
+			r = pstm.executeUpdate();
+			JOptionPane.showMessageDialog(ami.ar, "등록되었습니다");
+			
+			ami.jfAD.setVisible(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connectionMaker.closeConnection(conn, pstm, rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
 	}
 
 	// 회원창 - 중복확인

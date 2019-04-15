@@ -39,6 +39,13 @@ public class ModifyAdminRegit extends JPanel {
 	private final JLabel impossibleModify = new JLabel("\uC218\uC815\uBD88\uAC00");
 
 	EtchedBorder eborder;
+	private final JPanel addresspanel = new JPanel();
+	private final JLabel addresslabel = new JLabel("\uC8FC\uC18C");
+	private final JTextField addresstf = new JTextField();
+	private final JPanel emailpanel = new JPanel();
+	private final JLabel emaillabel = new JLabel("\uC774\uBA54\uC77C");
+	private final JTextField email = new JTextField();
+	private final JTextField emaildomain = new JTextField();
 
 	/**
 	 * Create the panel.
@@ -59,8 +66,8 @@ public class ModifyAdminRegit extends JPanel {
 		add(selectpanel);
 
 		mainpanel.setBackground(Color.DARK_GRAY);
-		mainpanel.setBounds(43, 64, 518, 360);
-		mainpanel.setLayout(new GridLayout(7, 1, 0, 10));
+		mainpanel.setBounds(43, 64, 518, 573);
+		mainpanel.setLayout(new GridLayout(9, 1, 0, 10));
 		mainpanel.add(idpanel);
 		mainpanel.add(etcpanel);
 		mainpanel.add(passwordpanel);
@@ -178,14 +185,50 @@ public class ModifyAdminRegit extends JPanel {
 		jobpanel.add(joblabel);
 		
 		JComboBox jobname = new JComboBox();
-		jobname.setBounds(107, 1, 85, 42);
+		jobname.setBounds(107, 1, 90, 53);
 		jobpanel.add(jobname);
 		jobname.addItem("관리자");
 		jobname.addItem("점원");
 		jobname.addItem("신입");
+		addresspanel.setLayout(null);
+		addresspanel.setBackground(Color.DARK_GRAY);
+		
+		mainpanel.add(addresspanel);
+		addresslabel.setOpaque(true);
+		addresslabel.setHorizontalAlignment(SwingConstants.CENTER);
+		addresslabel.setForeground(Color.WHITE);
+		addresslabel.setFont(new Font("돋움", Font.BOLD, 16));
+		addresslabel.setBackground(Color.DARK_GRAY);
+		addresslabel.setBounds(0, -1, 105, 51);
+		
+		addresspanel.add(addresslabel);
+		addresstf.setColumns(10);
+		addresstf.setBounds(104, 0, 315, 51);
+		
+		addresspanel.add(addresstf);
+		emailpanel.setLayout(null);
+		emailpanel.setBackground(Color.DARK_GRAY);
+		
+		mainpanel.add(emailpanel);
+		emaillabel.setOpaque(true);
+		emaillabel.setHorizontalAlignment(SwingConstants.CENTER);
+		emaillabel.setForeground(Color.WHITE);
+		emaillabel.setFont(new Font("돋움", Font.BOLD, 16));
+		emaillabel.setBackground(Color.DARK_GRAY);
+		emaillabel.setBounds(0, 0, 105, 51);
+		
+		emailpanel.add(emaillabel);
+		email.setColumns(10);
+		email.setBounds(103, 0, 142, 51);
+		
+		emailpanel.add(email);
+		emaildomain.setColumns(10);
+		emaildomain.setBounds(257, 0, 162, 51);
+		
+		emailpanel.add(emaildomain);
 
 		selectpanel.setBackground(Color.DARK_GRAY);
-		selectpanel.setBounds(316, 506, 245, 44);
+		selectpanel.setBounds(316, 647, 245, 44);
 		selectpanel.setLayout(null);
 		selectpanel.add(registerbtn);
 		selectpanel.add(cancelbtn);

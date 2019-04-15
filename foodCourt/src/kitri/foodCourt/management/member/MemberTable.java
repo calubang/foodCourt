@@ -29,10 +29,10 @@ public class MemberTable extends JPanel {
 	public MemberTable() {
 		connectionMaker = DbFactory.connectionMaker("oracle");
 		
-		Object[] rowData = new Object[11];
+		Object[] rowData = new Object[9];
 		try {
 
-			String quary = "SELECT user_id,password,phone_first||phone_middle||phone_last,user_point,password_quiz,password_answer,join_date,secession_date,enable FROM FOOK_USER";
+			String quary = "SELECT user_id,password,phone_first||phone_middle||phone_last as pn,user_point,password_quiz,password_answer,join_date,secession_date,enable FROM FOOK_USER";
 			conn = connectionMaker.makeConnection();
 			pstm = conn.prepareStatement(quary);
 			rs = pstm.executeQuery();
@@ -43,15 +43,16 @@ public class MemberTable extends JPanel {
 
 				rowData[0] = rs.getString("user_id");
 				rowData[1] = rs.getString("password");
-				rowData[2] = rs.getString("phone_first");
-				rowData[3] = rs.getString("phone_middle");
-				rowData[4] = rs.getString("phone_last");
-				rowData[5] = rs.getInt("user_point");
-				rowData[6] = rs.getString("password_quiz");
-				rowData[7] = rs.getString("password_answer");
-				rowData[8] = rs.getDate("join_date");
-				rowData[9] = rs.getDate("secession_date");
-				rowData[10] = rs.getString("enable");
+				rowData[2] = rs.getString("pn");
+//				rowData[2] = rs.getString("phone_first");
+//				rowData[3] = rs.getString("phone_middle");
+//				rowData[4] = rs.getString("phone_last");
+				rowData[3] = rs.getInt("user_point");
+				rowData[4] = rs.getString("password_quiz");
+				rowData[5] = rs.getString("password_answer");
+				rowData[6] = rs.getDate("join_date");
+				rowData[7] = rs.getDate("secession_date");
+				rowData[8] = rs.getString("enable");
 				
 				
 				dtm.addRow(rowData);
