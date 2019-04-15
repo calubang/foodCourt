@@ -6,6 +6,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Font;
 
+
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
@@ -17,9 +18,8 @@ import kitri.foodCourt.management.member.MemberTable;
 
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.awt.event.*;
 import java.awt.CardLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class AdminMemberInfo extends JPanel {
 
@@ -38,7 +38,8 @@ public class AdminMemberInfo extends JPanel {
 	JButton adminBtn = new JButton("\uAD00\uB9AC\uC790");
 	JButton memberBtn = new JButton("\uD68C\uC6D0");
 
-	AdminTable at = new AdminTable();
+	AdminTable at  = new AdminTable();
+	DefaultTableModel model = new DefaultTableModel();
 	MemberTable mt = new MemberTable();
 
 	CardLayout cl = new CardLayout(0, 0);
@@ -50,7 +51,7 @@ public class AdminMemberInfo extends JPanel {
 	ModifyRegit mR;
 	RemoveMember rm;
 
-
+	ListSelectionModel lsm;
 
 	JFrame jfA = new JFrame();
 
@@ -64,9 +65,6 @@ public class AdminMemberInfo extends JPanel {
 	JPanel jpaMo;
 	CardLayout card = new CardLayout();
 
-
-
-	
 	boolean check = false;
 
 	/**
@@ -148,6 +146,8 @@ public class AdminMemberInfo extends JPanel {
 		cl.show(tablePanel, "AdminTable");
 
 		add(tablePanel);
+		//테이블 구조 생성
+		
 
 //		add listener
 		ar = new AdminRegister();
@@ -166,16 +166,26 @@ public class AdminMemberInfo extends JPanel {
 		ar.idbtn.addActionListener(arc);
 		ar.registerbtn.addActionListener(arc);
 		ar.cancelbtn.addActionListener(arc);
+		ar.pwtf.addKeyListener(arc);
+		ar.passwordtf.addKeyListener(arc);
 
 		mr.idbtn.addActionListener(arc);
 		mr.registerbtn.addActionListener(arc);
 		mr.cancelbtn.addActionListener(arc);
-
+		mr.pwtf.addKeyListener(arc);
+		mr.passwordtf.addKeyListener(arc);
+		
 		maR.registerbtn.addActionListener(arc);
 		maR.cancelbtn.addActionListener(arc);
-
+		maR.pwtf.addKeyListener(arc);
+		maR.passwordtf.addKeyListener(arc);
+		
 		mR.registerbtn.addActionListener(arc);
 		mR.cancelbtn.addActionListener(arc);
+		mR.pwtf.addKeyListener(arc);
+		mR.passwordtf.addKeyListener(arc);
+		
+	
 	}
 
 }

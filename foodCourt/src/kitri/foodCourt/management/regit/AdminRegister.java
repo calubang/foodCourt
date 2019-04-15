@@ -1,21 +1,18 @@
 package kitri.foodCourt.management.regit;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
+
+import javax.swing.*;
+
 import java.awt.Component;
 
 public class AdminRegister extends JPanel {
 	
 	JTextField idtf;
-	JTextField passwordtf = new JTextField();
-	JTextField pwtf = new JTextField();
+	JPasswordField passwordtf = new JPasswordField();
+	JPasswordField pwtf = new JPasswordField();
 	JTextField nametf = new JTextField();
 	JTextField lastnumber = new JTextField();
 	JTextField midnumber = new JTextField();
@@ -28,7 +25,7 @@ public class AdminRegister extends JPanel {
 	JPanel phonepanel = new JPanel();
 	JPanel selectpanel = new JPanel();
 	JPanel etcpanel = new JPanel();
-
+	JComboBox jobname = new JComboBox();
 	JLabel adminRegister = new JLabel("\uAD00\uB9AC\uC790 \uB4F1\uB85D");
 	JLabel idlabel = new JLabel("\uC544\uC774\uB514");
 	JLabel etclabel = new JLabel("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
@@ -43,6 +40,11 @@ public class AdminRegister extends JPanel {
 	JButton registerbtn = new JButton("\uB4F1\uB85D");
 	JButton cancelbtn = new JButton("\uCDE8\uC18C");
 	private final JPanel jobpanel = new JPanel();
+	private final JPanel emailpanel = new JPanel();
+	private final JLabel emaillabel = new JLabel("\uC774\uBA54\uC77C");
+	JTextField addresstf;
+	JTextField email;
+	JTextField emaildomain;
 	
 	
 
@@ -66,8 +68,8 @@ public class AdminRegister extends JPanel {
 		add(selectpanel);
 
 		mainpanel.setBackground(Color.DARK_GRAY);
-		mainpanel.setBounds(43, 64, 518, 419);
-		mainpanel.setLayout(new GridLayout(7, 1, 0, 10));
+		mainpanel.setBounds(43, 64, 518, 572);
+		mainpanel.setLayout(new GridLayout(9, 1, 0, 10));
 		mainpanel.add(idpanel);
 		mainpanel.add(etcpanel);
 		mainpanel.add(passwordpanel);
@@ -103,7 +105,7 @@ public class AdminRegister extends JPanel {
 		passwordpanel.setLayout(null);
 		passwordpanel.add(passwordlabel);
 
-		passwordtf = new JTextField();
+		passwordtf = new JPasswordField();
 		passwordpanel.add(passwordtf);
 		passwordtf.setBounds(107, 0, 283, 51);
 		passwordtf.setColumns(10);
@@ -121,7 +123,7 @@ public class AdminRegister extends JPanel {
 		mainpanel.add(namepanel);
 		mainpanel.add(phonepanel);
 
-		pwtf = new JTextField();
+		pwtf = new JPasswordField();
 		pwpanel.add(pwtf);
 		pwtf.setBounds(107, 0, 283, 51);
 		pwtf.setColumns(10);
@@ -184,15 +186,56 @@ public class AdminRegister extends JPanel {
 		joblabel.setBounds(0, 0, 105, 51);
 		jobpanel.add(joblabel);
 		
-		JComboBox jobname = new JComboBox();
-		jobname.setBounds(105, 0, 116, 51);
+		
+		jobname.setBounds(105, 0, 105, 51);
 		jobpanel.add(jobname);
 		jobname.addItem("관리자");
 		jobname.addItem("점원");
 		jobname.addItem("신입");
 		
+		JPanel addresspanel = new JPanel();
+		addresspanel.setLayout(null);
+		addresspanel.setBackground(Color.DARK_GRAY);
+		mainpanel.add(addresspanel);
+		
+		JLabel addresslabel = new JLabel("\uC8FC\uC18C");
+		addresslabel.setOpaque(true);
+		addresslabel.setHorizontalAlignment(SwingConstants.CENTER);
+		addresslabel.setForeground(Color.WHITE);
+		addresslabel.setFont(new Font("돋움", Font.BOLD, 16));
+		addresslabel.setBackground(Color.DARK_GRAY);
+		addresslabel.setBounds(0, 0, 105, 51);
+		addresspanel.add(addresslabel);
+		
+		addresstf = new JTextField();
+		addresstf.setColumns(10);
+		addresstf.setBounds(104, 0, 315, 51);
+		addresspanel.add(addresstf);
+		emailpanel.setLayout(null);
+		emailpanel.setBackground(Color.DARK_GRAY);
+		
+		mainpanel.add(emailpanel);
+		emaillabel.setOpaque(true);
+		emaillabel.setHorizontalAlignment(SwingConstants.CENTER);
+		emaillabel.setForeground(Color.WHITE);
+		emaillabel.setFont(new Font("돋움", Font.BOLD, 16));
+		emaillabel.setBackground(Color.DARK_GRAY);
+		emaillabel.setBounds(0, 0, 105, 51);
+		
+		emailpanel.add(emaillabel);
+		
+		email = new JTextField();
+		email.setColumns(10);
+		email.setBounds(103, 0, 142, 51);
+		emailpanel.add(email);
+		
+		emaildomain = new JTextField();
+		emaildomain.setColumns(10);
+		emaildomain.setBounds(257, 0, 162, 51);
+		emailpanel.add(emaildomain);
+		
 		selectpanel.setBackground(Color.DARK_GRAY);
-		selectpanel.setBounds(316, 493, 245, 44);
+		selectpanel.setBounds(314, 646, 247, 44);
 		selectpanel.setLayout(null);
 		selectpanel.add(registerbtn);
 		selectpanel.add(cancelbtn);
