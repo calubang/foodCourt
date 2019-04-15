@@ -70,6 +70,7 @@ public class UserInfo extends JPanel {
 		this.add(pTop);
 		
 		JLabel lblBasketImage = new JLabel("");
+		lblBasketImage.setIcon(new ImageIcon(UserInfo.class.getResource("/img/user/userInfo_icon.png")));
 		lblBasketImage.setBounds(0, 0, 120, 50);
 		pTop.add(lblBasketImage);
 		

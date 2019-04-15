@@ -21,7 +21,6 @@ public class RoundBorder implements Border {
 	public void setThickness(int thickness) {
 		this.thickness = thickness;
 	}
-
 	
     public Insets getBorderInsets(Component c) {
         return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);

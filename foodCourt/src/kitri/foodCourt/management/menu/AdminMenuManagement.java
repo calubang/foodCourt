@@ -129,6 +129,7 @@ public class AdminMenuManagement extends JPanel {
 		amc = new AdminMenuControl(this);
 		
 		searchTextField.addKeyListener(amc);
+		
 		registerBtn.addActionListener(amc);
 		modifyBtn.addActionListener(amc);
 		deleteBtn.addActionListener(amc);

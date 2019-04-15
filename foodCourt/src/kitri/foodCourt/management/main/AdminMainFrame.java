@@ -1,14 +1,19 @@
 package kitri.foodCourt.management.main;
 
 import java.awt.EventQueue;
-
 import java.awt.Color;
+
 import javax.swing.UIManager;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.io.File;
+import java.io.IOException;
 import java.awt.CardLayout;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
@@ -17,6 +22,7 @@ import kitri.foodCourt.management.menu.AdminMenuManagement;
 import kitri.foodCourt.management.payment.AdminPayment;
 import kitri.foodCourt.management.regit.AdminMemberInfo;
 import kitri.foodCourt.management.request.AdminRequest;
+import java.awt.Insets;
 //import kitri.foodCourt.management.statistics.AdminStatistics;
 
 
@@ -28,11 +34,11 @@ public class AdminMainFrame extends JFrame {
 	JPanel buttonPanel = new JPanel();
 	JPanel emptyPanel = new JPanel();
 	
-	JButton menuManageBtn = new JButton("\uBA54\uB274\uAD00\uB9AC");
-	JButton memberManageBtn = new JButton("\uD68C\uC6D0\uAD00\uB9AC");
-	JButton requestManageBtn = new JButton("\uC694\uCCAD\uAD00\uB9AC");
-	JButton paymentBtn = new JButton("\uACB0\uC81C\uAD00\uB9AC");
-	JButton logoutBtn = new JButton("\uB85C\uADF8\uC544\uC6C3");
+	JButton menuManageBtn = new JButton(/*"皋春包府"*/);
+	JButton memberManageBtn = new JButton(/*"雀盔包府"*/);
+	JButton requestManageBtn = new JButton(/*"夸没包府"*/);
+	JButton paymentBtn = new JButton(/*"搬力包府"*/);
+	JButton logoutBtn = new JButton(/*"肺弊酒眶"*/);
 	
 	AdminMenuManagement amm = new AdminMenuManagement();
 	AdminMemberInfo ami = new AdminMemberInfo();
@@ -79,6 +85,21 @@ public class AdminMainFrame extends JFrame {
 		buttonPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uAD00\uB9AC\uC790", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 20, 40, 20)));
 		buttonPanel.setBounds(12, 25, 150, 722);
 		
+		try {
+			menuManageBtn.setMargin(new Insets(0, 0, 0, 0));
+			menuManageBtn.setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/menuLabel.jpg").getFile()))));
+			memberManageBtn.setMargin(new Insets(0, 0, 0, 0));
+			memberManageBtn.setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/memberLabel.jpg").getFile()))));
+			requestManageBtn.setMargin(new Insets(0, 0, 0, 0));
+			requestManageBtn.setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/requestLabel.jpg").getFile()))));
+			paymentBtn.setMargin(new Insets(0, 0, 0, 0));
+			paymentBtn.setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/paymentLabel.jpg").getFile()))));
+			logoutBtn.setMargin(new Insets(0, 0, 0, 0));
+			logoutBtn.setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/logoutLabel.jpg").getFile()))));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		buttonPanel.add(menuManageBtn);
 		buttonPanel.add(memberManageBtn);
 		buttonPanel.add(requestManageBtn);
@@ -99,13 +120,12 @@ public class AdminMainFrame extends JFrame {
 		contentPanel.add(ampPanel);
 		
 		
-
 		amfc = new AdminMainFrameControl(this);
-		
-		menuManageBtn.addActionListener(amfc);
-		memberManageBtn.addActionListener(amfc);
-		requestManageBtn.addActionListener(amfc);
-		paymentBtn.addActionListener(amfc);
-		logoutBtn.addActionListener(amfc);
+
+		menuManageBtn.addMouseListener(amfc);
+		memberManageBtn.addMouseListener(amfc);
+		requestManageBtn.addMouseListener(amfc);
+		paymentBtn.addMouseListener(amfc);
+		logoutBtn.addMouseListener(amfc);
 	}
 }

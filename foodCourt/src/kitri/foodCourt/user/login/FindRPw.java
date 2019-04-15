@@ -1,4 +1,4 @@
-package kitri.foodCourt.user.member;
+package kitri.foodCourt.user.login;
  
 import java.awt.Color;
 import java.awt.Font;
@@ -6,6 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class FindRPw extends JPanel
@@ -14,8 +16,10 @@ public class FindRPw extends JPanel
    public JTextField againPwTF;
    public JButton cancelbtn;
    public JButton confirmbtn;
-   FindPwMain findPwMain;
+   public JLabel checkL;
    
+   FindPwMain findPwMain;
+
    public FindRPw(FindPwMain findPwMain)
    {
      this.findPwMain = findPwMain;
@@ -29,6 +33,10 @@ public class FindRPw extends JPanel
      add(this.cancelbtn);
      
      this.confirmbtn = new JButton("확인");
+     confirmbtn.addActionListener(new ActionListener() {
+     	public void actionPerformed(ActionEvent e) {
+     	}
+     });
      this.confirmbtn.setBackground(new Color(0, 153, 255));
      this.confirmbtn.setBounds(391, 281, 85, 30);
      add(this.confirmbtn);
@@ -77,10 +85,10 @@ public class FindRPw extends JPanel
      this.pwTF.setBounds(147, 156, 307, 37);
      add(this.pwTF);
     
-     JLabel label_5 = new JLabel("입력한 비밀번호가 다릅니다.");
-     label_5.setFont(new Font("굴림", 0, 12));
-     label_5.setBounds(147, 260, 168, 23);
-     add(label_5);
+     checkL = new JLabel("입력한 비밀번호가 다릅니다.");
+     checkL.setFont(new Font("굴림", 0, 12));
+     checkL.setBounds(147, 260, 168, 23);
+     add(checkL);
      
      this.againPwTF = new JTextField();
      this.againPwTF.setColumns(10);

@@ -124,7 +124,7 @@ public class AdminPaymentService {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
 			
 			ps = c.prepareStatement("select request_number, to_char(payment_date, 'yyyy.mm.dd hh24:mi:ss') \"payment_date\", category_name, pd.food_name \"food_name\", count, pd.price \"price\", pd.point \"point\", card, cash, used_point, total_price, save_point "
 								  + "from fook_payment p, fook_payment_detail pd, fook_food f, fook_category fc "
@@ -200,7 +200,7 @@ public class AdminPaymentService {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
 			
 			ps = c.prepareStatement("select payment_id, user_id, to_char(payment_date, 'yyyy.mm.dd hh24:mi:ss') \"payment_date\", request_number, total_price, save_point, used_point, payment_state "
 								  + "from fook_payment");

@@ -1,4 +1,4 @@
-package kitri.foodCourt.user.member;
+package kitri.foodCourt.user.login;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;

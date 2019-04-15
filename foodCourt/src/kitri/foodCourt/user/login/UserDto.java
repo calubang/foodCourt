@@ -1,10 +1,18 @@
-package kitri.foodCourt.user.member;
+package kitri.foodCourt.user.login;
 
 public class UserDto {
 	
 	private String userId;
 	private String name;
 	private String phoneNumberFirst;
+
+	private String phoneNumberMiddle;
+	private String phoneNumberlast;
+	private int userPoint;
+	
+	private String password;
+	private String passwordQuiz;
+	private String passwordAnswer;
 	
 	public String getUserId() {
 		return userId;
@@ -96,13 +104,6 @@ public class UserDto {
 	}
 
 
-	private String phoneNumberMiddle;
-	private String phoneNumberlast;
-	private int userPoint;
-	
-	private String password;
-	private String passwordQuiz;
-	private String passwordAnswer;
 	
 	
 	@Override

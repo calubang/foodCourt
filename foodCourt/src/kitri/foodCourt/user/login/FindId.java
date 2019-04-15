@@ -1,4 +1,4 @@
-package kitri.foodCourt.user.member;
+package kitri.foodCourt.user.login;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -48,7 +48,11 @@ public class FindId extends JPanel {
 		    
 		this.comboBox = new JComboBox();
 		this.comboBox.setBounds(133, 226, 75, 37);
-		add(this.comboBox);
+		add(comboBox);
+	    comboBox.addItem("010");
+	    comboBox.addItem("011");
+	    comboBox.addItem("017");
+	    comboBox.addItem("019");
 		   
 		this.lastTF = new JTextField();
 		this.lastTF.setColumns(10);
@@ -104,8 +108,6 @@ public class FindId extends JPanel {
 		this.label_2.setBounds(24, 50, 206, 37);
 		add(this.label_2);
 		
-//		this.nextbtn.addActionListener(new FindId(this));
-//		this.cancelbtn.addActionListener(new FindId(this));
 
 
 		

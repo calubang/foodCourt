@@ -1,30 +1,24 @@
 package kitri.foodCourt.management.main;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import kitri.foodCourt.management.regit.AdminMemberInfo;
 
-public class AdminMainFrameControl implements ActionListener {
+public class AdminMainFrameControl implements MouseListener {
 
 	AdminMainFrame amf;
 	AdminMainFrameService amfs;
 
-	
-	
+
 	public AdminMainFrameControl(AdminMainFrame amf) {
 		this.amf = amf;
 		
 		amfs = new AdminMainFrameService(this);
 	}
 	
-//	public AdminMainFrameControl(AdminMemberInfo amif) {
-//		this.amif = amif;
-//		amfs = new AdminMainFrameService(this);
-//	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void mouseClicked(MouseEvent e) {
 		Object ob = e.getSource();
 		
 		if (ob == amf.menuManageBtn) {
@@ -37,6 +31,24 @@ public class AdminMainFrameControl implements ActionListener {
 			amfs.showPanel("AdminPayment");
 		} else if (ob == amf.logoutBtn) {
 			amfs.logout();
-		} 
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		amfs.showButtonText(e.getSource());
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		amfs.showButtonIcon(e.getSource());
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
 	}
 }

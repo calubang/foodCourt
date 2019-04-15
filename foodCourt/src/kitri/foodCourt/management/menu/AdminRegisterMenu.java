@@ -46,6 +46,7 @@ public class AdminRegisterMenu extends JPanel {
 	 * Create the panel.
 	 */
 	public AdminRegisterMenu() {
+		setBackground(new Color(192, 192, 192));
 		setSize(new Dimension(750, 650));
 		setLayout(null);
 		
