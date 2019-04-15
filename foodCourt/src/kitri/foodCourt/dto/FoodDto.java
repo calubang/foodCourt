@@ -2,6 +2,8 @@ package kitri.foodCourt.dto;
 
 import java.util.Date;
 
+import kitri.foodCourt.util.Constance;
+
 public class FoodDto {
 	//À¯Àú dto
 	private String foodId;				
@@ -75,7 +77,7 @@ public class FoodDto {
 		this.description = description;
 	}
 	public String getImageAddress() {
-		return imageAddress;
+		return Constance.foodImagePath + imageAddress;
 	}
 	public void setImageAddress(String imageAddress) {
 		this.imageAddress = imageAddress;

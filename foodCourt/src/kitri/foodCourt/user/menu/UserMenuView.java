@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import kitri.foodCourt.dto.FoodDto;
+import kitri.foodCourt.util.Constance;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

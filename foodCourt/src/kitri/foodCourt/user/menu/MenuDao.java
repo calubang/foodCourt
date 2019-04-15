@@ -12,6 +12,7 @@ public class MenuDao {
 
 	private ConnectionMaker connectionMaker;
 	
+	
 	public MenuDao() {
 		this.connectionMaker = DbFactory.connectionMaker("oracle");
 	}

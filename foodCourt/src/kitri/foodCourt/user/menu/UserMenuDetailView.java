@@ -12,6 +12,7 @@ import javax.swing.border.MatteBorder;
 
 import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.swing.*;
+import kitri.foodCourt.util.Constance;
 
 public class UserMenuDetailView extends JPanel {
 	JTextField tfCount;
