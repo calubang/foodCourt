@@ -42,7 +42,7 @@ public class LoginService {
     
     public void logJoin() {
     	
-    	String quary = "select user_id, password, name, user_point, phone_first, phone_middle, phone_last, password  from fook_user";
+    	String quary = "select user_id, password, name, user_point, phone_first, phone_middle, phone_last, password, password_quiz, password_answer from fook_user";
     	
 //    	logc.login.idtextField.getText();
 //    	logc.login.pwtextfd.getPassword();
@@ -93,6 +93,8 @@ public class LoginService {
 					user.setPhoneNumberMiddle(rs.getString("phone_middle"));
 					user.setPhoneNumberlast(rs.getString("phone_last"));
 					user.setUserPoint(rs.getInt("user_point"));
+					user.setPasswordQuiz(rs.getString("password_quiz"));
+					user.setPasswordAnswer(rs.getString("password_answer"));
 					
 					logc.loginMain.setVisible(false);
 					logc.loginMain.foodMain.dataSetting();
@@ -241,9 +243,9 @@ public class LoginService {
 		String str = dayTime.format(new Date());
 		
 		String quary = "INSERT INTO fook_user(user_id, password, name, phone_first, "
-				+ "phone_middle, phone_last, user_point, password_quiz, password_answer, "
+				+ "phone_middle, phone_last, user_point, password_quiz, password_answer, join_date , "
 				+ "enable) " + 
-				"VALUES (?,?,?,?,?,?,?,?,?,?)";
+				"VALUES (?,?,?,?,?,?,?,?,?, sysdate ,?)";
 		
 		// doubleidcheck 이용 중복버튼을 해봤는지 체크 해줌.
 		// 0이면 안눌름. 1이면 중복. 2이면 성공.
@@ -279,11 +281,34 @@ public class LoginService {
 			pstm.setInt(7, 0);
 			pstm.setString(8, question);
 			pstm.setString(9, answer);
-			pstm.setString(10, "N");
+			pstm.setString(10, "y");
 
 			
 			// SQL 문장을 실행하고 결과를 리턴 - SQL 문장 실행 후, 변경된 row 수 int type 리턴
 			int r = pstm.executeUpdate();
+			
+			if(r == 1) {
+				//정상적으로 회원가입됨
+				//성공 
+				User user = logc.loginMain.user;
+				
+				user.setUserId(id);
+				user.setPassword(pw);
+				user.setName(name);
+				user.setPhoneNumberFirst(phF);
+				user.setPhoneNumberMiddle(phM);
+				user.setPhoneNumberlast(phL);
+				user.setUserPoint(0);
+				user.setPasswordQuiz(question);
+				user.setPasswordAnswer(answer);
+				
+				logc.loginMain.setVisible(false);
+				logc.loginMain.foodMain.dataSetting();
+				logc.loginMain.foodMain.setVisible(true);
+			} else {
+				//비정상
+				return;
+			}
 			
 		} catch (SQLException e) {
 			System.out.println("[SQL Error : " + e.getMessage() + "]");

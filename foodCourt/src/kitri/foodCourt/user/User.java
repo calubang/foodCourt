@@ -13,6 +13,9 @@ public class User {
 	
 	//19.04.14 패스워드 추가
 	private String password;
+	private String passwordQuiz;
+	private String passwordAnswer;
+	
 
 	//하나의 장바구니
 	Basket basket;
@@ -75,7 +78,22 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public String getPasswordQuiz() {
+		return passwordQuiz;
+	}
+
+	public void setPasswordQuiz(String passwordQuiz) {
+		this.passwordQuiz = passwordQuiz;
+	}
+
+	public String getPasswordAnswer() {
+		return passwordAnswer;
+	}
+
+	public void setPasswordAnswer(String passwordAnswer) {
+		this.passwordAnswer = passwordAnswer;
+	}
+
 	//dto생성 or dto로 데이터변경
 	public void setDto(UserDto userDto) {
 		this.userId = userDto.getUserId();

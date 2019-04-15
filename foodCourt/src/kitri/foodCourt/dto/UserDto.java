@@ -12,8 +12,8 @@ public class UserDto {
 	int userPoint;
 	
 	//관리자
-	Date joinDate;
-	Date secessionDate;
+	String joinDate;
+	String secessionDate;
 	char enable;
 	//회의 필요함 비밀번호와 비밀번호 퀴즈 답변은 시스템이 담고 있어야하는가?
 	//유저시스템은 당연 필요없지만, 관리자에서도 안보이게 할건지 정해야할듯
@@ -25,16 +25,16 @@ public class UserDto {
 		super();
 	}
 	
-	public Date getJoinDate() {
+	public String getJoinDate() {
 		return joinDate;
 	}
-	public void setJoinDate(Date joinDate) {
+	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
-	public Date getSecessionDate() {
+	public String getSecessionDate() {
 		return secessionDate;
 	}
-	public void setSecessionDate(Date secessionDate) {
+	public void setSecessionDate(String secessionDate) {
 		this.secessionDate = secessionDate;
 	}
 	public char getEnable() {
