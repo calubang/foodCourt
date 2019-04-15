@@ -84,15 +84,20 @@ public class LoginService {
 					javax.swing.JOptionPane.showMessageDialog(logc.login, "로그인 성공.");
 					checking += 1;
 					//성공 
-					User user = new User(user_id, rs.getString("name"), rs.getInt("user_point"));
+					User user = logc.loginMain.user;
+					
+					user.setUserId(user_id);
+					user.setPassword(rs.getString("password"));
+					user.setName(rs.getString("name"));
 					user.setPhoneNumberFirst(rs.getString("phone_first"));
 					user.setPhoneNumberMiddle(rs.getString("phone_middle"));
 					user.setPhoneNumberlast(rs.getString("phone_last"));
-					user.setPassword(rs.getString("password"));
+					user.setUserPoint(rs.getInt("user_point"));
 					
 					logc.loginMain.setVisible(false);
+					logc.loginMain.foodMain.dataSetting();
 					logc.loginMain.foodMain.setVisible(true);
-					
+					//LoginMain.use
 					
 				}
 			}

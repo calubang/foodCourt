@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.view.FoodMain;
 
 public class LoginMain extends JFrame {
@@ -20,30 +21,34 @@ public class LoginMain extends JFrame {
 	CardLayout card = new CardLayout();
 	
 	public FoodMain foodMain;
+	public User user;
 
 
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					LoginMain frame = new LoginMain();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LoginMain frame = new LoginMain();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	FindIdMain findIdMain = new FindIdMain(this);
 	FindPwMain findPwMain = new FindPwMain(this);
 	LoginControl loginControl;
 
 	
-	public LoginMain(FoodMain foodMain) {
-		this.foodMain = foodMain;
+	public LoginMain() {
+		//시작부
+		setTitle("풉키에 오신것을 환영합니다.");
+		this.user =  new User();
+		foodMain = new FoodMain(user);
+		
 		this.loginControl = new LoginControl(this);
-
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new javax.swing.border.EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(new java.awt.BorderLayout(0, 0));

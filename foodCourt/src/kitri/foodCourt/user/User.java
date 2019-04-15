@@ -16,7 +16,12 @@ public class User {
 
 	//하나의 장바구니
 	Basket basket;
-
+	
+	public User() {
+		super();
+		basket = new BasketImpl();
+	}
+	
 	public User(String userId, String name, int userPoint) {
 		super();
 		this.userId = userId;
@@ -24,7 +29,10 @@ public class User {
 		this.userPoint = userPoint;
 		basket = new BasketImpl();
 	}
-
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public String getUserId() {
 		return userId;
 	}

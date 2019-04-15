@@ -77,19 +77,19 @@ public class FoodMain extends JFrame {
 	//로그인 부분 결합
 	public LoginMain loginMain;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FoodMain frame = new FoodMain();
-					//frame.setVisible(true);
-					frame.loginMain.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					//FoodMain frame = new FoodMain();
+//					//frame.setVisible(true);
+//					frame.loginMain.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	public void setPanelName(String panelName) {
 		this.currentPanelName = panelName;
@@ -98,26 +98,20 @@ public class FoodMain extends JFrame {
 		return this.currentPanelName;
 	}
 
-	public FoodMain() {
-		// 테스트용
-		user = new User("calubang", "안병욱", 5000);
-		user.setPhoneNumberFirst("010");
-		user.setPhoneNumberMiddle("7163");
-		user.setPhoneNumberlast("3863");
-		user.setPassword("123456");
-		
-		user.getBasket().setOrderCount(lbOrderCount);
-		
-		labName.setText(user.getName() + "님");
-		
-		
-		
-		//본코드
-		setTitle("풉키에 오신 것을 환영합니다.");
-		loginMain = new LoginMain(this);
-		this.setVisible(false);
+	public FoodMain(User user) {
+		this.user = user;
 		basketMain = new BasketMain(this);
 		userInfo = new UserInfo(this);
+		initView();
+		
+	}
+	
+	public void initView() {
+		//본코드
+		setTitle("풉키에 오신 것을 환영합니다.");
+		
+		this.setVisible(false);
+		
 		
 		labName.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		labName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -279,7 +273,7 @@ public class FoodMain extends JFrame {
 		btnYangsic.setContentAreaFilled(false);
 		btnYangsic.setBorderPainted(false);
 
-//		--------------------변하는 패널 부분 카드레이아웃 설정
+//				--------------------변하는 패널 부분 카드레이아웃 설정
 		panChangePanel.setLayout(card);
 		UserMenuDetailView.setBackground(Color.WHITE);
 		panChangePanel.add(UserMenuDetailView, "UserMenuDetailView");
@@ -375,6 +369,7 @@ public class FoodMain extends JFrame {
 		foodMainView.labYangsic.addActionListener(foodMainController);
 	}
 	
-	public void dataSetting(User user) {
+	public void dataSetting() {
+		labName.setText(user.getName() + "님");
 	}
 }
