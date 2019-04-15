@@ -439,6 +439,8 @@ insert into fook_user(user_id, password, name, phone_first, phone_middle, phone_
 values ('dfkjhg987', 'dfjhjh2', '박진영', '010', '3456', '7890', 10000, 'City?', 'Seoul', sysdate, NULL, 'y');
 insert into fook_user(user_id, password, name, phone_first, phone_middle, phone_last, user_point, password_quiz, password_answer, join_date, secession_date, enable)
 values ('dxcvowej34', '2309fjsdjfh', '양현석', '010', '7948', '2948', 300, 'Nation?', 'East Asia', sysdate, sysdate, 'n');
+insert into fook_user(user_id, password, name, phone_first, phone_middle, phone_last, user_point, password_quiz, password_answer, join_date, secession_date, enable)
+values ('calubang', '123456', '안병욱', '010', '7163', '3863', 5000, 'Nation?', 'East Asia', sysdate, sysdate, 'y');
 
 -- PAYMENT
 insert into fook_payment(payment_id, user_id, payment_date, request_number, total_price, save_point, used_point, card, cash, payment_state)
