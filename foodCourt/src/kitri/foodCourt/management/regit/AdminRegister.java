@@ -1,21 +1,18 @@
 package kitri.foodCourt.management.regit;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
+
+import javax.swing.*;
+
 import java.awt.Component;
 
 public class AdminRegister extends JPanel {
 	
 	JTextField idtf;
-	JTextField passwordtf = new JTextField();
-	JTextField pwtf = new JTextField();
+	JPasswordField passwordtf = new JPasswordField();
+	JPasswordField pwtf = new JPasswordField();
 	JTextField nametf = new JTextField();
 	JTextField lastnumber = new JTextField();
 	JTextField midnumber = new JTextField();
@@ -103,7 +100,7 @@ public class AdminRegister extends JPanel {
 		passwordpanel.setLayout(null);
 		passwordpanel.add(passwordlabel);
 
-		passwordtf = new JTextField();
+		passwordtf = new JPasswordField();
 		passwordpanel.add(passwordtf);
 		passwordtf.setBounds(107, 0, 283, 51);
 		passwordtf.setColumns(10);
@@ -121,7 +118,7 @@ public class AdminRegister extends JPanel {
 		mainpanel.add(namepanel);
 		mainpanel.add(phonepanel);
 
-		pwtf = new JTextField();
+		pwtf = new JPasswordField();
 		pwpanel.add(pwtf);
 		pwtf.setBounds(107, 0, 283, 51);
 		pwtf.setColumns(10);

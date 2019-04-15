@@ -1,7 +1,7 @@
 package kitri.foodCourt.management.regit;
 
 import java.awt.CardLayout;
-
+import java.awt.Color;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -12,13 +12,11 @@ import javax.swing.*;
 import kitri.foodCourt.db.ConnectionMaker;
 import kitri.foodCourt.db.DbFactory;
 import kitri.foodCourt.dto.AdminRegitDto;
-import kitri.foodCourt.management.regit.DBConnection;
 
 public class AdminRegisterService {
 
 	AdminRegisterControl arc;
 	AdminMemberInfo ami;
-
 
 	AdminRegister ar;
 	MemberRegister mr;
@@ -39,14 +37,13 @@ public class AdminRegisterService {
 	int checkid;
 	int pwcheck;
 	String checkidjoin;
-	
-	
+
 	public AdminRegisterService(AdminRegisterControl arc) {
 		connectionMaker = DbFactory.connectionMaker("oracle");
-		
+
 		checkid = 0;
 		pwcheck = 0;
-		
+
 		this.arc = arc;
 		ami = this.arc.ami;
 		ar = ami.ar;
@@ -57,6 +54,7 @@ public class AdminRegisterService {
 
 	}
 
+	// 관리자등록
 	public void showadminRegister() {
 		ami.ar.idtf.setText("");
 		ami.ar.nametf.setText("");
@@ -64,6 +62,8 @@ public class AdminRegisterService {
 		ami.ar.lastnumber.setText("");
 		ami.ar.passwordtf.setText("");
 		ami.ar.pwtf.setText("");
+		ami.ar.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
+
 		ami.jfAD.getContentPane().add(ami.ar);
 		ami.jfAD.setSize(600, 650);
 		ami.jfAD.setModal(true);
@@ -71,6 +71,7 @@ public class AdminRegisterService {
 
 	}
 
+	// 회원등록
 	public void showmemberRegister() {
 		ami.mr.idtf.setText("");
 		ami.mr.nametf.setText("");
@@ -78,6 +79,7 @@ public class AdminRegisterService {
 		ami.mr.lastnumber.setText("");
 		ami.mr.passwordtf.setText("");
 		ami.mr.pwtf.setText("");
+		ami.mr.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
 
 		ami.jfMD.getContentPane().add(ami.mr);
 		ami.jfMD.setSize(600, 650);
@@ -85,6 +87,7 @@ public class AdminRegisterService {
 		ami.jfMD.setVisible(true);
 	}
 
+	// 관리자/회원수정
 	public void showmodify() {
 
 		ami.maR.nametf.setText("");
@@ -92,30 +95,33 @@ public class AdminRegisterService {
 		ami.maR.lastnumber.setText("");
 		ami.maR.passwordtf.setText("");
 		ami.maR.pwtf.setText("");
-		
+		ami.maR.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
+
 		ami.mR.nametf.setText("");
 		ami.mR.midnumber.setText("");
 		ami.mR.lastnumber.setText("");
 		ami.mR.passwordtf.setText("");
 		ami.mR.pwtf.setText("");
-		
+		ami.mR.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
 		if (ami.check == false) {
-			
+
 			ami.card.show(ami.jpaMo, "adminModi");
-			
+
 		} else {
 			ami.card.show(ami.jpaMo, "memberModi");
-			
+
 		}
 		ami.jfMo.setSize(600, 650);
 		ami.jfMo.setVisible(true);
 	}
 
+	// 관리자/회원삭제
 	public void showdelete() {
 		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "정말 삭제하시겠습니까?\n(삭제하면 다시 되돌릴 수 없습니다.)", "삭제 확인",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 	}
 
+	// 관리자창 - 등록버튼
 	public void arRegister() {
 		String id = ami.ar.idtf.getText();
 		String pw = ami.ar.passwordtf.getText();
@@ -128,27 +134,24 @@ public class AdminRegisterService {
 		String str = dayTime.format(new Date());
 		String jobid = ami.ar.jobname.getSelectedItem().toString();
 		int r = 0;
-		
+
 		String quary = "insert into fook_manager(MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID,ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) values(?,?,?,?,?,?,?,?,?,?,?)";
-		
-		
-		if ( id.isEmpty() || pw.isEmpty() || pwtf.isEmpty()
-				|| name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()) { // == 는 주소값 비교.
-				JOptionPane.showMessageDialog(ami.ar, "빈 공간을 입력해 주세요.");
-			}else if(checkid == 0 || checkid == 1) {
-				JOptionPane.showMessageDialog(ami.ar, "중복 확인을 눌러주세요.");
-			}else if (!(checkidjoin.equals(id))) {
-				JOptionPane.showMessageDialog(ami.ar, "중복 확인을 눌러주세요.");
-			}else if ( pwcheck == 0) {
-				JOptionPane.showMessageDialog(ami.ar, "비밀번호를 확인해 주세요.");
-			}
+
+		if (id.isEmpty() || pw.isEmpty() || pwtf.isEmpty() || name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()) { 
+			JOptionPane.showMessageDialog(ami.ar, "빈 공간을 입력해 주세요.");
+		} else if (checkid == 0 || checkid == 1) {
+			JOptionPane.showMessageDialog(ami.ar, "중복 확인을 눌러주세요.");
+		} else if (!(checkidjoin.equals(id))) {
+			JOptionPane.showMessageDialog(ami.ar, "중복 확인을 눌러주세요.");
+		} else if (pwcheck == 0) {
+			JOptionPane.showMessageDialog(ami.ar, "비밀번호를 확인해 주세요.");
+		}
 		try {
 			conn = connectionMaker.makeConnection();
 			pstm = conn.prepareStatement(quary);
-			
-			
+
 			pstm.setString(1, id);
-			pstm.setString(2, name); 
+			pstm.setString(2, name);
 			pstm.setString(3, pw);
 			pstm.setString(4, numfirst);
 			pstm.setString(5, nummid);
@@ -157,12 +160,12 @@ public class AdminRegisterService {
 //			pstm.setString(8, question);
 //			pstm.setString(9, answer);
 //			pstm.setString(10, "N");
-			
+
 			r = pstm.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				connectionMaker.closeConnection(conn, pstm, rs);
 			} catch (SQLException e) {
@@ -172,43 +175,42 @@ public class AdminRegisterService {
 		}
 	}
 
+	// 관리자 id중복확인
 	public void arId() {
-//		int result = JOptionPane.showOptionDialog(ar, "사용하시겠습니까", "중복 확인", JOptionPane.YES_OPTION,
-//				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 		String quary = "select manager_id from fook_manager";
 		checkidjoin = ami.ar.idtf.getText();
-		if(checkidjoin.isEmpty()) {
+		if (checkidjoin.isEmpty()) {
 			JOptionPane.showMessageDialog(ami.ar, "ID를 입력하세요");
 		}
 		try {
 			conn = connectionMaker.makeConnection();
 			pstm = conn.prepareStatement(quary);
 			rs = pstm.executeQuery();
-			
+
 			String DBuser_id;
-			
+
 			int check = 0;
-			
-			while(rs.next()){
-				
+
+			while (rs.next()) {
+
 				DBuser_id = rs.getString("manager_id");
-				
+
 				if (checkidjoin.equals(DBuser_id)) {
-					
+
 					javax.swing.JOptionPane.showMessageDialog(ami.ar, "중복된 아이디가 있습니다.");
 					ami.ar.idtf.setText("");
-					
+
 					check = 1;
 					pwcheck = 1;
 				}
 			}
-			if( check == 0 ) {
+			if (check == 0) {
 				javax.swing.JOptionPane.showMessageDialog(ami.ar, "사용 가능한 아이디 입니다.");
 				pwcheck = 2;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
 				connectionMaker.closeConnection(conn, pstm, rs);
 			} catch (SQLException e) {
@@ -217,53 +219,56 @@ public class AdminRegisterService {
 		}
 	}
 
+	// dialog창끄기
 	public void Close(JDialog jd) {
 
 		jd.dispose();
 
 	}
 
+	// 회원등록창
 	public void mrRegister() {
 
 	}
 
+	// 회원창 - 중복확인
 	public void mrId() {
 //		int result = JOptionPane.showOptionDialog(ar, "사용하시겠습니까", "중복확인", JOptionPane.YES_OPTION,
 //				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 		String quary = "select user_id from fook_user";
 		checkidjoin = ami.ar.idtf.getText();
-		if(checkidjoin.isEmpty()) {
+		if (checkidjoin.isEmpty()) {
 			JOptionPane.showMessageDialog(ami.ar, "ID를 입력하세요");
 		}
 		try {
 			conn = connectionMaker.makeConnection();
 			pstm = conn.prepareStatement(quary);
 			rs = pstm.executeQuery();
-			
+
 			String DBuser_id;
-			
+
 			int check = 0;
-			
-			while(rs.next()){
-				
+
+			while (rs.next()) {
+
 				DBuser_id = rs.getString("user_id");
-				
+
 				if (checkidjoin.equals(DBuser_id)) {
-					
+
 					javax.swing.JOptionPane.showMessageDialog(ami.ar, "중복된 아이디가 있습니다.");
 					ami.ar.idtf.setText("");
-					
+
 					check = 1;
 					pwcheck = 1;
 				}
 			}
-			if( check == 0 ) {
+			if (check == 0) {
 				javax.swing.JOptionPane.showMessageDialog(ami.ar, "사용 가능한 아이디 입니다.");
 				pwcheck = 2;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
 				connectionMaker.closeConnection(conn, pstm, rs);
 			} catch (SQLException e) {
@@ -271,7 +276,6 @@ public class AdminRegisterService {
 			}
 		}
 	}
-	
 
 	public void maRRegister() {
 
@@ -280,8 +284,54 @@ public class AdminRegisterService {
 	public void mRRegister() {
 
 	}
-	public void checkid() {
-		
-		
+
+	// password 일치확인
+	public void pwCompare() {
+		String arpw = new String(ami.ar.passwordtf.getPassword());
+		String archeckpw = new String(ami.ar.pwtf.getPassword());
+		String mrpw = new String(ami.mr.passwordtf.getPassword());
+		String mrcheckpw = new String(ami.mr.pwtf.getPassword());
+		String maRpw = new String(ami.maR.passwordtf.getPassword());
+		String maRcheckpw = new String(ami.maR.pwtf.getPassword());
+		String mRpw = new String(ami.mR.passwordtf.getPassword());
+		String mRcheckpw = new String(ami.mR.pwtf.getPassword());
+
+		if (!((arpw.equals(archeckpw)) || arpw.isEmpty() || archeckpw.isEmpty())
+				&& ((mrpw.equals(archeckpw)) || mrpw.isEmpty() || mrcheckpw.isEmpty())
+				&& ((maRpw.equals(archeckpw)) || maRpw.isEmpty() || maRcheckpw.isEmpty())
+				&& ((mRpw.equals(archeckpw)) || mRpw.isEmpty() || mRcheckpw.isEmpty())) {
+			ami.ar.etclabel.setForeground(Color.RED);
+			ami.ar.etclabel.setText("비밀번호가 일치하지 않습니다.");
+			ami.mr.etclabel.setForeground(Color.RED);
+			ami.mr.etclabel.setText("비밀번호가 일치하지 않습니다.");
+			ami.maR.etclabel.setForeground(Color.RED);
+			ami.maR.etclabel.setText("비밀번호가 일치하지 않습니다.");
+			ami.mR.etclabel.setForeground(Color.RED);
+			ami.mR.etclabel.setText("비밀번호가 일치하지 않습니다.");
+			pwcheck = 0;
+		} else if ((arpw.length() < 6 || archeckpw.length() < 6) && (mrpw.length() < 6 || mrcheckpw.length() < 6)
+				&& (maRpw.length() < 6 || maRcheckpw.length() < 6) && (mRpw.length() < 6 || mRcheckpw.length() < 6)) {
+			ami.ar.etclabel.setForeground(Color.RED);
+			ami.ar.etclabel.setText("비밀번호를 6자리 이상 입력해 주세요.");
+			ami.mr.etclabel.setForeground(Color.RED);
+			ami.mr.etclabel.setText("비밀번호를 6자리 이상 입력해 주세요.");
+			ami.maR.etclabel.setForeground(Color.RED);
+			ami.maR.etclabel.setText("비밀번호를 6자리 이상 입력해 주세요.");
+			ami.mR.etclabel.setForeground(Color.RED);
+			ami.mR.etclabel.setText("비밀번호를 6자리 이상 입력해 주세요.");
+			pwcheck = 0;
+		} else if (arpw.equals(archeckpw) && mrpw.equals(mrcheckpw) && maRpw.equals(maRcheckpw)
+				&& mRpw.equals(mRcheckpw)) {
+			ami.ar.etclabel.setForeground(Color.GREEN);
+			ami.ar.etclabel.setText("비밀번호가 일치합니다.");
+			ami.mr.etclabel.setForeground(Color.GREEN);
+			ami.mr.etclabel.setText("비밀번호가 일치합니다.");
+			ami.maR.etclabel.setForeground(Color.GREEN);
+			ami.maR.etclabel.setText("비밀번호가 일치합니다.");
+			ami.mR.etclabel.setForeground(Color.GREEN);
+			ami.mR.etclabel.setText("비밀번호가 일치합니다.");
+			pwcheck = 1;
+
+		}
 	}
 }

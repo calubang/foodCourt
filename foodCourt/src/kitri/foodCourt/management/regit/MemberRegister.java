@@ -4,17 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 public class MemberRegister extends JPanel {
 	JTextField idtf;
-	JTextField passwordtf;
-	JTextField pwtf;
+	JPasswordField passwordtf;
+	JPasswordField pwtf;
 	JTextField nametf;
 	JTextField lastnumber;
 	JTextField midnumber;
@@ -99,7 +94,7 @@ public class MemberRegister extends JPanel {
 		passwordpanel.setLayout(null);
 		passwordpanel.add(passwordlabel);
 
-		passwordtf = new JTextField();
+		passwordtf = new JPasswordField();
 		passwordpanel.add(passwordtf);
 		passwordtf.setBounds(107, 0, 283, 51);
 		passwordtf.setColumns(10);
@@ -113,7 +108,7 @@ public class MemberRegister extends JPanel {
 		pwpanel.setLayout(null);
 		pwpanel.add(pwlabel);
 
-		pwtf = new JTextField();
+		pwtf = new JPasswordField();
 		pwpanel.add(pwtf);
 		pwtf.setBounds(107, 0, 283, 51);
 		pwtf.setColumns(10);

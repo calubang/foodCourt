@@ -1,9 +1,7 @@
 package kitri.foodCourt.management.regit;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class AdminRegisterControl implements ActionListener {
+import java.awt.event.*;
+public class AdminRegisterControl implements ActionListener, KeyListener {
 
 	AdminMemberInfo ami;
 	AdminRegisterService ars;
@@ -59,6 +57,40 @@ public class AdminRegisterControl implements ActionListener {
 			ami.jfMo.setVisible(false);
 		}
 
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		Object ob = e.getSource();
+		if(ob == ar.passwordtf) {
+			ars.pwCompare();
+		}else if(ob == ar.pwtf){
+			ars.pwCompare();
+		}else if(ob == mr.pwtf) {
+			ars.pwCompare();
+		}else if(ob == mr.passwordtf) {
+			ars.pwCompare();
+		}else if(ob == maR.pwtf) {
+			ars.pwCompare();
+		}else if(ob == maR.passwordtf) {
+			ars.pwCompare();
+		}else if(ob == mR.pwtf) {
+			ars.pwCompare();
+		}else if(ob == mR.passwordtf) {
+			ars.pwCompare();
+		}
 	}
 
 }
