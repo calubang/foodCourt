@@ -3,17 +3,15 @@ package kitri.foodCourt.user.swing;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.JPanel;
-
-import oracle.core.lmx.CoreException;
 
 public class RoundPanel extends JPanel implements MouseListener{
 
-	int thickness;
-	int arc;
-	Graphics2D graphics2D;
+	private int thickness;
+	private int arc;
 	private MouseListener controller;
+	private Color enterColor;
+	private Color exitColor;
 	
 	public RoundPanel() {
 		super();
@@ -41,11 +39,13 @@ public class RoundPanel extends JPanel implements MouseListener{
 		this.thickness = thickness;
 		this.arc = arc;
 		defaultSetting();
-		//setMouseListener();
 	}
 	
 	public void defaultSetting() {
+		this.setBorder(new RoundBorder(arc, thickness));
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		this.addMouseListener(this);
+		this.enterColor = hexToRgb("#FFF8DC");
 	}
 	
 	public void setMouseListener() {
@@ -61,29 +61,11 @@ public class RoundPanel extends JPanel implements MouseListener{
 		Graphics2D graphics2d = (Graphics2D) g;
 		graphics2d.setColor(getBackground());
 		graphics2d.fillRoundRect(thickness/2, thickness/2, getWidth()-thickness, getHeight()-thickness, arc, arc);
-		//hexToRgb("#FFF8DC")
-		//graphics2d.setStroke(new BasicStroke(thickness));
-		//graphics2d.setColor(getForeground());
-		//graphics2d.drawRoundRect(thickness/2, thickness/2, getWidth()-thickness, getHeight()-thickness, arc, arc);
-		
-	}
-	
-	@Override
-	protected void paintChildren(Graphics g) {
-		//Graphics2D graphics2d = (Graphics2D) g;
-		//graphics2d.setBackground(new Color(255, 255, 240));
-		//graphics2d.setColor(new Color(255, 255, 240));
-		//graphics2d.fillRoundRect(1, 1, getWidth()-3, getHeight()-3, 50, 50);
-		super.paintChildren(g);
-	}
-	
-	@Override
-	protected void paintBorder(Graphics g) {
-		Graphics2D graphics2d = (Graphics2D) g;
-		graphics2d.setColor(getForeground());
-		graphics2d.setStroke(new BasicStroke(thickness));
-		graphics2d.drawRoundRect(thickness/2, thickness/2, getWidth()-thickness, getHeight()-thickness, arc, arc);
-		//super.paintBorder(g);
+		Component component[] = getComponents();
+		int len = component.length;
+		for (int i = 0; i < len; i++) {
+			component[i].setBackground(getBackground());
+		}
 	}
 
 	@Override
@@ -107,12 +89,22 @@ public class RoundPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		e.getComponent().setBackground(hexToRgb("#FFF8DC"));
+		RoundPanel panel = (RoundPanel)e.getComponent();
+		if(enterColor != null) {
+			panel.setBackground(enterColor);
+		}else {
+			panel.setBackground(SystemColor.inactiveCaptionBorder);
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		e.getComponent().setBackground(Color.WHITE);
+		RoundPanel panel = (RoundPanel)e.getComponent();
+		if(exitColor != null) {
+			panel.setBackground(exitColor);
+		}else {
+			panel.setBackground(Color.WHITE);
+		}
 	}
 
 	public static Color hexToRgb(String colorStr) {

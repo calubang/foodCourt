@@ -2,10 +2,9 @@ package kitri.foodCourt.user.swing;
 
 import java.awt.*;
 import java.awt.event.MouseListener;
-
 import javax.swing.*;
 
-public class MenuButton extends JButton implements MouseListener{
+public class RoundButton extends JButton implements MouseListener{
 	
 	public int arc;
 	public int thickness;
@@ -13,32 +12,32 @@ public class MenuButton extends JButton implements MouseListener{
 	public Color exitColor;
 	public MouseListener controller;
 
-	public MenuButton() {
+	public RoundButton() {
 		super();
 		defaultSetting();
 	}
 
-	public MenuButton(Action a) {
+	public RoundButton(Action a) {
 		super(a);
 		defaultSetting();
 	}
 
-	public MenuButton(Icon icon) {
+	public RoundButton(Icon icon) {
 		super(icon);
 		defaultSetting();
 	}
 
-	public MenuButton(String text, Icon icon) {
+	public RoundButton(String text, Icon icon) {
 		super(text, icon);
 		defaultSetting();
 	}
 
-	public MenuButton(String text) {
+	public RoundButton(String text) {
 		super(text);
 		defaultSetting();
 	}
 	
-	public MenuButton(int thickness, int arc) {
+	public RoundButton(int thickness, int arc) {
 		this.arc = arc;
 		this.thickness = thickness;
 		defaultSetting();
@@ -96,12 +95,10 @@ public class MenuButton extends JButton implements MouseListener{
 
 	@Override
 	public void mouseEntered(java.awt.event.MouseEvent e) {
-		MenuButton button = (MenuButton)e.getComponent();
+		RoundButton button = (RoundButton)e.getComponent();
 		if(enterColor != null) {
 			button.setBackground(enterColor);
-			button.getParent().setBackground(enterColor);
 		}else {
-			button.getParent().setBackground(SystemColor.inactiveCaptionBorder);
 			button.setBackground(SystemColor.inactiveCaptionBorder);
 		}
 		
@@ -109,13 +106,13 @@ public class MenuButton extends JButton implements MouseListener{
 
 	@Override
 	public void mouseExited(java.awt.event.MouseEvent e) {
-		MenuButton button = (MenuButton)e.getComponent();
+		RoundButton button = (RoundButton)e.getComponent();
 		if(exitColor != null) {
 			button.setBackground(exitColor);
-			button.getParent().setBackground(exitColor);
 		}else {
-			button.getParent().setBackground(Color.WHITE);
 			button.setBackground(Color.WHITE);
 		}
 	}
+
+	
 }

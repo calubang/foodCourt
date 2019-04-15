@@ -37,7 +37,7 @@ public class FoodMain extends JFrame {
 	public JPanel panChangePanel = new JPanel();
 	public CardLayout card = new CardLayout();
 
-	public JButton btnMainMenu = new MainButton();
+	public JButton btnMainMenu = new JButton();
 
 	public JButton btnSearch = new JButton(
 			new ImageIcon(FoodMain.class.getResource("/img/user/search.PNG")));
@@ -68,7 +68,7 @@ public class FoodMain extends JFrame {
 	public JLabel labJoongsic = new JLabel("\uC911  \uC2DD");
 	public JLabel labIlsic = new JLabel("\uC77C  \uC2DD");
 	public JLabel labYangsic = new JLabel("\uC591  \uC2DD");
-	public JButton btnHansic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/koreanFoodImageSmall.png")));
+	public MainButton btnHansic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/koreanFoodImageSmall.png")));
 	public JButton btnJoongsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/chineseFoodImageSmall.png")));
 	public JButton btnIlsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/JapaneseFoodImageSmall.png")));
 	public JButton btnYangsic = new MainButton(new ImageIcon(FoodMain.class.getResource("/img/user/americanFoodImageSmall.png")));
@@ -131,7 +131,6 @@ public class FoodMain extends JFrame {
 		label.setText("비밀번호를 입력하세요.");
 		pPassword.add(label, BorderLayout.NORTH);
 		pPassword.add(pfPassword, BorderLayout.CENTER);
-		
 		
 		// 커서 모양지정
 		btnSearch.setCursor(csorHandCursor);
@@ -219,7 +218,7 @@ public class FoodMain extends JFrame {
 		btnJoongsic.setSize(95, 60);
 		btnJoongsic.setLocation(10, 10);
 		btnJoongsic.setCursor(csorHandCursor);
-		pChineseMenu.add(btnJoongsic, BorderLayout.CENTER);
+		pChineseMenu.add(btnJoongsic);
 		btnJoongsic.setName("2");
 		btnJoongsic.setFocusable(false);
 		btnJoongsic.setContentAreaFilled(false);
