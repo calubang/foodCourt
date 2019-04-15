@@ -38,7 +38,7 @@ public class AdminMainFrame extends JFrame {
 	JButton memberManageBtn = new JButton(/*"회원관리"*/);
 	JButton requestManageBtn = new JButton(/*"요청관리"*/);
 	JButton paymentBtn = new JButton(/*"결제관리"*/);
-	JButton logoutBtn = new JButton("로그아웃");
+	JButton logoutBtn = new JButton(/*"로그아웃"*/);
 	
 	AdminMenuManagement amm = new AdminMenuManagement();
 	AdminMemberInfo ami = new AdminMemberInfo();
@@ -94,6 +94,8 @@ public class AdminMainFrame extends JFrame {
 			requestManageBtn.setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/requestLabel.jpg").getFile()))));
 			paymentBtn.setMargin(new Insets(0, 0, 0, 0));
 			paymentBtn.setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/paymentLabel.jpg").getFile()))));
+			logoutBtn.setMargin(new Insets(0, 0, 0, 0));
+			logoutBtn.setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/logoutLabel.jpg").getFile()))));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -124,7 +126,6 @@ public class AdminMainFrame extends JFrame {
 		memberManageBtn.addMouseListener(amfc);
 		requestManageBtn.addMouseListener(amfc);
 		paymentBtn.addMouseListener(amfc);
-		
-		logoutBtn.addActionListener(amfc);
+		logoutBtn.addMouseListener(amfc);
 	}
 }

@@ -110,7 +110,7 @@ public class AdminMemberInfo extends JPanel {
 						new EmptyBorder(40, 40, 40, 40)));
 		memberMenuPanel.setBounds(799, 128, 209, 594);
 		memberMenuPanel.setLayout(new GridLayout(4, 1, 0, 60));
-		adminMemberRegisterBtn.setFont(new Font("µ¸¿ò", Font.PLAIN, 12));
+		//adminMemberRegisterBtn.setFont(new Font("µ¸¿ò", Font.PLAIN, 12));
 		memberMenuPanel.add(adminMemberRegisterBtn);
 		memberMenuPanel.add(memberRegisterBtn);
 		modifyBtn.addActionListener(new ActionListener() {

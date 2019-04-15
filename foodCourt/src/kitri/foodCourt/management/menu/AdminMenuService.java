@@ -162,7 +162,7 @@ public class AdminMenuService {
 			rowSelect = amm.commonTable.convertRowIndexToModel(rowSelect);
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
 			
 			ps = c.prepareStatement("select * "
 								  + "from fook_food "
@@ -224,7 +224,7 @@ public class AdminMenuService {
 
 				try {
 					Class.forName("oracle.jdbc.driver.OracleDriver");
-					c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+					c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
 					
 					ps = c.prepareStatement("delete from fook_food "
 										  + "where food_id = (?)");
@@ -262,7 +262,7 @@ public class AdminMenuService {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
 			
 			ps = c.prepareStatement("select food_id, food_name, f.category_id \"category_id\", category_name, price, food_point, food_description, image_address, manager_id, create_date, food_enable "
 								  + "from fook_food f, fook_category c "
@@ -309,7 +309,7 @@ public class AdminMenuService {
 			
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
-				c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+				c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
 				
 				ps = c.prepareStatement("select image_address, food_description "
 									  + "from fook_food "
@@ -493,7 +493,7 @@ public class AdminMenuService {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
 			
 			ps = c.prepareStatement("select image_address "
 					  + "from fook_food "
@@ -652,7 +652,7 @@ public class AdminMenuService {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
+			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
 			
 			ps = c.prepareStatement("select image_address "
 					  + "from fook_food "

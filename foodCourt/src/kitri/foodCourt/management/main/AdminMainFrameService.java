@@ -12,14 +12,12 @@ public class AdminMainFrameService {
 
 	AdminMainFrameControl amfc;
 	AdminMainFrame amf;
-//	AdminMemberInfo amif;
+
 	
 	public AdminMainFrameService(AdminMainFrameControl amfc) {
 		this.amfc = amfc;
 		amf = this.amfc.amf;
-//		amif = this.amfc.amif;
 	}
-	
 	
 	
 	public void showPanel(String str) {
@@ -41,6 +39,8 @@ public class AdminMainFrameService {
 			((JButton)ob).setText("夸没包府");
 		} else if (ob == amf.paymentBtn) {
 			((JButton)ob).setText("搬力包府");
+		} else if (ob == amf.logoutBtn) {
+			((JButton)ob).setText("肺弊酒眶");
 		}
 	}
 
@@ -49,13 +49,15 @@ public class AdminMainFrameService {
 
 		try {
 			if (ob == amf.menuManageBtn) {
-				((JButton)ob).setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/menuLabel.jpg").getFile()))));
+				((JButton)ob).setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrameService.class.getResource("/img/admin/menuLabel.jpg").getFile()))));
 			} else if (ob == amf.memberManageBtn) {
-				((JButton)ob).setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/memberLabel.jpg").getFile()))));
+				((JButton)ob).setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrameService.class.getResource("/img/admin/memberLabel.jpg").getFile()))));
 			} else if (ob == amf.requestManageBtn) {
-				((JButton)ob).setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/requestLabel.jpg").getFile()))));
+				((JButton)ob).setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrameService.class.getResource("/img/admin/requestLabel.jpg").getFile()))));
 			} else if (ob == amf.paymentBtn) {
-				((JButton)ob).setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrame.class.getResource("/img/admin/paymentLabel.jpg").getFile()))));
+				((JButton)ob).setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrameService.class.getResource("/img/admin/paymentLabel.jpg").getFile()))));
+			} else if (ob == amf.logoutBtn) {
+				((JButton)ob).setIcon(new ImageIcon(ImageIO.read(new File(AdminMainFrameService.class.getResource("/img/admin/logoutLabel.jpg").getFile()))));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
