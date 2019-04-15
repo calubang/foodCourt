@@ -382,14 +382,14 @@ DROP SEQUENCE food_fid_seq;
 DROP SEQUENCE payment_pid_seq;
 
 CREATE SEQUENCE food_fid_seq
-    START WITH 1
+    START WITH 0
     INCREMENT BY 1
     MAXVALUE 99999
     MINVALUE 1
     NOCYCLE;
 
 CREATE SEQUENCE payment_pid_seq 
-    START WITH 1
+    START WITH 0
     INCREMENT BY 1 
     MAXVALUE 999999 
     MINVALUE 0
@@ -517,63 +517,63 @@ values (payment_pid_seq.nextval, 'xx8z72', sysdate, '0008', 78000, 780, 8000, 15
 
 -- PAYMENT_DETAIL
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('0', '7', 'ÀÚÀå¸é', 5000, 3, 50);
+values ('1', '7', 'ÀÚÀå¸é', 5000, 3, 50);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('0', '12', '¼Ò¹Ù', 7000, 2, 70);
+values ('1', '12', '¼Ò¹Ù', 7000, 2, 70);
 
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('1', '1', 'ººÀ½¹ä', 6000, 3, 60);
+values ('2', '1', 'ººÀ½¹ä', 6000, 3, 60);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('1', '7', 'ÀÚÀå¸é', 5000, 2, 50);
+values ('2', '7', 'ÀÚÀå¸é', 5000, 2, 50);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('1', '12', '¼Ò¹Ù', 7000, 1, 70);
+values ('2', '12', '¼Ò¹Ù', 7000, 1, 70);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('1', '17', '½ºÅ×ÀÌÅ©', 9500, 4, 95);
+values ('2', '17', '½ºÅ×ÀÌÅ©', 9500, 4, 95);
 
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('2', '1', 'ººÀ½¹ä', 6000, 5, 60);
+values ('3', '1', 'ººÀ½¹ä', 6000, 5, 60);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('2', '12', '¼Ò¹Ù', 7000, 3, 70);
+values ('3', '12', '¼Ò¹Ù', 7000, 3, 70);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('2', '17', '½ºÅ×ÀÌÅ©', 9500, 1, 95);
+values ('3', '17', '½ºÅ×ÀÌÅ©', 9500, 1, 95);
 
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('3', '2', '¾Èµ¿±¹½Ã', 7500, 3, 75);
+values ('4', '2', '¾Èµ¿±¹½Ã', 7500, 3, 75);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('3', '19', 'Å¬·´»÷µåÀ§Ä¡', 9000, 2, 90);
+values ('4', '19', 'Å¬·´»÷µåÀ§Ä¡', 9000, 2, 90);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('3', '11', 'Â«»Í', 8000, 1, 80);
+values ('4', '11', 'Â«»Í', 8000, 1, 80);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('3', '8', '¸¶ÆÄµÎºÎ', 7000, 2, 70);
+values ('4', '8', '¸¶ÆÄµÎºÎ', 7000, 2, 70);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('3', '5', 'µ¹¼Üºñºö¹ä', 7500, 4, 75);
+values ('4', '5', 'µ¹¼Üºñºö¹ä', 7500, 4, 75);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('3', '10', 'Âý½ÒÅÁ¼öÀ°', 13000, 1, 130);
+values ('4', '10', 'Âý½ÒÅÁ¼öÀ°', 13000, 1, 130);
 
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('4', '16', 'ÂüÄ¡È¸µ¤¹ä', 18000, 1, 180);
+values ('5', '16', 'ÂüÄ¡È¸µ¤¹ä', 18000, 1, 180);
 
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('5', '16', 'Åä¸¶Åä±èÄ¡½ºÆÄ°ÔÆ¼', 8500, 1, 85);
+values ('6', '16', 'Åä¸¶Åä±èÄ¡½ºÆÄ°ÔÆ¼', 8500, 1, 85);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('5', '9', 'ÀâÃ¤¹ä', 8000, 3, 80);
+values ('6', '9', 'ÀâÃ¤¹ä', 8000, 3, 80);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('5', '5', 'µ¹¼Üºñºö¹ä', 7500, 2, 75);
+values ('6', '5', 'µ¹¼Üºñºö¹ä', 7500, 2, 75);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('5', '4', '¶Ò¹è±âºÒ°í±â', 7900, 1, 79);
+values ('6', '4', '¶Ò¹è±âºÒ°í±â', 7900, 1, 79);
 
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('6', '14', 'µ·±î½º', 8500, 3, 85);
+values ('7', '14', 'µ·±î½º', 8500, 3, 85);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('6', '15', '°¡¾²¿À¿ìµ¿', 5000, 4, 50);
+values ('7', '15', '°¡¾²¿À¿ìµ¿', 5000, 4, 50);
 
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('7', '11', 'Â«»Í', 8000, 3, 80);
+values ('8', '11', 'Â«»Í', 8000, 3, 80);
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('7', '13', '¾Ë¹ä', 8000, 1, 80);
+values ('8', '13', '¾Ë¹ä', 8000, 1, 80);
 
 insert into fook_payment_detail(payment_id, food_id, food_name, price, count, point)
-values ('8', '3', '¹ÙÁö¶ôÄ®±¹¼ö', 7000, 8, 70);
+values ('9', '3', '¹ÙÁö¶ôÄ®±¹¼ö', 7000, 8, 70);
 
 
 COMMIT;
