@@ -12,10 +12,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
-import kitri.foodCourt.management.member.AdminTable;
-import kitri.foodCourt.management.member.MemberTable;
-
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.event.*;
@@ -51,7 +47,6 @@ public class AdminMemberInfo extends JPanel {
 	ModifyRegit mR;
 	RemoveMember rm;
 
-	ListSelectionModel lsm;
 
 	JFrame jfA = new JFrame();
 
@@ -77,7 +72,7 @@ public class AdminMemberInfo extends JPanel {
 		jpaMo = new JPanel();
 		card = new CardLayout();
 		maR = new ModifyAdminRegit();
-		mR = new ModifyRegit();
+		mR = new ModifyRegit(mt);
 		jpaMo.setLayout(card);
 		jpaMo.add(maR, "adminModi");
 		jpaMo.add(mR, "memberModi");
