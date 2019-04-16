@@ -21,9 +21,7 @@ public class MemberTable extends JPanel {
 	private JTable memberTable = new JTable(tableModel);
 	private AdminUserDao dao;
 	
-
 	String[] column = { "유저ID", "패스워드", "이름", "핸드폰번호", "사용가능포인트", "비밀번호 찾기용질문", "비밀번호 찾기용답변",  "가입일", "탈퇴일", "활성화여부" };
-
 	
 	public MemberTable() {
 		dao = new AdminUserDao();
