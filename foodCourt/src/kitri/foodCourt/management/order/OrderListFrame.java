@@ -10,8 +10,8 @@ public class OrderListFrame extends JFrame {
 
 	JPanel contentPane;
 	JScrollPane scrollPane = new JScrollPane();
-	JButton btnOrderview = new JButton("\uC8FC\uBB38 \uD655\uC778");
-	JButton btnComplete = new JButton("\uC644\uB8CC");
+	JButton btnOrderview = new JButton("\uC8FC\uBB38\uC815\uBCF4 \uD655\uC778");
+	JButton btnComplete = new JButton("\uC870\uB9AC \uC644\uB8CC");
 	JButton btnRemove = new JButton("\uC81C\uAC70");
 	JPanel panOrder = new JPanel();
 	GridBagLayout gbl_panel = new GridBagLayout();
@@ -88,11 +88,11 @@ public class OrderListFrame extends JFrame {
 		setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		
-		btnOrderview.setBounds(662, 91, 110, 87);
+		btnOrderview.setBounds(662, 51, 110, 87);
 		getContentPane().add(btnOrderview);
-		btnComplete.setBounds(662, 230, 110, 87);
+		btnComplete.setBounds(662, 188, 110, 87);
 		getContentPane().add(btnComplete);
-		btnRemove.setBounds(662, 365, 110, 87);
+		btnRemove.setBounds(662, 323, 110, 87);
 		btnRemove.setVisible(false);
 		getContentPane().add(btnRemove);
 		panBase.setBounds(0, 0, 650, 582);
@@ -116,6 +116,7 @@ public class OrderListFrame extends JFrame {
 		
 		panBase.add(scrollPane);
 		setBounds(200, 200, 800, 620);
+		setResizable(false);
 		// 이벤트 등록--------------------------
 		btnOrderview.addActionListener(orderController);
 		btnComplete.addActionListener(orderController);

@@ -20,7 +20,6 @@ public class AdminMainFrameService {
 		amf = this.amfc.amf;
 	}
 	
-	
 	public void showPanel(String str) {
 		amf.cl.show(amf.ampPanel, str);
 	}
