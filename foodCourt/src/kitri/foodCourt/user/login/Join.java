@@ -19,25 +19,25 @@ public class Join extends JPanel
    public JTextField nameFD;
    public JTextField phLastFD;
    public JTextField phMiddleFD;
+   public JTextField questionTF;
+   public JTextField answerTF;
+   public JPasswordField pwTextFD; 
+   public JPasswordField pwCheckFD;
    public JButton cancelbtn;
    public JButton signupbtn;
    public JButton doublechekbtn;
    public JComboBox comboBox;
-   public JPasswordField pwTextFD; 
-   public JPasswordField pwCheckFD;
    public JLabel pwCheckL;
   
    public LoginMain loginMain;
-   public JTextField questionTF;
-   public JTextField answerTF;
-   private JLabel label_7;
-   private JLabel label_8;
-   private JLabel lblNewLabel_1;
-   private JLabel label_10;
-   private JLabel label_11;
-   private JLabel label_12;
-   private JLabel label_13;
-   private JLabel label_14;
+   public JLabel label_7;
+   public JLabel label_8;
+   public JLabel lblNewLabel_1;
+   public JLabel label_10;
+   public JLabel label_11;
+   public JLabel label_12;
+   public JLabel label_13;
+   public JLabel label_14;
    
    public Join(LoginMain loginMain)
    {

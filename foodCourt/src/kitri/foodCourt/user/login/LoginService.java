@@ -50,6 +50,7 @@ public class LoginService {
     	//유효성 위로
 		if ((logc.login.idtextField.getText().isEmpty()) || (logc.login.pwtextfd.getPassword().length == 0)) {
 			javax.swing.JOptionPane.showMessageDialog(logc.login, "아이디 또는 비밀번호를 입력해 주세요.");
+			return;
 		}
     	
         try {
@@ -255,18 +256,25 @@ public class LoginService {
 		if ( id.isEmpty() || pw.isEmpty() || pwC.isEmpty()
 			|| name.isEmpty() || phM.isEmpty() || phL.isEmpty()) { // == 는 주소값 비교.
 			JOptionPane.showMessageDialog(logc.join, "빈 공간을 입력해 주세요.");
+			return;
 		}else if(doubleidCheck == 0 || doubleidCheck == 1) {
 			JOptionPane.showMessageDialog(logc.join, "중복 확인을 눌러주세요.");
+			return;
 		}else if ( id.length() > 32) {
 			JOptionPane.showMessageDialog(logc.join, "한글 16자 이하 또는 영어 32자 이하로 아이디를 작성하세요.");
+			return;
 		}else if (!(userIdJoin.equals(id))) {
 			JOptionPane.showMessageDialog(logc.join, "중복 확인을 눌러주세요.");
+			return;
 		}else if ( pwCheck == 0) {
 			JOptionPane.showMessageDialog(logc.join, "비밀번호를 확인해 주세요.");
+			return;
 		}else if (name.length() > 32) {
 			JOptionPane.showMessageDialog(logc.join, "한글 16자 이하 또는 영어 32자 이하로 이름을 작성하세요.");
+			return;
 		}else if (phM.length() != 4 || phL.length() != 4) {
 			JOptionPane.showMessageDialog(logc.join, "휴대폰 번호를 각각 4자리만 입력해 주세요.");
+			return;
 		}
 		
 		
@@ -307,6 +315,7 @@ public class LoginService {
 				logc.loginMain.setVisible(false);
 				logc.loginMain.foodMain.dataSetting();
 				logc.loginMain.foodMain.setVisible(true);
+				javax.swing.JOptionPane.showMessageDialog(logc.login, "가입이 완료되었습니다.");	
 			} else {
 				//비정상
 				return;
@@ -344,12 +353,21 @@ public class LoginService {
         
         System.out.println(phM.length());
 		
-        if (phM.length() != 4 || phL.length() != 4) {
-        	javax.swing.JOptionPane.showMessageDialog(logc.join, "핸드폰 번호를 제대로 입력해 주세요.");		
-		}else if (user_name.isEmpty()) {
+        
+        if (user_name.isEmpty()) {
         	javax.swing.JOptionPane.showMessageDialog(logc.join, "아이디를 입력 바랍니다.");
-		}else if (phM.isEmpty() || phL.isEmpty()) {
-        	javax.swing.JOptionPane.showMessageDialog(logc.join, "핸드폰 번호를 입력 바랍니다.");
+        	logc.findId.middleTF.setText("");
+			logc.findId.lastTF.setText("");
+			logc.findId.nameTF.setText("");
+        	logc.findId.nameTF.requestFocus();
+        	return;
+		}else if (phM.length() != 4 || phL.length() != 4) {
+        	javax.swing.JOptionPane.showMessageDialog(logc.join, "핸드폰 번호를 제대로 입력해 주세요.");	
+        	logc.findId.middleTF.setText("");
+			logc.findId.lastTF.setText("");
+			logc.findId.nameTF.setText("");
+        	logc.findId.nameTF.requestFocus();
+        	return;
 		}
         
   	
@@ -392,6 +410,11 @@ public class LoginService {
 			
 			if (check == 0) {
 				javax.swing.JOptionPane.showMessageDialog(logc.join, "일치하는 아이디가 없습니다.");
+				logc.findId.middleTF.setText("");
+				logc.findId.lastTF.setText("");
+				logc.findId.nameTF.setText("");
+	        	logc.findId.nameTF.requestFocus();
+
 			}
 			
 			
@@ -412,11 +435,11 @@ public class LoginService {
 		
 	}
 
+	
+	
+	
+	
 	String findPwId; // 비밀번호  재변경시 필요
-	
-	
-	
-	
 	
 	
 //	비밀번호 찾기 페이지
@@ -524,7 +547,6 @@ public class LoginService {
 				
 				if (findPwId.equals(DBuser_id)) {
 					if (answerTF.equals(AnswerTF)) {
-						logc.findPwCheck.answerTF.setText("");
 						logc.findPwMain.card.show(logc.findPwMain.panMain, "findRPw");
 					}else {
 						javax.swing.JOptionPane.showMessageDialog(logc.findPwCheck, "질문이 일치하지 않습니다.");					
@@ -533,6 +555,7 @@ public class LoginService {
 
 			}
 			
+			logc.findPwCheck.answerTF.setText("");
 			
 			
 		} catch (SQLException e) {
@@ -594,7 +617,7 @@ public class LoginService {
 			}
 						
 			
-			
+			logc.findRPw.pwTF.requestFocus();		
 			
 		
 		} catch (SQLException e) {

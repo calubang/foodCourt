@@ -2,6 +2,8 @@ package kitri.foodCourt.user.login;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.event.*;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -23,7 +25,7 @@ public class FindIdMain extends JFrame
    {
      this.loginMain = loginMain;
      
-     setDefaultCloseOperation(3);
+     setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
      setBounds(100, 100, 450, 300);
      this.contentPane = new JPanel();
      this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -39,5 +41,6 @@ public class FindIdMain extends JFrame
      this.panMain.setBounds(0, 0, 600, 400);
      this.card.show(this.panMain, "findId");
      setVisible(false);
+     
 	}
 }
