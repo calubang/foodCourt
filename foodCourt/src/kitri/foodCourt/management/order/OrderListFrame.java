@@ -2,9 +2,10 @@ package kitri.foodCourt.management.order;
 
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 public class OrderListFrame extends JFrame {
 
 	JPanel contentPane;
@@ -14,12 +15,16 @@ public class OrderListFrame extends JFrame {
 	JButton btnOrderview = new JButton("\uC8FC\uBB38 \uD655\uC778");
 	JButton btnComplete = new JButton("\uC644\uB8CC");
 	JButton btnRemove = new JButton("\uC81C\uAC70");
-	
-	List<OrderList> list = new Vector<OrderList>();
-	Map<String, OrderList> map = new HashMap<String, OrderList>();
-	
+
+//	List<OrderList> list = new Vector<OrderList>();	
+//	Map<String, OrderList> map = new HashMap<String, OrderList>();
+	Map<String, OrderList> tmap = new TreeMap<String, OrderList>(Collections.reverseOrder()); // 내림차순 정렬을 하기위한 맵 덕분에
+																								// list안써도댐
+	Iterator<String> iteratorKey; // 키값 오름차순 정렬(기본)
+
 	OrderController orderController;
 	String selectedRequestNumber = ""; // 현재 누른 버튼 가져오기
+
 	/**
 	 * Launch the application.
 	 */
@@ -35,25 +40,36 @@ public class OrderListFrame extends JFrame {
 	}
 
 	public void addOrder() { // 여기서 리스트를 받아온다
+		iteratorKey = tmap.keySet().iterator();
 		int gridx = 0;
 		int gridy = 0;
-		for (OrderList order : list) {
-			OrderListButton orderListButton = new OrderListButton(order.getRequestNumber());
+		while (iteratorKey.hasNext()) {
+			String key = iteratorKey.next();
+			System.out.println(key + "," + tmap.get(key));
+			OrderListButton orderListButton = new OrderListButton(tmap.get(key).getRequestNumber());
 			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 			gbc_btnNewButton.insets = new Insets(0, 0, 9, 17);
 			gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
 			gbc_btnNewButton.gridx = gridx;
 			gbc_btnNewButton.gridy = gridy;
 			panel.add(orderListButton, gbc_btnNewButton);
-			
-			orderListButton.setName(order.getRequestNumber());
+
+			orderListButton.setName(tmap.get(key).getRequestNumber());
 			orderListButton.addActionListener(orderController);
-			//여기서 전에 클릭이 되었었는지 처리완료가 되있었는지 판단해서 볼더를 주거나 색을 칠해준다
+			// 여기서 전에 클릭이 되었었는지 처리완료가 되있었는지 판단해서 볼더를 주거나 색을 칠해준다
+			if (tmap.get(key).isComplete()) {
+				orderListButton.setBackground(Color.gray);
+			}
+			if (tmap.get(key).getRequestNumber().equals(selectedRequestNumber))
+				orderListButton.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 			gridx++;
 			if (gridx > 4) {
 				gridx = 0;
 				gridy++;
 			}
+			// 이버튼의 주소값을 넣어줘야 이벤트처리가 가능하다 (그러므로 orderlist에 button 필드 하나 추가??
+			// 그러면 버튼이 새로 생성될때마다 넣어줘야한다
+			tmap.get(key).setButton(orderListButton);
 		}
 	}
 
@@ -86,8 +102,8 @@ public class OrderListFrame extends JFrame {
 		btnRemove.setBounds(662, 365, 110, 87);
 		btnRemove.setVisible(false);
 		getContentPane().add(btnRemove);
-		
-		//이벤트 등록--------------------------
+		setBounds(200, 200, 800, 620);
+		// 이벤트 등록--------------------------
 		orderController = new OrderController(this);
 		btnOrderview.addActionListener(orderController);
 		btnComplete.addActionListener(orderController);

@@ -19,6 +19,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
 import kitri.foodCourt.management.menu.AdminMenuManagement;
+import kitri.foodCourt.management.order.OrderListFrame;
 import kitri.foodCourt.management.payment.AdminPayment;
 import kitri.foodCourt.management.regit.AdminMemberInfo;
 import kitri.foodCourt.management.request.AdminRequest;
@@ -49,8 +50,8 @@ public class AdminMainFrame extends JFrame {
 	AdminMainFrameControl amfc;
 	
 	CardLayout cl = new CardLayout(0, 0);
-	
-	
+	// 요청한 주문 목록 프레임
+	OrderListFrame orderListFrame = new OrderListFrame();
 	/**
 	 * Launch the application.
 	 */

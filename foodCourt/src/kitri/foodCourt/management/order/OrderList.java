@@ -3,6 +3,7 @@ package kitri.foodCourt.management.order;
 import java.util.Vector;
 
 public class OrderList { 
+	private OrderListButton button;
 	private String  requestNumber;
 	private boolean checkComplete = false; // 이 정보를 바탕으로 새로고침 하면서 체크된 주문 목록 표시
 	private Vector<String> menuName = new Vector<String>();
@@ -34,10 +35,16 @@ public class OrderList {
 	public int getMenuCountSize() {
 		return menucount.size();
 	}
-	public void setCheck() {
+	public void setComplete() {
 		this.checkComplete = true;
 	}
-	public boolean isCheck() {
+	public boolean isComplete() {
 		return this.checkComplete;
+	}
+	public void setButton(OrderListButton button) {
+		this.button = button; 
+	}
+	public OrderListButton getButton() {
+		return this.button;
 	}
 }

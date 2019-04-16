@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class OrderListButton extends JButton{
 	private String requestNumber;
-	private boolean visible = false;
+//	private boolean visible = false; //??왜만들었었지
 	public OrderListButton(String requestNumber) {
 		super(requestNumber);
 		this.requestNumber = requestNumber;
@@ -22,9 +22,9 @@ public class OrderListButton extends JButton{
 		setPreferredSize(ds);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
-	public boolean isVisible() {
-		return this.visible;
-	}
+//	public boolean isVisible() {
+//		return this.visible;
+//	}
 	public String getRequestNumber() {
 		return this.requestNumber;
 	}}
