@@ -85,7 +85,7 @@ public class FindRPw extends JPanel
      this.pwTF.setBounds(147, 156, 307, 37);
      add(this.pwTF);
     
-     checkL = new JLabel("입력한 비밀번호가 다릅니다.");
+     checkL = new JLabel("\uBE44\uBC00\uBC88\uD638\uB97C \uC785\uB825\uD574 \uC8FC\uC138\uC694.");
      checkL.setFont(new Font("굴림", 0, 12));
      checkL.setBounds(147, 260, 168, 23);
      add(checkL);

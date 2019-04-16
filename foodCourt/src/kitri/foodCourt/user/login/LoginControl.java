@@ -112,17 +112,6 @@ public class LoginControl implements ActionListener, KeyListener {
 			this.findPwMain.card.show(this.findPwMain.panMain, "findPw");
 			
 
-//			public JTextField idTextFD;
-//			public JTextField pwTextFD;
-//			public JTextField pwCheckFD;
-//			public JTextField nameFD;
-//			public JTextField phLastFD;
-//			public JTextField phMiddleFD;
-//			public JButton cancelbtn;
-//			public JButton sinupbtn;
-//			public JButton doublechekbtn;
-//			public JComboBox comboBox;
-			
 			
 //		회원가입 페이지
 		} else if (ob == this.loginMain.panJoin.cancelbtn) {
@@ -136,9 +125,6 @@ public class LoginControl implements ActionListener, KeyListener {
 		} else if (ob == this.loginMain.panJoin.doublechekbtn) {
 			loginService.doubleCheck();
 		} 
-//		else if (ob == this.loginMain.panJoin.comboBox) {
-//			
-//		}
 		else if (ob == loginMain.panJoin.signupbtn) {
 			loginService.signUp();
 		}
