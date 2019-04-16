@@ -15,15 +15,14 @@ public class OrderListFrame extends JFrame {
 	JButton btnRemove = new JButton("\uC81C\uAC70");
 	JPanel panOrder = new JPanel();
 	GridBagLayout gbl_panel = new GridBagLayout();
-//	List<OrderList> list = new Vector<OrderList>();	
-//	Map<String, OrderList> map = new HashMap<String, OrderList>();
+	private final JPanel panBase = new JPanel();
+	
 	Map<Integer, OrderList> tmap = new TreeMap<Integer, OrderList>(Collections.reverseOrder()); // 내림차순 정렬을 하기위한 맵 덕분에
-																								// list안써도댐
-	Iterator<Integer> iteratorKey; // 키값 오름차순 정렬(기본)
+	Iterator<Integer> iteratorKey; // 키값 오름차순 정렬(기본)									// list안써도댐
+	int selectedRequestNumber = 0; // 현재 누른 버튼 가져오기
 
 	OrderController orderController;
-	int selectedRequestNumber = 0; // 현재 누른 버튼 가져오기
-	private final JPanel panBase = new JPanel();
+	OrderDetailDialog orderDetailDialog;
 
 	/**
 	 * Launch the application.
@@ -83,8 +82,7 @@ public class OrderListFrame extends JFrame {
 	public OrderListFrame() {
 		orderController = new OrderController(this);
 		new Thread(new OrderListServer(new OrderService(orderController))).start();
-		
-		
+		orderDetailDialog = new OrderDetailDialog(this);
 		setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		

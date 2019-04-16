@@ -54,7 +54,6 @@ public class LoginService {
 		}
     	
         try {
-        	
         	conn = DBConnection.getConnection();
 			pstm = conn.prepareStatement(quary);
 			rs = pstm.executeQuery();

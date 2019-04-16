@@ -1,6 +1,7 @@
 package kitri.foodCourt.management.order;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.swing.border.LineBorder;
@@ -9,10 +10,11 @@ public class OrderService {
 	StringTokenizer st;
 	OrderController orderController;
 	OrderListFrame main;
-
+	int request;
 	public OrderService(OrderController orderController) {
 		this.orderController = orderController;
 		main = orderController.orderListFrame;
+		request = main.selectedRequestNumber;
 	}
 
 	// order리스트의 갱신을 담당
@@ -54,18 +56,40 @@ public class OrderService {
 
 	// 주문정보 프레임 띄우기
 	public void visibleOrder() {
-		System.out.println("visibleOrder");
-		System.out.println(main.selectedRequestNumber);
-		main.setVisible(true);
+		// 현재 시간 구하기
+		if (isRequestNotZero()) {
+			long time = System.currentTimeMillis();
+			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+			String str = dayTime.format(new Date(time));
+
+//		1. 현재 orderlist가져와서 
+//		2. main detail jtable에 뿌려주고
+//		3. setvisible 시켜주기
+			System.out.println("visibleOrder");
+			OrderList orderList = getSelectedOrderList();
+			int len = orderList.getMenuNameSize();
+			Vector<String[]> menuList = new Vector<String[]>();
+			String menu[] = new String[2];
+			for (int i = 0; i < len; i++) {
+				menu[0] = orderList.getMenuName(i);
+				menu[1] = orderList.getMenuCount(i);
+				menuList.add(menu);
+			}
+			main.orderDetailDialog.labRequestNum.setText(Integer.toString(request));
+			main.orderDetailDialog.labTimeNow.setText(str);
+			main.orderDetailDialog.setOrderDetail(len, menuList);
+			main.orderDetailDialog.revalidate();
+			main.orderDetailDialog.setVisible(true);
+		}
 	}
 
 	// 주문버튼 완료 처리 (버튼의 색을 바꿔준다)
 	public void completeOrder() {
 		System.out.println("completeOrder");
-		System.out.println(main.selectedRequestNumber);
-		if (!main.tmap.get(main.selectedRequestNumber).isComplete()) {
-			main.tmap.get(main.selectedRequestNumber).setComplete();
-			main.tmap.get(main.selectedRequestNumber).getButton().setBackground(Color.GREEN);
+		System.out.println(request);
+		if (isRequestNotZero() && !getSelectedOrderList().isComplete()) {
+			getSelectedOrderList().setComplete();
+			getSelectedButton().setBackground(Color.GREEN);
 			refresh();
 			main.btnRemove.setVisible(true);
 		}
@@ -74,9 +98,9 @@ public class OrderService {
 	// 완료된 버튼 지우기 (완료 처리 된 버튼을 클릭했을때만 보여진다)
 	public void removeOrder() {
 		System.out.println("removeOrder");
-		System.out.println(main.selectedRequestNumber);
-		main.tmap.remove(main.selectedRequestNumber);
-		main.selectedRequestNumber = 0;
+		System.out.println(request);
+		main.tmap.remove(request);
+		request = 0;
 		constructOrderList();
 		main.btnRemove.setVisible(false);
 	}
@@ -85,11 +109,12 @@ public class OrderService {
 	// 버튼을 누를때 check를 판단해서 제거 버튼을 활성/ 비활성 시켜야함
 	public void setGlobalOrderButton(Object object) {
 		System.out.println("setGlobalOrderButton");
-		System.out.println("requestNumber : " + main.selectedRequestNumber);
+		System.out.println("requestNumber : " + request);
 		OrderListButton orderListButton = (OrderListButton) object;
-		if (main.selectedRequestNumber != 0) {
-			if (!orderListButton.getName().equals(Integer.toString(main.selectedRequestNumber))) { // orderlist안에 버튼 넣어서 주소값 가져오기 성공
-				main.tmap.get(main.selectedRequestNumber).getButton().setBorder(null);
+		if (isRequestNotZero()) {
+			if (!orderListButton.getName().equals(Integer.toString(request))) { // orderlist안에 버튼 넣어서
+																									// 주소값 가져오기 성공
+				getSelectedButton().setBorder(null);
 				setClick(orderListButton);
 			}
 		} else { // 아무것도 선택되어있지 않을때
@@ -103,9 +128,9 @@ public class OrderService {
 
 	private void setClick(OrderListButton button) {
 		System.out.println("setClick");
-		//TODO 지금 여기서 문제 찾아야해 완료되어있는 버튼 눌러도 제거버튼이 활성화안되는 에러발견
+		// TODO 지금 여기서 문제 찾아야해 완료되어있는 버튼 눌러도 제거버튼이 활성화안되는 에러발견
 		button.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		main.selectedRequestNumber = Integer.parseInt(button.getName());
+		request = Integer.parseInt(button.getName());
 		refresh();
 	}
 
@@ -114,8 +139,8 @@ public class OrderService {
 		main.panOrder.removeAll();
 		// 재생성
 		main.addOrder();
-		if (main.selectedRequestNumber!=0) {
-			if (!main.tmap.get(main.selectedRequestNumber).isComplete())
+		if (isRequestNotZero()) {
+			if (!getSelectedOrderList().isComplete())
 				main.btnRemove.setVisible(false);
 			else
 				main.btnRemove.setVisible(true);
@@ -127,5 +152,19 @@ public class OrderService {
 	private void refresh() {
 		main.panOrder.revalidate();
 		main.panOrder.repaint();
+	}
+
+	private OrderListButton getSelectedButton() {
+		return main.tmap.get(request).getButton();
+	}
+
+	private OrderList getSelectedOrderList() {
+		return main.tmap.get(request);
+	}
+	private boolean isRequestNotZero() {
+		if(request != 0)
+			return true;
+		else 
+			return false;
 	}
 }

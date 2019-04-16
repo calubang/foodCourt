@@ -1,5 +1,6 @@
 package kitri.foodCourt.management.order;
 
+import java.util.List;
 import java.util.Vector;
 
 public class OrderList { 
@@ -7,13 +8,13 @@ public class OrderList {
 	private int  requestNumber;
 	private boolean checkComplete = false; // 이 정보를 바탕으로 새로고침 하면서 체크된 주문 목록 표시
 	private Vector<String> menuName = new Vector<String>();
-	private Vector<String> menucount = new Vector<String>();
+	private Vector<String> menuCount = new Vector<String>();
 	public void addMenuName(String name) {
 		System.out.println("");
 		menuName.add(name);
 	}
 	public void addMenuCount(String count) {
-		menucount.add(count);
+		menuCount.add(count);
 	}
 	public void setRequestNumber(int requestNumber) {
 		this.requestNumber = requestNumber;
@@ -27,14 +28,14 @@ public class OrderList {
 	}
 	
 	public String getMenuCount(int i) {
-		return menucount.get(i);
+		return menuCount.get(i);
 	}
 	public int getMenuNameSize() {
 		return menuName.size();
 	}
 	
 	public int getMenuCountSize() {
-		return menucount.size();
+		return menuCount.size();
 	}
 	public void setComplete() {
 		this.checkComplete = true;
@@ -48,4 +49,10 @@ public class OrderList {
 	public OrderListButton getButton() {
 		return this.button;
 	}
+//	public List<String> getMenuNameList() {
+//		return menuName;
+//	}
+//	public List<String> getMenuCountList() {
+//		return menuCount;
+//	}
 }
