@@ -91,7 +91,7 @@ public class Login extends JPanel {
      add(this.idlabel);
      
      this.label_2 = new JLabel();
-     this.label_2.setIcon(new ImageIcon(Login.class.getResource(Constance.userImagePath+"mainimage.png")));
+     this.label_2.setIcon(new ImageIcon(Login.class.getResource(Constance.USER_IMAGE_PATH+"mainimage.png")));
      this.label_2.setBounds(412, 84, 365, 274);
      add(this.label_2);
      
