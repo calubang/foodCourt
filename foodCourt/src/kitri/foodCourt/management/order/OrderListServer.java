@@ -40,9 +40,9 @@ public class OrderListServer implements Runnable {
 //						100|requestNumber|음식이름|갯수|음식이름|갯수 ~~
 					requestNumber = st.nextToken();
 					if (service.addOrderList(requestNumber, st.nextToken())) {
-						unicast(OrderConatance.SC_ORDER + "|" + "true", out);
+						unicast(OrderConatance.SC_ORDER_RESULT + "|" + "true", out);
 					} else {
-						unicast(OrderConatance.SC_ORDER + "|" + "false", out);
+						unicast(OrderConatance.SC_ORDER_RESULT + "|" + "false", out);
 					}
 					break;
 				}
@@ -60,9 +60,5 @@ public class OrderListServer implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static void main(String[] args) {
-		new Thread(new OrderListServer()).start();
 	}
 }

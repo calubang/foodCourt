@@ -77,7 +77,7 @@ public class OrderListFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public OrderListFrame() {
-
+		new Thread(new OrderListServer()).start();
 		setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		gbl_panel.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
