@@ -28,6 +28,8 @@ import javax.swing.JTextArea;
 @SuppressWarnings("serial")
 public class AdminMenuManagement extends JPanel {
 
+	String adminID;
+	
 	JTextField searchTextField = new JTextField();
 	JTextArea descriptionTextArea = new JTextArea();
 
@@ -68,9 +70,11 @@ public class AdminMenuManagement extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdminMenuManagement() {
+	public AdminMenuManagement(String adminID) {
 		setSize(new Dimension(1008, 722));
 		setLayout(null);
+		
+		this.adminID = adminID;
 		
 		searchLabel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		searchLabel.setFont(new Font("±¼¸²", Font.PLAIN, 24));

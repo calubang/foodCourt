@@ -88,7 +88,7 @@ import javax.swing.JTextField;
      answerTF.setBounds(147, 213, 307, 37);
      add(answerTF);
      
-     questionL = new JLabel("\uC9C8\uBB38 \uBD88\uB7EC\uC624\uAE30.");
+     questionL = new JLabel("\uC9C8\uBB38\uC774 \uC5C6\uC2B5\uB2C8\uB2E4.");
      questionL.setBounds(147, 156, 307, 37);
      add(questionL);
      

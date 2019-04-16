@@ -114,7 +114,7 @@ public class AdminRegisterService {
 
 		} else {
 			ami.card.show(ami.jpaMo, "memberModi");
-			ami.jfMo.setSize(600, 650);
+			ami.jfMo.setSize(600, 740);
 
 		}
 		ami.jfMo.setVisible(true);

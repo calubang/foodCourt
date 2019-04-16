@@ -94,6 +94,8 @@ public class UserInfoService {
 		userDto.setPhoneNumberFirst(userInfo.cbPhoneFirst.getSelectedItem().toString());
 		userDto.setPhoneNumberMiddle(userInfo.tfPhoneMiddle.getText());
 		userDto.setPhoneNumberlast(userInfo.tfPhoneLast.getText());
+		userDto.setPasswordQuiz(userInfo.tfPasswordQuiz.getText());
+		userDto.setPasswordAnswer(userInfo.tfPasswordAnswer.getText());
 		
 		if(dao.modify(userDto) != 1) {
 			return;
@@ -111,7 +113,7 @@ public class UserInfoService {
 	}
 	
 	public boolean allSameData() {
-		User user = foodMain.user;
+		User user = User.getInstance();
 		//ÀÌ¸§
 		if( !userInfo.tfName.getText().equals(user.getName())) {
 			return false;
@@ -133,11 +135,35 @@ public class UserInfoService {
 		if(!newPassword.isEmpty() && !newPassword.equals(user.getPassword()) ) {
 			return false;
 		}
+		
+		//ºñ¹Ð¹øÈ£ Ã£±â
+		if( !userInfo.tfPasswordQuiz.getText().equals(user.getPasswordQuiz())) {
+			return false;
+		}
+		if( !userInfo.tfPasswordAnswer.getText().equals(user.getPasswordAnswer()) ) {
+			return false;
+		}
 
 		return true;
 	}
 
 	public void cancel() {
 		foodMain.foodMainController.foodMainService.clickMain();
+	}
+	
+	//È¸¿øÅ»Åð
+	public void secession() {
+		int result = SwingFactory.getOptionPane("warning", userInfo, "Å»Åð È®ÀÎ", "Å»ÅðÇÏ¸é ¸ðµç Æ÷ÀÎÆ®°¡ ¼Ò¸êµË´Ï´Ù.\nÁ¤¸» Å»Åð ÇÏ½Ã°Ú½À´Ï±î?");
+		if(result == 0) {
+			//Å»Åð
+			User user = User.getInstance();
+			if(dao.secession(user.getUserId()) == 1) {
+				//Á¤»óÅ»Åð
+				user.logout();
+				foodMain.setVisible(false);
+			}
+		} else {
+			return;
+		}
 	}
 }

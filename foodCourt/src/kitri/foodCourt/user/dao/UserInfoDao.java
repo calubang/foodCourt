@@ -29,6 +29,8 @@ public class UserInfoDao {
 				"    , phone_first = ?\r\n" + 
 				"    , phone_middle = ?\r\n" + 
 				"    , phone_last = ?\r\n" + 
+				"    , password_quiz = ?\r\n" + 
+				"    , password_answer = ?\r\n" + 
 				"where user_id = ?\r\n";
 		try {
 			con = connectionMaker.makeConnection();
@@ -39,6 +41,8 @@ public class UserInfoDao {
 			ps.setString(4, modifyUser.getPhoneNumberMiddle());
 			ps.setString(5, modifyUser.getPhoneNumberlast());
 			ps.setString(6, modifyUser.getUserId());
+			ps.setString(7, modifyUser.getPasswordQuiz());
+			ps.setString(8, modifyUser.getPasswordAnswer());
 			
 			int result = ps.executeUpdate();
 			
@@ -69,5 +73,32 @@ public class UserInfoDao {
 		if(con != null) {
 			con.close();
 		}
+	}
+
+	public int secession(String userId) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = 
+				"delete from fook_user\r\n" + 
+				"where user_id = ?";
+		
+		try {
+			con = connectionMaker.makeConnection();
+			ps = con.prepareStatement(sql);
+			
+			return ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("DB failed : User Secession");
+			e.printStackTrace();
+		} finally {
+			try {
+				closeConnection(con, ps, null, sql);
+			} catch(SQLException e) {
+				System.out.println("DB close failed : User Secession");
+				e.printStackTrace();
+			}
+		}
+		return -1;
 	}
 }

@@ -3,6 +3,9 @@ package kitri.foodCourt.user;
 import kitri.foodCourt.dto.UserDto;
 
 public class User {
+	//하나의 유저만 가질수 있도록 싱글톤 적용
+	private static User user =  new User();
+	
 	//공통정보 
 	private String userId;
 	private String name;
@@ -20,17 +23,21 @@ public class User {
 	//하나의 장바구니
 	Basket basket;
 	
-	public User() {
+	private User() {
 		super();
 		basket = new BasketImpl();
 	}
 	
-	public User(String userId, String name, int userPoint) {
+	private User(String userId, String name, int userPoint) {
 		super();
 		this.userId = userId;
 		this.name = name;
 		this.userPoint = userPoint;
 		basket = new BasketImpl();
+	}
+	
+	public static User getInstance() {
+		return user;
 	}
 	
 	public void setUserId(String userId) {
@@ -114,6 +121,19 @@ public class User {
 		userDto.setPhoneNumberlast(phoneNumberlast);
 		userDto.setUserPoint(userPoint);
 		return userDto;
+	}
+	
+	public void logout() {
+		user.userId = null;
+		user.password = null;
+		user.name = null;
+		user.phoneNumberFirst = null;
+		user.phoneNumberMiddle = null;
+		user.phoneNumberlast = null;
+		user.passwordQuiz = null;
+		user.passwordAnswer = null;
+		user.userPoint = 0;
+		user.basket = new BasketImpl();
 	}
 	
 
