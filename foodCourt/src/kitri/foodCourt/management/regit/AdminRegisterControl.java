@@ -1,6 +1,9 @@
 package kitri.foodCourt.management.regit;
 
 import java.awt.event.*;
+
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 public class AdminRegisterControl implements ActionListener, KeyListener {
 
 	AdminMemberInfo ami;
@@ -92,5 +95,7 @@ public class AdminRegisterControl implements ActionListener, KeyListener {
 			ars.pwCompare();
 		}
 	}
+
+	
 
 }

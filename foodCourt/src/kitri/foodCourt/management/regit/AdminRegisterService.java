@@ -6,9 +6,9 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import kitri.foodCourt.db.ConnectionMaker;
 import kitri.foodCourt.db.DbFactory;
@@ -38,7 +38,8 @@ public class AdminRegisterService {
 	int checkid;
 	int pwcheck;
 	String checkidjoin;
-	AdminTable at;
+	public AdminTable at;
+	DefaultTableModel dtm;
 
 	public AdminRegisterService(AdminRegisterControl arc) {
 		connectionMaker = DbFactory.connectionMaker("oracle");
@@ -53,7 +54,7 @@ public class AdminRegisterService {
 		maR = ami.maR;
 		mR = ami.mR;
 		rm = ami.rm;
-
+		dtm = ami.at.dtm;
 	}
 
 	// 관리자등록
@@ -92,7 +93,7 @@ public class AdminRegisterService {
 	// 관리자/회원수정
 	public void showmodify() {
 		if (ami.check == false) {
-			//관리자
+			// 관리자
 			int SelectRow = ami.at.adt.getSelectedRow();
 
 			if (SelectRow == -1) {
@@ -107,7 +108,7 @@ public class AdminRegisterService {
 			ami.jfMo.setVisible(true);
 			return;
 		} else {
-			//회원
+			// 회원
 			int SelectRow = ami.mt.table.getSelectedRow();
 
 			if (SelectRow == -1) {
@@ -115,7 +116,7 @@ public class AdminRegisterService {
 				Close(ami.jfMoD);
 				return;
 			}
-			
+
 			ami.card.show(ami.jpaMo, "memberModi");
 			ami.mR.dataSetting();
 			ami.mR.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
@@ -123,26 +124,49 @@ public class AdminRegisterService {
 			ami.jfMo.setVisible(true);
 			return;
 		}
-//		ami.jfMo.setVisible(true);
-//		int SelectRow = at.adt.getSelectedRow();
-//		if (SelectRow == -1) {
-//			JOptionPane.showMessageDialog(ami.maR, "선택 되지 않았습니다.");
-//			Close(ami.jfMoD);
-//			return;
-//		}
 
-		
-
-		
 	}
 
 	// 관리자/회원삭제
 	public void showdelete() {
 		int resultQuery = 0;
-
 		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "정말 삭제하시겠습니까?\n(삭제하면 다시 되돌릴 수 없습니다.)", "삭제 확인",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 
+		int selectRow = ami.at.adt.getSelectedRow();
+		String quary = ("delete from fook_manager "
+					+ "where manager_id = (?)");
+
+		if (result == JOptionPane.OK_OPTION) {
+			if (selectRow >= 0) {
+				selectRow = ami.at.adt.convertRowIndexToModel(selectRow);
+				Object ob = ami.at.adt.getModel().getValueAt(selectRow, 0);
+
+				try {
+					conn = connectionMaker.makeConnection();
+					pstm = conn.prepareStatement(quary);
+
+					pstm.setString(1, (String) ob);
+
+					resultQuery = pstm.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						connectionMaker.closeConnection(conn, pstm, rs);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+
+				}
+				dtm.removeRow(selectRow);
+			}
+		} else {
+			return;
+		}
+		if (resultQuery == 0) {
+			JOptionPane.showMessageDialog(ami.deleteBtn, "선택 되지 않았습니다.");
+		}
 	}
 
 	// 관리자창 - 등록버튼
@@ -160,9 +184,11 @@ public class AdminRegisterService {
 		String email = ami.ar.email.getText();
 		String domain = ami.ar.emaildomain.getText();
 		String address = ami.ar.addresstf.getText();
-		int r = 0;
-
-		String quary = "insert into fook_manager(MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID,ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) values(?,?,?,?,?,?,?,?,?,?,?)";
+		
+		int result = 0;
+		Object[] rowData = new Object[12];
+		
+		String quary = "insert into fook_manager(MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID,hire_date,ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) values(?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		if (id.isEmpty() || pw.isEmpty() || pwtf.isEmpty() || name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()) {
 			JOptionPane.showMessageDialog(ami.ar, "빈 공간을 입력해 주세요.");
@@ -184,15 +210,46 @@ public class AdminRegisterService {
 			pstm.setString(5, nummid);
 			pstm.setString(6, numlast);
 			pstm.setString(7, jobid);
-			pstm.setString(8, null);
-			pstm.setString(9, address);
-			pstm.setString(10, email);
-			pstm.setString(11, domain);
+			pstm.setString(8, "");
+			pstm.setString(9, "12345");
+			pstm.setString(10, address);
+			pstm.setString(11, email);
+			pstm.setString(12, domain);
 
-			r = pstm.executeUpdate();
+			result = pstm.executeUpdate();
+			
+			pstm.close();
+			pstm = conn.prepareStatement("SELECT \n" + 
+					"    MANAGER_ID\n" + 
+					"    ,NAME\n" + 
+					"    ,PASSWORD\n" + 
+					"    ,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn\n" + 
+					"    ,fj.job_name as job_name\n" + 
+					"    ,HIRE_DATE\n" + 
+					"    ,ADDRESS_ZIP\n" + 
+					"    ,ADDRESS\n" + 
+					"    ,EMAIL\n" + 
+					"    ,EMAIL_DOMAIN \n" + 
+					"FROM \n" + 
+					"    FOOK_MANAGER fm \n" + 
+					"    , fook_job fj \n" + 
+					"where fm.job_id = fj.job_id(+)");
+			rs = pstm.executeQuery();
+			if((result != 0) && rs.next()) {
+				rowData[0] = id;
+				rowData[1] = name;
+				rowData[2] = pw;
+				rowData[3] = rs.getString("pn");
+				rowData[4] = rs.getString("job_name");
+				rowData[5] = rs.getDate("HIRE_DATE");
+				rowData[6] = rs.getString("ADDRESS_ZIP");
+				rowData[7] = address;
+				rowData[8] = email;
+				rowData[9] = domain;
+			}
+			ami.at.dtm.addRow(rowData);
 			JOptionPane.showMessageDialog(ami.ar, "등록되었습니다");
 
-			ami.jfAD.setVisible(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -203,6 +260,7 @@ public class AdminRegisterService {
 			}
 
 		}
+		ami.jfAD.setVisible(false);
 	}
 
 	// 관리자 id중복확인
@@ -316,8 +374,6 @@ public class AdminRegisterService {
 
 	// 회원창 - 중복확인
 	public void mrId() {
-//		int result = JOptionPane.showOptionDialog(ar, "사용하시겠습니까", "중복확인", JOptionPane.YES_OPTION,
-//				JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 		String quary = "select user_id from fook_user";
 		checkidjoin = ami.ar.idtf.getText();
 		if (checkidjoin.isEmpty()) {
@@ -362,48 +418,108 @@ public class AdminRegisterService {
 
 	public void maRRegister() {
 
-		int SelectRow = at.adt.getSelectedRow();
-		if (SelectRow < 0) {
-			JOptionPane.showMessageDialog(ami.maR, "선택 되지 않았습니다.");
-			Close(ami.jfMoD);
+		int SelectRow = ami.at.adt.convertRowIndexToModel(ami.at.adt.getSelectedRow());
+		int result = 0;
+		String quary = ("update fook_manager "
+					+ "set password = (?), name = (?), phone_first = (?), phone_middle = (?), phone_last = (?),job_id = (?), address = (?), email = (?), email_domain = (?)"
+					+ "where manager_id = (?)");
+		Object[] rowData = new Object[10];
+		String admin_id = maR.getidlabel.getText();
+		String admin_pw = maR.passwordtf.getText();
+		if (admin_pw.isEmpty()) {
+			JOptionPane.showMessageDialog(maR.registerbtn, "비밀번호를 입력하세요");
 			return;
 		}
-
-		String quary = "select NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, fj.job_name,ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN"
-				+ "from fook_manager fm, fook_job fj" + "where fm.job_id=fj.job_id,fm.name =(?)";
-
+		String admin_name = maR.nametf.getText();
+		if (admin_name.isEmpty()) {
+			JOptionPane.showMessageDialog(maR.registerbtn, "이름을 입력하세요");
+		}
+		String admin_phonefirst = (String) maR.fristnumber.getSelectedItem();
+		String admin_phonemid = maR.midnumber.getText();
+		if (admin_phonemid.isEmpty()) {
+			JOptionPane.showMessageDialog(maR.registerbtn, "번호를입력하세요");
+		}
+		String admin_phonelast = maR.lastnumber.getText();
+		if (admin_phonelast.isEmpty()) {
+			JOptionPane.showMessageDialog(maR.registerbtn, "번호를입력하세요");
+		}
+		String admin_jobid = (String) maR.jobname.getSelectedItem();
+		String admin_address = maR.addresstf.getText();
+		if (admin_address.isEmpty()) {
+			JOptionPane.showMessageDialog(maR.registerbtn, "주소를입력하세요");
+		}
+		String admin_email = maR.email.getText();
+		if (admin_email.isEmpty()) {
+			JOptionPane.showMessageDialog(maR.registerbtn, "이메일을입력하세요");
+		}
+		String admin_domain = maR.emaildomain.getText();
+		if (admin_domain.isEmpty()) {
+			JOptionPane.showMessageDialog(maR.registerbtn, "도메인을 입력하세요");
+		}
 		try {
-			System.out.println("오나");
-			SelectRow = at.adt.convertRowIndexToModel(SelectRow);
 			conn = connectionMaker.makeConnection();
 			pstm = conn.prepareStatement(quary);
-			pstm.setString(1, (String) at.dtm.getValueAt(SelectRow, 0));
+			
+			pstm.setString(1, admin_pw);
+			pstm.setString(2, admin_name);
+			pstm.setString(3, admin_phonefirst);
+			pstm.setString(4, admin_phonemid);
+			pstm.setString(5, admin_phonelast);
+			pstm.setString(6, admin_jobid);
+			pstm.setString(7, admin_address);
+			pstm.setString(8, admin_email);
+			pstm.setString(9, admin_domain);
+			pstm.setString(10, admin_id);
+			
+			result = pstm.executeUpdate();
+			
+			pstm.close();
+			
+			pstm = conn.prepareStatement("SELECT \n" + 
+					"    MANAGER_ID\n" + 
+					"    ,NAME\n" + 
+					"    ,PASSWORD\n" + 
+					"    ,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn\n" + 
+					"    ,fj.job_name as job_name\n" + 
+					"    ,HIRE_DATE\n" + 
+					"    ,ADDRESS_ZIP\n" + 
+					"    ,ADDRESS\n" + 
+					"    ,EMAIL\n" + 
+					"    ,EMAIL_DOMAIN \n" + 
+					"FROM \n" + 
+					"    FOOK_MANAGER fm \n" + 
+					"    , fook_job fj \n" + 
+					"where fm.job_id = fj.job_id(+)");
 			rs = pstm.executeQuery();
-			if (rs.next()) {
-				maR.nametf.setText(rs.getString("name"));
-				maR.passwordtf.setText(rs.getString("password"));
-				maR.fristnumber.setSelectedItem(rs.getString("phone_first"));
-				maR.midnumber.setText(rs.getString("phone_middle"));
-				maR.lastnumber.setText(rs.getString("phone_last"));
-				maR.jobname.setSelectedItem(rs.getString("job_name"));
-				maR.addresstf.setText(rs.getString("address"));
-				maR.email.setText(rs.getString("email"));
-				maR.emaildomain.setText(rs.getString("email_domain"));
+			if((result != 0) && rs.next()) {
+				rowData[0] = admin_id;
+				rowData[1] = admin_name;
+				rowData[2] = admin_pw;
+				rowData[3] = rs.getString("pn");
+				rowData[4] = admin_jobid;
+				rowData[5] = rs.getDate("HIRE_DATE");
+				rowData[6] = rs.getString("ADDRESS_ZIP");
+				rowData[7] = admin_address;
+				rowData[8] = admin_email;
+				rowData[9] = admin_domain;
+				
+			
+				int columNum = ami.at.dtm.getColumnCount();
+				for (int i = 0; i < columNum; i++) {
+					ami.at.dtm.setValueAt(rowData[i], SelectRow, i);
+				}
 			}
-
-			JOptionPane.showMessageDialog(ami.ar, "수정되었습니다");
-
-			ami.jfAD.setVisible(false);
+			ami.at.adt.setRowSelectionInterval(ami.at.adt.getSelectedRow(), ami.at.adt.getSelectedRow());
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		}finally {
 			try {
 				connectionMaker.closeConnection(conn, pstm, rs);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
 		}
+		ami.jfMoD.setVisible(false);
 	}
 
 	public void mRRegister() {
@@ -460,5 +576,4 @@ public class AdminRegisterService {
 		}
 	}
 
-	
 }
