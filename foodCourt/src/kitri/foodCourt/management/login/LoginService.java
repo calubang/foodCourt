@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import kitri.foodCourt.db.ConnectionMaker;
 import kitri.foodCourt.db.DbFactory;
 import kitri.foodCourt.management.main.AdminMainFrame;
+import kitri.foodCourt.management.order.OrderListFrame;
 
 
 public class LoginService {
@@ -72,8 +73,10 @@ public class LoginService {
 				warningMessage(l.loginbtn, "아이디 또는 패스워드가 일치하지 않습니다.", "관리자 로그인 오류");
 				return;
 			}
-			
-			new AdminMainFrame(adminID).setVisible(true);
+			AdminMainFrame adminMainFrame = new AdminMainFrame(adminID);
+			adminMainFrame.setVisible(true);
+			adminMainFrame.amfc.orderListFrame = new OrderListFrame();
+//			new AdminMainFrame(adminID).setVisible(true);
 			lm.dispose();
 		}
 	}

@@ -100,7 +100,7 @@ public class PaymentService {
 		// 네트워크 통신
 		// ---------------------------------------------------
 		Socket socket;
-		String orderStr = Integer.toString(user.getBasket().getRequestNumber());
+		String orderStr = Integer.toString(user.getBasket().getRequestNumber()) + "|";
 		boolean flag = true;
 		try {
 			socket = new Socket(OrderConatance.IP, OrderConatance.PORT);
@@ -108,12 +108,12 @@ public class PaymentService {
 			OutputStream out = socket.getOutputStream();
 			List<BasketDetail> list = user.getBasket().getDetailList();
 			for (BasketDetail basketDetail : list) {
-				orderStr += "|" + basketDetail.getFood().getFoodName() + "|" + basketDetail.getCount();
+				orderStr += basketDetail.getFood().getFoodName() + "^" + basketDetail.getCount() + "^";
 			}
 //			100|요청번호|음식이름|수량~
 			sendMassage(OrderConatance.CS_ORDER + "|" + orderStr, out);
 
-			while (true) {
+			while (flag) {
 				String msg = in.readLine();
 				System.out.println("서버가 보낸 메세지 : " + msg); 
 				StringTokenizer st = new StringTokenizer(msg, "|"); 
@@ -189,7 +189,7 @@ public class PaymentService {
 
 	private void sendMassage(String msg, OutputStream out) {
 		try {
-			out.write((msg + "\n").getBytes()); // BufferedReader는 enter key 기준
+			out.write((msg + "|\n").getBytes()); // BufferedReader는 enter key 기준
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

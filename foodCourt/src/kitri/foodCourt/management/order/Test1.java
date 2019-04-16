@@ -69,6 +69,7 @@ public class Test1 extends JFrame {
 		tmap.put("3", "3번째");
 		tmap.put("4", "4번째");
 		tmap.put("5", "5번째");
+		tmap.remove("3");
 	}
 	public void test() {
 		iteratorKey = tmap.keySet( ).iterator();

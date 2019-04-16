@@ -14,7 +14,6 @@ public class AdminMainFrameService {
 
 	AdminMainFrameControl amfc;
 	AdminMainFrame amf;
-
 	
 	public AdminMainFrameService(AdminMainFrameControl amfc) {
 		this.amfc = amfc;

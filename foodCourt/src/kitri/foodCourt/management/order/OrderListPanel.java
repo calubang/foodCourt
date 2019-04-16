@@ -15,7 +15,7 @@ public class OrderListPanel extends JPanel {
 	public OrderListPanel(ImageIcon roperImg, String foodName) {
 		setBackground(Color.WHITE);
 		
-		btnImg = new OrderListButton("order");
+		//btnImg = new OrderListButton("order");
 		labName = new JLabel(foodName);
 		labName.setFont(new Font("±¼¸²", Font.PLAIN, 16));
 		labName.setHorizontalAlignment(SwingConstants.CENTER);

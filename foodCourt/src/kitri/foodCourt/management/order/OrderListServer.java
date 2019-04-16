@@ -7,11 +7,12 @@ import java.util.*;
 
 public class OrderListServer implements Runnable {
 	// 유저를 담을 벡터 생성
-	OrderService service = new OrderService();
+	OrderService orderService;
 	// 서버소켓 생성
 	ServerSocket ss;
 
-	public OrderListServer() {
+	public OrderListServer(OrderService orderService) {
+		this.orderService = orderService;
 		try {
 			ss = new ServerSocket(OrderConatance.PORT); // 포트 열었다
 			System.out.println("클라이언트 접속 대기중............");
@@ -37,9 +38,10 @@ public class OrderListServer implements Runnable {
 				int protocol = Integer.parseInt(st.nextToken());
 				switch (protocol) {
 				case OrderConatance.CS_ORDER: {
-//						100|requestNumber|음식이름|갯수|음식이름|갯수 ~~
+//						100|requestNumber|음식이름^갯수^음식이름^갯수| ~~
 					requestNumber = st.nextToken();
-					if (service.addOrderList(requestNumber, st.nextToken())) {
+					if (orderService.addOrderList(Integer.parseInt(requestNumber), st.nextToken())) {
+						System.out.println("주문이 완료되었습니다");
 						unicast(OrderConatance.SC_ORDER_RESULT + "|" + "true", out);
 					} else {
 						unicast(OrderConatance.SC_ORDER_RESULT + "|" + "false", out);

@@ -49,10 +49,15 @@ public class AdminMainFrame extends JFrame {
 	AdminPayment ap = new AdminPayment();
 //	AdminStatistics as = new AdminStatistics();
 	
-	public AdminMainFrameControl amfc;
+	AdminMainFrameControl amfc;
 	
 	CardLayout cl = new CardLayout(0, 0);
+<<<<<<< HEAD
+	// 요청한 주문 목록 프레임
+	OrderListFrame orderListFrame = new OrderListFrame();
+=======
 	
+>>>>>>> 582b6d0d8d88e182ee916065964a2708056ac19c
 	/**
 	 * Launch the application.
 	 */
@@ -124,8 +129,9 @@ public class AdminMainFrame extends JFrame {
 		
 		contentPanel.add(ampPanel);
 		
-		amfc = new AdminMainFrameControl(this);
 		
+		amfc = new AdminMainFrameControl(this);
+
 		menuManageBtn.addMouseListener(amfc);
 		memberManageBtn.addMouseListener(amfc);
 		requestManageBtn.addMouseListener(amfc);

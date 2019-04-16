@@ -4,20 +4,21 @@ import java.util.Vector;
 
 public class OrderList { 
 	private OrderListButton button;
-	private String  requestNumber;
+	private int  requestNumber;
 	private boolean checkComplete = false; // 이 정보를 바탕으로 새로고침 하면서 체크된 주문 목록 표시
 	private Vector<String> menuName = new Vector<String>();
 	private Vector<String> menucount = new Vector<String>();
 	public void addMenuName(String name) {
+		System.out.println("");
 		menuName.add(name);
 	}
 	public void addMenuCount(String count) {
 		menucount.add(count);
 	}
-	public void setRequestNumber(String requestNumber) {
+	public void setRequestNumber(int requestNumber) {
 		this.requestNumber = requestNumber;
 	}
-	public String getRequestNumber() {
+	public int getRequestNumber() {
 		return this.requestNumber;
 	}
 	
