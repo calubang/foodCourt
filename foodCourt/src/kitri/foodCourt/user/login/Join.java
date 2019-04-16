@@ -171,7 +171,7 @@ public class Join extends JPanel
      
      JLabel lblNewLabel = new JLabel("");
      lblNewLabel.setBackground(Color.WHITE);
-     lblNewLabel.setIcon(new ImageIcon(Join.class.getResource(Constance.userImagePath + "duck.png")));
+     lblNewLabel.setIcon(new ImageIcon(Join.class.getResource(Constance.USER_IMAGE_PATH + "duck.png")));
      lblNewLabel.setBounds(861, 453, 327, 308);
      add(lblNewLabel);
      

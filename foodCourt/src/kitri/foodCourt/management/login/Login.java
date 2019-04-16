@@ -1,4 +1,4 @@
-package kitri.foodCourt.user.login;
+package kitri.foodCourt.management.login;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -19,18 +19,12 @@ public class Login extends JPanel {
 	public JLabel label_2;
 	public JLabel idlabel;
 	public JLabel pwlabel;
-	
-	public JButton joinbtn;
-	public JButton findidbtn;
-	public JButton findpwbtn;
 	public JButton loginbtn;
 
-	public LoginControl loginControl;
 	public LoginMain loginMain;
 
 	public Login(LoginMain loginMain){
      this.loginMain = loginMain;
-     this.loginControl = loginMain.loginControl;
      
      setBackground(Color.WHITE);
      setLayout(null);
@@ -51,29 +45,11 @@ public class Login extends JPanel {
      this.loginbtn.setBounds(319, 573, 532, 33);
      add(this.loginbtn);
      
-     this.joinbtn = new JButton("회원가입");
-     this.joinbtn.setBackground(new Color(0, 153, 255));
-     this.joinbtn.setBounds(319, 616, 157, 33);
-     add(this.joinbtn);
-     
      this.pwtextfd = new JPasswordField();
      this.pwtextfd.setEchoChar('*');
      this.pwtextfd.setColumns(10);
      this.pwtextfd.setBounds(412, 528, 439, 28);
      add(this.pwtextfd);
-     
-     this.findidbtn = new JButton("아이디 찾기");
-     this.findidbtn.setBackground(Color.GRAY);
-     this.findidbtn.setBounds(514, 616, 157, 33);
-     add(this.findidbtn);
-     
-     this.findpwbtn = new JButton("비밀번호 찾기");
-     
- 
- 
-     this.findpwbtn.setBackground(Color.GRAY);
-     this.findpwbtn.setBounds(694, 616, 157, 33);
-     add(this.findpwbtn);
      
      this.idtextField = new JTextField();
      this.idtextField.setColumns(10);

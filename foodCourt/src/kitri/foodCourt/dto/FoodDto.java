@@ -77,7 +77,7 @@ public class FoodDto {
 		this.description = description;
 	}
 	public String getImageAddress() {
-		return Constance.foodImagePath + imageAddress;
+		return Constance.FOOD_IMAGE_PATH + imageAddress;
 	}
 	public void setImageAddress(String imageAddress) {
 		this.imageAddress = imageAddress;
