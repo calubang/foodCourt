@@ -71,7 +71,7 @@ public class AdminMemberInfo extends JPanel {
 		
 		jpaMo = new JPanel();
 		card = new CardLayout();
-		maR = new ModifyAdminRegit();
+		maR = new ModifyAdminRegit(at);
 		mR = new ModifyRegit(mt);
 		jpaMo.setLayout(card);
 		jpaMo.add(maR, "adminModi");

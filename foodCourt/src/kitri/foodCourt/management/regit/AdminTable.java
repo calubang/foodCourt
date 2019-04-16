@@ -13,9 +13,9 @@ import kitri.foodCourt.db.DbFactory;
 @SuppressWarnings("serial")
 public class AdminTable extends JPanel {
 
-	JScrollPane scrollPane = new JScrollPane();
-	DefaultTableModel dtm = new DefaultTableModel();
-	JTable adt= new JTable(dtm);
+	public JScrollPane scrollPane = new JScrollPane();
+	public DefaultTableModel dtm = new DefaultTableModel();
+	public JTable adt= new JTable(dtm);
 
 	
 	private ConnectionMaker connectionMaker;
