@@ -48,6 +48,9 @@ public class UserInfoController implements KeyListener, ActionListener {
 		} else if(obj == userInfo.btnCancel) {
 			//Ãë¼Ò
 			service.cancel();
+		} else if(obj == userInfo.btnSecession) {
+			//Å»Åð
+			service.secession();
 		}
 	}
 
