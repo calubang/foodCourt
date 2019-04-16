@@ -18,6 +18,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import kitri.foodCourt.db.ConnectionMaker;
+import kitri.foodCourt.db.DbFactory;
+
 
 public class AdminPaymentService {
 
@@ -42,6 +45,7 @@ public class AdminPaymentService {
     Connection c = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    private ConnectionMaker connectionMaker;
     
     //Dao
     public AdminPaymentDao dao;
@@ -74,6 +78,7 @@ public class AdminPaymentService {
 		sorter.setSortKeys(sortKeys);
 		
 		dao = new AdminPaymentDao(this);
+		connectionMaker = DbFactory.connectionMaker("oracle");
 	}
 	
 	
@@ -123,8 +128,8 @@ public class AdminPaymentService {
 		Object[] rowData = new Object[8];
 		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
+
+			c = connectionMaker.makeConnection();
 			
 			ps = c.prepareStatement("select request_number, to_char(payment_date, 'yyyy.mm.dd hh24:mi:ss') \"payment_date\", category_name, pd.food_name \"food_name\", count, pd.price \"price\", pd.point \"point\", card, cash, used_point, total_price, save_point "
 								  + "from fook_payment p, fook_payment_detail pd, fook_food f, fook_category fc "
@@ -154,8 +159,6 @@ public class AdminPaymentService {
 				avr.payTotalValueLabel.setText(String.valueOf(rs.getInt("total_price")));
 				avr.getPointValueLabel.setText(String.valueOf(rs.getInt("save_point")));
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -199,8 +202,7 @@ public class AdminPaymentService {
 		Object[] rowData = new Object[8];
 		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
+			c = connectionMaker.makeConnection();
 			
 			ps = c.prepareStatement("select payment_id, user_id, to_char(payment_date, 'yyyy.mm.dd hh24:mi:ss') \"payment_date\", request_number, total_price, save_point, used_point, payment_state "
 								  + "from fook_payment");
@@ -219,8 +221,6 @@ public class AdminPaymentService {
 				
 				dtmPayment.addRow(rowData);
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

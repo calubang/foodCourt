@@ -25,6 +25,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import kitri.foodCourt.db.ConnectionMaker;
+import kitri.foodCourt.db.DbFactory;
+
 
 public class AdminMenuService {
 
@@ -50,6 +53,7 @@ public class AdminMenuService {
     Connection c = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    private ConnectionMaker connectionMaker;
     
 
     /**
@@ -79,6 +83,8 @@ public class AdminMenuService {
 		sorter.setSortKeys(sortKeys);
 		
 		chooser.setFileFilter(filter);
+		
+		connectionMaker = DbFactory.connectionMaker("oracle");
 	}
 	
 	/**
@@ -161,8 +167,7 @@ public class AdminMenuService {
 		try {
 			rowSelect = amm.commonTable.convertRowIndexToModel(rowSelect);
 			
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
+			c = connectionMaker.makeConnection();
 			
 			ps = c.prepareStatement("select * "
 								  + "from fook_food "
@@ -187,8 +192,6 @@ public class AdminMenuService {
 			image = new ImageIcon(AdminMenuService.class.getResource(f.getPath().replace("\\", "/")));
 			
 			am.pictureLabel.setIcon(image);
-		} catch (ClassNotFoundException e) {
-			warningMessage(amm.modifyBtn, "드라이버를 찾을 수 없습니다.", "메뉴 수정 오류");
 		} catch (SQLException e) {
 			warningMessage(amm.modifyBtn, e.getMessage(), "메뉴 수정 오류");
 		} finally {
@@ -223,8 +226,7 @@ public class AdminMenuService {
 				Object ob = amm.commonTable.getModel().getValueAt(currentSelectedrow, 0);
 
 				try {
-					Class.forName("oracle.jdbc.driver.OracleDriver");
-					c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
+					c = connectionMaker.makeConnection();
 					
 					ps = c.prepareStatement("delete from fook_food "
 										  + "where food_id = (?)");
@@ -232,8 +234,6 @@ public class AdminMenuService {
 					ps.setString(1, (String)ob);
 					
 					resultQuery = ps.executeUpdate();
-				} catch (ClassNotFoundException e) {
-					warningMessage(amm.deleteBtn, "드라이버를 찾을 수 없습니다.", "메뉴 삭제 오류");
 				} catch (SQLException e) {
 					warningMessage(amm.deleteBtn, e.getMessage(), "메뉴 삭제 오류");
 				} finally {
@@ -261,8 +261,7 @@ public class AdminMenuService {
 		Object[] rowData = new Object[8];
 		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
+			c = connectionMaker.makeConnection();
 			
 			ps = c.prepareStatement("select food_id, food_name, f.category_id \"category_id\", category_name, price, food_point, food_description, image_address, manager_id, create_date, food_enable "
 								  + "from fook_food f, fook_category c "
@@ -282,8 +281,6 @@ public class AdminMenuService {
 				
 				dtm.addRow(rowData);
 			}
-		} catch (ClassNotFoundException e) {
-			warningMessage(amm.commonTable, "드라이버를 찾을 수 없습니다.", "메뉴 보기 오류");
 		} catch (SQLException e) {
 			warningMessage(amm.commonTable, e.getMessage(), "메뉴 보기 오류");
 		} finally {
@@ -308,8 +305,7 @@ public class AdminMenuService {
 			String description = null;
 			
 			try {
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
+				c = connectionMaker.makeConnection();
 				
 				ps = c.prepareStatement("select image_address, food_description "
 									  + "from fook_food "
@@ -323,8 +319,6 @@ public class AdminMenuService {
 					imgUrl = rs.getString("image_address");
 					description = rs.getString("food_description");
 				}
-			} catch (ClassNotFoundException e) {
-				warningMessage(amm.commonTable, "드라이버를 찾을 수 없습니다.", "메뉴 보기 오류");
 			} catch (SQLException e) {
 				warningMessage(amm.commonTable, e.getMessage(), "메뉴 보기 오류");
 			} finally {
@@ -492,9 +486,7 @@ public class AdminMenuService {
 		String imgUrl = fullpath.substring(fullpath.lastIndexOf("/") + 1, fullpath.length());
 		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
-			
+			c = connectionMaker.makeConnection();
 			ps = c.prepareStatement("select image_address "
 					  + "from fook_food "
 					  + "where image_address = (?)");
@@ -564,8 +556,6 @@ public class AdminMenuService {
 			}
 			
 			amm.commonTable.setRowSelectionInterval(amm.commonTable.getSelectedRow(), amm.commonTable.getSelectedRow());
-		} catch (ClassNotFoundException e) {
-			warningMessage(am.confirmBtn, "드라이버를 찾을 수 없습니다.", "메뉴 수정 오류");
 		} catch (SQLException e) {
 			warningMessage(am.confirmBtn, e.getMessage(), "메뉴 수정 오류");
 		} finally {
@@ -651,8 +641,8 @@ public class AdminMenuService {
 		}
 		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.111:1521:orcl", "fook", "fook");
+			
+			c = connectionMaker.makeConnection();
 			
 			ps = c.prepareStatement("select image_address "
 					  + "from fook_food "
@@ -715,8 +705,6 @@ public class AdminMenuService {
 			}
 			
 			dtm.addRow(rowData);
-		} catch (ClassNotFoundException e) {
-			warningMessage(arm.confirmBtn, "드라이버를 찾을 수 없습니다.", "메뉴 등록 오류");
 		} catch (SQLException e) {
 			warningMessage(arm.confirmBtn, e.getMessage(), "메뉴 등록 오류");
 		} finally {
