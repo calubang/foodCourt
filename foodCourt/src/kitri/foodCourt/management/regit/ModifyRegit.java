@@ -1,10 +1,8 @@
 package kitri.foodCourt.management.regit;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 
@@ -24,7 +22,6 @@ public class ModifyRegit extends JPanel {
 	JPanel selectpanel = new JPanel();
 	JPanel etcpanel = new JPanel();
 
-	
 	JLabel modifylabel = new JLabel("\uC815\uBCF4 \uC218\uC815");
 	JLabel idlabel = new JLabel("\uC544\uC774\uB514");
 	JLabel etclabel = new JLabel("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
@@ -39,6 +36,8 @@ public class ModifyRegit extends JPanel {
 	private final JLabel impossibleModify = new JLabel("\uC218\uC815\uBD88\uAC00");
 
 	EtchedBorder eborder;
+	private final JPanel enablepanel = new JPanel();
+	private final JLabel enablelabel = new JLabel("\uD65C\uC131\uD654");
 
 	/**
 	 * Create the panel.
@@ -59,8 +58,8 @@ public class ModifyRegit extends JPanel {
 		add(selectpanel);
 
 		mainpanel.setBackground(Color.DARK_GRAY);
-		mainpanel.setBounds(43, 64, 518, 360);
-		mainpanel.setLayout(new GridLayout(6, 1, 0, 10));
+		mainpanel.setBounds(43, 64, 518, 419);
+		mainpanel.setLayout(new GridLayout(7, 1, 0, 10));
 		mainpanel.add(idpanel);
 		mainpanel.add(etcpanel);
 		mainpanel.add(passwordpanel);
@@ -162,19 +161,30 @@ public class ModifyRegit extends JPanel {
 		phonelabel.setForeground(Color.WHITE);
 		phonelabel.setHorizontalAlignment(SwingConstants.CENTER);
 		phonelabel.setBounds(0, 0, 107, 51);
+		enablepanel.setLayout(null);
+		enablepanel.setBackground(Color.DARK_GRAY);
+		
+		mainpanel.add(enablepanel);
+		enablelabel.setHorizontalAlignment(SwingConstants.CENTER);
+		enablelabel.setForeground(Color.WHITE);
+		enablelabel.setFont(new Font("µ¸¿ò", Font.BOLD, 16));
+		enablelabel.setBounds(0, 0, 107, 51);
+		
+		enablepanel.add(enablelabel);
+		
+		JComboBox enablebox = new JComboBox();
+		enablebox.setModel(new DefaultComboBoxModel(new String[] {"Y", "N"}));
+		enablebox.setBounds(107, 10, 83, 31);
+		enablepanel.add(enablebox);
 
 		selectpanel.setBackground(Color.DARK_GRAY);
-		selectpanel.setBounds(272, 434, 245, 44);
+		selectpanel.setBounds(316, 526, 245, 44);
 		selectpanel.setLayout(null);
 		selectpanel.add(registerbtn);
 		selectpanel.add(cancelbtn);
 
 		registerbtn.setBounds(12, 5, 110, 39);
 		cancelbtn.setBounds(134, 5, 110, 39);
-		
-		
 
 	}
-	
-
 }
