@@ -1,6 +1,6 @@
 package kitri.foodCourt.management.main;
 
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 import java.awt.Color;
 
 import javax.swing.UIManager;
@@ -29,6 +29,8 @@ import java.awt.Insets;
 @SuppressWarnings("serial")
 public class AdminMainFrame extends JFrame {
 
+	String adminID;
+	
 	JPanel contentPanel = new JPanel();
 	JPanel ampPanel = new JPanel();
 	JPanel buttonPanel = new JPanel();
@@ -40,7 +42,7 @@ public class AdminMainFrame extends JFrame {
 	JButton paymentBtn = new JButton(/*"결제관리"*/);
 	JButton logoutBtn = new JButton(/*"로그아웃"*/);
 	
-	AdminMenuManagement amm = new AdminMenuManagement();
+	AdminMenuManagement amm;
 	AdminMemberInfo ami = new AdminMemberInfo();
 	AdminRequest ar = new AdminRequest();
 	AdminPayment ap = new AdminPayment();
@@ -50,28 +52,30 @@ public class AdminMainFrame extends JFrame {
 	
 	CardLayout cl = new CardLayout(0, 0);
 	
-	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AdminMainFrame frame = new AdminMainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AdminMainFrame frame = new AdminMainFrame();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public AdminMainFrame() {
+	public AdminMainFrame(String adminID) {
 		super("Food Court");
+		
+		this.adminID = adminID;
+		amm = new AdminMenuManagement(adminID);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 800);
@@ -82,7 +86,7 @@ public class AdminMainFrame extends JFrame {
 		setContentPane(contentPanel);
 		
 		buttonPanel.setLayout(new GridLayout(6, 1, 0, 45));
-		buttonPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uAD00\uB9AC\uC790", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 20, 40, 20)));
+		buttonPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), this.adminID, TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(40, 20, 40, 20)));
 		buttonPanel.setBounds(12, 25, 150, 722);
 		
 		try {

@@ -2,15 +2,14 @@ package kitri.foodCourt.management.login;
 
 import java.awt.CardLayout;
 import java.awt.EventQueue;
-import java.awt.event.KeyListener;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.view.FoodMain;
 
+
+@SuppressWarnings("serial")
 public class LoginMain extends JFrame {
 	
 	JPanel contentPane;
@@ -22,6 +21,8 @@ public class LoginMain extends JFrame {
 	public FoodMain foodMain;
 	public User user;
 
+	LoginControl lc;
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -56,9 +57,9 @@ public class LoginMain extends JFrame {
 		this.card.show(this.panMain, "panLogin");
 		setVisible(true);
 		
-//		로그인 페이지
-
-
+		//로그인 페이지
+		lc = new LoginControl(this);
 		
+		panLogin.loginbtn.addActionListener(lc);
 	}
 }

@@ -128,7 +128,6 @@ public class AdminPaymentService {
 		Object[] rowData = new Object[8];
 		
 		try {
-
 			c = connectionMaker.makeConnection();
 			
 			ps = c.prepareStatement("select request_number, to_char(payment_date, 'yyyy.mm.dd hh24:mi:ss') \"payment_date\", category_name, pd.food_name \"food_name\", count, pd.price \"price\", pd.point \"point\", card, cash, used_point, total_price, save_point "
