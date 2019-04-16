@@ -32,25 +32,30 @@ public class ModifyAdminRegit extends JPanel {
 	JLabel pwlabel = new JLabel("\uBE44\uBC00\uBC88\uD638\uD655\uC778");
 	JLabel namelabel = new JLabel("\uC774\uB984");
 	JLabel phonelabel = new JLabel("\uD734\uB300\uC804\uD654");
-
+	JLabel getidlabel = new JLabel("");
+	
 	JComboBox fristnumber = new JComboBox();
 	JButton registerbtn = new JButton("\uC218\uC815");
 	JButton cancelbtn = new JButton("\uCDE8\uC18C");
 	private final JLabel impossibleModify = new JLabel("\uC218\uC815\uBD88\uAC00");
-
+	JComboBox jobname = new JComboBox();
 	EtchedBorder eborder;
-	private final JPanel addresspanel = new JPanel();
-	private final JLabel addresslabel = new JLabel("\uC8FC\uC18C");
-	private final JTextField addresstf = new JTextField();
-	private final JPanel emailpanel = new JPanel();
-	private final JLabel emaillabel = new JLabel("\uC774\uBA54\uC77C");
-	private final JTextField email = new JTextField();
-	private final JTextField emaildomain = new JTextField();
+	JPanel addresspanel = new JPanel();
+	JLabel addresslabel = new JLabel("\uC8FC\uC18C");
+	JTextField addresstf = new JTextField();
+	JPanel emailpanel = new JPanel();
+	JLabel emaillabel = new JLabel("\uC774\uBA54\uC77C");
+	JTextField email = new JTextField();
+	JTextField emaildomain = new JTextField();
+	
+	//admin 테이블
+	public AdminTable at;
 
 	/**
 	 * Create the panel.
 	 */
-	public ModifyAdminRegit() {
+	public ModifyAdminRegit(AdminTable at) {
+		this.at = at;
 		setBackground(Color.DARK_GRAY);
 		setLayout(null);
 
@@ -88,10 +93,14 @@ public class ModifyAdminRegit extends JPanel {
 		impossibleModify.setForeground(Color.WHITE);
 		impossibleModify.setBackground(Color.DARK_GRAY);
 		impossibleModify.setOpaque(true);
-		impossibleModify.setBounds(105, 0, 288, 51);
+		impossibleModify.setBounds(217, 0, 76, 51);
 		impossibleModify.setBorder(eborder);
 		eborder = new EtchedBorder(EtchedBorder.RAISED);
 		idpanel.add(impossibleModify);
+		
+		
+		getidlabel.setBounds(107, 10, 107, 34);
+		idpanel.add(getidlabel);
 
 		etcpanel.setBackground(Color.DARK_GRAY);
 		etcpanel.setLayout(null);
@@ -184,7 +193,7 @@ public class ModifyAdminRegit extends JPanel {
 		joblabel.setBounds(0, 0, 99, 42);
 		jobpanel.add(joblabel);
 		
-		JComboBox jobname = new JComboBox();
+		
 		jobname.setBounds(107, 1, 90, 53);
 		jobpanel.add(jobname);
 		jobname.addItem("관리자");
@@ -235,8 +244,11 @@ public class ModifyAdminRegit extends JPanel {
 
 		registerbtn.setBounds(12, 5, 110, 39);
 		cancelbtn.setBounds(134, 5, 110, 39);
+	}
+	
+	public void dataSetting() {
+		int row = at.adt.convertRowIndexToModel(at.adt.getSelectedRow());
 		
-		
-
+		nametf.setText(String.valueOf(at.dtm.getValueAt(row, 0)));
 	}
 }

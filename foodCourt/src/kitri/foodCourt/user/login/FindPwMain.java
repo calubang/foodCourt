@@ -22,7 +22,7 @@
 	   {
 	     this.loginMain = loginMain;
 	     
-	     setDefaultCloseOperation(3);
+	     setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	     setBounds(100, 100, 450, 300);
 	     this.contentPane = new JPanel();
 	     this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

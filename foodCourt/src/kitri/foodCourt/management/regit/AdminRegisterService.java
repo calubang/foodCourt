@@ -6,14 +6,13 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.*;
 
 import kitri.foodCourt.db.ConnectionMaker;
 import kitri.foodCourt.db.DbFactory;
 import kitri.foodCourt.dto.AdminRegitDto;
-import kitri.foodCourt.management.member.AdminTable;
-import kitri.foodCourt.management.member.MemberTable;
 
 public class AdminRegisterService {
 
@@ -25,9 +24,7 @@ public class AdminRegisterService {
 	ModifyAdminRegit maR;
 	RemoveMember rm;
 	ModifyRegit mR;
-	
-	AdminTable at = new AdminTable();
-	
+
 	List<AdminRegitDto> list = new ArrayList<AdminRegitDto>();
 	AdminRegitDto AdminRegitDto;
 	String[] option = { "예", "아니요" };
@@ -41,6 +38,7 @@ public class AdminRegisterService {
 	int checkid;
 	int pwcheck;
 	String checkidjoin;
+	AdminTable at;
 
 	public AdminRegisterService(AdminRegisterControl arc) {
 		connectionMaker = DbFactory.connectionMaker("oracle");
@@ -55,7 +53,7 @@ public class AdminRegisterService {
 		maR = ami.maR;
 		mR = ami.mR;
 		rm = ami.rm;
-		
+
 	}
 
 	// 관리자등록
@@ -93,37 +91,55 @@ public class AdminRegisterService {
 
 	// 관리자/회원수정
 	public void showmodify() {
-
-		ami.maR.nametf.setText("");
-		ami.maR.midnumber.setText("");
-		ami.maR.lastnumber.setText("");
-		ami.maR.passwordtf.setText("");
-		ami.maR.pwtf.setText("");
-		ami.maR.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
-
-		ami.mR.nametf.setText("");
-		ami.mR.midnumber.setText("");
-		ami.mR.lastnumber.setText("");
-		ami.mR.passwordtf.setText("");
-		ami.mR.pwtf.setText("");
-		ami.mR.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
 		if (ami.check == false) {
+			//관리자
+			int SelectRow = ami.at.adt.getSelectedRow();
 
+			if (SelectRow == -1) {
+				JOptionPane.showMessageDialog(ami.maR, "선택 되지 않았습니다.");
+				Close(ami.jfMoD);
+				return;
+			}
 			ami.card.show(ami.jpaMo, "adminModi");
 			ami.jfMo.setSize(600, 740);
-
+			ami.maR.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
+			ami.maR.dataSetting();
+			ami.jfMo.setVisible(true);
+			return;
 		} else {
-			ami.card.show(ami.jpaMo, "memberModi");
-			ami.jfMo.setSize(600, 740);
+			//회원
+			int SelectRow = ami.mt.table.getSelectedRow();
 
+			if (SelectRow == -1) {
+				JOptionPane.showMessageDialog(ami.mR, "선택 되지 않았습니다.");
+				Close(ami.jfMoD);
+				return;
+			}
+			
+			ami.card.show(ami.jpaMo, "memberModi");
+			ami.mR.dataSetting();
+			ami.mR.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
+			ami.jfMo.setSize(600, 740);
+			ami.jfMo.setVisible(true);
+			return;
 		}
-		ami.jfMo.setVisible(true);
+//		ami.jfMo.setVisible(true);
+//		int SelectRow = at.adt.getSelectedRow();
+//		if (SelectRow == -1) {
+//			JOptionPane.showMessageDialog(ami.maR, "선택 되지 않았습니다.");
+//			Close(ami.jfMoD);
+//			return;
+//		}
+
+		
+
+		
 	}
 
 	// 관리자/회원삭제
 	public void showdelete() {
 		int resultQuery = 0;
-		
+
 		int result = JOptionPane.showOptionDialog(ami.deleteBtn, "정말 삭제하시겠습니까?\n(삭제하면 다시 되돌릴 수 없습니다.)", "삭제 확인",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 
@@ -148,7 +164,7 @@ public class AdminRegisterService {
 
 		String quary = "insert into fook_manager(MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID,ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) values(?,?,?,?,?,?,?,?,?,?,?)";
 
-		if (id.isEmpty() || pw.isEmpty() || pwtf.isEmpty() || name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()) { 
+		if (id.isEmpty() || pw.isEmpty() || pwtf.isEmpty() || name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()) {
 			JOptionPane.showMessageDialog(ami.ar, "빈 공간을 입력해 주세요.");
 		} else if (checkid == 0 || checkid == 1) {
 			JOptionPane.showMessageDialog(ami.ar, "중복 확인을 눌러주세요.");
@@ -170,12 +186,12 @@ public class AdminRegisterService {
 			pstm.setString(7, jobid);
 			pstm.setString(8, null);
 			pstm.setString(9, address);
-			pstm.setString(10,email);
-			pstm.setString(11,domain);
+			pstm.setString(10, email);
+			pstm.setString(11, domain);
 
 			r = pstm.executeUpdate();
 			JOptionPane.showMessageDialog(ami.ar, "등록되었습니다");
-			
+
 			ami.jfAD.setVisible(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -251,12 +267,12 @@ public class AdminRegisterService {
 		String numlast = ami.mr.lastnumber.getText();
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd");
 		String str = dayTime.format(new Date());
-		
+
 		int r = 0;
 
 		String quary = "insert into fook_manager(user_id, PASSWORD,NAME, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, user_point,password_quiz, password_answer, enable) values(?,?,?,?,?,?,?,?,?,?)";
 
-		if (id.isEmpty() || pw.isEmpty() || pwtf.isEmpty() || name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()) { 
+		if (id.isEmpty() || pw.isEmpty() || pwtf.isEmpty() || name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()) {
 			JOptionPane.showMessageDialog(ami.ar, "빈 공간을 입력해 주세요.");
 		} else if (checkid == 0 || checkid == 1) {
 			JOptionPane.showMessageDialog(ami.ar, "중복 확인을 눌러주세요.");
@@ -275,15 +291,15 @@ public class AdminRegisterService {
 			pstm.setString(4, numfirst);
 			pstm.setString(5, nummid);
 			pstm.setString(6, numlast);
-//			pstm.setString(7, jobid);
-			pstm.setString(8, null);
+//			pstm.setint(7, 0);
+//			pstm.setString(8, null);
 //			pstm.setString(9, address);
 //			pstm.setString(10,email);
 //			pstm.setString(11,domain);
 
 			r = pstm.executeUpdate();
 			JOptionPane.showMessageDialog(ami.ar, "등록되었습니다");
-			
+
 			ami.jfAD.setVisible(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -295,7 +311,7 @@ public class AdminRegisterService {
 			}
 
 		}
-		
+
 	}
 
 	// 회원창 - 중복확인
@@ -346,6 +362,48 @@ public class AdminRegisterService {
 
 	public void maRRegister() {
 
+		int SelectRow = at.adt.getSelectedRow();
+		if (SelectRow < 0) {
+			JOptionPane.showMessageDialog(ami.maR, "선택 되지 않았습니다.");
+			Close(ami.jfMoD);
+			return;
+		}
+
+		String quary = "select NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, fj.job_name,ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN"
+				+ "from fook_manager fm, fook_job fj" + "where fm.job_id=fj.job_id,fm.name =(?)";
+
+		try {
+			System.out.println("오나");
+			SelectRow = at.adt.convertRowIndexToModel(SelectRow);
+			conn = connectionMaker.makeConnection();
+			pstm = conn.prepareStatement(quary);
+			pstm.setString(1, (String) at.dtm.getValueAt(SelectRow, 0));
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				maR.nametf.setText(rs.getString("name"));
+				maR.passwordtf.setText(rs.getString("password"));
+				maR.fristnumber.setSelectedItem(rs.getString("phone_first"));
+				maR.midnumber.setText(rs.getString("phone_middle"));
+				maR.lastnumber.setText(rs.getString("phone_last"));
+				maR.jobname.setSelectedItem(rs.getString("job_name"));
+				maR.addresstf.setText(rs.getString("address"));
+				maR.email.setText(rs.getString("email"));
+				maR.emaildomain.setText(rs.getString("email_domain"));
+			}
+
+			JOptionPane.showMessageDialog(ami.ar, "수정되었습니다");
+
+			ami.jfAD.setVisible(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connectionMaker.closeConnection(conn, pstm, rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 	public void mRRegister() {
@@ -401,4 +459,6 @@ public class AdminRegisterService {
 
 		}
 	}
+
+	
 }

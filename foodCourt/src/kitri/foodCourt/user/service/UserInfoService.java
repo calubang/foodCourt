@@ -161,6 +161,7 @@ public class UserInfoService {
 				//Á¤»óÅ»Åð
 				user.logout();
 				foodMain.setVisible(false);
+				foodMain.loginMain.setVisible(true);
 			}
 		} else {
 			return;

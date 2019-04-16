@@ -7,10 +7,11 @@ import javax.swing.border.LineBorder;
 import kitri.foodCourt.user.Basket;
 import kitri.foodCourt.user.controller.PaymentController;
 import kitri.foodCourt.user.swing.*;
+import kitri.foodCourt.util.Constance;
 
 public class Payment extends JPanel {
 
-	public static int requestNumber = 1;
+	public static int requestNumber = Constance.REQUEST_NUMBER_START;
 	private PaymentController controller;
 	public Receipt receipt;
 	public BasketMain basketMain;

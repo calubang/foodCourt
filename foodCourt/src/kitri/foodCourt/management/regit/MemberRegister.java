@@ -38,8 +38,9 @@ public class MemberRegister extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param mt 
 	 */
-	public MemberRegister() {
+	public MemberRegister(MemberTable mt) {
 		setBackground(Color.DARK_GRAY);
 		setLayout(null);
 
