@@ -86,7 +86,7 @@ public class LoginService {
 					//성공 
 					
 					
-					logc.loginMain.user = new User();
+					logc.loginMain.user = User.getInstance();
 					User user = logc.loginMain.user;
 					
 					user.setUserId(user_id);
@@ -300,7 +300,7 @@ public class LoginService {
 			if(r == 1) {
 				//정상적으로 회원가입됨
 				//성공 
-				logc.loginMain.user = new User();
+				logc.loginMain.user = User.getInstance();
 				User user = logc.loginMain.user;
 				
 				user.setUserId(id);
