@@ -29,7 +29,10 @@ public class FoodMainController implements ActionListener, KeyListener, MouseLis
 			foodMainService.userInfo();
 		else if(ob == foodMain.btnOrderList)
 			foodMainService.orderList();
-		else if(ob instanceof MenuButton) {
+		else if(ob == foodMain.btnLogout) {
+			//·Î±×¾Æ¿ô
+			foodMainService.logout();
+		} else if(ob instanceof MenuButton) {
 			foodMainService.searchMenuDetail(((MenuButton) ob).getName());
 		} else if(ob instanceof RoundPanel) {
 			foodMainService.searchCategory(((RoundPanel)ob).getName());
@@ -62,8 +65,10 @@ public class FoodMainController implements ActionListener, KeyListener, MouseLis
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		String name = e.getComponent().getName();
-		if(name.charAt(0) >= '0' && name.charAt(0) <= '9') {
+		if(name.charAt(0) >= '1' && name.charAt(0) <= '9') {
 			foodMainService.searchCategory(name);
+		} else if(name.charAt(0) == '0'){
+			foodMainService.logout();
 		} else if(name.equals("back")){
 			foodMainService.backMenu();
 		} else if(name.equals("basket")){

@@ -81,14 +81,13 @@ public class BasketImpl implements Basket{
 	public void setDetailList(List<BasketDetail> detailList) {
 		this.detailList = detailList;
 	}
-	
 	public FLabel getOrderCount() {
 		return orderCount;
 	}
-
 	public void setOrderCount(FLabel orderCount) {
 		this.orderCount = orderCount;
 	}
+	
 	
 	//구현 메소드
 	//유저용

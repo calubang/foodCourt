@@ -74,7 +74,7 @@ public class UserInfo extends JPanel {
 		
 		JPanel pTop = new JPanel();
 		pTop.setBackground(Color.WHITE);
-		pTop.setBounds(0, 0, 1012, 66);
+		pTop.setBounds(0, 0, 1012, 60);
 		pTop.setLayout(null);
 		this.add(pTop);
 		
@@ -89,14 +89,10 @@ public class UserInfo extends JPanel {
 		pTop.add(lbUserInfo);
 		lbUserInfo.setText("\uC720\uC800\uC815\uBCF4");
 		
-		JPanel pSeparator = new JPanel();
-		pSeparator.setBounds(0, 60, 1012, 6);
-		pTop.add(pSeparator);
-		pSeparator.setBackground(SystemColor.activeCaption);
-		
 		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 66, 638, 513);
+		panel.setBounds(0, 60, 638, 513);
 		this.add(panel);
 		panel.setLayout(null);
 		
@@ -129,6 +125,7 @@ public class UserInfo extends JPanel {
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		tfId = new JTextField();
+		tfId.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		tfId.setEditable(false);
 		tfId.setBackground(Color.WHITE);
 		tfId.setForeground(Color.BLACK);
@@ -139,6 +136,7 @@ public class UserInfo extends JPanel {
 		tfId.setColumns(10);
 		
 		tfName = new JTextField();
+		tfName.setBorder(new LineBorder(Color.BLACK, 1, true));
 		tfName.setToolTipText("\uC774\uB984");
 		tfName.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 		tfName.setBounds(124, 59, 342, 35);
@@ -158,12 +156,14 @@ public class UserInfo extends JPanel {
 		panel.add(cbPhoneFirst);
 		
 		tfPhoneMiddle = new JTextField();
+		tfPhoneMiddle.setBorder(new LineBorder(Color.BLACK, 1, true));
 		tfPhoneMiddle.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 		tfPhoneMiddle.setBounds(232, 104, 110, 35);
 		panel.add(tfPhoneMiddle);
 		tfPhoneMiddle.setColumns(10);
 		
 		tfPhoneLast = new JTextField();
+		tfPhoneLast.setBorder(new LineBorder(Color.BLACK, 1, true));
 		tfPhoneLast.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 		tfPhoneLast.setBounds(356, 104, 110, 35);
 		panel.add(tfPhoneLast);
@@ -207,18 +207,21 @@ public class UserInfo extends JPanel {
 		panel_1.add(lbPasswordInfo);
 		
 		pfNewPassword = new JPasswordField();
+		pfNewPassword.setBorder(new LineBorder(Color.BLACK, 1, true));
 		pfNewPassword.setName("new");
 		pfNewPassword.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 		pfNewPassword.setBounds(123, 40, 207, 30);
 		panel_1.add(pfNewPassword);
 		
 		pfRePassword = new JPasswordField();
+		pfRePassword.setBorder(new LineBorder(Color.BLACK, 1, true));
 		pfRePassword.setName("re");
 		pfRePassword.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 		pfRePassword.setBounds(123, 80, 207, 30);
 		panel_1.add(pfRePassword);
 		
 		btnModify = new FButton();
+		btnModify.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		btnModify.setBackground(SystemColor.inactiveCaptionBorder);
 		btnModify.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		btnModify.setText("\uC218\uC815");
@@ -226,6 +229,7 @@ public class UserInfo extends JPanel {
 		panel.add(btnModify);
 		
 		btnCancel = new FButton();
+		btnCancel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		btnCancel.setBackground(SystemColor.inactiveCaptionBorder);
 		btnCancel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		btnCancel.setText("\uCDE8\uC18C");
@@ -254,10 +258,9 @@ public class UserInfo extends JPanel {
 		panel_2.add(label_8);
 		
 		tfPasswordQuiz = new JTextField();
+		tfPasswordQuiz.setBorder(new LineBorder(Color.BLACK, 1, true));
 		tfPasswordQuiz.setForeground(Color.BLACK);
 		tfPasswordQuiz.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
-		tfPasswordQuiz.setEnabled(false);
-		tfPasswordQuiz.setEditable(false);
 		tfPasswordQuiz.setColumns(10);
 		tfPasswordQuiz.setBackground(Color.WHITE);
 		tfPasswordQuiz.setBounds(124, 40, 366, 35);
@@ -271,10 +274,9 @@ public class UserInfo extends JPanel {
 		panel_2.add(label_10);
 		
 		tfPasswordAnswer = new JTextField();
+		tfPasswordAnswer.setBorder(new LineBorder(Color.BLACK, 1, true));
 		tfPasswordAnswer.setForeground(Color.BLACK);
 		tfPasswordAnswer.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
-		tfPasswordAnswer.setEnabled(false);
-		tfPasswordAnswer.setEditable(false);
 		tfPasswordAnswer.setColumns(10);
 		tfPasswordAnswer.setBackground(Color.WHITE);
 		tfPasswordAnswer.setBounds(124, 80, 366, 35);
@@ -290,14 +292,15 @@ public class UserInfo extends JPanel {
 		
 		FLabel label_9 = new FLabel();
 		label_9.setIcon(new ImageIcon(UserInfo.class.getResource(Constance.USER_IMAGE_PATH + "duck.png")));
-		label_9.setBounds(650, 293, 241, 286);
+		label_9.setBounds(650, 287, 241, 286);
 		this.add(label_9);
 		
 		btnSecession = new FButton();
+		btnSecession.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		btnSecession.setText("\uD68C\uC6D0\uD0C8\uD1F4");
 		btnSecession.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		btnSecession.setBackground(SystemColor.inactiveCaptionBorder);
-		btnSecession.setBounds(903, 355, 97, 35);
+		btnSecession.setBounds(900, 523, 97, 35);
 		add(btnSecession);
 	}
 	

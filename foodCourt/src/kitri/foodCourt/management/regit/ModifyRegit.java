@@ -437,7 +437,7 @@ public class ModifyRegit extends JPanel {
 		userDto.setPasswordQuiz(tfPasswordQuiz.getText());
 		userDto.setPasswordAnswer(tfPasswordAnswer.getText());
 		
-		String joinDate = yearJoin.getYear() + "-" + (monthJoin.getMonth() < 10 ? "0"+monthJoin.getMonth() : monthJoin.getMonth()) + "-" + dayJoin.getValue();
+		String joinDate = yearJoin.getYear() + "-" + intTOString(monthJoin.getMonth()) + "-" + intTOString(dayJoin.getValue());
 		System.out.println(joinDate);
 		userDto.setJoinDate(joinDate);
 		
@@ -445,7 +445,7 @@ public class ModifyRegit extends JPanel {
 		if(yearSecession.getYear() == 0 || daySecession.getValue() == 0) {
 			secessionDate = "";
 		}else {
-			secessionDate = yearSecession.getYear() + "-" + (monthSecession.getMonth() < 10 ? "0"+monthSecession.getMonth() : monthSecession.getMonth()) + "-" + daySecession.getValue();
+			secessionDate = yearSecession.getYear() + "-" + intTOString(monthSecession.getMonth()) + "-" + intTOString(daySecession.getValue());
 		}
 		System.out.println(secessionDate);
 		userDto.setSecessionDate(secessionDate);
@@ -457,5 +457,39 @@ public class ModifyRegit extends JPanel {
 	
 	public void clear() {
 		
+		
+		impossibleModify.setText("");
+		
+		pwtf.setText("");
+		passwordtf.setText("");
+		
+		nametf.setText("");
+		
+		fristnumber.setSelectedItem("010");
+		midnumber.setText("");
+		lastnumber.setText("");
+		
+		tfPasswordQuiz.setText("");
+		tfPasswordAnswer.setText("");
+		
+		GregorianCalendar calendar = new GregorianCalendar();
+		yearJoin.setYear(calendar.get(Calendar.YEAR));
+		monthJoin.setMonth(calendar.get(Calendar.MONTH)+1);
+		dayJoin.setValue(calendar.get(Calendar.DAY_OF_MONTH));
+		
+		yearSecession.setYear(calendar.get(Calendar.YEAR));
+		monthSecession.setMonth(calendar.get(Calendar.MONTH)+1);
+		daySecession.setValue(calendar.get(Calendar.DAY_OF_MONTH));
+		
+		cbEnable.setSelectedItem("Y");
+	}
+	
+	public String intTOString(int value) {
+		String str = "";
+		if(value < 10) {
+			return "0" + value;
+		}else {
+			return ""+value;
+		}
 	}
 }

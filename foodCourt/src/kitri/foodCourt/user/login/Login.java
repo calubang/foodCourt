@@ -11,6 +11,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import kitri.foodCourt.util.Constance;
+import java.awt.SystemColor;
+import javax.swing.border.LineBorder;
 
 public class Login extends JPanel {
 	
@@ -37,57 +39,65 @@ public class Login extends JPanel {
      setBounds(0, 0, 1200, 800);
      
      this.pwlabel = new JLabel("PW");
+     pwlabel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
      this.pwlabel.setOpaque(true);
      this.pwlabel.setHorizontalAlignment(0);
-     this.pwlabel.setForeground(Color.WHITE);
-     this.pwlabel.setFont(new Font("±¼¸²", 0, 14));
+     this.pwlabel.setForeground(new Color(0, 0, 0));
+     this.pwlabel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 14));
      this.pwlabel.setBounds(new Rectangle(340, 465, 81, 39));
-     this.pwlabel.setBackground(new Color(0, 153, 255));
-     this.pwlabel.setBounds(319, 522, 81, 39);
+     this.pwlabel.setBackground(SystemColor.inactiveCaptionBorder);
+     this.pwlabel.setBounds(319, 459, 81, 39);
      add(this.pwlabel);
      
      this.loginbtn = new JButton("·Î±×ÀÎ");
-     this.loginbtn.setBackground(new Color(0, 153, 255));
-     this.loginbtn.setBounds(319, 573, 532, 33);
+     loginbtn.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+     this.loginbtn.setBackground(SystemColor.inactiveCaptionBorder);
+     this.loginbtn.setBounds(319, 510, 532, 33);
      add(this.loginbtn);
      
      this.joinbtn = new JButton("È¸¿ø°¡ÀÔ");
-     this.joinbtn.setBackground(new Color(0, 153, 255));
-     this.joinbtn.setBounds(319, 616, 157, 33);
+     joinbtn.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+     this.joinbtn.setBackground(SystemColor.inactiveCaptionBorder);
+     this.joinbtn.setBounds(319, 553, 157, 33);
      add(this.joinbtn);
      
      this.pwtextfd = new JPasswordField();
+     pwtextfd.setBorder(new LineBorder(Color.BLACK, 1, true));
      this.pwtextfd.setEchoChar('*');
      this.pwtextfd.setColumns(10);
-     this.pwtextfd.setBounds(412, 528, 439, 28);
+     this.pwtextfd.setBounds(412, 459, 439, 39);
      add(this.pwtextfd);
      
      this.findidbtn = new JButton("¾ÆÀÌµð Ã£±â");
-     this.findidbtn.setBackground(Color.GRAY);
-     this.findidbtn.setBounds(514, 616, 157, 33);
+     findidbtn.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+     this.findidbtn.setBackground(SystemColor.inactiveCaptionBorder);
+     this.findidbtn.setBounds(514, 553, 157, 33);
      add(this.findidbtn);
      
      this.findpwbtn = new JButton("ºñ¹Ð¹øÈ£ Ã£±â");
+     findpwbtn.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
      
  
  
-     this.findpwbtn.setBackground(Color.GRAY);
-     this.findpwbtn.setBounds(694, 616, 157, 33);
+     this.findpwbtn.setBackground(SystemColor.inactiveCaptionBorder);
+     this.findpwbtn.setBounds(694, 553, 157, 33);
      add(this.findpwbtn);
      
      this.idtextField = new JTextField();
+     idtextField.setBorder(new LineBorder(Color.BLACK, 1, true));
      this.idtextField.setColumns(10);
-     this.idtextField.setBounds(412, 479, 439, 28);
+     this.idtextField.setBounds(412, 410, 439, 39);
      add(this.idtextField);
      
      this.idlabel = new JLabel("ID");
+     idlabel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
      this.idlabel.setOpaque(true);
      this.idlabel.setHorizontalAlignment(0);
-     this.idlabel.setForeground(Color.WHITE);
-     this.idlabel.setFont(new Font("±¼¸²", 0, 14));
+     this.idlabel.setForeground(new Color(0, 0, 0));
+     this.idlabel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 14));
      this.idlabel.setBounds(new Rectangle(340, 465, 81, 39));
-     this.idlabel.setBackground(new Color(0, 153, 255));
-     this.idlabel.setBounds(319, 473, 81, 39);
+     this.idlabel.setBackground(SystemColor.inactiveCaptionBorder);
+     this.idlabel.setBounds(319, 410, 81, 39);
      add(this.idlabel);
      
      this.label_2 = new JLabel();

@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.MouseListener;
 import javax.swing.*;
 
+import kitri.foodCourt.util.Constance;
+
 public class RoundButton extends JButton implements MouseListener{
 	
 	//라운드정도와 선의 두께
@@ -46,8 +48,8 @@ public class RoundButton extends JButton implements MouseListener{
 	public void defaultSetting() {
 		setBackground(Color.WHITE);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
-		this.enterColor = SwingFactory.hexToRgb("#FFF8DC");
-		
+		//this.enterColor = SwingFactory.hexToRgb("#FFF8DC");
+		this.enterColor = Constance.MAIN_COLOR;
 		//생성한 객체에서 바로 마우스이벤트를 등록시켜버림. 이 객체로 생성하면 다 같은 액션이 일어남
 		//클릭부는 구현하지 않고 actionListener 를 이용한다.
 		addMouseListener(this);

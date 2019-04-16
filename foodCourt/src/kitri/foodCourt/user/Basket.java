@@ -32,5 +32,6 @@ public interface Basket {
 	public void setOrderCount(FLabel orderCount);
 	public int downCount(int index);
 	public int upCount(int index);
+
 	
 }

@@ -5,6 +5,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
+import kitri.foodCourt.util.Constance;
+
 public class MenuButton extends JButton implements MouseListener{
 	
 	public int arc;
@@ -47,7 +49,8 @@ public class MenuButton extends JButton implements MouseListener{
 	public void defaultSetting() {
 		setBackground(Color.WHITE);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
-		this.enterColor = SwingFactory.hexToRgb("#FFF8DC");
+		//this.enterColor = SwingFactory.hexToRgb("#FFF8DC");
+		this.enterColor = Constance.MAIN_COLOR;
 		addMouseListener(this);
 	}
 	

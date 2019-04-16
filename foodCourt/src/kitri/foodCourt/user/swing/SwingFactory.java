@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 
 import kitri.foodCourt.user.swing.*;
 import kitri.foodCourt.user.view.FoodMain;
+import kitri.foodCourt.util.Constance;
 
 public class SwingFactory {
 	private static SwingFactory swingFactory = new SwingFactory();
@@ -137,6 +138,17 @@ public class SwingFactory {
 		}
 	}
 	
+	public static JPanel getJPanel(String name) {
+		JPanel panel = new JPanel();
+		switch(name) {
+		case "separator":
+			panel.setBackground(Constance.SEPARATOR_COLOR);
+			break;
+		}
+		
+		return panel;
+	}
+	
 	public static Icon getScaledImage(int width, int height, String fileName, int hints) {
 		ImageIcon icon = null;		
 		try {
@@ -159,6 +171,7 @@ public class SwingFactory {
 		}
 		return icon;
 	}
+
 	
 	public static Color hexToRgb(String colorStr) {
 	    return new Color(

@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.BasketDetail;
+import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.controller.FoodMainController;
 import kitri.foodCourt.user.dao.MenuDao;
 import kitri.foodCourt.user.swing.*;
@@ -168,6 +169,17 @@ public class FoodMainService {
 		} else {
 			foodMain.setPanelName("noSearchMenuImg");
 			foodMain.card.show(foodMain.panChangePanel, foodMain.getPanelName());
+		}
+	}
+
+	public void logout() {
+		int input = SwingFactory.getOptionPane("messageChoice", foodMain, "·Î±×¾Æ¿ô", "·Î±×¾Æ¿ô ÇÏ½Ã°Ú½À´Ï±î?");
+		if(input == 0) {
+			User user = User.getInstance();
+			user.logout();
+			foodMain.labName.setText("´Ô");
+			foodMain.setVisible(false);
+			foodMain.loginMain.setVisible(true);
 		}
 	}
 
