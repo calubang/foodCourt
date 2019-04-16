@@ -148,7 +148,7 @@ public class AdminMemberInfo extends JPanel {
 
 //		add listener
 		ar = new AdminRegister();
-		mr = new MemberRegister();
+		mr = new MemberRegister(mt);
 		//maR = new ModifyAdminRegit();
 		//mR = new ModifyRegit();
 		arc = new AdminRegisterControl(this);
