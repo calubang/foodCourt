@@ -85,6 +85,7 @@ public class UserInfoDao {
 		try {
 			con = connectionMaker.makeConnection();
 			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
 			
 			return ps.executeUpdate();
 			

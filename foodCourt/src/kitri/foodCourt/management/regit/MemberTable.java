@@ -1,14 +1,15 @@
 package kitri.foodCourt.management.regit;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Vector;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import kitri.foodCourt.dto.UserDto;
+import kitri.foodCourt.management.regit.AdminUserDao;
 import kitri.foodCourt.user.swing.SwingFactory;
 
 
@@ -17,8 +18,13 @@ public class MemberTable extends JPanel {
 
 	JScrollPane scrollPane = new JScrollPane();
 	DefaultTableModel tableModel = new DefaultTableModel();
-	private JTable memberTable = new JTable(tableModel);
-	private AdminUserDao dao;
+	public JTable table = new JTable(tableModel){
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		};
+	};
+	public AdminUserDao dao;
 	
 	String[] column = { "유저ID", "패스워드", "이름", "핸드폰번호", "사용가능포인트", "비밀번호 찾기용질문", "비밀번호 찾기용답변",  "가입일", "탈퇴일", "활성화여부" };
 	
@@ -34,14 +40,20 @@ public class MemberTable extends JPanel {
 		setLayout(null);
 
 		scrollPane.setBounds(0, 0, 780, 640);
-		scrollPane.setViewportView(memberTable);
+		scrollPane.setViewportView(table);
 		add(scrollPane);
 		
 		for (int i = 0; i < column.length; i++) {
 			tableModel.addColumn(column[i]);
 		}
 		
-		memberTable.setEnabled(false);
+		table.setBorder(new LineBorder(new Color(0, 0, 0)));
+		//table.setBounds(0, 356, 791, 366);
+		table.setShowGrid(true);
+		table.setShowVerticalLines(true);
+		table.setAutoCreateRowSorter(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
 		
 	}
 	
@@ -49,7 +61,7 @@ public class MemberTable extends JPanel {
 		Vector<UserDto> vector = dao.allSelect();
 		
 		if(vector == null) {
-			SwingFactory.getOptionPane("errorMessage", memberTable, "DB오류", "DB연결 오류");
+			SwingFactory.getOptionPane("errorMessage", table, "DB오류", "DB연결 오류");
 			return;
 		} else {
 			insertTable(vector);
@@ -80,3 +92,4 @@ public class MemberTable extends JPanel {
 	}
 
 }
+
