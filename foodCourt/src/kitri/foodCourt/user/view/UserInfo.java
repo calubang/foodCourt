@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import kitri.foodCourt.user.swing.FLabel;
+import kitri.foodCourt.util.Constance;
 
 import javax.swing.border.LineBorder;
 
@@ -35,24 +36,32 @@ public class UserInfo extends JPanel {
 	public FLabel lbPasswordInfo;
 	public FButton btnModify;
 	public FButton btnCancel;
+	public JTextField tfPasswordQuiz;
+	public JTextField tfPasswordAnswer;
+	public FButton btnSecession;
 	
 	private boolean Modifiable = false;
 	
 	//ÀüÈ­¹øÈ£
 	public String phoneFirstArray[] = {"010", "011", "016", "017"};
+
 	
 	
 	public UserInfo(FoodMain foodMain) {		
 		this.foodMain = foodMain;
-		this.user = foodMain.user;
+		this.user = User.getInstance();
 		initView();
 		//ÀÌº¥Æ® µî·ÏºÎ
 		controller = new UserInfoController(this);
+		
+		
+		
+		//ÀÌº¥Æ® µî·Ï
 		pfNewPassword.addKeyListener(controller);
 		pfRePassword.addKeyListener(controller);
 		btnCancel.addActionListener(controller);
 		btnModify.addActionListener(controller);
-		
+		btnSecession.addActionListener(controller);
 	}
 	
 	public void initView() {
@@ -70,7 +79,7 @@ public class UserInfo extends JPanel {
 		this.add(pTop);
 		
 		JLabel lblBasketImage = new JLabel("");
-		lblBasketImage.setIcon(new ImageIcon(UserInfo.class.getResource("/img/user/userInfo_icon.png")));
+		lblBasketImage.setIcon(new ImageIcon(UserInfo.class.getResource(Constance.USER_IMAGE_PATH + "userInfo_icon.png")));
 		lblBasketImage.setBounds(0, 0, 120, 50);
 		pTop.add(lblBasketImage);
 		
@@ -87,7 +96,7 @@ public class UserInfo extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 66, 477, 394);
+		panel.setBounds(0, 66, 638, 513);
 		this.add(panel);
 		panel.setLayout(null);
 		
@@ -213,23 +222,87 @@ public class UserInfo extends JPanel {
 		btnModify.setBackground(SystemColor.inactiveCaptionBorder);
 		btnModify.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		btnModify.setText("\uC218\uC815");
-		btnModify.setBounds(263, 335, 97, 35);
+		btnModify.setBounds(420, 463, 97, 35);
 		panel.add(btnModify);
 		
 		btnCancel = new FButton();
 		btnCancel.setBackground(SystemColor.inactiveCaptionBorder);
 		btnCancel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		btnCancel.setText("\uCDE8\uC18C");
-		btnCancel.setBounds(372, 335, 97, 35);
+		btnCancel.setBounds(529, 463, 97, 35);
 		panel.add(btnCancel);
 		
+		FLabel label_5 = new FLabel(1, 20);
+		label_5.setText("\uBE44\uBC00\uBC88\uD638 \uCC3E\uAE30");
+		label_5.setHorizontalAlignment(SwingConstants.CENTER);
+		label_5.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
+		label_5.setBounds(12, 322, 100, 35);
+		panel.add(label_5);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		panel_2.setBackground(SystemColor.inactiveCaptionBorder);
+		panel_2.setBounds(124, 322, 502, 131);
+		panel.add(panel_2);
+		panel_2.setLayout(null);
+		
+		FLabel label_8 = new FLabel(1, 20);
+		label_8.setText("\uC9C8\uBB38");
+		label_8.setHorizontalAlignment(SwingConstants.CENTER);
+		label_8.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
+		label_8.setBounds(12, 40, 100, 30);
+		panel_2.add(label_8);
+		
+		tfPasswordQuiz = new JTextField();
+		tfPasswordQuiz.setForeground(Color.BLACK);
+		tfPasswordQuiz.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
+		tfPasswordQuiz.setEnabled(false);
+		tfPasswordQuiz.setEditable(false);
+		tfPasswordQuiz.setColumns(10);
+		tfPasswordQuiz.setBackground(Color.WHITE);
+		tfPasswordQuiz.setBounds(124, 40, 366, 35);
+		panel_2.add(tfPasswordQuiz);
+		
+		FLabel label_10 = new FLabel(1, 20);
+		label_10.setText("\uB2F5\uBCC0");
+		label_10.setHorizontalAlignment(SwingConstants.CENTER);
+		label_10.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
+		label_10.setBounds(12, 80, 100, 30);
+		panel_2.add(label_10);
+		
+		tfPasswordAnswer = new JTextField();
+		tfPasswordAnswer.setForeground(Color.BLACK);
+		tfPasswordAnswer.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
+		tfPasswordAnswer.setEnabled(false);
+		tfPasswordAnswer.setEditable(false);
+		tfPasswordAnswer.setColumns(10);
+		tfPasswordAnswer.setBackground(Color.WHITE);
+		tfPasswordAnswer.setBounds(124, 80, 366, 35);
+		panel_2.add(tfPasswordAnswer);
+		
+		FLabel label_11 = new FLabel(1, 20);
+		label_11.setText("\uBE44\uBC00\uBC88\uD638\uB97C \uCC3E\uC744 \uB54C \uC0AC\uC6A9\uB429\uB2C8\uB2E4. \uAC04\uB2E8\uD55C \uC9C8\uBB38\uC73C\uB85C \uC124\uC815\uD558\uC138\uC694.");
+		label_11.setHorizontalAlignment(SwingConstants.LEFT);
+		label_11.setForeground(Color.RED);
+		label_11.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
+		label_11.setBounds(12, 10, 478, 20);
+		panel_2.add(label_11);
+		
 		FLabel label_9 = new FLabel();
-		label_9.setIcon(new ImageIcon(UserInfo.class.getResource("/img/user/duck.png")));
-		label_9.setBounds(612, 321, 352, 285);
+		label_9.setIcon(new ImageIcon(UserInfo.class.getResource(Constance.USER_IMAGE_PATH + "duck.png")));
+		label_9.setBounds(650, 293, 241, 286);
 		this.add(label_9);
+		
+		btnSecession = new FButton();
+		btnSecession.setText("\uD68C\uC6D0\uD0C8\uD1F4");
+		btnSecession.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
+		btnSecession.setBackground(SystemColor.inactiveCaptionBorder);
+		btnSecession.setBounds(903, 355, 97, 35);
+		add(btnSecession);
 	}
 	
 	public void dataSetting() {
+		
 		tfId.setText(user.getUserId() + " (¼öÁ¤ºÒ°¡)");
 		tfName.setText(user.getName());
 		cbPhoneFirst.setSelectedItem(user.getPhoneNumberFirst());		
@@ -240,6 +313,8 @@ public class UserInfo extends JPanel {
 		pfRePassword.setText("");
 		lbPasswordInfo.setText("");
 		
+		tfPasswordQuiz.setText(user.getPasswordQuiz());
+		tfPasswordQuiz.setText(user.getPasswordAnswer());
 		
 		Modifiable = true;
 		btnModify.setEnabled(true);
@@ -252,6 +327,4 @@ public class UserInfo extends JPanel {
 	public void setModifiable(boolean modifiable) {
 		Modifiable = modifiable;
 	}
-	
-	
 }

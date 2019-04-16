@@ -24,26 +24,27 @@ public class LoginMain extends JFrame {
 	public User user;
 
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginMain frame = new LoginMain();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					LoginMain frame = new LoginMain();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	FindIdMain findIdMain = new FindIdMain(this);
 	FindPwMain findPwMain = new FindPwMain(this);
 	LoginControl loginControl;
 
 	
-	public LoginMain() {
+	public LoginMain(FoodMain foodMain) {
 		//시작부
+		this.foodMain = foodMain;
 		setTitle("풉키에 오신것을 환영합니다.");
 		
 		this.loginControl = new LoginControl(this);

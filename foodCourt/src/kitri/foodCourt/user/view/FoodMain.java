@@ -77,19 +77,17 @@ public class FoodMain extends JFrame {
 	//로그인 부분 결합
 	public LoginMain loginMain;
 	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					//FoodMain frame = new FoodMain();
-//					//frame.setVisible(true);
-//					frame.loginMain.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FoodMain frame = new FoodMain();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	public void setPanelName(String panelName) {
 		this.currentPanelName = panelName;
@@ -98,10 +96,14 @@ public class FoodMain extends JFrame {
 		return this.currentPanelName;
 	}
 
-	public FoodMain(User user) {
-		this.user = user;
+	public FoodMain() {
+		this.user = User.getInstance();
+
+		loginMain = new LoginMain(this);
+		loginMain.setVisible(true);
 		basketMain = new BasketMain(this);
 		userInfo = new UserInfo(this);
+		this.setVisible(false);
 		initView();
 		
 	}

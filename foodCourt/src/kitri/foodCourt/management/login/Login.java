@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import kitri.foodCourt.util.Constance;
 
+@SuppressWarnings("serial")
 public class Login extends JPanel {
 	
 	public JPasswordField pwtextfd;
@@ -70,10 +71,6 @@ public class Login extends JPanel {
      this.label_2.setIcon(new ImageIcon(Login.class.getResource(Constance.USER_IMAGE_PATH+"mainimage.png")));
      this.label_2.setBounds(412, 84, 365, 274);
      add(this.label_2);
-     
-//   this.findpwbtn.addActionListener(new Login.1(this));
-
-     
    }
 }
 

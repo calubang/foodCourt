@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import kitri.foodCourt.management.login.LoginMain;
+
 
 public class AdminMainFrameService {
 
@@ -25,7 +27,9 @@ public class AdminMainFrameService {
 	}
 	
 	public void logout() {
-		
+		amf.adminID = null;
+		new LoginMain().setVisible(true);
+		amf.dispose();
 	}
 
 	public void showButtonText(Object ob) {

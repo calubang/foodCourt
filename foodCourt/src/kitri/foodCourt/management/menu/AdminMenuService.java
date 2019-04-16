@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,6 +26,7 @@ import javax.swing.table.TableRowSorter;
 
 import kitri.foodCourt.db.ConnectionMaker;
 import kitri.foodCourt.db.DbFactory;
+import kitri.foodCourt.management.main.AdminMainFrame;
 
 
 public class AdminMenuService {
@@ -35,6 +35,7 @@ public class AdminMenuService {
 	AdminMenuManagement amm;
 	AdminRegisterMenu arm;
 	AdminModifyMenu am;
+	AdminMainFrame amf;
 	
 	String[] option = {"예", "아니오"};
 	String[] column = {"메뉴ID", "메뉴이름", "카테고리", "가격", "포인트", "담당매니저", "등록일", "주문가능여부"};
@@ -485,6 +486,8 @@ public class AdminMenuService {
 		String fullpath = food_image.toString();
 		String imgUrl = fullpath.substring(fullpath.lastIndexOf("/") + 1, fullpath.length());
 		
+		String manager_id = amm.adminID;
+		
 		try {
 			c = connectionMaker.makeConnection();
 			ps = c.prepareStatement("select image_address "
@@ -515,7 +518,7 @@ public class AdminMenuService {
 			ps.close();
 			
 			ps = c.prepareStatement("update fook_food "
-								  + "set food_name = (?), category_id = (?), price = (?), food_point = (?), food_description = (?), image_address = (?), food_enable = (?) "
+								  + "set food_name = (?), category_id = (?), price = (?), food_point = (?), food_description = (?), image_address = (?), manager_id = (?), food_enable = (?) "
 								  + "where food_id = (?)");
 			
 			ps.setString(1, food_name);
@@ -524,8 +527,9 @@ public class AdminMenuService {
 			ps.setInt(4, point);
 			ps.setString(5, food_description);
 			ps.setString(6, imgUrl);
-			ps.setString(7, food_enable);
-			ps.setString(8, food_id);
+			ps.setString(7, manager_id);
+			ps.setString(8, food_enable);
+			ps.setString(9, food_id);
 			
 			result = ps.executeUpdate();
 
@@ -545,7 +549,7 @@ public class AdminMenuService {
 				rowData[2] = rs.getString("category_name");
 				rowData[3] = price;
 				rowData[4] = point;
-				rowData[5] = dtm.getValueAt(currentSelectedrow, 5);	// TODO jwlee use to real manager_id
+				rowData[5] = manager_id;
 				rowData[6] = dtm.getValueAt(currentSelectedrow, 6);
 				rowData[7] = food_enable.equals("y") ? "주문 가능" : "주문 불가능";
 
@@ -603,7 +607,7 @@ public class AdminMenuService {
 		String fullpath = food_image.toString();
 		String imgUrl = fullpath.substring(fullpath.lastIndexOf("/") + 1, fullpath.length());
 		
-		String manager_id = "Admin123";	// TODO jwlee use to real manager_id
+		String manager_id = amm.adminID;
 		
 		String priceStr = arm.priceTextField.getText();
 		if (priceStr.isEmpty()) {
@@ -641,7 +645,6 @@ public class AdminMenuService {
 		}
 		
 		try {
-			
 			c = connectionMaker.makeConnection();
 			
 			ps = c.prepareStatement("select image_address "

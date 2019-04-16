@@ -86,8 +86,7 @@ public class LoginService {
 					//성공 
 					
 					
-					logc.loginMain.user = User.getInstance();
-					User user = logc.loginMain.user;
+					User user = User.getInstance();
 					
 					user.setUserId(user_id);
 					user.setPassword(rs.getString("password"));
@@ -98,13 +97,6 @@ public class LoginService {
 					user.setUserPoint(rs.getInt("user_point"));
 					user.setPasswordQuiz(rs.getString("password_quiz"));
 					user.setPasswordAnswer(rs.getString("password_answer"));
-					
-					//FoodMain 
-					if(logc.loginMain.foodMain != null) {
-						logc.loginMain.foodMain.user = user;
-					}else {
-						logc.loginMain.foodMain = new FoodMain(user);
-					}
 					
 					logc.loginMain.setVisible(false);
 					logc.loginMain.foodMain.dataSetting();
@@ -300,8 +292,7 @@ public class LoginService {
 			if(r == 1) {
 				//정상적으로 회원가입됨
 				//성공 
-				logc.loginMain.user = User.getInstance();
-				User user = logc.loginMain.user;
+				User user = User.getInstance();
 				
 				user.setUserId(id);
 				user.setPassword(pw);
@@ -312,14 +303,7 @@ public class LoginService {
 				user.setUserPoint(0);
 				user.setPasswordQuiz(question);
 				user.setPasswordAnswer(answer);
-				
-				//FoodMain 
-				if(logc.loginMain.foodMain != null) {
-					logc.loginMain.foodMain.user = user;
-				}else {
-					logc.loginMain.foodMain = new FoodMain(user);
-				}
-				
+					
 				logc.loginMain.setVisible(false);
 				logc.loginMain.foodMain.dataSetting();
 				logc.loginMain.foodMain.setVisible(true);
@@ -472,17 +456,29 @@ public class LoginService {
 					if (PasswordQ.equals("null")) {
 						logc.findPwCheck.questionL.setText("질문 등록을 하지 않았습니다.");
 						logc.findPwCheck.answerTF.setEditable(false);
+						logc.findPwCheck.nextbtn.setBackground(new Color(240, 240, 240));;
+						logc.findPwCheck.nextbtn.setEnabled(false);
+						logc.findPwCheck.cancelbtn.setText("확인");
+						logc.findPwMain.card.show(logc.findPwMain.panMain, "findPwCheck");
+//						logc.findPwMain.setVisible(false);
 						// 확인 누르면 메인으로 돌아지게 만들기. findPwId 전역변수 초기화 시켜주기
 					}else{
+						logc.findPwCheck.answerTF.setEditable(true);
+						logc.findPwCheck.nextbtn.setBackground(new Color(0, 153, 255));;
+						logc.findPwCheck.nextbtn.setEnabled(true);
+						logc.findPwCheck.cancelbtn.setText("취소");
 						logc.findPwCheck.questionL.setText(PasswordQ);
+						logc.findPwMain.card.show(logc.findPwMain.panMain, "findPwCheck");
 						findPwId = DBuser_id;
 					}
-					logc.findPwMain.card.show(logc.findPwMain.panMain, "findPwCheck");
 					idC = 1;
 				}
 			}
-			if (idC == 0) {
-				javax.swing.JOptionPane.showMessageDialog(logc.findPw, "있는 아이디가 없습니다.");					
+			
+			if (!(name.isEmpty())) {
+				if (idC == 0) {
+					javax.swing.JOptionPane.showMessageDialog(logc.findPw, "있는 아이디가 없습니다.");					
+				}
 			}
 			
 			
@@ -556,17 +552,17 @@ public class LoginService {
 		String againpwTF = logc.findRPw.againPwTF.getText();
 		
 		
-    	if (!(password.equals(againpwTF)) || password.isEmpty() || againpwTF.isEmpty()) {
-			logc.findRPw.checkL.setForeground(Color.RED);
-			logc.findRPw.checkL.setText("비밀번호가 일치하지 않습니다.");
-			RpwCheck = 0;
-		}else if (password.length() < 6 || againpwTF.length() < 6 ) {
+		if (password.length() < 6 || againpwTF.length() < 6 ) {
 			logc.findRPw.checkL.setForeground(Color.RED);
 			logc.findRPw.checkL.setText("비밀번호를 6자리 이상 입력해 주세요.");
 			RpwCheck = 0;
+		}else if (!(password.equals(againpwTF)) || password.isEmpty() || againpwTF.isEmpty()) {
+			logc.findRPw.checkL.setForeground(Color.RED);
+			logc.findRPw.checkL.setText("비밀번호가 일치하지 않습니다.");
+			RpwCheck = 0;
 		}else if (password.equals(againpwTF)) {
 			logc.findRPw.checkL.setForeground(Color.GREEN);
-			logc.join.pwCheckL.setText("비밀번호가 일치합니다.");
+			logc.findRPw.checkL.setText("비밀번호가 일치합니다.");
 			RpwCheck = 1;
 		} 
     	
@@ -592,6 +588,7 @@ public class LoginService {
 				logc.findPwMain.card.show(logc.findPwMain.panMain, "findPw");
 				RpwCheck = 0;
 				findPwId = null; // 전역변수 초기화 시켜주기.
+				javax.swing.JOptionPane.showMessageDialog(logc.login, "비밀번호가 바뀌였습니다.");	
 			}else if ( RpwCheck == 0) {
 				javax.swing.JOptionPane.showMessageDialog(logc.findRPw, "비밀번호를 확인해 주세요.");					
 			}

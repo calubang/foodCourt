@@ -123,6 +123,19 @@ public class User {
 		return userDto;
 	}
 	
+	public void logout() {
+		user.userId = null;
+		user.password = null;
+		user.name = null;
+		user.phoneNumberFirst = null;
+		user.phoneNumberMiddle = null;
+		user.phoneNumberlast = null;
+		user.passwordQuiz = null;
+		user.passwordAnswer = null;
+		user.userPoint = 0;
+		user.basket = new BasketImpl();
+	}
+	
 
 	@Override
 	public String toString() {
