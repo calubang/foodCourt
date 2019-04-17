@@ -49,7 +49,6 @@ public class AdminMemberInfo extends JPanel {
 
 
 	JFrame jfA = new JFrame();
-
 	JDialog jfAD = new JDialog(jfA, "관리자등록");
 
 	JFrame jfM = new JFrame();
@@ -57,6 +56,7 @@ public class AdminMemberInfo extends JPanel {
 
 	JFrame jfMo = new JFrame();
 	JDialog jfMoD = new JDialog();
+
 	JPanel jpaMo;
 	CardLayout card = new CardLayout();
 

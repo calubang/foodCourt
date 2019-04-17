@@ -26,7 +26,7 @@ public class UserMenuDetailView extends JPanel {
 	public FLabel count = new FLabel(Font.PLAIN, 15);
 	public FLabel point = new FLabel(Font.PLAIN, 15);
 	public FLabel panel = new FLabel(Font.PLAIN, 15);
-	public JButton btnBack = new JButton("\uC774\uC804\uC73C\uB85C");
+	public RoundButton btnBack = new RoundButton("\uC774\uC804\uC73C\uB85C");
 	public AddOrderListButton btnBasket;
 	
 	public UserMenuDetailView(FoodDto foodDto, FoodMainService service) {
@@ -51,7 +51,7 @@ public class UserMenuDetailView extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		btnBasket = new AddOrderListButton("\uC7A5\uBC14\uAD6C\uB2C8 \uB2F4\uAE30", this);
+		btnBasket = new AddOrderListButton("¿ÂπŸ±∏¥œ ¥„±‚", this);
 		btnBack.setName("back");
 		btnBasket.setName("basket");
 		btnBasket.setFoodDto(foodDto);
@@ -108,29 +108,27 @@ public class UserMenuDetailView extends JPanel {
 		add(tfCount);
 		tfCount.setColumns(10);
 		
-		RoundPanel pBack = new RoundPanel(3, 40);
-		pBack.setBackground(Color.WHITE);
-		pBack.setMouseListener();
-		pBack.setName("back");
-		pBack.setLayout(null);
-		pBack.setBounds(199, 476, 200, 70);
-		add(pBack);
-		
-		FLabel lbBack = new FLabel();
-		//lbBack.setBackground(Color.BLACK);
-		lbBack.setBounds(20, 10, 150, 50);
-		lbBack.setHorizontalAlignment(SwingConstants.CENTER);
-		lbBack.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
-		lbBack.setText("¿Ã¿¸¿∏∑Œ");
-		pBack.add(lbBack);
+//		RoundPanel pBack = new RoundPanel(3, 40);
+//		pBack.setBackground(Color.WHITE);
+//		pBack.setMouseListener();
+//		pBack.setName("back");
+//		pBack.setLayout(null);
+//		pBack.setBounds(199, 476, 200, 70);
+//		add(pBack);
+//		
+//		FLabel lbBack = new FLabel();
+//		//lbBack.setBackground(Color.BLACK);
+//		lbBack.setBounds(20, 10, 150, 50);
+//		lbBack.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbBack.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
+//		lbBack.setText("¿Ã¿¸¿∏∑Œ");
+//		pBack.add(lbBack);
 		
 		btnBack.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 20));
-		btnBack.setBounds(10, 10, 180, 70);
+		btnBack.setBounds(199, 476, 200, 70);
 		btnBack.setBackground(Color.WHITE);
-		btnBack.setFocusable(false);
-		btnBack.setContentAreaFilled(false);
-		btnBack.setBorderPainted(false);
-		//pBack.add(btnBack);
+		btnBack.setBorder(new RoundBorder(30, 3));
+		add(btnBack);
 		
 		btnBasket.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 20));
 		btnBasket.setBounds(585, 476, 200, 70);
@@ -139,7 +137,7 @@ public class UserMenuDetailView extends JPanel {
 		add(btnBasket);
 		
 		//¿Ã∫•∆Æ µÓ∑œ∫Œ ------------------------------------------
-		pBack.setController(service.foodMainController);
+		//pBack.setController(service.foodMainController);
 		btnBack.addActionListener(service.foodMainController);
 		btnBasket.addActionListener(service.foodMainController);
 		btnBasket.addMouseListener(service.foodMainController);

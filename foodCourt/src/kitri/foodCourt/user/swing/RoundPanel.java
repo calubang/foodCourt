@@ -5,6 +5,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
+import kitri.foodCourt.util.Constance;
+
 public class RoundPanel extends JPanel implements MouseListener{
 
 	private int thickness;
@@ -49,7 +51,8 @@ public class RoundPanel extends JPanel implements MouseListener{
 		this.setBorder(new RoundBorder(arc, thickness));
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		this.addMouseListener(this);
-		this.enterColor = hexToRgb("#FFF8DC");
+		//this.enterColor = hexToRgb("#FFF8DC");
+		this.enterColor = Constance.MAIN_COLOR;
 	}
 	
 	public void setMouseListener() {

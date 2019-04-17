@@ -82,7 +82,7 @@ public class AdminUserDao {
 		return vector;
 	}
 	
-	public UserDto select(String userId) {
+	public boolean select(String userId) {
 		UserDto userDto = null;
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -108,26 +108,28 @@ public class AdminUserDao {
 			con = connectionMaker.makeConnection();
 			ps = con.prepareStatement(sql);
 			
-			rs = ps.executeQuery();
+			rs = ps.executeQuery(sql);
+			return rs.next();
 			
-			userDto = new UserDto();
-			userDto.setUserId(rs.getString("user_id"));
-			userDto.setPassword(rs.getString("password"));
-			userDto.setName(rs.getString("name"));
-			userDto.setPhoneNumberFirst(rs.getString("phone_first"));
-			userDto.setPhoneNumberMiddle(rs.getString("phone_middle"));
-			userDto.setPhoneNumberlast(rs.getString("phone_last"));
-			userDto.setUserPoint(Integer.parseInt(rs.getString("user_point")));
-			userDto.setPasswordQuiz(rs.getString("password_quiz"));
-			userDto.setPasswordAnswer(rs.getString("password_answer"));
-			userDto.setJoinDate(rs.getString("join_date"));
-			userDto.setSecessionDate(rs.getString("secession_date"));
-			userDto.setEnable(rs.getString("enable").charAt(0));
+			
+//			userDto = new UserDto();
+//			userDto.setUserId(rs.getString("user_id"));
+//			userDto.setPassword(rs.getString("password"));
+//			userDto.setName(rs.getString("name"));
+//			userDto.setPhoneNumberFirst(rs.getString("phone_first"));
+//			userDto.setPhoneNumberMiddle(rs.getString("phone_middle"));
+//			userDto.setPhoneNumberlast(rs.getString("phone_last"));
+//			userDto.setUserPoint(Integer.parseInt(rs.getString("user_point")));
+//			userDto.setPasswordQuiz(rs.getString("password_quiz"));
+//			userDto.setPasswordAnswer(rs.getString("password_answer"));
+//			userDto.setJoinDate(rs.getString("join_date"));
+//			userDto.setSecessionDate(rs.getString("secession_date"));
+//			userDto.setEnable(rs.getString("enable").charAt(0));
 				
-			return userDto;
+			//return userDto;
 			
 		} catch (SQLException sqle) {
-			System.out.println("SELECT문에서 예외 발생");
+			System.out.println("id select 문에서 예외 발생");
 			sqle.printStackTrace();
 
 		} finally {
@@ -140,7 +142,7 @@ public class AdminUserDao {
 			}
 			
 		}
-		return userDto;
+		return false;
 	}
 	
 	public int modify(UserDto userDto) {
@@ -184,7 +186,114 @@ public class AdminUserDao {
 			return result;
 			
 		} catch (SQLException sqle) {
-			System.out.println("SELECT문에서 예외 발생");
+			System.out.println("modify 문에서 예외 발생");
+			sqle.printStackTrace();
+
+		} finally {
+			// DB 연결을 종료한다.
+			try {
+				connectionMaker.closeConnection(con, ps, rs);
+			} catch (SQLException e) {
+				System.out.println("DB연결 종료중 문제생김 : " + sql);
+				e.printStackTrace();
+			}
+			
+		}
+		return result;
+	}
+	
+	public int delete(String userId) {
+		int result = -1;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = 
+				"delete from fook_user\n" + 
+				"where user_id = ?";
+		
+		try {
+			con = connectionMaker.makeConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+
+			
+			result = ps.executeUpdate();
+			
+			return result;
+			
+		} catch (SQLException sqle) {
+			System.out.println("delete문에서 예외 발생");
+			sqle.printStackTrace();
+
+		} finally {
+			// DB 연결을 종료한다.
+			try {
+				connectionMaker.closeConnection(con, ps, rs);
+			} catch (SQLException e) {
+				System.out.println("DB연결 종료중 문제생김 : " + sql);
+				e.printStackTrace();
+			}
+			
+		}
+		return result;
+	}
+	
+	public int insert(UserDto user) {
+		int result = -1;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = 
+				"insert into fook_user(\n" + 
+				"    user_id\n" + 
+				"    , password\n" + 
+				"    , name\n" + 
+				"    , phone_first\n" + 
+				"    , phone_middle\n" + 
+				"    , phone_last\n" + 
+				"    , user_point\n" + 
+				"    , password_quiz\n" + 
+				"    , password_answer\n" + 
+				"    , join_date\n" + 
+				"    , secession_date\n" + 
+				"    , enable\n" + 
+				")values(\n" + 
+				"    '?'\n" + 
+				"    , ?\n" + 
+				"    , ?\n" + 
+				"    , ?\n" + 
+				"    , ?\n" + 
+				"    , ?\n" + 
+				"    , ?\n" + 
+				"    , ?\n" + 
+				"    , ?\n" + 
+				"    , nvl(to_date(?, 'yyyy-mm-dd'), sysdate)\n" + 
+				"    , nvl(to_date(?, 'yyyy-mm-dd'), '')\n" + 
+				"    , lower(?)\n" + 
+				")";
+		
+		try {
+			con = connectionMaker.makeConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, user.getUserId());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getName());
+			ps.setString(4, user.getPhoneNumberFirst());
+			ps.setString(5, user.getPhoneNumberMiddle());
+			ps.setString(6, user.getPhoneNumberlast());
+			ps.setInt(7, user.getUserPoint());
+			ps.setString(8, user.getPasswordQuiz());
+			ps.setString(9, user.getPasswordAnswer());
+			ps.setString(10, user.getJoinDate());
+			ps.setString(11, user.getSecessionDate());
+			ps.setString(12, user.getEnable()+"");
+
+			result = ps.executeUpdate();
+			
+			return result;
+			
+		} catch (SQLException sqle) {
+			System.out.println("insert문에서 예외 발생");
 			sqle.printStackTrace();
 
 		} finally {

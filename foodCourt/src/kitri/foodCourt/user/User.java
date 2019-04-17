@@ -1,6 +1,7 @@
 package kitri.foodCourt.user;
 
 import kitri.foodCourt.dto.UserDto;
+import kitri.foodCourt.user.swing.FLabel;
 
 public class User {
 	//하나의 유저만 가질수 있도록 싱글톤 적용
@@ -133,7 +134,9 @@ public class User {
 		user.passwordQuiz = null;
 		user.passwordAnswer = null;
 		user.userPoint = 0;
+		FLabel label = user.basket.getOrderCount();
 		user.basket = new BasketImpl();
+		user.basket.setOrderCount(label);
 	}
 	
 

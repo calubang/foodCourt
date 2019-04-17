@@ -13,6 +13,7 @@ import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.*;
 import kitri.foodCourt.user.controller.BasketController;
 import kitri.foodCourt.user.swing.*;
+import kitri.foodCourt.util.Constance;
 import oracle.net.aso.a;
 
 import javax.swing.border.*;
@@ -82,7 +83,7 @@ public class BasketMain extends JPanel{
 		
 		JPanel pTop = new JPanel();
 		pTop.setBackground(Color.WHITE);
-		pTop.setBounds(0, 0, 1012, 141);
+		pTop.setBounds(0, 0, 1012, 122);
 		pBasketMain.add(pTop);
 		pTop.setLayout(null);
 		
@@ -97,14 +98,9 @@ public class BasketMain extends JPanel{
 		pTop.add(lblBasket);
 		lblBasket.setText("\uC7A5\uBC14\uAD6C\uB2C8");
 		
-		JPanel pSeparator = new JPanel();
-		pSeparator.setBounds(0, 70, 1012, 6);
-		pTop.add(pSeparator);
-		pSeparator.setBackground(SystemColor.activeCaption);
-		
 		JPanel pBasketMenu = new JPanel();
 		pBasketMenu.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		pBasketMenu.setBounds(0, 85, 1012, 50);
+		pBasketMenu.setBounds(0, 70, 1012, 50);
 		pTop.add(pBasketMenu);
 		pBasketMenu.setBackground(SystemColor.inactiveCaptionBorder);
 		pBasketMenu.setLayout(null);
@@ -141,8 +137,8 @@ public class BasketMain extends JPanel{
 		pBasketMenu.add(label);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(SystemColor.inactiveCaptionBorder, 1, true));
-		panel_1.setBounds(0, 143, 1012, 330);
+		panel_1.setBorder(new LineBorder(Color.BLACK, 1, true));
+		panel_1.setBounds(0, 127, 1012, 345);
 		pBasketMain.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
@@ -201,7 +197,7 @@ public class BasketMain extends JPanel{
 		btnPayment.setBackground(SystemColor.inactiveCaptionBorder);
 		btnPayment.setToolTipText("\uACB0\uC81C");
 		btnPayment.setName("payment");
-		btnPayment.setBounds(831, 95, 169, 47);
+		btnPayment.setBounds(843, 95, 169, 47);
 		pBottom.add(btnPayment);
 		btnPayment.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		btnPayment.setText("\uACB0\uC81C");
@@ -248,21 +244,21 @@ public class BasketMain extends JPanel{
 		int count = detail.getCount();
 		JPanel pFood = new JPanel();
 		pFood.setLayout(null);
-		pFood.setMaximumSize(new Dimension(1010, 110));
-		pFood.setPreferredSize(new Dimension(1010, 110));
+		pFood.setMaximumSize(new Dimension(1012, 115));
+		pFood.setPreferredSize(new Dimension(1012, 115));
 		pFood.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 		pFood.setBackground(SystemColor.inactiveCaptionBorder);
 		//x버튼
 		FButton btnX = SwingFactory.getInstance().getButton("x");
 		//btnX.setName(index+"cancel");
-		btnX.setBounds(26, 33, 44, 44);
+		btnX.setBounds(26, 35, 44, 44);
 		pFood.add(btnX);
 		btnX.setName("x"+index);
 		btnX.setToolTipText("삭제");
 		
 		//음식설명용 패널 - 차후 클릭하면 효과있음
 		FPanel pFoodInfo = SwingFactory.getInstance().getPanel("basketFood");
-		pFoodInfo.setBounds(93, 0, 350, 109);
+		pFoodInfo.setBounds(93, 0, 350, 113);
 		pFoodInfo.setName(detail.getFood().getFoodId());
 		pFoodInfo.setBackground(SystemColor.inactiveCaptionBorder);
 		pFood.add(pFoodInfo);
@@ -270,7 +266,7 @@ public class BasketMain extends JPanel{
 		//음식사진
 		FButton btnFoodImage = SwingFactory.getInstance().getButton("image");
 		URL url = BasketMain.class.getResource(detail.getFood().getImageAddress());
-		btnFoodImage.setBounds(12, 15, 120, 80);
+		btnFoodImage.setBounds(12, 15, 120, 82);
 		if(url != null) {			
 			try {
 				BufferedImage bImage = ImageIO.read(url);
@@ -287,14 +283,14 @@ public class BasketMain extends JPanel{
 		FLabel lFoodName = SwingFactory.getInstance().getLabel("basketFood");
 		lFoodName.setText(detail.getFood().getFoodName());
 		lFoodName.setHorizontalAlignment(SwingConstants.LEFT);
-		lFoodName.setBounds(144, 20, 190, 70);
+		lFoodName.setBounds(144, 22, 190, 70);
 		lFoodName.setName(detail.getFood().getFoodId());
 		pFoodInfo.add(lFoodName);
 		
 		//포인트
 		FLabel lPoint = SwingFactory.getInstance().getLabel("basketFood");
 		lPoint.setText(String.valueOf(detail.getFood().getPoint()));
-		lPoint.setBounds(420, 33, 100, 44);
+		lPoint.setBounds(420, 35, 100, 44);
 		pFood.add(lPoint);
 		
 		//수량증가 화살표
@@ -312,19 +308,19 @@ public class BasketMain extends JPanel{
 		//수량
 		FLabel lCount = SwingFactory.getInstance().getLabel("basketFood");
 		lCount.setText(String.valueOf(detail.getCount()));
-		lCount.setBounds(560, 33, 100, 45);
+		lCount.setBounds(560, 35, 100, 45);
 		pFood.add(lCount);
 		
 		//개당가격
 		FLabel lPrice = SwingFactory.getInstance().getLabel("basketFood");
 		lPrice.setText(String.valueOf(detail.getFood().getPrice()));
-		lPrice.setBounds(720, 33, 100, 45);
+		lPrice.setBounds(720, 35, 100, 45);
 		pFood.add(lPrice);
 		
 		//총가격
 		FLabel lPriceSum = SwingFactory.getInstance().getLabel("basketFood");
 		lPriceSum.setText(String.valueOf(detail.getFood().getPrice()*count));
-		lPriceSum.setBounds(870, 33, 100, 45);
+		lPriceSum.setBounds(870, 35, 100, 45);
 		pFood.add(lPriceSum);
 		
 		//이벤트

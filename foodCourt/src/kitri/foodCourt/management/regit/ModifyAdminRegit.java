@@ -97,6 +97,7 @@ public class ModifyAdminRegit extends JPanel {
 		impossibleModify.setBorder(eborder);
 		eborder = new EtchedBorder(EtchedBorder.RAISED);
 		idpanel.add(impossibleModify);
+		getidlabel.setForeground(Color.WHITE);
 		
 		
 		getidlabel.setBounds(107, 10, 107, 34);
@@ -249,6 +250,11 @@ public class ModifyAdminRegit extends JPanel {
 	public void dataSetting() {
 		int row = at.adt.convertRowIndexToModel(at.adt.getSelectedRow());
 		
-		nametf.setText(String.valueOf(at.dtm.getValueAt(row, 0)));
+		getidlabel.setText(String.valueOf(at.dtm.getValueAt(row, 0)));
+		nametf.setText(String.valueOf(at.dtm.getValueAt(row, 1)));
+		addresstf.setText(String.valueOf(at.dtm.getValueAt(row, 6)));
+		email.setText(String.valueOf(at.dtm.getValueAt(row, 7)));
+		emaildomain.setText(String.valueOf(at.dtm.getValueAt(row, 8)));
+		
 	}
 }

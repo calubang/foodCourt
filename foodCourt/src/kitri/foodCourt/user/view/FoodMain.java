@@ -19,38 +19,43 @@ import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.controller.FoodMainController;
 import kitri.foodCourt.user.login.LoginMain;
 import kitri.foodCourt.user.swing.*;
+import kitri.foodCourt.util.Constance;
 
 public class FoodMain extends JFrame {
 	public String currentPanelName;
 	public JPanel contentPane;
 	public JTextField searchField;
 	public JPanel panel = new JPanel();
-	public JPanel panel_5 = new JPanel();
-	public JPanel panel_3 = new JPanel();
-	public JPanel panel_2 = new JPanel();
+	
+	//구분자 패널
+	public JPanel pSeparator1 = SwingFactory.getJPanel("separator");
+	public JPanel pSeparator2 = SwingFactory.getJPanel("separator");
+	public JPanel pSeparator3 = SwingFactory.getJPanel("separator");
+	public JPanel pSeparator4 = SwingFactory.getJPanel("separator");
+	public JPanel pSeparator5 =SwingFactory.getJPanel("separator");
+	
+	public JPanel pHomeButton = new JPanel();
+	
 	public UserMenuView userMenuView = new UserMenuView();
 	public UserMenuDetailView UserMenuDetailView = new UserMenuDetailView();
 	public FoodMainView foodMainView = new FoodMainView();
 	public NoSearchMenuImg noSearchMenuImg = new NoSearchMenuImg();
 
 	public FLabel labSearch = new FLabel("\uAC80\uC0C9");
-	public JPanel panel_6 = new JPanel();
+	
 	public JPanel panChangePanel = new JPanel();
 	public CardLayout card = new CardLayout();
-
 	public JButton btnMainMenu = new JButton();
-
-	public JButton btnSearch = new JButton(
-			new ImageIcon(FoodMain.class.getResource("/img/user/search.PNG")));
-	public JPanel panMainButton = new JPanel();
+	public JButton btnSearch = new JButton(new ImageIcon(FoodMain.class.getResource("/img/user/search.PNG")));
 	public JButton btnUserInfo = new JButton();
 	public JLabel labName = new JLabel();
-	public JButton btnOrderList = new JButton(
-			new ImageIcon(FoodMain.class.getResource("/img/user/basket.png")));
+	public JButton btnOrderList = new JButton(new ImageIcon(FoodMain.class.getResource("/img/user/basket.png")));
 	public JLabel labBasket = new JLabel("\uC8FC\uBB38\uBAA9\uB85D");
-	public JPanel panBarVerRight = new JPanel();
 	public Cursor csorHandCursor = new Cursor(Cursor.HAND_CURSOR);
 	boolean check = false;
+	public MainButton btnLogout;
+	public RoundPanel pLogout;
+	
 	// 장바구니, 결제부분 결합
 	public User user;
 	public BasketMain basketMain;
@@ -76,6 +81,7 @@ public class FoodMain extends JFrame {
 	
 	//로그인 부분 결합
 	public LoginMain loginMain;
+	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -124,6 +130,7 @@ public class FoodMain extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		panel.setBorder(null);
+		btnSearch.setBackground(new Color(255, 240, 245));
 		btnSearch.setToolTipText("\uAC80\uC0C9");
 		
 		//패스워드 확인용 패널
@@ -163,24 +170,29 @@ public class FoodMain extends JFrame {
 		panel.setBackground(Color.WHITE);
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		panel_5.setBackground(SystemColor.activeCaption);
 
-		panel_5.setBounds(12, 10, 1160, 6);
-		panel.add(panel_5);
-		panel_3.setBackground(SystemColor.activeCaption);
+		pSeparator1.setBounds(12, 10, 1160, 6);
+		panel.add(pSeparator1);
 
-		panel_3.setBounds(12, 102, 1160, 6);
-		panel.add(panel_3);
+		pSeparator2.setBounds(12, 102, 1160, 6);
+		panel.add(pSeparator2);
+		pSeparator3.setBounds(145, 26, 4, 66);
+		panel.add(pSeparator3);
 
-		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(16, 21, 120, 75);
-		panel.add(panel_2);
-		panel_2.setLayout(null);
+		pSeparator4.setBounds(916, 26, 4, 66);
+		
+		panel.add(pSeparator4);
+		pSeparator5.setBounds(145, 118, 4, 633);
+		panel.add(pSeparator5);
+		pHomeButton.setBackground(Color.WHITE);
+		pHomeButton.setBounds(16, 21, 120, 75);
+		panel.add(pHomeButton);
+		pHomeButton.setLayout(null);
 		btnMainMenu.setToolTipText("\uBA54\uC778");
 		btnMainMenu.setPreferredSize(new Dimension(115, 75));
 		btnMainMenu.setIcon(new ImageIcon(FoodMain.class.getResource("/img/user/home2.png")));
 		btnMainMenu.setBorderPainted(false);
-		panel_2.add(btnMainMenu);
+		pHomeButton.add(btnMainMenu);
 		btnMainMenu.setBackground(Color.WHITE);
 		panChangePanel.setBackground(Color.WHITE);
 		
@@ -274,6 +286,31 @@ public class FoodMain extends JFrame {
 		btnYangsic.setFocusable(false);
 		btnYangsic.setContentAreaFilled(false);
 		btnYangsic.setBorderPainted(false);
+		
+		pLogout = new RoundPanel(2, 40);
+		pLogout.setLayout(null);
+		pLogout.setName("0");
+		pLogout.setBackground(Color.WHITE);
+		pLogout.setBounds(16, 651, 115, 100);
+		panel.add(pLogout);
+		
+		JLabel label_1 = new JLabel("\uB85C\uADF8\uC544\uC6C3");
+		label_1.setOpaque(true);
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		label_1.setBackground(Color.WHITE);
+		label_1.setBounds(10, 70, 95, 20);
+		pLogout.add(label_1);
+		
+		btnLogout = new MainButton((Icon) null);
+		btnLogout.setIcon(new ImageIcon(FoodMain.class.getResource("/img/user/logout.png")));
+		btnLogout.setName("4");
+		btnLogout.setFocusable(false);
+		btnLogout.setContentAreaFilled(false);
+		btnLogout.setBorderPainted(false);
+		btnLogout.setBounds(10, 10, 95, 60);
+		pLogout.add(btnLogout);
+		
 
 //				--------------------변하는 패널 부분 카드레이아웃 설정
 		panChangePanel.setLayout(card);
@@ -291,21 +328,14 @@ public class FoodMain extends JFrame {
 
 		searchField = new JTextField();
 		searchField.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		searchField.setBorder(new MatteBorder(2, 2, 4, 4, (Color) Color.BLACK));
+		searchField.setBorder(new MatteBorder(2, 2, 4, 4, (Color) SystemColor.activeCaption));
 		searchField.setBounds(240, 42, 553, 38);
 		panel.add(searchField);
 		searchField.setColumns(10);
-		panel_6.setBackground(SystemColor.activeCaption);
-
-		panel_6.setBounds(145, 118, 4, 633);
-		panel.add(panel_6);
 		btnSearch.setBorder(new LineBorder(SystemColor.activeCaption, 1, true));
 		btnSearch.setBounds(826, 42, 40, 38);
 
 		panel.add(btnSearch);
-		panMainButton.setBounds(145, 26, 4, 66);
-		panel.add(panMainButton);
-		panMainButton.setBackground(SystemColor.activeCaption);
 		btnUserInfo.setBorder(new LineBorder(SystemColor.activeCaption, 1, true));
 		btnUserInfo.setBounds(965, 26, 79, 54);
 
@@ -332,10 +362,6 @@ public class FoodMain extends JFrame {
 		labBasket.setBounds(1074, 77, 79, 22);
 
 		panel.add(labBasket);
-		panBarVerRight.setBackground(SystemColor.activeCaption);
-		panBarVerRight.setBounds(916, 26, 4, 66);
-
-		panel.add(panBarVerRight);
 		labSearch.setBounds(170, 26, 60, 66);
 		panel.add(labSearch);
 		// ---------------------
@@ -364,11 +390,16 @@ public class FoodMain extends JFrame {
 		pAmericanMenu.addMouseListener(foodMainController);
 		btnIlsic.addActionListener(foodMainController);
 		pJapaneseMenu.addMouseListener(foodMainController);
+		btnLogout.addActionListener(foodMainController);
+		pLogout.addMouseListener(foodMainController);
 		
 		foodMainView.labHansic.addActionListener(foodMainController);
 		foodMainView.labJoongsic.addActionListener(foodMainController);
 		foodMainView.labIlsic.addActionListener(foodMainController);
 		foodMainView.labYangsic.addActionListener(foodMainController);
+		
+		
+		
 	}
 	
 	public void dataSetting() {

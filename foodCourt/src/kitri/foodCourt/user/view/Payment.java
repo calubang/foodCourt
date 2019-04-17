@@ -71,11 +71,6 @@ public class Payment extends JPanel {
 		this.setBounds(160, 118, 1012, 634);
 		setLayout(null);
 		
-		JPanel pSeperator = new JPanel();
-		pSeperator.setBackground(SystemColor.activeCaption);
-		pSeperator.setBounds(0, 60, 1012, 6);
-		add(pSeperator);
-		
 		JLabel lbPageImage = new JLabel("");
 		lbPageImage.setIcon(new ImageIcon(Payment.class.getResource("/img/user/payment.png")));
 		lbPageImage.setBounds(0, 0, 120, 50);
@@ -91,7 +86,7 @@ public class Payment extends JPanel {
 		pTotalPrice.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		pTotalPrice.setLayout(null);
 		pTotalPrice.setBackground(SystemColor.inactiveCaptionBorder);
-		pTotalPrice.setBounds(0, 75, 1012, 85);
+		pTotalPrice.setBounds(0, 60, 1012, 85);
 		add(pTotalPrice);
 		
 		FLabel label_1 = new FLabel();
