@@ -117,31 +117,25 @@ public class PaymentService {
 
 			while (flag) {
 				String msg = in.readLine();
-				System.out.println("서버가 보낸 메세지 : " + msg); 
-				StringTokenizer st = new StringTokenizer(msg, "|"); 
+				System.out.println("서버가 보낸 메세지 : " + msg);
+				StringTokenizer st = new StringTokenizer(msg, "|");
 				int protocol = Integer.parseInt(st.nextToken());
 				switch (protocol) {
 				case OrderConatance.SC_ORDER_RESULT: {
-//				200|true or false
-					String tmp = st.nextToken();
-					if(tmp.equals("false")) {
-						flag = false;
-//						JOptionPane.showMessageDialog(parentComponent, "주문 요청 오류가 발생했습니다. 직원에게 문의해주세요", "주문 오류", JOptionPane.ERROR_MESSAGE);
-					}
-					else
-						flag = false;
+//					200|true or false
+					flag = false;
 				}
 				}
 			}
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(controller.payment.basketMain.foodMain, "주문 오류가 발생했습니다 \n 직원에게 문의해주세요", "결제 오류", JOptionPane.ERROR_MESSAGE);
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(controller.payment.basketMain.foodMain, "주문 오류가 발생했습니다 \n 직원에게 문의해주세요", "결제 오류", JOptionPane.ERROR_MESSAGE);
 		} finally {
-			if(out != null) {try {out.close();} catch (IOException e) {e.printStackTrace();}}
-			if(in != null) {try {in.close();} catch (IOException e) {e.printStackTrace();}}
-			if(socket != null) {try {socket.close();} catch (IOException e) {e.printStackTrace();}}
-			
+			if (out != null) 		{try {out.close();} 	catch (IOException e) {e.printStackTrace();}}
+			if (in != null) 		{try {in.close();} 		catch (IOException e) {e.printStackTrace();}}
+			if (socket != null) 	{try {socket.close();} 	catch (IOException e) {e.printStackTrace();}}
+
 		}
 		// ---------------------------------------------------
 

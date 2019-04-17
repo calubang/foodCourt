@@ -1,6 +1,5 @@
 package kitri.foodCourt.user.service;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -14,7 +13,6 @@ import kitri.foodCourt.user.controller.FoodMainController;
 import kitri.foodCourt.user.dao.MenuDao;
 import kitri.foodCourt.user.swing.*;
 import kitri.foodCourt.user.view.*;
-import old.DaoFactory;
 
 public class FoodMainService {
 	public FoodMainController foodMainController;

@@ -20,15 +20,8 @@ public class OrderService {
 	}
 
 	// order리스트의 갱신을 담당
-	public boolean addOrderList(int requestNumber, String orderFood) {
+	public void addOrderList(int requestNumber, String orderFood) {
 		System.out.println("addOrderList");
-//		System.out.println(main.tmap);
-//		int size;
-//		if(!(main.tmap.isEmpty())) {
-//			size = main.tmap.size();
-//		} else {
-//			size = 0;
-//		}
 		OrderList order = new OrderList();
 		order.setRequestNumber(requestNumber);
 		System.out.println(orderFood);
@@ -48,12 +41,6 @@ public class OrderService {
 		System.out.println("주문목록 재생성 완료");
 		if (!main.isVisible())
 			main.setVisible(true);
-//		if (size + 1 == main.tmap.size())
-//			return true;
-//		else {
-//			return false;
-//		}
-		return true;
 	}
 
 	// 주문정보 프레임 띄우기

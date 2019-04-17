@@ -91,9 +91,9 @@ public class UserMenuView extends JPanel {
 				
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(service.foodMain, "오류가 발생했습니다 \n 다시 시도해주세요", "메뉴 검색 오류", JOptionPane.ERROR_MESSAGE);
 		} catch (URISyntaxException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(service.foodMain, "오류가 발생했습니다 \n 다시 시도해주세요", "메뉴 검색 오류", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 //		만약 메뉴를 17개 뽑아온다고 하면

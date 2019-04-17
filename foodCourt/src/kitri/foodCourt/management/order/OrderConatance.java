@@ -10,7 +10,7 @@ public interface OrderConatance {
 	public static final int CS_ORDER = 100;
 	
 //	server >> client(여러명이 될 수 있다)
-//	주문정보 수신 여부 전송				200|성공여부
+//	주문정보 수신 여부 전송				200|
 	public static final int SC_ORDER_RESULT = 200;
 	
 }

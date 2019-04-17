@@ -22,9 +22,9 @@ public class OrderListFrame extends JFrame {
 	Iterator<Integer> iteratorKey; // 키값 오름차순 정렬(기본)									// list안써도댐
 	int selectedRequestNumber = 0; // 현재 누른 버튼 가져오기
 
-	OrderController orderController;
-	OrderDetailDialog orderDetailDialog;
-
+	OrderController orderController = null;
+	OrderDetailDialog orderDetailDialog = null;
+	public OrderListServer orderListServer = null;
 	/**
 	 * Launch the application.
 	 */
@@ -87,10 +87,11 @@ public class OrderListFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public OrderListFrame() {
-		super();
-		setTitle("\uC74C\uC2DD \uC8FC\uBB38 \uBAA9\uB85D");
+		super("\uC74C\uC2DD \uC8FC\uBB38 \uBAA9\uB85D");
 		orderController = new OrderController(this);
-		new Thread(new OrderListServer(new OrderService(orderController))).start();
+		orderListServer = new OrderListServer(new OrderService(orderController));
+		new Thread(orderListServer).start();
+
 		orderDetailDialog = new OrderDetailDialog(this);
 		setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
