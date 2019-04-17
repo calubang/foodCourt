@@ -13,6 +13,7 @@ public class AdminRegisterControl implements ActionListener, KeyListener {
 	ModifyAdminRegit maR;
 	ModifyRegit mR;
 	RemoveMember rm;
+	AdminTable at;
 
 	public AdminRegisterControl(AdminMemberInfo ami) {
 		this.ami = ami;
@@ -38,6 +39,8 @@ public class AdminRegisterControl implements ActionListener, KeyListener {
 			ars.showdelete();
 		} else if (ob == ami.ar.registerbtn) {
 			ars.arRegister();
+			ami.at.dtm.setNumRows(0);
+			ami.at.selectAdmin();
 		} else if (ob == ami.ar.idbtn) {
 			ars.arId();
 		} else if (ob == ami.ar.cancelbtn) {	
@@ -50,6 +53,8 @@ public class AdminRegisterControl implements ActionListener, KeyListener {
 			ars.Close(ami.jfMD);
 		} else if (ob == ami.maR.registerbtn) {
 			ars.maRRegister();
+			ami.at.dtm.setNumRows(0);
+			ami.at.selectAdmin();
 		} else if (ob == maR.cancelbtn) {
 			System.out.println("1");
 			ami.jfMo.setVisible(false);

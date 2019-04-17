@@ -252,7 +252,9 @@ public class ModifyAdminRegit extends JPanel {
 		
 		getidlabel.setText(String.valueOf(at.dtm.getValueAt(row, 0)));
 		nametf.setText(String.valueOf(at.dtm.getValueAt(row, 1)));
-		
+		addresstf.setText(String.valueOf(at.dtm.getValueAt(row, 6)));
+		email.setText(String.valueOf(at.dtm.getValueAt(row, 7)));
+		emaildomain.setText(String.valueOf(at.dtm.getValueAt(row, 8)));
 		
 	}
 }

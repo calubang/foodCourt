@@ -65,6 +65,9 @@ public class AdminRegisterService {
 		ami.ar.lastnumber.setText("");
 		ami.ar.passwordtf.setText("");
 		ami.ar.pwtf.setText("");
+		ami.ar.addresstf.setText("");
+		ami.ar.email.setText("");
+		ami.ar.emaildomain.setText("");
 		ami.ar.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
 
 		ami.jfAD.getContentPane().add(ami.ar);
@@ -185,10 +188,16 @@ public class AdminRegisterService {
 		String domain = ami.ar.emaildomain.getText();
 		String address = ami.ar.addresstf.getText();
 		
-		int result = 0;
-		Object[] rowData = new Object[12];
+		if(jobid == "관리자") {
+			jobid = "Admin";
+		}else if(jobid == "점원") {
+			jobid = "Clerk";
+		}else {
+			jobid = "NewBie";
+		}
 		
-		String quary = "insert into fook_manager(MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID,hire_date,ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		String quary = "insert into fook_manager(MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID,hire_date,ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) values(?,?,?,?,?,?,?,sysdate,?,?,?,?)";
 
 		if (id.isEmpty() || pw.isEmpty() || pwtf.isEmpty() || name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()) {
 			JOptionPane.showMessageDialog(ami.ar, "빈 공간을 입력해 주세요.");
@@ -210,44 +219,45 @@ public class AdminRegisterService {
 			pstm.setString(5, nummid);
 			pstm.setString(6, numlast);
 			pstm.setString(7, jobid);
-			pstm.setString(8, "");
-			pstm.setString(9, "12345");
-			pstm.setString(10, address);
-			pstm.setString(11, email);
-			pstm.setString(12, domain);
-
-			result = pstm.executeUpdate();
 			
-			pstm.close();
-			pstm = conn.prepareStatement("SELECT \n" + 
-					"    MANAGER_ID\n" + 
-					"    ,NAME\n" + 
-					"    ,PASSWORD\n" + 
-					"    ,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn\n" + 
-					"    ,fj.job_name as job_name\n" + 
-					"    ,HIRE_DATE\n" + 
-					"    ,ADDRESS_ZIP\n" + 
-					"    ,ADDRESS\n" + 
-					"    ,EMAIL\n" + 
-					"    ,EMAIL_DOMAIN \n" + 
-					"FROM \n" + 
-					"    FOOK_MANAGER fm \n" + 
-					"    , fook_job fj \n" + 
-					"where fm.job_id = fj.job_id(+)");
-			rs = pstm.executeQuery();
-			if((result != 0) && rs.next()) {
-				rowData[0] = id;
-				rowData[1] = name;
-				rowData[2] = pw;
-				rowData[3] = rs.getString("pn");
-				rowData[4] = rs.getString("job_name");
-				rowData[5] = rs.getDate("HIRE_DATE");
-				rowData[6] = rs.getString("ADDRESS_ZIP");
-				rowData[7] = address;
-				rowData[8] = email;
-				rowData[9] = domain;
-			}
-			ami.at.dtm.addRow(rowData);
+			pstm.setString(8, "12345");
+			pstm.setString(9, address);
+			pstm.setString(10, email);
+			pstm.setString(11, domain);
+
+			pstm.executeUpdate();
+			
+//			pstm.close();
+//			pstm = conn.prepareStatement("SELECT \n" + 
+//					"    MANAGER_ID\n" + 
+//					"    ,NAME\n" + 
+//					"    ,PASSWORD\n" + 
+//					"    ,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn\n" + 
+//					"    ,fj.job_name as job_name\n" + 
+//					"    ,HIRE_DATE\n" + 
+//					"    ,ADDRESS_ZIP\n" + 
+//					"    ,ADDRESS\n" + 
+//					"    ,EMAIL\n" + 
+//					"    ,EMAIL_DOMAIN \n" + 
+//					"FROM \n" + 
+//					"    FOOK_MANAGER fm \n" + 
+//					"    , fook_job fj \n" + 
+//					"where fm.job_id = fj.job_id(+)");
+//			rs = pstm.executeQuery();
+//			if((result != 0) ) {
+//				Date date = new Date();
+//				rowData[0] = id;
+//				rowData[1] = name;
+//				rowData[2] = pw;
+//				rowData[3] = numfirst+nummid+numlast;
+//				rowData[4] = jobid;
+//				rowData[5] = Date date = new Date());
+//				rowData[6] = "3211";
+//				rowData[7] = address;
+//				rowData[8] = email;
+//				rowData[9] = domain;
+//			}
+//			ami.at.dtm.addRow(rowData);
 			JOptionPane.showMessageDialog(ami.ar, "등록되었습니다");
 
 		} catch (SQLException e) {
@@ -418,12 +428,11 @@ public class AdminRegisterService {
 
 	public void maRRegister() {
 
-		int SelectRow = ami.at.adt.convertRowIndexToModel(ami.at.adt.getSelectedRow());
-		int result = 0;
+//		int SelectRow = ami.at.adt.convertRowIndexToModel(ami.at.adt.getSelectedRow());
+
 		String quary = ("update fook_manager "
 					+ "set password = (?), name = (?), phone_first = (?), phone_middle = (?), phone_last = (?),job_id = (?), address = (?), email = (?), email_domain = (?)"
 					+ "where manager_id = (?)");
-		Object[] rowData = new Object[10];
 		String admin_id = maR.getidlabel.getText();
 		String admin_pw = maR.passwordtf.getText();
 		if (admin_pw.isEmpty()) {
@@ -456,6 +465,13 @@ public class AdminRegisterService {
 		if (admin_domain.isEmpty()) {
 			JOptionPane.showMessageDialog(maR.registerbtn, "도메인을 입력하세요");
 		}
+		if(admin_jobid == "관리자") {
+			admin_jobid = "Admin";
+		}else if(admin_jobid == "점원") {
+			admin_jobid = "Clerk";
+		}else {
+			admin_jobid = "NewBie";
+		}
 		try {
 			conn = connectionMaker.makeConnection();
 			pstm = conn.prepareStatement(quary);
@@ -471,45 +487,47 @@ public class AdminRegisterService {
 			pstm.setString(9, admin_domain);
 			pstm.setString(10, admin_id);
 			
-			result = pstm.executeUpdate();
+			pstm.executeUpdate();
 			
-			pstm.close();
-			
-			pstm = conn.prepareStatement("SELECT \n" + 
-					"    MANAGER_ID\n" + 
-					"    ,NAME\n" + 
-					"    ,PASSWORD\n" + 
-					"    ,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn\n" + 
-					"    ,fj.job_name as job_name\n" + 
-					"    ,HIRE_DATE\n" + 
-					"    ,ADDRESS_ZIP\n" + 
-					"    ,ADDRESS\n" + 
-					"    ,EMAIL\n" + 
-					"    ,EMAIL_DOMAIN \n" + 
-					"FROM \n" + 
-					"    FOOK_MANAGER fm \n" + 
-					"    , fook_job fj \n" + 
-					"where fm.job_id = fj.job_id(+)");
-			rs = pstm.executeQuery();
-			if((result != 0) && rs.next()) {
-				rowData[0] = admin_id;
-				rowData[1] = admin_name;
-				rowData[2] = admin_pw;
-				rowData[3] = rs.getString("pn");
-				rowData[4] = admin_jobid;
-				rowData[5] = rs.getDate("HIRE_DATE");
-				rowData[6] = rs.getString("ADDRESS_ZIP");
-				rowData[7] = admin_address;
-				rowData[8] = admin_email;
-				rowData[9] = admin_domain;
-				
-			
-				int columNum = ami.at.dtm.getColumnCount();
-				for (int i = 0; i < columNum; i++) {
-					ami.at.dtm.setValueAt(rowData[i], SelectRow, i);
-				}
-			}
+//			pstm.close();
+//			
+//			pstm = conn.prepareStatement("SELECT \n" + 
+//					"    MANAGER_ID\n" + 
+//					"    ,NAME\n" + 
+//					"    ,PASSWORD\n" + 
+//					"    ,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn\n" + 
+//					"    ,fj.job_name as job_name\n" + 
+//					"    ,HIRE_DATE\n" + 
+//					"    ,ADDRESS_ZIP\n" + 
+//					"    ,ADDRESS\n" + 
+//					"    ,EMAIL\n" + 
+//					"    ,EMAIL_DOMAIN \n" + 
+//					"FROM \n" + 
+//					"    FOOK_MANAGER fm \n" + 
+//					"    , fook_job fj \n" + 
+//					"where fm.job_id = fj.job_id(+)");
+//			rs = pstm.executeQuery();
+//			if((result != 0)) {
+//				rowData[0] = admin_id;
+//				rowData[1] = admin_name;
+//				rowData[2] = admin_pw;
+//				rowData[3] = "pn";
+//				rowData[4] = admin_jobid;
+//				rowData[5] = "hire_date";
+//				rowData[6] = "4321";
+//				rowData[7] = admin_address;
+//				rowData[8] = admin_email;
+//				rowData[9] = admin_domain;
+//				
+//			
+//				int columNum = ami.at.dtm.getColumnCount();
+//				for (int i = 0; i < columNum; i++) {
+//					ami.at.dtm.setValueAt(rowData[i], SelectRow, i);
+//				}
+//			}
 			ami.at.adt.setRowSelectionInterval(ami.at.adt.getSelectedRow(), ami.at.adt.getSelectedRow());
+			JOptionPane.showMessageDialog(ami.maR, "수정 되었습니다.");
+			ami.jfMo.setVisible(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -519,7 +537,6 @@ public class AdminRegisterService {
 				e.printStackTrace();
 			}
 		}
-		ami.jfMoD.setVisible(false);
 	}
 
 	public void mRRegister() {
