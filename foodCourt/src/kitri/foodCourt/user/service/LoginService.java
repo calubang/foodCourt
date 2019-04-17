@@ -44,7 +44,7 @@ public class LoginService {
     
     public void logJoin() {
     	
-    	String quary = "select user_id, password, name, user_point, phone_first, phone_middle, phone_last, password, password_quiz, password_answer from fook_user";
+    	String quary = "select user_id, password, name, user_point, phone_first, phone_middle, phone_last, password, password_quiz, password_answer from fook_user where lower(enable) = 'y'";
     	
 //    	logc.login.idtextField.getText();
 //    	logc.login.pwtextfd.getPassword();
@@ -143,7 +143,7 @@ public class LoginService {
     
     public void doubleCheck() {
     	
-        String quary = "select user_id from fook_user";
+        String quary = "select user_id from fook_user where enable = lower('y')";
         userIdJoin = logc.join.idTextFD.getText();
         
         if (userIdJoin.isEmpty()) {
@@ -345,7 +345,7 @@ public class LoginService {
 
 	public void findid() {
 		
-		String quary = "select name, user_id, phone_first, phone_middle, phone_last from fook_user";
+		String quary = "select name, user_id, phone_first, phone_middle, phone_last from fook_user where lower(enable) = 'y'";
         
 		String user_name = logc.findId.nameTF.getText();
 		String phF = logc.findId.comboBox.getSelectedItem().toString();
@@ -450,7 +450,7 @@ public class LoginService {
 
 	public void findPw() {
 		
-		String quary = "select user_id, nvl(password_quiz, 'null') \"password_quiz\" , password_answer from fook_user";
+		String quary = "select user_id, nvl(password_quiz, 'null') \"password_quiz\" , password_answer from fook_user where lower(enable) = 'y'";
 		String name = logc.findPw.idTF.getText();
 		String passwordA = logc.findPwCheck.answerTF.getText();
 		
@@ -532,7 +532,7 @@ public class LoginService {
 	
 	public void findPwCheck() {
 		
-		String quary = "select user_id, password_answer from fook_user";
+		String quary = "select user_id, password_answer from fook_user where lower(enable) = 'y'";
 		String answerTF = logc.findPwCheck.answerTF.getText();
 		
 		try {

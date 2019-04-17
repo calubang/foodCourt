@@ -175,6 +175,8 @@ public class FoodMainService {
 		if(input == 0) {
 			User user = User.getInstance();
 			user.logout();
+			foodMain.card.show(foodMain.panChangePanel, "foodMainView");
+			foodMain.currentPanelName = "foodMainView";
 			foodMain.labName.setText("ดิ");
 			foodMain.setVisible(false);
 			foodMain.loginMain.setVisible(true);

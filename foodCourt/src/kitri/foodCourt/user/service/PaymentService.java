@@ -1,13 +1,13 @@
 package kitri.foodCourt.user.service;
 
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.xml.crypto.Data;
 
 import kitri.foodCourt.dto.PaymentDto;
@@ -45,8 +45,7 @@ public class PaymentService {
 
 	public void receiptOK() {
 		payment.setEnabled(true);
-		Receipt receipt = payment.receipt;
-		receipt.setVisible(false);
+		payment.receipt.setVisible(false);
 	}
 
 	public void payment() {
@@ -161,6 +160,12 @@ public class PaymentService {
 
 	// 입력받은 숫자확인
 	public void checkValue(JTextField tp, char input) {
+		if(input == KeyEvent.VK_BACK_SPACE) {
+			return;
+		}
+		if( input < 32 || input > 126 ) {
+			return;
+		}
 		if (input > '9' || input < '0') {
 			if (tp.getText().isEmpty()) {
 				return;

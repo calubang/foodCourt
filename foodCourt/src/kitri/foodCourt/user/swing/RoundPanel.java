@@ -62,7 +62,38 @@ public class RoundPanel extends JPanel implements MouseListener{
 	public void setController(MouseListener controller) {
 		this.controller = controller;
 	} 
-	
+	public int getThickness() {
+		return thickness;
+	}
+
+	public void setThickness(int thickness) {
+		this.thickness = thickness;
+	}
+
+	public int getArc() {
+		return arc;
+	}
+
+	public void setArc(int arc) {
+		this.arc = arc;
+	}
+
+	public Color getEnterColor() {
+		return enterColor;
+	}
+
+	public void setEnterColor(Color enterColor) {
+		this.enterColor = enterColor;
+	}
+
+	public Color getExitColor() {
+		return exitColor;
+	}
+
+	public void setExitColor(Color exitColor) {
+		this.exitColor = exitColor;
+	}
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		//실제 그려지는 부분

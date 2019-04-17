@@ -40,13 +40,14 @@ public class UserInfoDao {
 			ps.setString(3, modifyUser.getPhoneNumberFirst());
 			ps.setString(4, modifyUser.getPhoneNumberMiddle());
 			ps.setString(5, modifyUser.getPhoneNumberlast());
-			ps.setString(6, modifyUser.getUserId());
-			ps.setString(7, modifyUser.getPasswordQuiz());
-			ps.setString(8, modifyUser.getPasswordAnswer());
+			ps.setString(6, modifyUser.getPasswordQuiz());
+			ps.setString(7, modifyUser.getPasswordAnswer());
+			ps.setString(8, modifyUser.getUserId());
 			
 			int result = ps.executeUpdate();
 			
 			System.out.println("DB : User Modify ->" + modifyUser);
+			System.out.println(result);
 			return result;
 			
 		} catch (SQLException e) {
@@ -79,8 +80,12 @@ public class UserInfoDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = 
-				"delete from fook_user\r\n" + 
-				"where user_id = ?";
+				"update fook_user\n" + 
+				"set\n" + 
+				"    secession_date = sysdate\n" + 
+				"    , enable = lower('n')\n" + 
+				"where\n" + 
+				"    user_id = ?";
 		
 		try {
 			con = connectionMaker.makeConnection();
