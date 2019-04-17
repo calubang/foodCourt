@@ -1,4 +1,4 @@
-package kitri.foodCourt.user.login;
+package kitri.foodCourt.user.view;
 
 import java.awt.Color;
 import java.awt.Font;

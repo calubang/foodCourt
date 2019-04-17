@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import kitri.foodCourt.db.ConnectionMaker;
 import kitri.foodCourt.db.DbFactory;
 import kitri.foodCourt.dto.AdminRegitDto;
+import kitri.foodCourt.dto.UserDto;
+import kitri.foodCourt.user.swing.SwingFactory;
 
 public class AdminRegisterService {
 
@@ -39,7 +41,11 @@ public class AdminRegisterService {
 	int pwcheck;
 	String checkidjoin;
 	public AdminTable at;
+	public MemberTable mt;
 	DefaultTableModel dtm;
+	
+	//멤버부분 추가
+	public AdminUserDao dao;
 
 	public AdminRegisterService(AdminRegisterControl arc) {
 		connectionMaker = DbFactory.connectionMaker("oracle");
@@ -50,11 +56,17 @@ public class AdminRegisterService {
 		this.arc = arc;
 		ami = this.arc.ami;
 		ar = ami.ar;
+		
+		//멤버 관련
 		mr = ami.mr;
-		maR = ami.maR;
 		mR = ami.mR;
 		rm = ami.rm;
+		mt = ami.mt;
+		
+		maR = ami.maR;
 		dtm = ami.at.dtm;
+		
+		dao = new AdminUserDao();
 	}
 
 	// 관리자등록
@@ -79,18 +91,15 @@ public class AdminRegisterService {
 
 	// 회원등록
 	public void showmemberRegister() {
-		ami.mr.idtf.setText("");
-		ami.mr.nametf.setText("");
-		ami.mr.midnumber.setText("");
-		ami.mr.lastnumber.setText("");
-		ami.mr.passwordtf.setText("");
-		ami.mr.pwtf.setText("");
-		ami.mr.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
-
+		ami.mr.clear();
+		
 		ami.jfMD.getContentPane().add(ami.mr);
-		ami.jfMD.setSize(600, 650);
+		ami.jfMD.setBounds(ami.getX()+100, ami.getY()+100, 575, 760);
 		ami.jfMD.setModal(true);
 		ami.jfMD.setVisible(true);
+		ami.jfM.setResizable(false);
+		ami.jfMD.setResizable(false);
+	
 	}
 
 	// 관리자/회원수정
@@ -279,6 +288,7 @@ public class AdminRegisterService {
 		checkidjoin = ami.ar.idtf.getText();
 		if (checkidjoin.isEmpty()) {
 			JOptionPane.showMessageDialog(ami.ar, "ID를 입력하세요");
+			return;
 		}
 		try {
 			conn = connectionMaker.makeConnection();
@@ -325,105 +335,52 @@ public class AdminRegisterService {
 	}
 
 	// 회원등록창
+	//abo
 	public void mrRegister() {
-		String id = ami.mr.idtf.getText();
-		String pw = ami.mr.passwordtf.getText();
-		String pwtf = ami.mr.pwtf.getText();
-		String name = ami.mr.nametf.getText();
-		String numfirst = ami.mr.fristnumber.getSelectedItem().toString();
-		String nummid = ami.mr.midnumber.getText();
-		String numlast = ami.mr.lastnumber.getText();
-		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd");
-		String str = dayTime.format(new Date());
-
-		int r = 0;
-
-		String quary = "insert into fook_manager(user_id, PASSWORD,NAME, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, user_point,password_quiz, password_answer, enable) values(?,?,?,?,?,?,?,?,?,?)";
-
-		if (id.isEmpty() || pw.isEmpty() || pwtf.isEmpty() || name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()) {
-			JOptionPane.showMessageDialog(ami.ar, "빈 공간을 입력해 주세요.");
-		} else if (checkid == 0 || checkid == 1) {
-			JOptionPane.showMessageDialog(ami.ar, "중복 확인을 눌러주세요.");
-		} else if (!(checkidjoin.equals(id))) {
-			JOptionPane.showMessageDialog(ami.ar, "중복 확인을 눌러주세요.");
-		} else if (pwcheck == 0) {
-			JOptionPane.showMessageDialog(ami.ar, "비밀번호를 확인해 주세요.");
+		if(mr.check == false) {
+			SwingFactory.getOptionPane("errorMessage", mr , "아이디 중복체크 여부", "아이디 중복체크를 확인해주세요.");
+			return;
 		}
-		try {
-			conn = connectionMaker.makeConnection();
-			pstm = conn.prepareStatement(quary);
-
-			pstm.setString(1, id);
-			pstm.setString(2, name);
-			pstm.setString(3, pw);
-			pstm.setString(4, numfirst);
-			pstm.setString(5, nummid);
-			pstm.setString(6, numlast);
-//			pstm.setint(7, 0);
-//			pstm.setString(8, null);
-//			pstm.setString(9, address);
-//			pstm.setString(10,email);
-//			pstm.setString(11,domain);
-
-			r = pstm.executeUpdate();
-			JOptionPane.showMessageDialog(ami.ar, "등록되었습니다");
-
+		
+		UserDto userDto = mr.makeUserDto();
+		if(userDto == null) {
+			return;
+		}
+		
+		if(dao.insert(userDto) == 1) {
+			
+			//정상등록
+			SwingFactory.getOptionPane("message", mR, "회원정보 수정완료", "회원정보가 수정되었습니다.");
+			//테이블에 적용
+			mR.clear();
+			mt.initData();
 			ami.jfAD.setVisible(false);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				connectionMaker.closeConnection(conn, pstm, rs);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
+			
+		}else {
+			SwingFactory.getOptionPane("errorMessage", mr, "유저 등록", "유저 등록을 실패하였습니다.");
+			return;
 		}
-
+		
 	}
 
 	// 회원창 - 중복확인
 	public void mrId() {
-		String quary = "select user_id from fook_user";
-		checkidjoin = ami.ar.idtf.getText();
-		if (checkidjoin.isEmpty()) {
-			JOptionPane.showMessageDialog(ami.ar, "ID를 입력하세요");
+		
+		String userId = ami.mr.idtf.getText();
+		
+		if (userId.isEmpty()) {
+			JOptionPane.showMessageDialog(ami.mr, "ID를 입력하세요");
+			return;
 		}
-		try {
-			conn = connectionMaker.makeConnection();
-			pstm = conn.prepareStatement(quary);
-			rs = pstm.executeQuery();
-
-			String DBuser_id;
-
-			int check = 0;
-
-			while (rs.next()) {
-
-				DBuser_id = rs.getString("user_id");
-
-				if (checkidjoin.equals(DBuser_id)) {
-
-					javax.swing.JOptionPane.showMessageDialog(ami.ar, "중복된 아이디가 있습니다.");
-					ami.ar.idtf.setText("");
-
-					check = 1;
-					pwcheck = 1;
-				}
-			}
-			if (check == 0) {
-				javax.swing.JOptionPane.showMessageDialog(ami.ar, "사용 가능한 아이디 입니다.");
-				pwcheck = 2;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				connectionMaker.closeConnection(conn, pstm, rs);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		
+		if(dao.select(userId)) {
+			SwingFactory.getOptionPane("errorMessage", mr, "아이디 중복확인", "중복된 아이디가 있습니다.");
+			return;
+		}else {
+			mr.check = true;
+			SwingFactory.getOptionPane("message", mr, "아이디 중복확인", "사용가능한 아이디입니다.");
 		}
+		
 	}
 
 	public void maRRegister() {
@@ -539,8 +496,24 @@ public class AdminRegisterService {
 		}
 	}
 
+	//유저 정보수정
+	//abo
 	public void mRRegister() {
-
+		UserDto userDto = mR.makeUserDto();
+		if(userDto == null) {
+			return;
+		}
+		
+		int result = dao.modify(userDto);
+		if(result == 1) {
+			SwingFactory.getOptionPane("message", mR, "회원정보 수정완료", "회원정보가 수정되었습니다.");
+			//테이블에 적용
+			mt.initData();
+			mR.clear();
+			ami.jfMo.setVisible(false);
+		}else {
+			SwingFactory.getOptionPane("errorMessage", mR, "회원정보 수정실패", "회원정보 수정이 실패하였습니다.");
+		}
 	}
 
 	// password 일치확인

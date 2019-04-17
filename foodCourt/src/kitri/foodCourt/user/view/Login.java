@@ -1,4 +1,4 @@
-package kitri.foodCourt.user.login;
+package kitri.foodCourt.user.view;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import kitri.foodCourt.user.controller.LoginControl;
 import kitri.foodCourt.user.swing.FButton;
 import kitri.foodCourt.user.swing.SwingFactory;
 import kitri.foodCourt.util.Constance;

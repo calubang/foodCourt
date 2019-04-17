@@ -3,6 +3,8 @@ package kitri.foodCourt.management.regit;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.*;
 
 import javax.swing.*;
@@ -12,8 +14,9 @@ import com.toedter.calendar.JMonthChooser;
 import com.toedter.components.JSpinField;
 
 import kitri.foodCourt.dto.UserDto;
+import kitri.foodCourt.user.swing.SwingFactory;
 
-public class ModifyRegit extends JPanel {
+public class ModifyRegit extends JPanel implements ItemListener{
 
 	JPanel mainpanel = new JPanel();
 	JPanel idpanel = new JPanel();
@@ -97,6 +100,10 @@ public class ModifyRegit extends JPanel {
 	public ModifyRegit(MemberTable mt) {
 		this.memberTable = mt;
 		initView();
+		
+		//이벤트 등록부
+		cbEnable.addItemListener(this);
+		
 
 	}
 	public void dataSetting() {
@@ -121,16 +128,10 @@ public class ModifyRegit extends JPanel {
 		String dateStr = "";
 		StringTokenizer tokenizer;
 		if( memberTable.tableModel.getValueAt(row, 7) == null ) {
-			yearJoin.setMinimum(0);
-			yearJoin.setValue(0);
-			
-			monthJoin.setMonth(0);
-			
-			dayJoin.setMinimum(0);
-			dayJoin.setValue(0);
-			
-			yearJoin.setMinimum(1);
-			dayJoin.setMinimum(1);
+			GregorianCalendar calendar = new GregorianCalendar();
+			yearJoin.setYear(calendar.get(Calendar.YEAR));
+			monthJoin.setMonth(calendar.get(Calendar.MONTH));
+			dayJoin.setValue(calendar.get(Calendar.DAY_OF_MONTH));
 		} else {
 			dateStr = String.valueOf(memberTable.tableModel.getValueAt(row, 7)).substring(0, 10);
 			tokenizer = new StringTokenizer(dateStr, "-");
@@ -138,22 +139,20 @@ public class ModifyRegit extends JPanel {
 			int month = Integer.parseInt(tokenizer.nextToken());
 			int date = Integer.parseInt(tokenizer.nextToken());
 			
+			
+			System.out.println(month);
 			yearJoin.setYear(year);
-			monthJoin.setMonth(month);
+			monthJoin.setMonth(month-1);
 			dayJoin.setValue(date);
+			
 		}
-
+		
 		//탈퇴일
 		if( memberTable.tableModel.getValueAt(row, 8) == null ) {
-			yearSecession.setMinimum(0);
-			yearSecession.setValue(0);
-			
-			monthSecession.setMonth(0);
-			daySecession.setMinimum(0);
-			daySecession.setValue(0);
-			
-			daySecession.setMinimum(1);
-			yearSecession.setMinimum(1);
+			GregorianCalendar calendar = new GregorianCalendar();
+			yearSecession.setYear(calendar.get(Calendar.YEAR));
+			monthSecession.setMonth(calendar.get(Calendar.MONTH));
+			daySecession.setValue(calendar.get(Calendar.DAY_OF_MONTH));
 			
 		} else {
 			dateStr = String.valueOf(memberTable.tableModel.getValueAt(row, 8)).substring(0, 10);
@@ -162,7 +161,7 @@ public class ModifyRegit extends JPanel {
 			int month = Integer.parseInt(tokenizer.nextToken());
 			int date = Integer.parseInt(tokenizer.nextToken());
 			yearSecession.setYear(year);
-			monthSecession.setMonth(month);
+			monthSecession.setMonth(month-1);
 			daySecession.setValue(date);
 		}
 		
@@ -171,8 +170,12 @@ public class ModifyRegit extends JPanel {
 		tfPasswordAnswer.setText(String.valueOf(memberTable.tableModel.getValueAt(row, 6)));
 		
 		//enable
-		cbEnable.setSelectedItem((String)memberTable.tableModel.getValueAt(row, 9));
-		
+		cbEnable.setSelectedItem(String.valueOf(memberTable.tableModel.getValueAt(row, 9)));
+		if(String.valueOf(cbEnable.getSelectedItem()).equals("Y")) {
+			yearSecession.setEnabled(false);
+			monthSecession.setEnabled(false);
+			daySecession.setEnabled(false);
+		}
 	}
 	
 	public void initView(){
@@ -428,28 +431,72 @@ public class ModifyRegit extends JPanel {
 	public UserDto makeUserDto() {
 		UserDto userDto = new UserDto();
 		
+		//비밀번호 확인체크
+		String password = new String(passwordtf.getPassword());
+		String passwordRe = new String(pwtf.getPassword());
+		
+		if(password.length() < 6) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "비민번호는 6글자 이상으로 해주세요");
+			return null;
+		}
+		
+		if( !isCorrectPassword(password) ) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "비민번호는 숫자 혹은 문자의 조합만 가능합니다.");
+			return null;
+		}
+		
+		if( !password.equals(passwordRe)) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "비밀번호가 다릅니다.");
+			return null;
+		}
+		
+		//유저포인트 숫자체크
+		String userPointStr = tfUserPoint.getText();
+		for(int i=0 ; i<userPointStr.length() ; i++) {
+			if(userPointStr.charAt(i) < '0' || userPointStr.charAt(i) > '9' ) {
+				SwingFactory.getOptionPane("errorMessage", this, "입력오류", "풉키포인트에 문자가 섞였습니다.");
+				return null;
+			}
+		}
+		
+		//전화번호 숫자체크
+		String phoneNumberMiddle = midnumber.getText();
+		String phoneNumberLast = lastnumber.getText();
+		if( phoneNumberMiddle.length() > 4 || (!isNumber(phoneNumberMiddle)) ) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "중간 전화번호가 잘못되었습니다.");
+			return null;
+		}
+		
+		if(phoneNumberLast.length() > 4 || (!isNumber(phoneNumberLast)) ) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "마지막 전화번호가 잘못되었습니다.");
+			return null;
+		}
+		
 		userDto.setUserId(impossibleModify.getText());
 		userDto.setPassword(new String(pwtf.getPassword()));
 		userDto.setName(nametf.getText());
+		
+		
 		userDto.setPhoneNumberFirst(String.valueOf(fristnumber.getSelectedItem()));
-		userDto.setPhoneNumberMiddle(midnumber.getText());
-		userDto.setPhoneNumberlast(lastnumber.getText());
+		userDto.setPhoneNumberMiddle(phoneNumberMiddle);
+		userDto.setPhoneNumberlast(phoneNumberLast);
 		userDto.setPasswordQuiz(tfPasswordQuiz.getText());
 		userDto.setPasswordAnswer(tfPasswordAnswer.getText());
 		
-		String joinDate = yearJoin.getYear() + "-" + intTOString(monthJoin.getMonth()) + "-" + intTOString(dayJoin.getValue());
-		System.out.println(joinDate);
+		
+		userDto.setUserPoint(Integer.valueOf(userPointStr));
+		
+		String joinDate = yearJoin.getYear() + "-" + intTOString(monthJoin.getMonth()+1) + "-" + intTOString(dayJoin.getValue());
 		userDto.setJoinDate(joinDate);
 		
 		String secessionDate = "";
-		if(yearSecession.getYear() == 0 || daySecession.getValue() == 0) {
+		if(String.valueOf(cbEnable.getSelectedItem()).equals("Y")) {
 			secessionDate = "";
 		}else {
-			secessionDate = yearSecession.getYear() + "-" + intTOString(monthSecession.getMonth()) + "-" + intTOString(daySecession.getValue());
+			secessionDate = yearSecession.getYear() + "-" + intTOString(monthSecession.getMonth()+1) + "-" + intTOString(daySecession.getValue());
 		}
-		System.out.println(secessionDate);
+
 		userDto.setSecessionDate(secessionDate);
-		
 		userDto.setEnable(String.valueOf(cbEnable.getSelectedItem()).charAt(0));
 		
 		return userDto;
@@ -464,6 +511,8 @@ public class ModifyRegit extends JPanel {
 		passwordtf.setText("");
 		
 		nametf.setText("");
+		
+		tfUserPoint.setText("");
 		
 		fristnumber.setSelectedItem("010");
 		midnumber.setText("");
@@ -491,5 +540,43 @@ public class ModifyRegit extends JPanel {
 		}else {
 			return ""+value;
 		}
+	}
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		String enable = String.valueOf(e.getItem());
+		if(enable.equals("N")) {
+			yearSecession.setEnabled(true);
+			monthSecession.setEnabled(true);
+			daySecession.setEnabled(true);
+		}else {
+			yearSecession.setEnabled(false);
+			monthSecession.setEnabled(false);
+			daySecession.setEnabled(false);
+		}
+	}
+	
+	public boolean isNumber(String value) {
+		int length = value.length();
+		for(int i=0 ; i<length ; i++) {
+			if(value.charAt(i) < '0' || value.charAt(i) > '9' ) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean isCorrectPassword(String password) {
+		int length = password.length();
+		if(length < 6) {
+			return false;
+		}
+		
+		for(int i=0 ; i<length ; i++) {
+			char temp = password.charAt(i);
+			if( !((temp >= 'a' && temp <= 'z') || (temp >= 'A' && temp <= 'Z') || (temp >= '0' && temp <= '9')) ) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

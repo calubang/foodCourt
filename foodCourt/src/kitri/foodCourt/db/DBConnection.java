@@ -1,4 +1,4 @@
-package kitri.foodCourt.user.login;
+package kitri.foodCourt.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

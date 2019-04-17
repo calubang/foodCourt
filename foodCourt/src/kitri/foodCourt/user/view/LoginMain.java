@@ -1,4 +1,4 @@
-package kitri.foodCourt.user.login;
+package kitri.foodCourt.user.view;
 
 import java.awt.CardLayout;
 import java.awt.EventQueue;
@@ -7,16 +7,16 @@ import java.awt.event.KeyListener;
 import javax.swing.*;
 
 import kitri.foodCourt.user.User;
-import kitri.foodCourt.user.view.FoodMain;
+import kitri.foodCourt.user.controller.LoginControl;
 
 public class LoginMain extends JFrame {
 	
-	JPanel contentPane;
-	Login panLogin = new Login(this);
-	Join panJoin = new Join(this);
+	public JPanel contentPane;
+	public Login panLogin = new Login(this);
+	public Join panJoin = new Join(this);
 
-	JPanel panMain = new JPanel();
-	CardLayout card = new CardLayout();
+	public JPanel panMain = new JPanel();
+	public CardLayout card = new CardLayout();
 	
 	public FoodMain foodMain;
 	public User user;
@@ -35,9 +35,9 @@ public class LoginMain extends JFrame {
 //		});
 //	}
 
-	FindIdMain findIdMain = new FindIdMain(this);
-	FindPwMain findPwMain = new FindPwMain(this);
-	LoginControl loginControl;
+	public FindIdMain findIdMain = new FindIdMain(this);
+	public FindPwMain findPwMain = new FindPwMain(this);
+	public LoginControl loginControl;
 
 	
 	public LoginMain(FoodMain foodMain) {

@@ -1,4 +1,4 @@
-package kitri.foodCourt.user.login;
+package kitri.foodCourt.user.service;
  
 import java.awt.Color;
 import java.io.PrintStream;
@@ -8,7 +8,9 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import kitri.foodCourt.db.DBConnection;
 import kitri.foodCourt.user.User;
+import kitri.foodCourt.user.controller.LoginControl;
 import kitri.foodCourt.user.view.FoodMain;
  
 public class LoginService {
@@ -29,7 +31,7 @@ public class LoginService {
 	// 생성자 안에 넣어놔야 되는 이유는?? logincontrol밑에 둬도 안됬던 이유는??
 	// 생성자 안에 넣으면 인식이 안되서 값을 넣으라고 뜸.
 
-	LoginService(LoginControl logc) { 
+	public LoginService(LoginControl logc) { 
 		doubleidCheck = 0;
 		pwCheck = 0;
 //		userIdJoin = logc.join.idTextFD.getText();
