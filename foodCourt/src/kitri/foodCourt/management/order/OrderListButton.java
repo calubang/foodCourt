@@ -18,7 +18,6 @@ public class OrderListButton extends JButton{
 
 	public OrderListButton() {
 		ds = new Dimension(100, 100);
-		setBackground(Color.WHITE);
 		setOpaque(true);
 		setMaximumSize(ds);
 		setPreferredSize(ds);
