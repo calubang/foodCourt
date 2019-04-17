@@ -11,12 +11,12 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.event.*;
 import java.awt.CardLayout;
 
+@SuppressWarnings("serial")
 public class AdminMemberInfo extends JPanel {
 
 	private JTextField searchTextField;
