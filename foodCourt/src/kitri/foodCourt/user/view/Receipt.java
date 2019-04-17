@@ -93,7 +93,7 @@ public class Receipt extends JFrame {
 		}else {
 			lbCard.setText(card);
 		}
-		if(card.isEmpty()) {
+		if(point.isEmpty()) {
 			lbPoint.setText("0");
 		}else {
 			lbPoint.setText(point);
@@ -119,7 +119,7 @@ public class Receipt extends JFrame {
 
 	public void initView() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 474);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

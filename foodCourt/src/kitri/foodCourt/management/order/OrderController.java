@@ -21,6 +21,8 @@ public class OrderController implements ActionListener{
 			orderService.removeOrder();
 		} else if(ob instanceof OrderListButton) {
 			orderService.setGlobalOrderButton(ob);
+		} else if(ob == orderListFrame.orderDetailDialog.btnCheck) {
+			orderService.closingOrderDetail();
 		}
 	}
 }

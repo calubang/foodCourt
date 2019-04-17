@@ -99,13 +99,15 @@ public class PaymentService {
 
 		// 네트워크 통신
 		// ---------------------------------------------------
-		Socket socket;
+		Socket socket = null;
+		BufferedReader in = null;
+		OutputStream out = null;
 		String orderStr = Integer.toString(user.getBasket().getRequestNumber()) + "|";
 		boolean flag = true;
 		try {
 			socket = new Socket(OrderConatance.IP, OrderConatance.PORT);
-			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			OutputStream out = socket.getOutputStream();
+			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			out = socket.getOutputStream();
 			List<BasketDetail> list = user.getBasket().getDetailList();
 			for (BasketDetail basketDetail : list) {
 				orderStr += basketDetail.getFood().getFoodName() + "^" + basketDetail.getCount() + "^";
@@ -135,6 +137,11 @@ public class PaymentService {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if(out != null) {try {out.close();} catch (IOException e) {e.printStackTrace();}}
+			if(in != null) {try {in.close();} catch (IOException e) {e.printStackTrace();}}
+			if(socket != null) {try {socket.close();} catch (IOException e) {e.printStackTrace();}}
+			
 		}
 		// ---------------------------------------------------
 

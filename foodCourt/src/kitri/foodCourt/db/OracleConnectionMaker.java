@@ -12,7 +12,6 @@ public class OracleConnectionMaker implements ConnectionMaker{
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection(
-
 //					"jdbc:oracle:thin:@192.168.14.11:1521:orcl", "fook", "fook");
 
 					"jdbc:oracle:thin:@"+ Constance.DB_IP +":1521:orcl", "fook", "fook");
