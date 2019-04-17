@@ -2,7 +2,7 @@ package kitri.foodCourt.management.order;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,17 +15,22 @@ import javax.swing.JScrollPane;
 
 public class OrderDetailDialog extends JDialog {
 	
-	JLabel labRequestNum = new JLabel("request");
-	JLabel labTimeNow = new JLabel("\uD604\uC7AC\uC2DC\uAC04");
+	JLabel labRequestNum = new JLabel("");
+	JLabel labTimeNow = new JLabel("");
 	JButton btnCheck = new JButton("\uD655\uC778");
 	
 	String columns[] = {"메뉴", "수량"};
 	Object[] rowData = new Object[2];
 	
 	DefaultTableModel defaultTableModel = new DefaultTableModel();
-	JTable menuTable;
+	JTable menuTable = new JTable(defaultTableModel) {
+
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		};
+	};
 	JScrollPane scrollPaneTable = new JScrollPane(menuTable);
-	private JTable table = new JTable();
 
 	public OrderDetailDialog(OrderListFrame orderListFrame) {
 		super(orderListFrame, "\uC8FC\uBB38\uC815\uBCF4", false);
@@ -33,29 +38,25 @@ public class OrderDetailDialog extends JDialog {
 		getContentPane().setLayout(null);
 
 		labRequestNum.setHorizontalAlignment(SwingConstants.CENTER);
-		labRequestNum.setBounds(118, 92, 153, 37);
+		labRequestNum.setBounds(125, 92, 146, 37);
 		getContentPane().add(labRequestNum);
 
 		labTimeNow.setOpaque(true);
 		labTimeNow.setBackground(new Color(255, 228, 196));
 		labTimeNow.setHorizontalAlignment(SwingConstants.CENTER);
-		labTimeNow.setBounds(72, 37, 249, 45);
+		labTimeNow.setBounds(76, 37, 245, 45);
 		getContentPane().add(labTimeNow);
 
 		btnCheck.setBounds(118, 520, 153, 43);
 		getContentPane().add(btnCheck);
+		scrollPaneTable.setBounds(12, 133, 380, 377);
+//		JScrollPane scrollPane = new JScrollPane();
+//		scrollPane.setBounds(12, 135, 369, 376);
+		getContentPane().add(scrollPaneTable);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 135, 369, 376);
-		getContentPane().add(scrollPane);
 
-		table.setPreferredSize(new Dimension(380, 376));
-		table.setPreferredScrollableViewportSize(new Dimension(380, 376));
-
-		scrollPane.setViewportView(table);
+		scrollPaneTable.setViewportView(menuTable);
 		
-		defaultTableModel.addColumn(columns[0]);
-		defaultTableModel.addColumn(columns[1]);
 		
 		setBounds(200, 200, 410, 610);
 		
@@ -63,16 +64,24 @@ public class OrderDetailDialog extends JDialog {
 //		amm.jdM.setSize(750, 650);
 //		setModal(true);
 		setResizable(false);
-		defaultTableModel.addRow(rowData);
-		menuTable = new JTable(defaultTableModel) {
-
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			};
-		};
+		
+		//menuTable.setPreferredSize(new Dimension(380, 376));
+		menuTable.setShowHorizontalLines(true);
+		menuTable.setPreferredScrollableViewportSize(new Dimension(380, 376));
+		defaultTableModel.addColumn(columns[0]);
+		defaultTableModel.addColumn(columns[1]);
+		//가운데 정렬
+		DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
+		tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		TableColumnModel tcmSchedule = menuTable.getColumnModel();
+		for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+			tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
+		}
+		//이벤트 등록부----------------------------------
+		btnCheck.addActionListener(orderListFrame.orderController);
 	}
 	public void setOrderDetail(int count, Vector<String[]> menuList) {
+		defaultTableModel.setRowCount(0);
 		for(int i=0; i<count; i++) {
 			defaultTableModel.addRow(menuList.get(i));
 		}

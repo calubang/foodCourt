@@ -5,8 +5,9 @@ import java.util.Vector;
 
 public class OrderList { 
 	private OrderListButton button;
-	private int  requestNumber;
+	private int requestNumber;
 	private boolean checkComplete = false; // 이 정보를 바탕으로 새로고침 하면서 체크된 주문 목록 표시
+	private boolean checkOrder = false; // 이 정보를 바탕으로 주문정보를 확인했는지 체크
 	private Vector<String> menuName = new Vector<String>();
 	private Vector<String> menuCount = new Vector<String>();
 	public void addMenuName(String name) {
@@ -49,10 +50,10 @@ public class OrderList {
 	public OrderListButton getButton() {
 		return this.button;
 	}
-//	public List<String> getMenuNameList() {
-//		return menuName;
-//	}
-//	public List<String> getMenuCountList() {
-//		return menuCount;
-//	}
+	public void setCheckOrder() {
+		this.checkOrder = true;
+	}
+	public boolean getCheckOrder() {
+		return this.checkOrder;
+	}
 }

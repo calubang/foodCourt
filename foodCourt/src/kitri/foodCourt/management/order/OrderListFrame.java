@@ -4,19 +4,20 @@ import java.awt.*;
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 public class OrderListFrame extends JFrame {
 
 	JPanel contentPane;
 	JScrollPane scrollPane = new JScrollPane();
-	JButton btnOrderview = new JButton("\uC8FC\uBB38\uC815\uBCF4 \uD655\uC778");
+	JButton btnOrderview = new JButton("\uC8FC\uBB38 \uD655\uC778");
 	JButton btnComplete = new JButton("\uC870\uB9AC \uC644\uB8CC");
 	JButton btnRemove = new JButton("\uC81C\uAC70");
 	JPanel panOrder = new JPanel();
 	GridBagLayout gbl_panel = new GridBagLayout();
 	private final JPanel panBase = new JPanel();
-	
+	Border defualt;
 	Map<Integer, OrderList> tmap = new TreeMap<Integer, OrderList>(Collections.reverseOrder()); // 내림차순 정렬을 하기위한 맵 덕분에
 	Iterator<Integer> iteratorKey; // 키값 오름차순 정렬(기본)									// list안써도댐
 	int selectedRequestNumber = 0; // 현재 누른 버튼 가져오기
@@ -59,6 +60,12 @@ public class OrderListFrame extends JFrame {
 
 			orderListButton.setName(Integer.toString(tmap.get(key).getRequestNumber()));
 			orderListButton.addActionListener(orderController);
+			// 디폴트 색은 오렌지!!
+			if(!tmap.get(key).getCheckOrder())
+				orderListButton.setBackground(Color.ORANGE);
+			else {
+				orderListButton.setBackground(Color.WHITE);
+			}
 			// 여기서 전에 클릭이 되었었는지 처리완료가 되있었는지 판단해서 볼더를 주거나 색을 칠해준다
 			if (tmap.get(key).isComplete()) {
 				orderListButton.setBackground(Color.GREEN);
@@ -80,6 +87,8 @@ public class OrderListFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public OrderListFrame() {
+		super();
+		setTitle("\uC74C\uC2DD \uC8FC\uBB38 \uBAA9\uB85D");
 		orderController = new OrderController(this);
 		new Thread(new OrderListServer(new OrderService(orderController))).start();
 		orderDetailDialog = new OrderDetailDialog(this);
@@ -91,6 +100,8 @@ public class OrderListFrame extends JFrame {
 		btnComplete.setBounds(662, 188, 110, 87);
 		getContentPane().add(btnComplete);
 		btnRemove.setBounds(662, 323, 110, 87);
+		btnOrderview.setVisible(false);
+		btnComplete.setVisible(false);
 		btnRemove.setVisible(false);
 		getContentPane().add(btnRemove);
 		panBase.setBounds(0, 0, 650, 582);
@@ -111,7 +122,7 @@ public class OrderListFrame extends JFrame {
 		scrollPane.setBounds(0, 0, 650, 582);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
+		defualt = btnComplete.getBorder();
 		panBase.add(scrollPane);
 		setBounds(200, 200, 800, 620);
 		setResizable(false);

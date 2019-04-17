@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 public class OrderService {
 	StringTokenizer st;
 	OrderController orderController;
 	OrderListFrame main;
+	
 	int request;
 	public OrderService(OrderController orderController) {
 		this.orderController = orderController;
@@ -59,7 +61,7 @@ public class OrderService {
 		// 현재 시간 구하기
 		if (isRequestNotZero()) {
 			long time = System.currentTimeMillis();
-			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd a h시 mm분 ss초");
 			String str = dayTime.format(new Date(time));
 
 //		1. 현재 orderlist가져와서 
@@ -75,11 +77,16 @@ public class OrderService {
 				menu[1] = orderList.getMenuCount(i);
 				menuList.add(menu);
 			}
-			main.orderDetailDialog.labRequestNum.setText(Integer.toString(request));
+			orderList.setCheckOrder();
+			main.orderDetailDialog.labRequestNum.setText("주문요청번호 : " + Integer.toString(request));
 			main.orderDetailDialog.labTimeNow.setText(str);
 			main.orderDetailDialog.setOrderDetail(len, menuList);
 			main.orderDetailDialog.revalidate();
 			main.orderDetailDialog.setVisible(true);
+			orderList.setCheckOrder();
+			if(!orderList.isComplete())
+				orderList.getButton().setBackground(Color.WHITE);
+			refresh();
 		}
 	}
 
@@ -103,6 +110,8 @@ public class OrderService {
 		request = 0;
 		constructOrderList();
 		main.btnRemove.setVisible(false);
+		main.btnOrderview.setVisible(false);
+		main.btnComplete.setVisible(false);
 	}
 
 	// 어떤버튼을 클릭했는지 전역변수에 담기
@@ -114,12 +123,17 @@ public class OrderService {
 		if (isRequestNotZero()) {
 			if (!orderListButton.getName().equals(Integer.toString(request))) { // orderlist안에 버튼 넣어서
 																									// 주소값 가져오기 성공
-				getSelectedButton().setBorder(null);
+				getSelectedButton().setBorder(main.defualt);
 				setClick(orderListButton);
 			}
 		} else { // 아무것도 선택되어있지 않을때
 			setClick(orderListButton);
 		}
+		main.btnOrderview.setVisible(true);
+		if (main.tmap.get(Integer.parseInt(orderListButton.getName())).getCheckOrder())
+			main.btnComplete.setVisible(true);
+		else
+			main.btnComplete.setVisible(false);
 		if (main.tmap.get(Integer.parseInt(orderListButton.getName())).isComplete())
 			main.btnRemove.setVisible(true);
 		else
@@ -128,6 +142,7 @@ public class OrderService {
 
 	private void setClick(OrderListButton button) {
 		System.out.println("setClick");
+
 		// TODO 지금 여기서 문제 찾아야해 완료되어있는 버튼 눌러도 제거버튼이 활성화안되는 에러발견
 		button.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		request = Integer.parseInt(button.getName());
@@ -139,6 +154,15 @@ public class OrderService {
 		main.panOrder.removeAll();
 		// 재생성
 		main.addOrder();
+		if (!isRequestNotZero()) {
+			main.btnOrderview.setVisible(false);
+		}
+		if (isRequestNotZero()) {
+			if (!getSelectedOrderList().getCheckOrder())
+				main.btnComplete.setVisible(false);
+			else
+				main.btnComplete.setVisible(true);
+		}
 		if (isRequestNotZero()) {
 			if (!getSelectedOrderList().isComplete())
 				main.btnRemove.setVisible(false);
@@ -166,5 +190,12 @@ public class OrderService {
 			return true;
 		else 
 			return false;
+	}
+
+	public void closingOrderDetail() {
+		main.orderDetailDialog.setVisible(false);
+		main.orderDetailDialog.labRequestNum.setText("");
+		main.orderDetailDialog.labTimeNow.setText("");
+		main.btnComplete.setVisible(true);
 	}
 }
