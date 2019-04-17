@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import java.awt.Component;
 
+@SuppressWarnings("serial")
 public class AdminRegister extends JPanel {
 	
 	JTextField idtf;
@@ -185,13 +186,12 @@ public class AdminRegister extends JPanel {
 		joblabel.setHorizontalAlignment(SwingConstants.CENTER);
 		joblabel.setBounds(0, 0, 105, 51);
 		jobpanel.add(joblabel);
+		jobname.setModel(new DefaultComboBoxModel(new String[] {"\uAD00\uB9AC\uC790", "\uC810\uC6D0", "\uC2E0\uC785"}));
 		
 		
 		jobname.setBounds(105, 0, 105, 51);
 		jobpanel.add(jobname);
-		jobname.addItem("관리자");
-		jobname.addItem("점원");
-		jobname.addItem("신입");
+		
 		
 		JPanel addresspanel = new JPanel();
 		addresspanel.setLayout(null);
