@@ -3,8 +3,6 @@ package kitri.foodCourt.management.order;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 public class OrderService {
@@ -22,7 +20,6 @@ public class OrderService {
 		main.orderNumber++;
 		System.out.println("addOrderList");
 		OrderList order = new OrderList();
-//		order.setRequestNumber(requestNumber);
 		order.setRequestNumber(main.orderNumber);
 		System.out.println(orderFood);
 		st = new StringTokenizer(orderFood, "^");
@@ -35,7 +32,6 @@ public class OrderService {
 			System.out.println("order : " + order.getRequestNumber() + " : " + order.getMenuName(i) + " : "
 					+ order.getMenuCount(i));
 		}
-//		main.tmap.put(requestNumber, order);
 		main.tmap.put(main.orderNumber, order);
 		// 주문 목록 패널에 재적용
 		constructOrderList();
@@ -50,7 +46,7 @@ public class OrderService {
 		// 현재 시간 구하기
 		if (isRequestNotZero()) {
 			long time = System.currentTimeMillis();
-			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd a h시 mm분 ss초");
+			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd a h시 mm분 ss초");
 			String str = dayTime.format(new Date(time));
 
 //		1. 현재 orderlist가져와서 
@@ -68,7 +64,6 @@ public class OrderService {
 				System.out.println(orderList.getMenuCount(i));
 				menuList.add(menu);
 			}
-			orderList.setCheckOrder();
 			main.orderDetailDialog.labRequestNum.setText("주문번호 : " + Integer.toString(main.selectedRequestNumber));
 			main.orderDetailDialog.labTimeNow.setText(str);
 			System.out.println("주문종류갯수 : "+len);
@@ -119,7 +114,7 @@ public class OrderService {
 			setClick(orderListButton);
 		}
 		main.btnOrderview.setVisible(true);
-		if (main.tmap.get(Integer.parseInt(orderListButton.getName())).getCheckOrder())
+		if (main.tmap.get(Integer.parseInt(orderListButton.getName())).isCheckOrder())
 			main.btnComplete.setVisible(true);
 		else
 			main.btnComplete.setVisible(false);
@@ -146,7 +141,7 @@ public class OrderService {
 			main.btnOrderview.setVisible(false);
 		}
 		if (isRequestNotZero()) {
-			if (!getSelectedOrderList().getCheckOrder())
+			if (!getSelectedOrderList().isCheckOrder())
 				main.btnComplete.setVisible(false);
 			else
 				main.btnComplete.setVisible(true);

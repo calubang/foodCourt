@@ -53,7 +53,7 @@ public class OrderList {
 	public void setCheckOrder() {
 		this.checkOrder = true;
 	}
-	public boolean getCheckOrder() {
+	public boolean isCheckOrder() {
 		return this.checkOrder;
 	}
 }

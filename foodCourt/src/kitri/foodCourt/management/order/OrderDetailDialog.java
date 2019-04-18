@@ -13,6 +13,7 @@ import java.util.Vector;
 
 import javax.swing.JScrollPane;
 import java.awt.Font;
+import java.awt.event.*;
 
 public class OrderDetailDialog extends JDialog {
 	
@@ -82,6 +83,13 @@ public class OrderDetailDialog extends JDialog {
 		}
 		//이벤트 등록부----------------------------------
 		btnCheck.addActionListener(orderListFrame.orderController);
+		WindowListener windowListener = new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				orderListFrame.orderController.orderService.closingOrderDetail();
+			}
+		};
+		addWindowListener(windowListener);
 	}
 	public void setOrderDetail(int count, Vector<String[]> menuList) {
 		defaultTableModel.setRowCount(0);

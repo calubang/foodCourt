@@ -3,22 +3,12 @@ package kitri.foodCourt.user.view;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-
-import java.io.IOException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
 import javax.swing.border.LineBorder;
 import javax.swing.*;
 import javax.swing.border.*;
-
-import kitri.foodCourt.dto.FoodDto;
-import kitri.foodCourt.user.BasketDetail;
 import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.controller.FoodMainController;
 import kitri.foodCourt.user.swing.*;
-import kitri.foodCourt.util.Constance;
 
 public class FoodMain extends JFrame {
 	public String currentPanelName;
