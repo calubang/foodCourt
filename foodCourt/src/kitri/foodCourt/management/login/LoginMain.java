@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import kitri.foodCourt.management.order.OrderListFrame;
 import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.view.FoodMain;
 
@@ -22,7 +23,7 @@ public class LoginMain extends JFrame {
 	public User user;
 
 	LoginControl lc;
-	
+	public static OrderListFrame orderListFrame = new OrderListFrame();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -61,5 +62,8 @@ public class LoginMain extends JFrame {
 		lc = new LoginControl(this);
 		
 		panLogin.loginbtn.addActionListener(lc);
+		
+		addWindowListener(lc);
+		
 	}
 }

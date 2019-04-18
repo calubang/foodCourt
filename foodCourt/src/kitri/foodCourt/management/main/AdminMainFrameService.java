@@ -26,7 +26,7 @@ public class AdminMainFrameService {
 	
 	public void logout() {
 		amf.adminID = null;
-		new LoginMain().setVisible(true);
+		amf.loginMain.setVisible(true);
 		amf.dispose();
 	}
 

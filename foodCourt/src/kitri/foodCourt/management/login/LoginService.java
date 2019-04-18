@@ -73,11 +73,14 @@ public class LoginService {
 				warningMessage(l.loginbtn, "아이디 또는 패스워드가 일치하지 않습니다.", "관리자 로그인 오류");
 				return;
 			}
-			AdminMainFrame adminMainFrame = new AdminMainFrame(adminID);
+			AdminMainFrame adminMainFrame = new AdminMainFrame(adminID, lm);
 			adminMainFrame.setVisible(true);
-			adminMainFrame.amfc.orderListFrame = new OrderListFrame();
+
 //			new AdminMainFrame(adminID).setVisible(true);
-			lm.dispose();
+//			lm.dispose();
+			l.idtextField.setText("");
+			l.pwtextfd.setText("");
+			lm.setVisible(false);
 		}
 	}
 	
