@@ -81,20 +81,6 @@ public class PaymentService {
 			SwingFactory.getOptionPane("message", payment, "결제오류", "입력금액 총합이 많습니다.");
 			return;
 		}
-		// 포인트 조절
-		savePoint = user.getBasket().getSavePoint();
-		usedPoint = point;
-		user.setUserPoint(user.getUserPoint() - usedPoint + savePoint);
-
-		// DB연동
-		user.getBasket().setRequestNumber(payment.requestNumber);
-		int dbResult = paymentDao.insertPayment(user, card, cash, point);
-		if (dbResult == -1) {
-			// 비정상
-			System.out.println("비정상종료");
-			SwingFactory.getOptionPane("errorMessage", payment, "결제오류", "결제오류, 관리자를 호출해주세요.");
-			return;
-		}
 
 		// 네트워크 통신
 		// ---------------------------------------------------
@@ -103,7 +89,7 @@ public class PaymentService {
 		OutputStream out = null;
 		String orderStr = "";
 		boolean flag = true;
-		String orderNumber; // 서버에서 생성해준 request 번호
+		String orderNumber=""; // 서버에서 생성해준 request 번호
 		try {
 			socket = new Socket(OrderConatance.IP, OrderConatance.PORT);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -140,11 +126,26 @@ public class PaymentService {
 
 		}
 		// ---------------------------------------------------
-
+		
+		// DB연동
+		user.getBasket().setRequestNumber(Integer.valueOf(orderNumber));
+		int dbResult = paymentDao.insertPayment(user, card, cash, point);
+		if (dbResult == -1) {
+			// 비정상
+			System.out.println("비정상종료");
+			SwingFactory.getOptionPane("errorMessage", payment, "결제오류", "결제오류, 관리자를 호출해주세요.");
+			return;
+		}
+		
+		// 포인트 조절
+		savePoint = user.getBasket().getSavePoint();
+		usedPoint = point;
+		user.setUserPoint(user.getUserPoint() - usedPoint + savePoint);
+		
 		// 모든 절차후
-		int result = SwingFactory.getOptionPane("message", payment, "결제확인", payment.requestNumber + "번으로 결제완료 되었습니다.");
+		int result = SwingFactory.getOptionPane("message", payment, "결제확인", orderNumber + "번으로 결제완료 되었습니다.");
 		if (result == 0) {
-			payment.requestNumber++;
+			//payment.requestNumber++;
 			payment.basketMain.foodMain.card.show(payment.basketMain.foodMain.panChangePanel, "foodMainView");
 			// 장바구니 초기화
 			payment.basketMain.user.getBasket().removeAll();

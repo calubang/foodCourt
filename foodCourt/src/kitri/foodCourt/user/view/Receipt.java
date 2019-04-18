@@ -13,8 +13,8 @@ import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.swing.*;
 
 import java.awt.GridLayout;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
+
 import javax.swing.border.MatteBorder;
 import javax.swing.table.*;
 
@@ -46,6 +46,8 @@ public class Receipt extends JFrame {
 	public FLabel lbPoint;
 	public FLabel lbTotalPrice;
 	public FLabel lbTotalPoint;
+	public FLabel lbPaymentDate;
+	public FLabel lbId;
 	
 	//결제페이지
 	public Payment payment;
@@ -103,6 +105,17 @@ public class Receipt extends JFrame {
 		lbTotalPrice.setText(user.getBasket().getTotalPrice()+"원");
 		lbTotalPoint.setText(user.getBasket().getSavePoint()+"P");
 		
+		//아이디, 시간 찍기
+		lbId.setText(user.getUserId());
+		GregorianCalendar calendar = new GregorianCalendar();
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH)+1;
+		int day = calendar.get(calendar.DAY_OF_MONTH);
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+		lbPaymentDate.setText(""+year+"-"+intTOString(month)+"-"+ intTOString(day)+" " + intTOString(hour) + ":" + minute + ":" + second);
+		
 	}
 	public void clear() {
 		int size = foodTableMode.getRowCount();
@@ -118,6 +131,7 @@ public class Receipt extends JFrame {
 	}
 
 	public void initView() {
+		setTitle("영수증");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 474);
@@ -151,7 +165,6 @@ public class Receipt extends JFrame {
 
 		FLabel lbPaymentNumber = new FLabel(Font.PLAIN, 15);
 		lbPaymentNumber.setHorizontalAlignment(SwingConstants.CENTER);
-		lbPaymentNumber.setText("217");
 		lbPaymentNumber.setBounds(75, 50, 73, 30);
 		pTop.add(lbPaymentNumber);
 
@@ -160,8 +173,7 @@ public class Receipt extends JFrame {
 		label_3.setBounds(210, 50, 75, 30);
 		pTop.add(label_3);
 
-		FLabel lbPaymentDate = new FLabel(Font.PLAIN, 15);
-		lbPaymentDate.setText("19-04-08 12:05:23");
+		lbPaymentDate = new FLabel(Font.PLAIN, 15);
 		lbPaymentDate.setBounds(289, 50, 135, 30);
 		pTop.add(lbPaymentDate);
 
@@ -171,8 +183,7 @@ public class Receipt extends JFrame {
 		label2.setBounds(237, 84, 75, 30);
 		pTop.add(label2);
 
-		FLabel lbId = new FLabel(Font.PLAIN, 15);
-		lbId.setText("calubang");
+		lbId = new FLabel(Font.PLAIN, 15);
 		lbId.setBounds(324, 84, 100, 30);
 		pTop.add(lbId);
 
@@ -204,7 +215,14 @@ public class Receipt extends JFrame {
 		JTableHeader th = tabFood.getTableHeader();
 		th.setPreferredSize(new Dimension(0, COLUMN_HEIGHT));
 		th.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-
+		
+		//칸 크기 조절
+		tabFood.getColumnModel().getColumn(0).setPreferredWidth(50);
+		tabFood.getColumnModel().getColumn(1).setPreferredWidth(134);
+		tabFood.getColumnModel().getColumn(2).setPreferredWidth(100);
+		tabFood.getColumnModel().getColumn(3).setPreferredWidth(50);
+		tabFood.getColumnModel().getColumn(4).setPreferredWidth(100);
+		
 		spFood.setViewportView(tabFood);
 
 		pPayment = new JPanel();
@@ -289,5 +307,9 @@ public class Receipt extends JFrame {
 		btnOK.setText("\uD655\uC778");
 		btnOK.setBounds(157, 10, 127, 45);
 		pBottom.add(btnOK);
+	}
+	
+	public String intTOString(int value) {
+		return value < 10 ? "0" + value : value+"";
 	}
 }
