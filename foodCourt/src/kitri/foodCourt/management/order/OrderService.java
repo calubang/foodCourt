@@ -75,10 +75,7 @@ public class OrderService {
 			main.orderDetailDialog.setOrderDetail(len, menuList);
 			main.orderDetailDialog.revalidate();
 			main.orderDetailDialog.setVisible(true);
-			orderList.setCheckOrder();
-			if(!orderList.isComplete())
-				orderList.getButton().setBackground(main.color);
-			refresh();
+			
 		}
 	}
 
@@ -184,9 +181,14 @@ public class OrderService {
 	}
 
 	public void closingOrderDetail() {
+		OrderList orderList = getSelectedOrderList();
 		main.orderDetailDialog.setVisible(false);
 		main.orderDetailDialog.labRequestNum.setText("");
 		main.orderDetailDialog.labTimeNow.setText("");
 		main.btnComplete.setVisible(true);
+		orderList.setCheckOrder();
+		if(!orderList.isComplete())
+			orderList.getButton().setBackground(main.color);
+		refresh();
 	}
 }
