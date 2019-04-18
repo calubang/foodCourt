@@ -199,8 +199,10 @@ public class AdminRegisterService {
 		
 		String quary = "insert into fook_manager(MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID,hire_date,ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) values(?,?,?,?,?,?,?,sysdate,?,?,?,?)";
 
-		if (id.isEmpty() || pw.isEmpty() || pwtf.isEmpty() || name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()) {
+		if (id.isEmpty() || pw.isEmpty() || pwtf.isEmpty() || name.isEmpty() || nummid.isEmpty() || numlast.isEmpty()
+				|| address.isEmpty() || email.isEmpty() ||domain.isEmpty()) {
 			JOptionPane.showMessageDialog(ami.ar, "빈 공간을 입력해 주세요.");
+			return;
 		} else if (checkid == 0 || checkid == 1) {
 			JOptionPane.showMessageDialog(ami.ar, "중복 확인을 눌러주세요.");
 		} else if (!(checkidjoin.equals(id))) {
