@@ -11,7 +11,7 @@ public class AdminMainFrameControl extends WindowAdapter implements MouseListene
 
 	AdminMainFrame amf;
 	AdminMainFrameService amfs;
-	public OrderListFrame orderListFrame;
+	public static OrderListFrame orderListFrame = null;
 
 	public AdminMainFrameControl(AdminMainFrame amf) {
 		this.amf = amf;
