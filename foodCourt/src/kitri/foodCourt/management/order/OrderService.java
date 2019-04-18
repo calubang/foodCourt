@@ -56,15 +56,18 @@ public class OrderService {
 			OrderList orderList = getSelectedOrderList();
 			int len = orderList.getMenuNameSize();
 			Vector<String[]> menuList = new Vector<String[]>();
-			String menu[] = new String[2];
 			for (int i = 0; i < len; i++) {
+				String menu[] = new String[2];
 				menu[0] = orderList.getMenuName(i);
 				menu[1] = orderList.getMenuCount(i);
+				System.out.println(orderList.getMenuName(i));
+				System.out.println(orderList.getMenuCount(i));
 				menuList.add(menu);
 			}
 			orderList.setCheckOrder();
-			main.orderDetailDialog.labRequestNum.setText("주문요청번호 : " + Integer.toString(main.selectedRequestNumber));
+			main.orderDetailDialog.labRequestNum.setText("주문번호 : " + Integer.toString(main.selectedRequestNumber));
 			main.orderDetailDialog.labTimeNow.setText(str);
+			System.out.println("주문종류갯수 : "+len);
 			main.orderDetailDialog.setOrderDetail(len, menuList);
 			main.orderDetailDialog.revalidate();
 			main.orderDetailDialog.setVisible(true);
