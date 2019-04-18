@@ -226,7 +226,7 @@ public class AdminRegisterService {
 		} else if (jobid == "점원") {
 			jobid = "Clerk";
 		} else {
-			jobid = "NewBie";
+			jobid = "Newbie";
 		}
 
 		String quary = "insert into fook_manager(MANAGER_ID, NAME, PASSWORD, PHONE_FIRST,PHONE_MIDDLE,PHONE_LAST, JOB_ID,hire_date,ADDRESS_ZIP, ADDRESS, EMAIL, EMAIL_DOMAIN) values(?,?,?,?,?,?,?,sysdate,?,?,?,?)";
@@ -436,7 +436,7 @@ public class AdminRegisterService {
 		} else if (admin_jobid == "점원") {
 			admin_jobid = "Clerk";
 		} else {
-			admin_jobid = "NewBie";
+			admin_jobid = "Newbie";
 		}
 		try {
 			conn = connectionMaker.makeConnection();
@@ -547,8 +547,8 @@ public class AdminRegisterService {
 			//유저
 			int size = dtm.getRowCount();
 			for (int i = 0; i < size; i++) {
-				String temp = String.valueOf(dtm.getValueAt(i, 0));
-				temp += String.valueOf(dtm.getValueAt(i, 2));
+				String temp = String.valueOf(memberTable.getValueAt(i, 0));
+				temp += String.valueOf(memberTable.getValueAt(i, 2));
 				if(temp.indexOf(search) > -1) {
 					memberTable.setRowSelectionInterval(i, i);
 					return;
@@ -560,8 +560,8 @@ public class AdminRegisterService {
 			DefaultTableModel dtm = ami.at.dtm;
 			int size = dtm.getRowCount();
 			for (int i = 0; i < size; i++) {
-				String temp = String.valueOf(dtm.getValueAt(i, 0));
-				temp += String.valueOf(dtm.getValueAt(i, 1));
+				String temp = String.valueOf(adminTable.getValueAt(i, 0));
+				temp += String.valueOf(adminTable.getValueAt(i, 1));
 				if(temp.indexOf(search) > -1) {
 					adminTable.setRowSelectionInterval(i, i);
 					return;
