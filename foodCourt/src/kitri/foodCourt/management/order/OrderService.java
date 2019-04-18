@@ -46,7 +46,7 @@ public class OrderService {
 		// 현재 시간 구하기
 		if (isRequestNotZero()) {
 			long time = System.currentTimeMillis();
-			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd a h시 mm분 ss초");
+			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd a h시 mm분 ss초");
 			String str = dayTime.format(new Date(time));
 
 //		1. 현재 orderlist가져와서 
@@ -114,7 +114,7 @@ public class OrderService {
 			setClick(orderListButton);
 		}
 		main.btnOrderview.setVisible(true);
-		if (main.tmap.get(Integer.parseInt(orderListButton.getName())).getCheckOrder())
+		if (main.tmap.get(Integer.parseInt(orderListButton.getName())).isCheckOrder())
 			main.btnComplete.setVisible(true);
 		else
 			main.btnComplete.setVisible(false);
@@ -141,7 +141,7 @@ public class OrderService {
 			main.btnOrderview.setVisible(false);
 		}
 		if (isRequestNotZero()) {
-			if (!getSelectedOrderList().getCheckOrder())
+			if (!getSelectedOrderList().isCheckOrder())
 				main.btnComplete.setVisible(false);
 			else
 				main.btnComplete.setVisible(true);

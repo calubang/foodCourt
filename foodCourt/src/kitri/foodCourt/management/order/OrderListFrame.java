@@ -60,7 +60,7 @@ public class OrderListFrame extends JFrame {
 			orderListButton.setName(Integer.toString(tmap.get(key).getRequestNumber()));
 			orderListButton.addActionListener(orderController);
 			// 디폴트 색은 오렌지!!
-			if(!tmap.get(key).getCheckOrder())
+			if(!tmap.get(key).isCheckOrder())
 				orderListButton.setBackground(Color.ORANGE);
 			else {
 				orderListButton.setBackground(color);
