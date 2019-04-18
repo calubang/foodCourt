@@ -187,14 +187,14 @@ public class ModifyRegit extends JPanel implements ItemListener{
 		modifylabel.setForeground(Color.WHITE);
 		modifylabel.setOpaque(true);
 		modifylabel.setHorizontalAlignment(SwingConstants.CENTER);
-		modifylabel.setBounds(0, 0, 538, 31);
+		modifylabel.setBounds(0, 0, 600, 31);
 
 		add(modifylabel);
 		add(mainpanel);
 		add(selectpanel);
 
 		mainpanel.setBackground(Color.DARK_GRAY);
-		mainpanel.setBounds(10, 41, 518, 609);
+		mainpanel.setBounds(10, 41, 576, 609);
 		mainpanel.setLayout(new GridLayout(11, 1, 0, 10));
 		mainpanel.add(idpanel);
 		mainpanel.add(passwordpanel);
@@ -237,7 +237,7 @@ public class ModifyRegit extends JPanel implements ItemListener{
 		passwordlabel.setBounds(0, 0, 107, 47);
 		etclabel.setForeground(Color.WHITE);
 		etclabel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 12));
-		etclabel.setBounds(395, 0, 123, 47);
+		etclabel.setBounds(395, 0, 181, 47);
 		passwordpanel.add(etclabel);
 
 		pwpanel.setBackground(Color.DARK_GRAY);
@@ -383,7 +383,7 @@ public class ModifyRegit extends JPanel implements ItemListener{
 		tfPasswordQuiz = new JTextField();
 		tfPasswordQuiz.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 		tfPasswordQuiz.setColumns(10);
-		tfPasswordQuiz.setBounds(108, 0, 398, 47);
+		tfPasswordQuiz.setBounds(108, 0, 456, 47);
 		
 		pPasswordQuiz.add(tfPasswordQuiz);
 		pPasswordAnswer.setBackground(Color.DARK_GRAY);
@@ -399,7 +399,7 @@ public class ModifyRegit extends JPanel implements ItemListener{
 		tfPasswordAnswer = new JTextField();
 		tfPasswordAnswer.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15));
 		tfPasswordAnswer.setColumns(10);
-		tfPasswordAnswer.setBounds(108, 0, 398, 47);
+		tfPasswordAnswer.setBounds(108, 0, 456, 47);
 		
 		pPasswordAnswer.add(tfPasswordAnswer);
 		enablepanel.setLayout(null);
@@ -419,7 +419,7 @@ public class ModifyRegit extends JPanel implements ItemListener{
 		enablepanel.add(cbEnable);
 
 		selectpanel.setBackground(Color.DARK_GRAY);
-		selectpanel.setBounds(282, 654, 245, 44);
+		selectpanel.setBounds(341, 660, 245, 44);
 		selectpanel.setLayout(null);
 		selectpanel.add(registerbtn);
 		selectpanel.add(cancelbtn);

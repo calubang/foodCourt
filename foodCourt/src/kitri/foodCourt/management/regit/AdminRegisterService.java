@@ -132,8 +132,11 @@ public class AdminRegisterService {
 			ami.card.show(ami.jpaMo, "memberModi");
 			ami.mR.dataSetting();
 			ami.mR.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
-			ami.jfMo.setSize(600, 740);
+			ami.jfMD.setModal(true);
+			ami.jfMo.setSize(600, 708);
+			ami.jfMD.setBounds(ami.getX() + 100, ami.getY() + 100, 600, 708);
 			ami.jfMo.setVisible(true);
+		
 			return;
 		}
 
@@ -516,7 +519,7 @@ public class AdminRegisterService {
 	}
 
 	// 유저 정보수정
-	// abo
+	// abo 600 708
 	public void mRRegister() {
 		UserDto userDto = mR.makeUserDto();
 		if (userDto == null) {

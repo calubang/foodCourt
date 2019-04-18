@@ -50,6 +50,7 @@ public class AdminRegisterControl implements ActionListener, KeyListener {
 		} else if (ob == ami.mr.idbtn) {
 			ars.mrId();
 		} else if (ob == ami.mr.cancelbtn) {
+			ami.mr.clear();
 			ars.Close(ami.jfMD);
 		} else if (ob == ami.maR.registerbtn) {
 			ars.maRRegister();
@@ -61,7 +62,7 @@ public class AdminRegisterControl implements ActionListener, KeyListener {
 		}else if(ob == ami.mR.registerbtn) {
 			ars.mRRegister();
 		}else if(ob == ami.mR.cancelbtn) {
-			System.out.println("2");
+			ami.mR.clear();
 			ami.jfMo.setVisible(false);
 		}
 
