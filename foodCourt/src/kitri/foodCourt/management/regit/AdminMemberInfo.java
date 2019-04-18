@@ -6,7 +6,6 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Font;
 
-
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
@@ -34,7 +33,7 @@ public class AdminMemberInfo extends JPanel {
 	JButton adminBtn = new JButton("\uAD00\uB9AC\uC790");
 	JButton memberBtn = new JButton("\uD68C\uC6D0");
 
-	AdminTable at  = new AdminTable();
+	AdminTable at = new AdminTable();
 	DefaultTableModel model = new DefaultTableModel();
 	MemberTable mt = new MemberTable();
 
@@ -47,7 +46,6 @@ public class AdminMemberInfo extends JPanel {
 	ModifyRegit mR;
 	RemoveMember rm;
 
-
 	JFrame jfA = new JFrame();
 	JDialog jfAD = new JDialog(jfA, "관리자등록");
 
@@ -59,6 +57,8 @@ public class AdminMemberInfo extends JPanel {
 
 	JPanel jpaMo;
 	CardLayout card = new CardLayout();
+	
+	public String currentCard = new String();
 
 	boolean check = false;
 
@@ -68,7 +68,6 @@ public class AdminMemberInfo extends JPanel {
 
 	public AdminMemberInfo() {
 
-		
 		jpaMo = new JPanel();
 		card = new CardLayout();
 		maR = new ModifyAdminRegit(at);
@@ -76,10 +75,10 @@ public class AdminMemberInfo extends JPanel {
 		jpaMo.setLayout(card);
 		jpaMo.add(maR, "adminModi");
 		jpaMo.add(mR, "memberModi");
-		
+
 		// jpaMo.setBounds(160, 118, 1012, 634);
 		jfMo.getContentPane().add(jpaMo);
-		
+
 		setSize(new Dimension(1007, 722));
 		setLayout(null);
 
@@ -103,7 +102,7 @@ public class AdminMemberInfo extends JPanel {
 						new EmptyBorder(40, 40, 40, 40)));
 		memberMenuPanel.setBounds(799, 128, 209, 594);
 		memberMenuPanel.setLayout(new GridLayout(4, 1, 0, 60));
-		//adminMemberRegisterBtn.setFont(new Font("돋움", Font.PLAIN, 12));
+		// adminMemberRegisterBtn.setFont(new Font("돋움", Font.PLAIN, 12));
 		memberMenuPanel.add(adminMemberRegisterBtn);
 		memberMenuPanel.add(memberRegisterBtn);
 		modifyBtn.addActionListener(new ActionListener() {
@@ -119,7 +118,10 @@ public class AdminMemberInfo extends JPanel {
 		adminBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				check = false;
+				adminBtn.setBorder(new LineBorder(Color.BLACK, 3));
+				memberBtn.setBorder(new LineBorder(Color.BLACK, 1));
 				cl.show(tablePanel, "AdminTable");
+				currentCard = "AdminTable";
 				check = false;
 			}
 		});
@@ -127,7 +129,10 @@ public class AdminMemberInfo extends JPanel {
 		memberBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				check = true;
+				adminBtn.setBorder(new LineBorder(Color.BLACK, 1));
+				memberBtn.setBorder(new LineBorder(Color.BLACK, 3));
 				cl.show(tablePanel, "MemberTable");
+				currentCard = "MemberTable";
 				check = true;
 			}
 		});
@@ -139,18 +144,16 @@ public class AdminMemberInfo extends JPanel {
 		tablePanel.add("AdminTable", at);
 		tablePanel.add("MemberTable", mt);
 		cl.show(tablePanel, "AdminTable");
-		
-		
+		currentCard = "AdminTable";
 
 		add(tablePanel);
-		//테이블 구조 생성
-		
+		// 테이블 구조 생성
 
 //		add listener
 		ar = new AdminRegister();
 		mr = new MemberRegister(mt);
-		//maR = new ModifyAdminRegit();
-		//mR = new ModifyRegit();
+		// maR = new ModifyAdminRegit();
+		// mR = new ModifyRegit();
 		arc = new AdminRegisterControl(this);
 
 		adminMemberRegisterBtn.addActionListener(arc);
@@ -171,18 +174,17 @@ public class AdminMemberInfo extends JPanel {
 		mr.cancelbtn.addActionListener(arc);
 		mr.pwtf.addKeyListener(arc);
 		mr.passwordtf.addKeyListener(arc);
-		
+
 		maR.registerbtn.addActionListener(arc);
 		maR.cancelbtn.addActionListener(arc);
 		maR.pwtf.addKeyListener(arc);
 		maR.passwordtf.addKeyListener(arc);
-		
+
 		mR.registerbtn.addActionListener(arc);
 		mR.cancelbtn.addActionListener(arc);
 		mR.pwtf.addKeyListener(arc);
 		mR.passwordtf.addKeyListener(arc);
-		
-	
+
 	}
 
 }
