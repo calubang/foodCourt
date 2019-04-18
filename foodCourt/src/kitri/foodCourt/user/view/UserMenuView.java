@@ -56,6 +56,8 @@ public class UserMenuView extends JPanel {
 		scrollPane.setBounds(0, 0, 1012, 634);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(10);	//스크롤 속도
+
 		setMenu(list);
 		add(scrollPane);
 		

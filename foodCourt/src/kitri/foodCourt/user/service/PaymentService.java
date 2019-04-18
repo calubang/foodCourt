@@ -117,8 +117,10 @@ public class PaymentService {
 			}
 		} catch (UnknownHostException e) {
 			JOptionPane.showMessageDialog(controller.payment.basketMain.foodMain, "주문 오류가 발생했습니다 \n 직원에게 문의해주세요", "결제 오류", JOptionPane.ERROR_MESSAGE);
+			return;
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(controller.payment.basketMain.foodMain, "주문 오류가 발생했습니다 \n 직원에게 문의해주세요", "결제 오류", JOptionPane.ERROR_MESSAGE);
+			return;
 		} finally {
 			if (out != null) 		{try {out.close();} 	catch (IOException e) {e.printStackTrace();}}
 			if (in != null) 		{try {in.close();} 		catch (IOException e) {e.printStackTrace();}}
