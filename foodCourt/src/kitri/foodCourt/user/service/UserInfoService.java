@@ -208,6 +208,7 @@ public class UserInfoService {
 				foodMain.card.show(foodMain.panChangePanel, "foodMainView");
 				foodMain.currentPanelName = "foodMainView";
 				foodMain.setVisible(false);
+				foodMain.loginMain.card.show(foodMain.loginMain.panMain, "panLogin");
 				foodMain.loginMain.setVisible(true);
 			}
 		} else {

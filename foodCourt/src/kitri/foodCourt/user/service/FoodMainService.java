@@ -179,6 +179,7 @@ public class FoodMainService {
 			foodMain.currentPanelName = "foodMainView";
 			foodMain.labName.setText("ดิ");
 			foodMain.setVisible(false);
+			foodMain.loginMain.card.show(foodMain.loginMain.panMain, "panLogin");
 			foodMain.loginMain.setVisible(true);
 		}
 	}
