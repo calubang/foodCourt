@@ -132,9 +132,8 @@ public class AdminRegisterService {
 			ami.card.show(ami.jpaMo, "memberModi");
 			ami.mR.dataSetting();
 			ami.mR.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
-			ami.jfMD.setModal(true);
-			ami.jfMo.setSize(600, 708);
-			ami.jfMD.setBounds(ami.getX() + 100, ami.getY() + 100, 600, 708);
+			ami.jfMo.setSize(620, 750);
+			ami.jfMo.setBounds(ami.getX() + 100, ami.getY() + 100, 620, 750);
 			ami.jfMo.setVisible(true);
 		
 			return;

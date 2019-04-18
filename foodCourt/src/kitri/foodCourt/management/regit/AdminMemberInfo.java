@@ -145,6 +145,7 @@ public class AdminMemberInfo extends JPanel {
 		tablePanel.add("MemberTable", mt);
 		cl.show(tablePanel, "AdminTable");
 		currentCard = "AdminTable";
+		adminBtn.setBorder(new LineBorder(Color.BLACK, 3));
 
 		add(tablePanel);
 		// 테이블 구조 생성
