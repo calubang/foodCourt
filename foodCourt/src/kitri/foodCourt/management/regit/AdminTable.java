@@ -23,7 +23,7 @@ public class AdminTable extends JPanel {
 	PreparedStatement pstm = null;
 	ResultSet rs = null;
 
-	String[] column = { "관리자ID", "이름","비밀번호", "핸드폰번호", "직급", "입사일", "우편번호", "주소", "이메일", "이메일도메인" };
+	String[] column = { "관리자ID", "이름","비밀번호", "핸드폰번호", "직급", "입사일", "주소", "이메일", "이메일도메인" };
 
 	/**
 	 * Create the panel.
@@ -64,7 +64,7 @@ public class AdminTable extends JPanel {
 					"    ,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn\n" + 
 					"    ,fj.job_name as job_name\n" + 
 					"    ,HIRE_DATE\n" + 
-					"    ,ADDRESS_ZIP\n" + 
+//					"    ,ADDRESS_ZIP\n" + 
 					"    ,ADDRESS\n" + 
 					"    ,EMAIL\n" + 
 					"    ,EMAIL_DOMAIN \n" + 
@@ -84,10 +84,10 @@ public class AdminTable extends JPanel {
 				rowData[3] = rs.getString("pn");
 				rowData[4] = rs.getString("job_name");
 				rowData[5] = rs.getDate("HIRE_DATE");
-				rowData[6] = rs.getString("ADDRESS_ZIP");
-				rowData[7] = rs.getString("ADDRESS");
-				rowData[8] = rs.getString("email");
-				rowData[9] = rs.getString("EMAIL_DOMAIN");
+//				rowData[6] = rs.getString("ADDRESS_ZIP");
+				rowData[6] = rs.getString("ADDRESS");
+				rowData[7] = rs.getString("email");
+				rowData[8] = rs.getString("EMAIL_DOMAIN");
 				
 				
 				dtm.addRow(rowData);				

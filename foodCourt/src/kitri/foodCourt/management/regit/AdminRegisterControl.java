@@ -63,6 +63,8 @@ public class AdminRegisterControl implements ActionListener, KeyListener {
 		}else if(ob == ami.mR.cancelbtn) {
 			System.out.println("2");
 			ami.jfMo.setVisible(false);
+		}else if(ob == ami.searchTextField) {
+			ars.search();
 		}
 
 	}
