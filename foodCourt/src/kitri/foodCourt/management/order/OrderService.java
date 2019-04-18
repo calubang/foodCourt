@@ -3,8 +3,6 @@ package kitri.foodCourt.management.order;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 public class OrderService {
@@ -22,7 +20,6 @@ public class OrderService {
 		main.orderNumber++;
 		System.out.println("addOrderList");
 		OrderList order = new OrderList();
-//		order.setRequestNumber(requestNumber);
 		order.setRequestNumber(main.orderNumber);
 		System.out.println(orderFood);
 		st = new StringTokenizer(orderFood, "^");
@@ -35,7 +32,6 @@ public class OrderService {
 			System.out.println("order : " + order.getRequestNumber() + " : " + order.getMenuName(i) + " : "
 					+ order.getMenuCount(i));
 		}
-//		main.tmap.put(requestNumber, order);
 		main.tmap.put(main.orderNumber, order);
 		// 주문 목록 패널에 재적용
 		constructOrderList();
@@ -68,7 +64,6 @@ public class OrderService {
 				System.out.println(orderList.getMenuCount(i));
 				menuList.add(menu);
 			}
-			orderList.setCheckOrder();
 			main.orderDetailDialog.labRequestNum.setText("주문번호 : " + Integer.toString(main.selectedRequestNumber));
 			main.orderDetailDialog.labTimeNow.setText(str);
 			System.out.println("주문종류갯수 : "+len);
