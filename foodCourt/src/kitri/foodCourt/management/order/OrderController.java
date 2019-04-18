@@ -1,9 +1,8 @@
 package kitri.foodCourt.management.order;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class OrderController implements ActionListener{
+public class OrderController extends WindowAdapter implements ActionListener{
 	OrderListFrame orderListFrame;
 	OrderService orderService;
 	public OrderController(OrderListFrame orderListFrame) {
@@ -24,5 +23,9 @@ public class OrderController implements ActionListener{
 		} else if(ob == orderListFrame.orderDetailDialog.btnCheck) {
 			orderService.closingOrderDetail();
 		}
+	}
+	@Override
+	public void windowClosing(WindowEvent e) {
+		orderListFrame.setVisible(false);
 	}
 }

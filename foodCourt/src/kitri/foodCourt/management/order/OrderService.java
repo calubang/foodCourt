@@ -3,6 +3,8 @@ package kitri.foodCourt.management.order;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
 
 public class OrderService {
@@ -38,6 +40,9 @@ public class OrderService {
 		System.out.println("주문목록 재생성 완료");
 		if (!main.isVisible())
 			main.setVisible(true);
+		if (main.getState() == JFrame.ICONIFIED)
+			main.setState(JFrame.NORMAL);
+		main.toFront(); // 맨 앞의 창으로 가져오기
 		return main.orderNumber;
 	}
 

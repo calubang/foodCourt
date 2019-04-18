@@ -164,6 +164,8 @@ public class OrderListFrame extends JFrame {
 		setBounds(200, 200, 800, 620);
 		setResizable(false);
 		// 이벤트 등록--------------------------
+		addWindowListener(orderController);
+		
 		btnOrderview.addActionListener(orderController);
 		btnComplete.addActionListener(orderController);
 		btnRemove.addActionListener(orderController);
