@@ -9,6 +9,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 
 import kitri.foodCourt.user.swing.*;
+import kitri.foodCourt.util.Constance;
 
 public class MenuPanel extends JPanel implements MouseListener{
 	public JButton btnImg;
@@ -48,7 +49,7 @@ public class MenuPanel extends JPanel implements MouseListener{
 		
 		this.thickness = 3;
 		this.arc = 40;
-		this.enterColor = SwingFactory.hexToRgb("#FFF8DC");
+		this.enterColor = Constance.MAIN_COLOR;
 		setBorder(new RoundBorder(arc, thickness));
 		this.addMouseListener(this);
 		// 이벤트 등록부
