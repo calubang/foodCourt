@@ -1,4 +1,4 @@
-package kitri.foodCourt.dto;
+package old;
 
 public class AdminJobDto {
 
