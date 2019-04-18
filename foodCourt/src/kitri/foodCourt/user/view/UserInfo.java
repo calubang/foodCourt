@@ -332,7 +332,7 @@ public class UserInfo extends JPanel {
 		lbPasswordInfo.setText("");
 		
 		tfPasswordQuiz.setText(user.getPasswordQuiz());
-		tfPasswordQuiz.setText(user.getPasswordAnswer());
+		tfPasswordAnswer.setText(user.getPasswordAnswer());
 		
 		Modifiable = true;
 		btnModify.setEnabled(true);

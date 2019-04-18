@@ -111,4 +111,5 @@ public class UserDto {
 				+ ", password=" + password + ", passwordQuiz=" + passwordQuiz + ", passwordAnswer=" + passwordAnswer
 				+ "]";
 	}
+
 }

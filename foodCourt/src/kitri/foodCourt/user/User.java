@@ -111,6 +111,8 @@ public class User {
 		this.phoneNumberlast = userDto.getPhoneNumberlast();
 		this.userPoint = userDto.getUserPoint();
 		this.password = userDto.getPassword();
+		setPasswordQuiz(userDto.getPasswordQuiz());
+		setPasswordAnswer(userDto.getPasswordAnswer());
 	}
 	public UserDto getDto() {
 		UserDto userDto = new UserDto();
@@ -121,6 +123,8 @@ public class User {
 		userDto.setPhoneNumberMiddle(phoneNumberMiddle);
 		userDto.setPhoneNumberlast(phoneNumberlast);
 		userDto.setUserPoint(userPoint);
+		userDto.setPasswordQuiz(getPasswordQuiz());
+		userDto.setPasswordAnswer(getPasswordAnswer());
 		return userDto;
 	}
 	

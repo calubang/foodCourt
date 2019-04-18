@@ -113,9 +113,8 @@ public class Payment extends JPanel {
 		pTotalPrice.add(lbTotalPoint);
 		
 		RoundPanel pCash = new RoundPanel();
-		pCash.setBackground(new Color(255, 255, 240));
-		//pCash.addMouseListener(pCash);
-		//pCash.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		pCash.removeMouseListener(pCash);
+		pCash.setBackground(Constance.BASKET_COLOR);
 		pCash.setBounds(100, 210, 200, 180);
 		add(pCash);
 		pCash.setLayout(null);
@@ -135,7 +134,8 @@ public class Payment extends JPanel {
 		pCash.add(tfCash);
 	
 		RoundPanel pCard = new RoundPanel();
-		pCard.setBackground(new Color(255, 255, 240));
+		pCard.removeMouseListener(pCard);
+		pCard.setBackground(Constance.BASKET_COLOR);
 		pCard.setLayout(null);
 		pCard.setBounds(400, 210, 200, 180);
 		add(pCard);
@@ -155,7 +155,8 @@ public class Payment extends JPanel {
 		pCard.add(lbCard);
 		
 		RoundPanel pPoint = new RoundPanel();
-		pPoint.setBackground(new Color(255, 255, 240));
+		pPoint.removeMouseListener(pPoint);
+		pPoint.setBackground(Constance.BASKET_COLOR);
 		pPoint.setLayout(null);
 		pPoint.setBounds(700, 210, 200, 180);
 		add(pPoint);

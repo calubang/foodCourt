@@ -12,23 +12,14 @@ public class OrderService {
 	OrderController orderController;
 	OrderListFrame main;
 	
-	int request;
 	public OrderService(OrderController orderController) {
 		this.orderController = orderController;
 		main = orderController.orderListFrame;
-		request = main.selectedRequestNumber;
 	}
 
 	// order리스트의 갱신을 담당
-	public boolean addOrderList(int requestNumber, String orderFood) {
+	public void addOrderList(int requestNumber, String orderFood) {
 		System.out.println("addOrderList");
-//		System.out.println(main.tmap);
-//		int size;
-//		if(!(main.tmap.isEmpty())) {
-//			size = main.tmap.size();
-//		} else {
-//			size = 0;
-//		}
 		OrderList order = new OrderList();
 		order.setRequestNumber(requestNumber);
 		System.out.println(orderFood);
@@ -48,12 +39,6 @@ public class OrderService {
 		System.out.println("주문목록 재생성 완료");
 		if (!main.isVisible())
 			main.setVisible(true);
-//		if (size + 1 == main.tmap.size())
-//			return true;
-//		else {
-//			return false;
-//		}
-		return true;
 	}
 
 	// 주문정보 프레임 띄우기
@@ -71,21 +56,24 @@ public class OrderService {
 			OrderList orderList = getSelectedOrderList();
 			int len = orderList.getMenuNameSize();
 			Vector<String[]> menuList = new Vector<String[]>();
-			String menu[] = new String[2];
 			for (int i = 0; i < len; i++) {
+				String menu[] = new String[2];
 				menu[0] = orderList.getMenuName(i);
 				menu[1] = orderList.getMenuCount(i);
+				System.out.println(orderList.getMenuName(i));
+				System.out.println(orderList.getMenuCount(i));
 				menuList.add(menu);
 			}
 			orderList.setCheckOrder();
-			main.orderDetailDialog.labRequestNum.setText("주문요청번호 : " + Integer.toString(request));
+			main.orderDetailDialog.labRequestNum.setText("주문번호 : " + Integer.toString(main.selectedRequestNumber));
 			main.orderDetailDialog.labTimeNow.setText(str);
+			System.out.println("주문종류갯수 : "+len);
 			main.orderDetailDialog.setOrderDetail(len, menuList);
 			main.orderDetailDialog.revalidate();
 			main.orderDetailDialog.setVisible(true);
 			orderList.setCheckOrder();
 			if(!orderList.isComplete())
-				orderList.getButton().setBackground(Color.WHITE);
+				orderList.getButton().setBackground(main.color);
 			refresh();
 		}
 	}
@@ -93,7 +81,7 @@ public class OrderService {
 	// 주문버튼 완료 처리 (버튼의 색을 바꿔준다)
 	public void completeOrder() {
 		System.out.println("completeOrder");
-		System.out.println(request);
+		System.out.println(main.selectedRequestNumber);
 		if (isRequestNotZero() && !getSelectedOrderList().isComplete()) {
 			getSelectedOrderList().setComplete();
 			getSelectedButton().setBackground(Color.GREEN);
@@ -105,9 +93,9 @@ public class OrderService {
 	// 완료된 버튼 지우기 (완료 처리 된 버튼을 클릭했을때만 보여진다)
 	public void removeOrder() {
 		System.out.println("removeOrder");
-		System.out.println(request);
-		main.tmap.remove(request);
-		request = 0;
+		System.out.println(main.selectedRequestNumber);
+		main.tmap.remove(main.selectedRequestNumber);
+		main.selectedRequestNumber = 0;
 		constructOrderList();
 		main.btnRemove.setVisible(false);
 		main.btnOrderview.setVisible(false);
@@ -118,10 +106,10 @@ public class OrderService {
 	// 버튼을 누를때 check를 판단해서 제거 버튼을 활성/ 비활성 시켜야함
 	public void setGlobalOrderButton(Object object) {
 		System.out.println("setGlobalOrderButton");
-		System.out.println("requestNumber : " + request);
+		System.out.println("requestNumber : " + main.selectedRequestNumber);
 		OrderListButton orderListButton = (OrderListButton) object;
 		if (isRequestNotZero()) {
-			if (!orderListButton.getName().equals(Integer.toString(request))) { // orderlist안에 버튼 넣어서
+			if (!orderListButton.getName().equals(Integer.toString(main.selectedRequestNumber))) { // orderlist안에 버튼 넣어서
 																									// 주소값 가져오기 성공
 				getSelectedButton().setBorder(main.defualt);
 				setClick(orderListButton);
@@ -145,7 +133,7 @@ public class OrderService {
 
 		// TODO 지금 여기서 문제 찾아야해 완료되어있는 버튼 눌러도 제거버튼이 활성화안되는 에러발견
 		button.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		request = Integer.parseInt(button.getName());
+		main.selectedRequestNumber = Integer.parseInt(button.getName());
 		refresh();
 	}
 
@@ -179,14 +167,14 @@ public class OrderService {
 	}
 
 	private OrderListButton getSelectedButton() {
-		return main.tmap.get(request).getButton();
+		return main.tmap.get(main.selectedRequestNumber).getButton();
 	}
 
 	private OrderList getSelectedOrderList() {
-		return main.tmap.get(request);
+		return main.tmap.get(main.selectedRequestNumber);
 	}
 	private boolean isRequestNotZero() {
-		if(request != 0)
+		if(main.selectedRequestNumber != 0)
 			return true;
 		else 
 			return false;

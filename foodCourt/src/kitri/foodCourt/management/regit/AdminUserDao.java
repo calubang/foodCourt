@@ -88,27 +88,16 @@ public class AdminUserDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = 
-				"select \r\n" + 
-				"    user_id\r\n" + 
-				"    , password\r\n" + 
-				"    , name\r\n" + 
-				"    , phone_first\r\n" + 
-				"    , phone_middle\r\n" + 
-				"    , phone_last\r\n" + 
-				"    , user_point\r\n" + 
-				"    , password_quiz\r\n" + 
-				"    , password_answer\r\n" + 
-				"    , to_char(join_date, 'yyyy-mm-dd hh24:mi:ss') as join_date\r\n" + 
-				"    , nvl(to_char(secession_date, 'yyyy-mm-dd hh24:mi:ss'), '') as secession_date\r\n" + 
-				"    , enable\r\n" + 
+				"select user_id\r\n" + 
 				"from fook_user\r\n" + 
-				"where user_id = ? ";
+				"where user_id = ?";
 		
 		try {
 			con = connectionMaker.makeConnection();
 			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
 			
-			rs = ps.executeQuery(sql);
+			rs = ps.executeQuery();
 			return rs.next();
 			
 			
@@ -161,9 +150,9 @@ public class AdminUserDao {
 				"    , user_point = ?\r\n" + 
 				"    , password_quiz = ?\r\n" + 
 				"    , password_answer = ?\r\n" + 
-				"    , join_date = nvl(to_date(?, 'yyyy-mm-dd hh24:mi:ss'), join_date)\r\n" + 
-				"    , secession_date = ?\r\n" + 
-				"    , enable = ?\r\n" + 
+				"    , join_date = nvl(to_date(?, 'yyyy-mm-dd'), join_date)\r\n" + 
+				"    , secession_date = nvl(to_date(?, 'yyyy-mm-dd'), secession_date)\r\n" + 
+				"    , enable = lower(?)\r\n" + 
 				"where user_id = ?";
 		
 		try {
@@ -180,6 +169,7 @@ public class AdminUserDao {
 			ps.setString(9, userDto.getJoinDate());
 			ps.setString(10, userDto.getSecessionDate());
 			ps.setString(11, String.valueOf(userDto.getEnable()));
+			ps.setString(12, userDto.getUserId());
 			
 			result = ps.executeUpdate();
 			
@@ -258,13 +248,13 @@ public class AdminUserDao {
 				"    , secession_date\n" + 
 				"    , enable\n" + 
 				")values(\n" + 
-				"    '?'\n" + 
+				"    ?\n" + 
 				"    , ?\n" + 
 				"    , ?\n" + 
 				"    , ?\n" + 
 				"    , ?\n" + 
 				"    , ?\n" + 
-				"    , ?\n" + 
+				"    , nvl(?, 0)\n" + 
 				"    , ?\n" + 
 				"    , ?\n" + 
 				"    , nvl(to_date(?, 'yyyy-mm-dd'), sysdate)\n" + 

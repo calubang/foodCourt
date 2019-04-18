@@ -20,11 +20,13 @@ import javax.swing.border.TitledBorder;
 
 import kitri.foodCourt.management.menu.AdminMenuManagement;
 import kitri.foodCourt.management.order.OrderListFrame;
+import kitri.foodCourt.management.order.OrderListServer;
 import kitri.foodCourt.management.payment.AdminPayment;
 import kitri.foodCourt.management.regit.AdminMemberInfo;
 import kitri.foodCourt.management.request.AdminRequest;
 import java.awt.Insets;
 //import kitri.foodCourt.management.statistics.AdminStatistics;
+import java.awt.event.*;
 
 
 @SuppressWarnings("serial")
@@ -131,5 +133,8 @@ public class AdminMainFrame extends JFrame {
 		requestManageBtn.addMouseListener(amfc);
 		paymentBtn.addMouseListener(amfc);
 		logoutBtn.addMouseListener(amfc);
+		// Á¾·á ½Ã
+		addWindowListener(amfc);
 	}
+
 }

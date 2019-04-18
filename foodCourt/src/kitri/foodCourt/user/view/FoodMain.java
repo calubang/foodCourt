@@ -17,7 +17,6 @@ import kitri.foodCourt.dto.FoodDto;
 import kitri.foodCourt.user.BasketDetail;
 import kitri.foodCourt.user.User;
 import kitri.foodCourt.user.controller.FoodMainController;
-import kitri.foodCourt.user.login.LoginMain;
 import kitri.foodCourt.user.swing.*;
 import kitri.foodCourt.util.Constance;
 

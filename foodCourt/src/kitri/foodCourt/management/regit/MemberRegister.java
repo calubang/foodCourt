@@ -3,6 +3,8 @@ package kitri.foodCourt.management.regit;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -13,8 +15,9 @@ import com.toedter.calendar.JMonthChooser;
 import com.toedter.components.JSpinField;
 
 import kitri.foodCourt.dto.UserDto;
+import kitri.foodCourt.user.swing.SwingFactory;
 
-public class MemberRegister extends JPanel {
+public class MemberRegister extends JPanel implements ItemListener{
 	public JTextField idtf;
 	public JPasswordField passwordtf;
 	public JPasswordField pwtf;
@@ -70,9 +73,13 @@ public class MemberRegister extends JPanel {
 	public MemberRegister(MemberTable mt) {
 		initView();
 		check = false;
+		
+		//이벤트 등록
+		cbEnable.addItemListener(this);
 	}
 	
 	public void initView() {
+		this.setSize(571, 726);
 		setBackground(Color.DARK_GRAY);
 		setLayout(null);
 
@@ -97,6 +104,7 @@ public class MemberRegister extends JPanel {
 		idpanel.setBackground(Color.DARK_GRAY);
 		idpanel.setLayout(null);
 		idpanel.add(idlabel);
+		idbtn.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		idpanel.add(idbtn);
 
 		idtf = new JTextField();
@@ -130,8 +138,9 @@ public class MemberRegister extends JPanel {
 		passwordlabel.setFont(new Font("돋움", Font.BOLD, 16));
 		passwordlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordlabel.setBounds(0, 0, 107, 51);
+		etclabel.setFont(new Font("맑은 고딕", Font.PLAIN, 11));
 		etclabel.setForeground(Color.WHITE);
-		etclabel.setBounds(398, 1, 134, 51);
+		etclabel.setBounds(398, 1, 150, 51);
 		passwordpanel.add(etclabel);
 
 		pwpanel.setBackground(Color.DARK_GRAY);
@@ -220,6 +229,7 @@ public class MemberRegister extends JPanel {
 		label_1.setBounds(0, 0, 107, 47);
 		
 		pJoinDate.add(label_1);
+		yearJoin.getSpinner().setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		yearJoin.setBounds(108, 0, 90, 47);
 		
 		pJoinDate.add(yearJoin);
@@ -229,6 +239,7 @@ public class MemberRegister extends JPanel {
 		monthJoin.setBounds(210, 0, 90, 46);
 		pJoinDate.add(monthJoin);
 		monthJoin.setLayout(null);
+		dayJoin.getSpinner().setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		dayJoin.setMinimum(1);
 		dayJoin.setMaximum(31);
 		dayJoin.setBounds(312, 0, 78, 47);
@@ -244,6 +255,7 @@ public class MemberRegister extends JPanel {
 		label_2.setBounds(0, 0, 107, 47);
 		
 		pSecession.add(label_2);
+		yearSecession.getSpinner().setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		yearSecession.setBounds(108, 0, 90, 47);
 		
 		pSecession.add(yearSecession);
@@ -253,6 +265,7 @@ public class MemberRegister extends JPanel {
 		monthSecession.setBounds(210, 0, 90, 47);
 		pSecession.add(monthSecession);
 		monthSecession.setLayout(null);
+		daySecession.getSpinner().setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		daySecession.setMinimum(1);
 		daySecession.setMaximum(31);
 		daySecession.setBounds(312, 0, 78, 47);
@@ -336,19 +349,14 @@ public class MemberRegister extends JPanel {
 		
 		//가입일
 		yearJoin.setYear(new GregorianCalendar().get(Calendar.YEAR));
-		monthJoin.setMonth(new GregorianCalendar().get(Calendar.MONTH)+1);
+		monthJoin.setMonth(new GregorianCalendar().get(Calendar.MONTH));
 		dayJoin.setValue(new GregorianCalendar().get(Calendar.DAY_OF_MONTH));
 		
 		//탈퇴일
-		yearSecession.setMinimum(0);
-		yearSecession.setYear(0);
-		yearSecession.setMinimum(1);
-		
-		monthSecession.setMonth(1);
-		
-		daySecession.setMinimum(0);
-		daySecession.setValue(0);
-		daySecession.setMinimum(1);
+		yearSecession.setEnabled(false);
+		monthSecession.setEnabled(false);
+		daySecession.setEnabled(false);
+		daySecession.setValue(new GregorianCalendar().get(Calendar.DAY_OF_MONTH));
 		
 		//퀴즈
 		tfPasswordQuiz.setText("");
@@ -361,8 +369,66 @@ public class MemberRegister extends JPanel {
 		check = false;
 	}
 	
-	public void makeUserDto() {
+	public UserDto makeUserDto() {
 		UserDto userDto = new UserDto();
+		
+		//비밀번호 확인체크
+		String password = new String(passwordtf.getPassword());
+		String passwordRe = new String(pwtf.getPassword());
+		
+		if(password.length() < 6) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "비민번호는 6글자 이상으로 해주세요");
+			return null;
+		}
+		
+		if( !isCorrectPassword(password) ) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "비민번호는 숫자 혹은 문자의 조합만 가능합니다.");
+			return null;
+		}
+		
+		if( !password.equals(passwordRe)) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "비밀번호가 다릅니다.");
+			return null;
+		}
+		
+		//유저포인트 숫자체크
+		String userPointStr = tfUserPoint.getText();
+		for(int i=0 ; i<userPointStr.length() ; i++) {
+			if(userPointStr.charAt(i) < '0' || userPointStr.charAt(i) > '9' ) {
+				SwingFactory.getOptionPane("errorMessage", this, "입력오류", "풉키포인트에 문자가 섞였습니다.");
+				return null;
+			}
+		}
+		
+		//전화번호 숫자체크
+		String phoneNumberMiddle = midnumber.getText();
+		String phoneNumberLast = lastnumber.getText();
+		if( phoneNumberMiddle.length() > 4 || (!isNumber(phoneNumberMiddle)) ) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "중간 전화번호가 잘못되었습니다.");
+			return null;
+		}
+		
+		if(phoneNumberLast.length() > 4 || (!isNumber(phoneNumberLast)) ) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "마지막 전화번호가 잘못되었습니다.");
+			return null;
+		}
+		//추가
+		//이름
+		String name = nametf.getText().trim();
+		if(name.isEmpty()) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "이름을 입력해주세요.");
+			return null;
+		}
+		//전화번호 입력안함
+		if(phoneNumberMiddle.isEmpty()) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "중간 전화번호를 입력하지 않았습니다.");
+			return null;
+		}
+		//전화번호 입력안함
+		if(phoneNumberLast.isEmpty()) {
+			SwingFactory.getOptionPane("errorMessage", this, "입력오류", "마지막 전화번호를 입력하지 않았습니다.");
+			return null;
+		}
 		
 		userDto.setUserId(idtf.getText().trim());
 		userDto.setPassword(new String(pwtf.getPassword()));
@@ -374,17 +440,19 @@ public class MemberRegister extends JPanel {
 		userDto.setPasswordQuiz(tfPasswordQuiz.getText().trim());
 		userDto.setPasswordAnswer(tfPasswordAnswer.getText().trim());
 		
-		String joinDate = "" + yearJoin.getYear() + "-" + intTOString(monthJoin.getMonth()) + "-" + intTOString(dayJoin.getValue());
+		String joinDate = "" + yearJoin.getYear() + "-" + intTOString(monthJoin.getMonth()+1) + "-" + intTOString(dayJoin.getValue());
 		userDto.setJoinDate(joinDate);
-		if(yearSecession.getYear() == 0 || daySecession.getValue() == 0) {
+		
+		if(String.valueOf(cbEnable.getSelectedItem()).equals("Y")) {
 			userDto.setSecessionDate("");
 		}else {
-			String secessionDate = "" + yearSecession.getYear() + "-" + intTOString(monthSecession.getMonth()) + "-" + intTOString(daySecession.getValue());
+			String secessionDate = "" + yearSecession.getYear() + "-" + intTOString(monthSecession.getMonth()+1) + "-" + intTOString(daySecession.getValue());
 			userDto.setJoinDate(secessionDate);
 		}
 		
 		userDto.setEnable(String.valueOf(cbEnable.getSelectedItem()).charAt(0));
 		
+		return userDto;
 	}
 	
 	public String intTOString(int value) {
@@ -394,5 +462,44 @@ public class MemberRegister extends JPanel {
 		}else {
 			return ""+value;
 		}
+	}
+	
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		String enable = String.valueOf(e.getItem());
+		if(enable.equals("N")) {
+			yearSecession.setEnabled(true);
+			monthSecession.setEnabled(true);
+			daySecession.setEnabled(true);
+		}else {
+			yearSecession.setEnabled(false);
+			monthSecession.setEnabled(false);
+			daySecession.setEnabled(false);
+		}
+	}
+	
+	public boolean isNumber(String value) {
+		int length = value.length();
+		for(int i=0 ; i<length ; i++) {
+			if(value.charAt(i) < '0' || value.charAt(i) > '9' ) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean isCorrectPassword(String password) {
+		int length = password.length();
+		if(length < 6) {
+			return false;
+		}
+		
+		for(int i=0 ; i<length ; i++) {
+			char temp = password.charAt(i);
+			if( !((temp >= 'a' && temp <= 'z') || (temp >= 'A' && temp <= 'Z') || (temp >= '0' && temp <= '9')) ) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

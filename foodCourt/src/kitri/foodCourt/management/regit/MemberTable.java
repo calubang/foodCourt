@@ -58,6 +58,11 @@ public class MemberTable extends JPanel {
 	}
 	
 	public void initData() {
+		int size = tableModel.getRowCount();
+		for(int i =0 ; i<size ; i++) {
+			tableModel.removeRow(size-i-1);
+		}
+		
 		Vector<UserDto> vector = dao.allSelect();
 		
 		if(vector == null) {

@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.util.Vector;
 
 import javax.swing.JScrollPane;
+import java.awt.Font;
 
 public class OrderDetailDialog extends JDialog {
 	
@@ -36,10 +37,12 @@ public class OrderDetailDialog extends JDialog {
 		super(orderListFrame, "\uC8FC\uBB38\uC815\uBCF4", false);
 		getContentPane().setBackground(new Color(220, 220, 220));
 		getContentPane().setLayout(null);
+		labRequestNum.setFont(new Font("±¼¸²", Font.PLAIN, 16));
 
 		labRequestNum.setHorizontalAlignment(SwingConstants.CENTER);
 		labRequestNum.setBounds(125, 92, 146, 37);
 		getContentPane().add(labRequestNum);
+		labTimeNow.setFont(new Font("±¼¸²", Font.PLAIN, 16));
 
 		labTimeNow.setOpaque(true);
 		labTimeNow.setBackground(new Color(255, 228, 196));
@@ -64,7 +67,7 @@ public class OrderDetailDialog extends JDialog {
 //		amm.jdM.setSize(750, 650);
 //		setModal(true);
 		setResizable(false);
-		
+		setAlwaysOnTop(true);
 		//menuTable.setPreferredSize(new Dimension(380, 376));
 		menuTable.setShowHorizontalLines(true);
 		menuTable.setPreferredScrollableViewportSize(new Dimension(380, 376));

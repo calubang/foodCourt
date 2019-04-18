@@ -1,11 +1,11 @@
 package kitri.foodCourt.management.main;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
+import java.io.IOException;
 
-import kitri.foodCourt.management.order.OrderListFrame;
+import kitri.foodCourt.management.order.*;
 
-public class AdminMainFrameControl implements MouseListener {
+public class AdminMainFrameControl extends WindowAdapter implements MouseListener {
 
 	AdminMainFrame amf;
 	AdminMainFrameService amfs;
@@ -59,4 +59,15 @@ public class AdminMainFrameControl implements MouseListener {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
+		@Override
+		public void windowClosing(WindowEvent e) {
+			OrderListServer orderListServer = orderListFrame.orderListServer;
+			//안전하게 종료 하기!!
+			System.out.println("안전종료 메소드 실행");
+			if(orderListServer.serverSocket != null) {try {orderListServer.serverSocket.close();orderListServer.flag = false;} catch (IOException io) {io.printStackTrace();}}
+			if(orderListServer.socket != null) {try {orderListServer.socket.close();} catch (IOException io) {io.printStackTrace();}}
+			if(orderListServer.in != null) {try {orderListServer.in.close();} catch (IOException io) {io.printStackTrace();}}
+			if(orderListServer.out != null) {try {orderListServer.out.close();} catch (IOException io) {io.printStackTrace();}}
+
+		}
 }
