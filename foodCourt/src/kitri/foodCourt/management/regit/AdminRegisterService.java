@@ -86,6 +86,7 @@ public class AdminRegisterService {
 		ami.jfAD.setSize(600, 740);
 		ami.jfAD.setModal(true);
 		ami.jfAD.setVisible(true);
+		ami.jfAD.setResizable(false);
 
 	}
 
@@ -95,15 +96,15 @@ public class AdminRegisterService {
 
 		ami.jfMD.getContentPane().add(ami.mr);
 		ami.jfMD.setBounds(ami.getX() + 100, ami.getY() + 100, 575, 760);
-		ami.jfMD.setModal(true);
-		ami.jfMD.setVisible(true);
 		ami.jfM.setResizable(false);
 		ami.jfMD.setResizable(false);
-
+		ami.jfMD.setVisible(true);
 	}
 
 	// 관리자/회원수정
 	public void showmodify() {
+		
+		
 		if (ami.check == false) {
 			// 관리자
 			int SelectRow = ami.at.adt.getSelectedRow();
@@ -113,11 +114,13 @@ public class AdminRegisterService {
 				Close(ami.jfMoD);
 				return;
 			}
+			ami.jfMo.setTitle("관리자정보 수정");
 			ami.card.show(ami.jpaMo, "adminModi");
 			ami.jfMo.setSize(600, 740);
 			ami.maR.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
 			ami.maR.dataSetting();
 			ami.jfMo.setVisible(true);
+			ami.jfMo.setResizable(false);
 			return;
 		} else {
 			// 회원
@@ -128,13 +131,14 @@ public class AdminRegisterService {
 				Close(ami.jfMoD);
 				return;
 			}
-
+			ami.jfMo.setTitle("회원정보 수정");
 			ami.card.show(ami.jpaMo, "memberModi");
 			ami.mR.dataSetting();
 			ami.mR.etclabel.setText("6\uC790\uB9AC\uC774\uC0C1 \uBB38\uC790,\uC22B\uC790\uC870\uD569");
 			ami.jfMo.setSize(620, 750);
 			ami.jfMo.setBounds(ami.getX() + 100, ami.getY() + 100, 620, 750);
 			ami.jfMo.setVisible(true);
+			ami.jfMo.setResizable(false);
 		
 			return;
 		}
@@ -327,6 +331,21 @@ public class AdminRegisterService {
 	// 회원등록창
 	// abo
 	public void mrRegister() {
+		//재확인
+		String userId = ami.mr.idtf.getText();
+
+		if (userId.isEmpty()) {
+			JOptionPane.showMessageDialog(ami.mr, "ID를 입력하세요");
+			return;
+		}
+		if (dao.select(userId)) {
+			SwingFactory.getOptionPane("errorMessage", mr, "아이디 중복확인", "중복된 아이디가 있습니다.");
+			return;
+		} else {
+			mr.check = true;
+		}
+		
+		//회원등록 진행
 		if (mr.check == false) {
 			SwingFactory.getOptionPane("errorMessage", mr, "아이디 중복체크 여부", "아이디 중복체크를 확인해주세요.");
 			return;
