@@ -23,7 +23,6 @@ public class OrderListFrame extends JFrame {
 	int selectedRequestNumber = 0; // 현재 누른 버튼 가져오기
 
 	Color color = new Color(250,250,210);
-	
 	OrderController orderController = null;
 	OrderDetailDialog orderDetailDialog = null;
 	public OrderListServer orderListServer = null;

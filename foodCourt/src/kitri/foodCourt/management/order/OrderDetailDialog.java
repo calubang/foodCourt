@@ -67,7 +67,7 @@ public class OrderDetailDialog extends JDialog {
 //		amm.jdM.setSize(750, 650);
 //		setModal(true);
 		setResizable(false);
-		
+		setAlwaysOnTop(true);
 		//menuTable.setPreferredSize(new Dimension(380, 376));
 		menuTable.setShowHorizontalLines(true);
 		menuTable.setPreferredScrollableViewportSize(new Dimension(380, 376));
