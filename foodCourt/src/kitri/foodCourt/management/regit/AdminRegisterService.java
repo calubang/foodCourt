@@ -258,37 +258,6 @@ public class AdminRegisterService {
 
 			pstm.executeUpdate();
 
-//			pstm.close();
-//			pstm = conn.prepareStatement("SELECT \n" + 
-//					"    MANAGER_ID\n" + 
-//					"    ,NAME\n" + 
-//					"    ,PASSWORD\n" + 
-//					"    ,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn\n" + 
-//					"    ,fj.job_name as job_name\n" + 
-//					"    ,HIRE_DATE\n" + 
-//					"    ,ADDRESS_ZIP\n" + 
-//					"    ,ADDRESS\n" + 
-//					"    ,EMAIL\n" + 
-//					"    ,EMAIL_DOMAIN \n" + 
-//					"FROM \n" + 
-//					"    FOOK_MANAGER fm \n" + 
-//					"    , fook_job fj \n" + 
-//					"where fm.job_id = fj.job_id(+)");
-//			rs = pstm.executeQuery();
-//			if((result != 0) ) {
-//				Date date = new Date();
-//				rowData[0] = id;
-//				rowData[1] = name;
-//				rowData[2] = pw;
-//				rowData[3] = numfirst+nummid+numlast;
-//				rowData[4] = jobid;
-//				rowData[5] = Date date = new Date());
-//				rowData[6] = "3211";
-//				rowData[7] = address;
-//				rowData[8] = email;
-//				rowData[9] = domain;
-//			}
-//			ami.at.dtm.addRow(rowData);
 			JOptionPane.showMessageDialog(ami.ar, "등록되었습니다");
 
 		} catch (SQLException e) {
@@ -468,42 +437,6 @@ public class AdminRegisterService {
 
 			pstm.executeUpdate();
 
-//			pstm.close();
-//			
-//			pstm = conn.prepareStatement("SELECT \n" + 
-//					"    MANAGER_ID\n" + 
-//					"    ,NAME\n" + 
-//					"    ,PASSWORD\n" + 
-//					"    ,PHONE_FIRST||PHONE_MIDDLE||PHONE_LAST as pn\n" + 
-//					"    ,fj.job_name as job_name\n" + 
-//					"    ,HIRE_DATE\n" + 
-//					"    ,ADDRESS_ZIP\n" + 
-//					"    ,ADDRESS\n" + 
-//					"    ,EMAIL\n" + 
-//					"    ,EMAIL_DOMAIN \n" + 
-//					"FROM \n" + 
-//					"    FOOK_MANAGER fm \n" + 
-//					"    , fook_job fj \n" + 
-//					"where fm.job_id = fj.job_id(+)");
-//			rs = pstm.executeQuery();
-//			if((result != 0)) {
-//				rowData[0] = admin_id;
-//				rowData[1] = admin_name;
-//				rowData[2] = admin_pw;
-//				rowData[3] = "pn";
-//				rowData[4] = admin_jobid;
-//				rowData[5] = "hire_date";
-//				rowData[6] = "4321";
-//				rowData[7] = admin_address;
-//				rowData[8] = admin_email;
-//				rowData[9] = admin_domain;
-//				
-//			
-//				int columNum = ami.at.dtm.getColumnCount();
-//				for (int i = 0; i < columNum; i++) {
-//					ami.at.dtm.setValueAt(rowData[i], SelectRow, i);
-//				}
-//			}
 			ami.at.adt.setRowSelectionInterval(ami.at.adt.getSelectedRow(), ami.at.adt.getSelectedRow());
 			JOptionPane.showMessageDialog(ami.maR, "수정 되었습니다.");
 			ami.jfMo.setVisible(false);
@@ -585,6 +518,38 @@ public class AdminRegisterService {
 			ami.mR.etclabel.setText("비밀번호가 일치합니다.");
 			pwcheck = 1;
 
+		}
+	}
+
+	public void search() {
+		String search = ami.searchTextField.getText().trim();
+		if(ami.check) {
+			JTable memberTable = ami.mt.table; 
+			DefaultTableModel dtm = ami.mt.tableModel;
+			//유저
+			int size = dtm.getRowCount();
+			for (int i = 0; i < size; i++) {
+				String temp = String.valueOf(dtm.getValueAt(i, 0));
+				temp += String.valueOf(dtm.getValueAt(i, 2));
+				if(temp.indexOf(search) > -1) {
+					memberTable.setRowSelectionInterval(i, i);
+					return;
+				}
+			}
+		} else {
+			//관리자
+			JTable adminTable = ami.at.adt;
+			DefaultTableModel dtm = ami.at.dtm;
+			int size = dtm.getRowCount();
+			for (int i = 0; i < size; i++) {
+				String temp = String.valueOf(dtm.getValueAt(i, 0));
+				temp += String.valueOf(dtm.getValueAt(i, 1));
+				if(temp.indexOf(search) > -1) {
+					adminTable.setRowSelectionInterval(i, i);
+					return;
+				}
+			}
+			
 		}
 	}
 

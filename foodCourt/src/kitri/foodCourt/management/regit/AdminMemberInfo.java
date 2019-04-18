@@ -18,7 +18,7 @@ import java.awt.CardLayout;
 @SuppressWarnings("serial")
 public class AdminMemberInfo extends JPanel {
 
-	private JTextField searchTextField;
+	public JTextField searchTextField;
 
 	JPanel memberMenuPanel = new JPanel();
 	JPanel tablePanel = new JPanel();
@@ -184,6 +184,9 @@ public class AdminMemberInfo extends JPanel {
 		mR.cancelbtn.addActionListener(arc);
 		mR.pwtf.addKeyListener(arc);
 		mR.passwordtf.addKeyListener(arc);
+		
+		//°Ë»ö
+		searchTextField.addActionListener(arc);
 
 	}
 
