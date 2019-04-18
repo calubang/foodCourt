@@ -3,6 +3,8 @@ package kitri.foodCourt.management.main;
 import java.awt.event.*;
 import java.io.IOException;
 
+import javax.swing.JFrame;
+
 import kitri.foodCourt.management.order.*;
 
 public class AdminMainFrameControl extends WindowAdapter implements MouseListener {
@@ -34,6 +36,9 @@ public class AdminMainFrameControl extends WindowAdapter implements MouseListene
 			} else {
 				if (!orderListFrame.isVisible())
 					orderListFrame.setVisible(true);
+				if (orderListFrame.getState() == JFrame.ICONIFIED)
+					orderListFrame.setState(JFrame.NORMAL);
+				orderListFrame.toFront(); // 맨 앞의 창으로 가져오기
 			}
 		} else if (ob == amf.paymentBtn) {
 			amfs.showPanel("AdminPayment");
