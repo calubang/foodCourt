@@ -65,7 +65,7 @@ public class OrderDetailDialog extends JDialog {
 		
 //		amm.jdM.getContentPane().add(amm.am);
 //		amm.jdM.setSize(750, 650);
-//		setModal(true);
+		setModal(true);
 		setResizable(false);
 		setAlwaysOnTop(true);
 		//menuTable.setPreferredSize(new Dimension(380, 376));
