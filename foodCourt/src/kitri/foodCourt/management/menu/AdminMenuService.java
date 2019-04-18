@@ -143,6 +143,7 @@ public class AdminMenuService {
 		
 		amm.jdR.getContentPane().add(arm);
 		amm.jdR.setSize(750, 650);
+		amm.jdR.setResizable(false);
 		amm.jdR.setModal(true);
 		amm.jdR.setVisible(true);
 	}
