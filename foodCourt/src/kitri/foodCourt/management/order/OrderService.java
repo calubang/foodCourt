@@ -18,10 +18,12 @@ public class OrderService {
 	}
 
 	// order리스트의 갱신을 담당
-	public void addOrderList(int requestNumber, String orderFood) {
+	public int addOrderList(String orderFood) {
+		main.orderNumber++;
 		System.out.println("addOrderList");
 		OrderList order = new OrderList();
-		order.setRequestNumber(requestNumber);
+//		order.setRequestNumber(requestNumber);
+		order.setRequestNumber(main.orderNumber);
 		System.out.println(orderFood);
 		st = new StringTokenizer(orderFood, "^");
 		while (st.hasMoreTokens()) {
@@ -33,12 +35,14 @@ public class OrderService {
 			System.out.println("order : " + order.getRequestNumber() + " : " + order.getMenuName(i) + " : "
 					+ order.getMenuCount(i));
 		}
-		main.tmap.put(requestNumber, order);
+//		main.tmap.put(requestNumber, order);
+		main.tmap.put(main.orderNumber, order);
 		// 주문 목록 패널에 재적용
 		constructOrderList();
 		System.out.println("주문목록 재생성 완료");
 		if (!main.isVisible())
 			main.setVisible(true);
+		return main.orderNumber;
 	}
 
 	// 주문정보 프레임 띄우기
@@ -130,7 +134,6 @@ public class OrderService {
 
 	private void setClick(OrderListButton button) {
 		System.out.println("setClick");
-
 		// TODO 지금 여기서 문제 찾아야해 완료되어있는 버튼 눌러도 제거버튼이 활성화안되는 에러발견
 		button.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		main.selectedRequestNumber = Integer.parseInt(button.getName());

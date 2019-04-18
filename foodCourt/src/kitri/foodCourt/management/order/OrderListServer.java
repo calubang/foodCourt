@@ -29,20 +29,20 @@ public class OrderListServer implements Runnable {
 			try {
 				socket = serverSocket.accept(); // socket에 클라이언트 정보 저장
 				System.out.println("클라이언트 접속 성공 : " + socket);
-				String requestNumber;
 				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				out = socket.getOutputStream();
 				String msg = in.readLine();
 				System.out.println("클라이언트가 보낸 메세지 : " + msg); // protocol|메세지형식
 				StringTokenizer st = new StringTokenizer(msg, "|");
 				int protocol = Integer.parseInt(st.nextToken());
+				int orderNumber;
 				switch (protocol) {
 				case OrderConatance.CS_ORDER: {
 //					100|requestNumber|음식이름^갯수^음식이름^갯수| ~~
-					requestNumber = st.nextToken();
-					orderService.addOrderList(Integer.parseInt(requestNumber), st.nextToken());
+					orderNumber = orderService.addOrderList(st.nextToken());
 						System.out.println("주문이 완료되었습니다");
-						unicast(Integer.toString(OrderConatance.SC_ORDER_RESULT), out);
+//						unicast(Integer.toString(OrderConatance.SC_ORDER_RESULT), out);
+						unicast(Integer.toString(OrderConatance.SC_ORDER_RESULT) + "|" + orderNumber + "|", out);
 					break;
 				}
 				}

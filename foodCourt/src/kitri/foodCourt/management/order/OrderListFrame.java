@@ -21,7 +21,7 @@ public class OrderListFrame extends JFrame {
 	Map<Integer, OrderList> tmap = new TreeMap<Integer, OrderList>(Collections.reverseOrder()); // 내림차순 정렬을 하기위한 맵 덕분에
 	Iterator<Integer> iteratorKey; // 키값 오름차순 정렬(기본)									// list안써도댐
 	int selectedRequestNumber = 0; // 현재 누른 버튼 가져오기
-
+	int orderNumber = 0; // 주문번호
 	Color color = new Color(250,250,210);
 	OrderController orderController = null;
 	OrderDetailDialog orderDetailDialog = null;

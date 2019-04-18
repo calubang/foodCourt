@@ -101,8 +101,9 @@ public class PaymentService {
 		Socket socket = null;
 		BufferedReader in = null;
 		OutputStream out = null;
-		String orderStr = Integer.toString(user.getBasket().getRequestNumber()) + "|";
+		String orderStr = "";
 		boolean flag = true;
+		String orderNumber; // 서버에서 생성해준 request 번호
 		try {
 			socket = new Socket(OrderConatance.IP, OrderConatance.PORT);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -111,7 +112,7 @@ public class PaymentService {
 			for (BasketDetail basketDetail : list) {
 				orderStr += basketDetail.getFood().getFoodName() + "^" + basketDetail.getCount() + "^";
 			}
-//			100|요청번호|음식이름|수량~
+//			100|음식이름^수량~|
 			sendMassage(OrderConatance.CS_ORDER + "|" + orderStr, out);
 
 			while (flag) {
@@ -122,6 +123,8 @@ public class PaymentService {
 				switch (protocol) {
 				case OrderConatance.SC_ORDER_RESULT: {
 //					200|true or false
+					orderNumber = st.nextToken();
+					System.out.println("주문 번호"+orderNumber);
 					flag = false;
 				}
 				}
