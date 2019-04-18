@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
+import kitri.foodCourt.management.login.LoginMain;
 import kitri.foodCourt.management.menu.AdminMenuManagement;
 import kitri.foodCourt.management.order.OrderListFrame;
 import kitri.foodCourt.management.order.OrderListServer;
@@ -49,6 +50,7 @@ public class AdminMainFrame extends JFrame {
 	AdminMemberInfo ami = new AdminMemberInfo();
 	AdminRequest ar = new AdminRequest();
 	AdminPayment ap = new AdminPayment();
+	LoginMain loginMain = null;
 //	AdminStatistics as = new AdminStatistics();
 	
 	public AdminMainFrameControl amfc;
@@ -74,9 +76,9 @@ public class AdminMainFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AdminMainFrame(String adminID) {
+	public AdminMainFrame(String adminID, LoginMain lm) {
 		super("Food Court");
-		
+		this.loginMain = lm;
 		this.adminID = adminID;
 		amm = new AdminMenuManagement(adminID);
 		

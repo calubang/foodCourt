@@ -5,13 +5,13 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import kitri.foodCourt.management.login.LoginMain;
 import kitri.foodCourt.management.order.*;
 
 public class AdminMainFrameControl extends WindowAdapter implements MouseListener {
 
 	AdminMainFrame amf;
 	AdminMainFrameService amfs;
-	public static OrderListFrame orderListFrame = null;
 
 	public AdminMainFrameControl(AdminMainFrame amf) {
 		this.amf = amf;
@@ -30,15 +30,15 @@ public class AdminMainFrameControl extends WindowAdapter implements MouseListene
 		} else if (ob == amf.requestManageBtn) {
 			// amfs.showPanel("AdminRequest");
 			// 요청한 주문 목록 프레임
-			if (orderListFrame == null) {
-				orderListFrame = new OrderListFrame();
-				orderListFrame.setVisible(true);
+			if (LoginMain.orderListFrame.isVisible()) {
+				if (!LoginMain.orderListFrame.isVisible())
+					LoginMain.orderListFrame.setVisible(true);
+				if (LoginMain.orderListFrame.getState() == JFrame.ICONIFIED)
+					LoginMain.orderListFrame.setState(JFrame.NORMAL);
+				LoginMain.orderListFrame.toFront(); // 맨 앞의 창으로 가져오기
 			} else {
-				if (!orderListFrame.isVisible())
-					orderListFrame.setVisible(true);
-				if (orderListFrame.getState() == JFrame.ICONIFIED)
-					orderListFrame.setState(JFrame.NORMAL);
-				orderListFrame.toFront(); // 맨 앞의 창으로 가져오기
+				LoginMain.orderListFrame.setVisible(true);
+				LoginMain.orderListFrame.toFront();
 			}
 		} else if (ob == amf.paymentBtn) {
 			amfs.showPanel("AdminPayment");
@@ -66,13 +66,7 @@ public class AdminMainFrameControl extends WindowAdapter implements MouseListene
 	}
 		@Override
 		public void windowClosing(WindowEvent e) {
-			OrderListServer orderListServer = orderListFrame.orderListServer;
-			//안전하게 종료 하기!!
-			System.out.println("안전종료 메소드 실행");
-			if(orderListServer.serverSocket != null) {try {orderListServer.serverSocket.close();orderListServer.flag = false;} catch (IOException io) {io.printStackTrace();}}
-			if(orderListServer.socket != null) {try {orderListServer.socket.close();} catch (IOException io) {io.printStackTrace();}}
-			if(orderListServer.in != null) {try {orderListServer.in.close();} catch (IOException io) {io.printStackTrace();}}
-			if(orderListServer.out != null) {try {orderListServer.out.close();} catch (IOException io) {io.printStackTrace();}}
+			
 
 		}
 }
