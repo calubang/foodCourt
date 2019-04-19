@@ -5,8 +5,6 @@ public class DbFactory {
 		switch(name) {
 		case "oracle":
 			return new OracleConnectionMaker();
-		case "oracleJW":
-			return new OracleConnectionMakerJW();
 		default:
 			return new OracleConnectionMaker();
 		}

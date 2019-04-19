@@ -12,7 +12,7 @@ public class AdminPaymentDao {
 	
 	public AdminPaymentDao(AdminPaymentService service) {
 		this.service = service;
-		connectionMaker = DbFactory.connectionMaker("oracleJW");
+		connectionMaker = DbFactory.connectionMaker("oracle");
 	}
 	
 	//결제삭제
@@ -28,8 +28,10 @@ public class AdminPaymentDao {
 			con = connectionMaker.makeConnection();
 			con.setAutoCommit(false);
 			
+			System.out.println(paymentId);
 			//먼저 detail 삭제
 			if(deleteDetail(con, paymentId) > 0) {
+				System.out.println(paymentId);
 				//성공하면 payment 삭제
 				ps = con.prepareStatement(sql);
 				ps.setString(1, paymentId);
@@ -44,9 +46,10 @@ public class AdminPaymentDao {
 			} else {
 				return -1;
 			}
-		} catch (SQLException e){
+		} catch (SQLException e){	
 			e.printStackTrace();
 		} finally {
+			
 			try {
 				if(ps != null) {
 					ps.close();
@@ -71,14 +74,14 @@ public class AdminPaymentDao {
 	public int deleteDetail(Connection con, String paymentId) throws SQLException{
 		PreparedStatement ps = null;
 		String sql = 
-				"delete from fook_payment_detail\r\n" + 
-				"where \r\n" + 
-				"    payment_id= (?) \r\n";
+				"delete from fook_payment_detail where payment_id= ? ";
 		
 		ps = con.prepareStatement(sql);
 		ps.setString(1, paymentId);
 		
+		System.out.println(paymentId);
 		int result = ps.executeUpdate();
+		System.out.println(result);
 		return result;
 		
 	}
