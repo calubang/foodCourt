@@ -151,7 +151,7 @@ public class AdminUserDao {
 				"    , password_quiz = ?\r\n" + 
 				"    , password_answer = ?\r\n" + 
 				"    , join_date = nvl(to_date(?, 'yyyy-mm-dd'), join_date)\r\n" + 
-				"    , secession_date = nvl(to_date(?, 'yyyy-mm-dd'), secession_date)\r\n" + 
+				"    , secession_date = nvl(to_date(?, 'yyyy-mm-dd'), '')\r\n" + 
 				"    , enable = lower(?)\r\n" + 
 				"where user_id = ?";
 		
