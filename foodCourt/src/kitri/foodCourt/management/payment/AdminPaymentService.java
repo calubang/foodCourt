@@ -123,6 +123,7 @@ public class AdminPaymentService {
 		dtmReceipt.setRowCount(0);
 		
 		int currentSelectedrow = ap.commonTable.convertRowIndexToModel(ap.commonTable.getSelectedRow());
+		Object payment_id = dtmPayment.getValueAt(currentSelectedrow, 0);
 		Object user_id = dtmPayment.getValueAt(currentSelectedrow, 1);
 		
 		Object[] rowData = new Object[8];
@@ -132,9 +133,10 @@ public class AdminPaymentService {
 			
 			ps = c.prepareStatement("select request_number, to_char(payment_date, 'yyyy.mm.dd hh24:mi:ss') \"payment_date\", category_name, pd.food_name \"food_name\", count, pd.price \"price\", pd.point \"point\", card, cash, used_point, total_price, save_point "
 								  + "from fook_payment p, fook_payment_detail pd, fook_food f, fook_category fc "
-								  + "where user_id = (?) and p.payment_id = pd.payment_id and pd.food_id = f.food_id and f.category_id = fc.category_id");
+								  + "where user_id = (?) and p.payment_id = (?) and p.payment_id = pd.payment_id and pd.food_id = f.food_id and f.category_id = fc.category_id");
 			
 			ps.setString(1, (String)user_id);
+			ps.setString(2, (String)payment_id);
 			
 			rs = ps.executeQuery();
 
