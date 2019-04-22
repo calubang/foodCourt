@@ -718,6 +718,12 @@ public class AdminMenuService {
 		closeWindow(amm.jdR);
 	}
 	
+	/**
+	 * Decide if given string is enable to convert integer.  
+	 * 
+	 * @param str String to be converted to integer
+	 * @return True if string is possible to convert integer, otherwise false.
+	 */
 	private boolean isConvertDigit(String str) {
 		boolean result = true;
 		
